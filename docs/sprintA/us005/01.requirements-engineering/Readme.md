@@ -5,55 +5,67 @@
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a HRM, I want to generate a team proposal automatically.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Teams are temporary associations of employees who will carry out a set of tasks in one or more green spaces.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	When creating multipurpose teams, the number of members and the set of skills that must be covered are crucial.
+ 
 
 **From the client clarifications:**
-
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** What other inputs are needed to generate a team
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** To be answered
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** What are the specific challenges or pain points that HRMs currently face when creating team proposals manually?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** To be answered
+
+> **Question:** Are there any specific challenges or pain points that HRMs currently face when creating team proposals manually?
+>
+> **Answer:** To be answered
+
+> **Question:** Will this feature be HRM restricted or can the HRM give the inputs to any user
+>
+> **Answer:** To be answered
+
+>**Question:** Are there any dependencies or relationships between certain skills that need to be considered when forming teams?
+>
+>**Answer:** To be answered
+
+>**Question:** Do team compositions change dynamically over time, or are they relatively static?
+>
+>**Answer:** To be answered
+
+>**Question:** What kind of reporting or feedback mechanisms would be helpful for HRMs to validate and evaluate the proposed team compositions?
+>
+>**Answer:** To be Answered
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The number of members must be given by the HRM
+* **AC2:** The skills needed must be given by the HRM
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* Currently not found
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * number of members
+    * skills needed
+    * to be answered...
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* Generated team
 
 ### 1.6. System Sequence Diagram (SSD)
 
