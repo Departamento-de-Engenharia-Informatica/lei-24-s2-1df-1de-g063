@@ -6,7 +6,6 @@
 ### 1.1. User Story Description
 
 As a HRM, I want to register an employee with a profession and key attributes.
-attributes.
 
 ### 1.2. Customer Specifications and Clarifications 
 

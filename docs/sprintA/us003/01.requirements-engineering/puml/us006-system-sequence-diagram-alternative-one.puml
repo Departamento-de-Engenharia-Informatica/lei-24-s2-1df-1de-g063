@@ -12,13 +12,14 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    Employee -> System : asks to register an employee with a profession and key attributes
+
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> Employee : requests data (an employee, a profession and key atributes)
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : types requested data (an employee, a profession and key atributes)
     activate System
 
         System --> Employee : shows task category list and asks to select one
