@@ -11,9 +11,7 @@ HRM intends to assign one or more competences to an employee
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	"Assim, um colaborador tem um ocupação principal (profissão) e um conjunto de competências que o habilitam a desempenhar/assumir determinadas tarefas/responsabilidades, por exemplo: condução de viaturas de diferentes tipos (e.g. ligeiro, pesado), operação de máquinas como retroescavadoras ou tratores; poda de árvores; aplicação de fito-fármacos."
 
 **From the client clarifications:**
 

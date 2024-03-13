@@ -11,19 +11,17 @@ As a HRM, I want to register an employee with a profession and key attributes.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	 "A MS conta com um conjunto alargado de colaboradores que realizam as mais variadas tarefas no contexto da gestão de espaços verdes. Alguns exemplos das profissões são: projectista, orçamementista, jardineiro, electricista ou pedreiro. Assim, um colaborador tem um ocupação principal (profissão) e um conjunto de competências que o habilitam a desempenhar/assumir determinadas tarefas/responsabilidades, por exemplo: conduçãao de viaturas de diferentes tipos (e.g. ligeiro, pesado), operação de máquinas como retroescavadoras ou tratores; poda de árvores; aplicação de fito-fármacos."
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Is there any limit to the number of employees per profession?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** To define
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
