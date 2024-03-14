@@ -1,39 +1,38 @@
-# US006 - Create a Task 
+# US006 - Register a vehicle 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Vehicle Park Manager (VMP) I want to register a vehicle
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	"Este tipo de viatura pode ser apenas para passageiros ou misto, ligeiras ou pesadas, com ou sem caixa aberta.
+Em termos de m ́aquinas, a MS possui tractores, retroescavadoras e máquinas giratórias, corta-relvas, entre outros. Os equipamentos podem ser muito diversos, como pulverizadores, plataformas elevat ́orias, motosserras, motorro ̧cadoras, sopradores, es- cadas, cisternas e alfaias diversas que podem ser acopladas aos tractores, como por exemplo: grades de discos, capinadoras, escarificadores." 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** 
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** A car must be entered
+* **AC2:** The car must not already be registered.
+* **AC3:** The VMP must insert a code to perform this operation as he is the only one with the power to do it.
+* **AC4:** The attributes that should be used to describe a vehicle are: Make, Model, Type, Tare, Gross Weight, Current Kms, Registration Date, Acquisition Date and Overhaul Frequency (in Kms).
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency with UC07 and UC08.
 
 ### 1.5 Input and Output Data
 
