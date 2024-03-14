@@ -12,10 +12,10 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    Employee -> System : asks to assign one or more competences to an employee
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> Employee : requests data (an employee and the competence to assign)
     deactivate System
 
     Employee -> System : types requested data

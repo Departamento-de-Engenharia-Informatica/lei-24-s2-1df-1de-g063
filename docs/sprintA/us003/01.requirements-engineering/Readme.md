@@ -19,7 +19,7 @@ As a HRM, I want to register an employee with a profession and key attributes.
 >
 > **Answer:** 
 
-> **Question:** To define
+> **Question:** Do I have to show an approval message?
 >
 > **Answer:** 
 
@@ -28,7 +28,8 @@ As a HRM, I want to register an employee with a profession and key attributes.
 * **AC1:** There has to be inserted an employee, a profession and key atributes.
 * **AC2:** The profession and the atributes have to be already registred.
 * **AC3:** The employee cannot be registered yet.
-* **AC4:** The HRM must insert a code to perform this operation as he is the only one with the power to do it.
+* **AC4:** If any validation errors occur, the system should provide clear error messages indicating what needs to be corrected.
+* **AC5:** The HRM must insert a code to perform this operation as he is the only one with the power to do it.
 
 ### 1.4. Found out Dependencies
 

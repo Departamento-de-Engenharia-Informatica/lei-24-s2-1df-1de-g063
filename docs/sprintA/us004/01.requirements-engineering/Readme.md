@@ -15,14 +15,14 @@ HRM intends to assign one or more competences to an employee
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** How to only allow the HRM to make this action?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
-
+> **Question:** 
+> 
+> **Answer:**
+> 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
