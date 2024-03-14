@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US05 - Generate a team
 
 
 ## 1. Requirements Engineering
@@ -17,15 +17,11 @@ As a HRM, I want to generate a team proposal automatically.
  
 
 **From the client clarifications:**
-> **Question:** What other inputs are needed to generate a team
+> **Question:** What inputs are needed to generate a team
 >
 > **Answer:** To be answered
 
 > **Question:** What are the specific challenges or pain points that HRMs currently face when creating team proposals manually?
->
-> **Answer:** To be answered
-
-> **Question:** Are there any specific challenges or pain points that HRMs currently face when creating team proposals manually?
 >
 > **Answer:** To be answered
 
@@ -34,10 +30,6 @@ As a HRM, I want to generate a team proposal automatically.
 > **Answer:** To be answered
 
 >**Question:** Are there any dependencies or relationships between certain skills that need to be considered when forming teams?
->
->**Answer:** To be answered
-
->**Question:** Do team compositions change dynamically over time, or are they relatively static?
 >
 >**Answer:** To be answered
 
