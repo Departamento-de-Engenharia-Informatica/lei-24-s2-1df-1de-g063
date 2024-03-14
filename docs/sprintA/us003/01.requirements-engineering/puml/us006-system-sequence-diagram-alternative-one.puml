@@ -22,7 +22,7 @@ activate Employee
     Employee -> System : types requested data (an employee, a profession and key atributes)
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> Employee : shows task category list and asks to select one (must select "Record")
     deactivate System
 
     Employee -> System : selects a task category
