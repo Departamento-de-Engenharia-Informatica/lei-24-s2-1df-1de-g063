@@ -49,7 +49,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![US005-System-Sequence-diagram](/docs/sprintA/us006/01.requirements-engineering/svg/us005/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![US005-System-Sequence-diagram](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 
 ### 1.7 Other Relevant Remarks
