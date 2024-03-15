@@ -40,12 +40,9 @@ Em termos de m ́aquinas, a MS possui tractores, retroescavadoras e máquinas gi
 
 * Typed data:
     * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
+    * an access code
+    * a vehicle
+    * vehicle characteristics
 * Selected data:
     * a task category 
 
