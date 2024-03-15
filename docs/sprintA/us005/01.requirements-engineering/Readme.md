@@ -20,19 +20,7 @@ As a HRM, I want to generate a team proposal automatically.
 > **Question:** What inputs are needed to generate a team
 >
 > **Answer:** To be answered
-
-> **Question:** What are the specific challenges or pain points that HRMs currently face when creating team proposals manually?
->
-> **Answer:** To be answered
-
-> **Question:** Will this feature be HRM restricted or can the HRM give the inputs to any user
->
-> **Answer:** To be answered
-
->**Question:** Are there any dependencies or relationships between certain skills that need to be considered when forming teams?
->
->**Answer:** To be answered
-
+> 
 >**Question:** What kind of reporting or feedback mechanisms would be helpful for HRMs to validate and evaluate the proposed team compositions?
 >
 >**Answer:** To be Answered
@@ -44,7 +32,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.4. Found out Dependencies
 
-* Currently not found
+* Dependencies found in [US001](/docs/sprintA/us001) and US04
 
 ### 1.5 Input and Output Data
 
