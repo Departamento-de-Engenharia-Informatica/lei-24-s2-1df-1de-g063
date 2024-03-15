@@ -20,19 +20,7 @@ As a HRM, I want to generate a team proposal automatically.
 > **Question:** What inputs are needed to generate a team
 >
 > **Answer:** To be answered
-
-> **Question:** What are the specific challenges or pain points that HRMs currently face when creating team proposals manually?
->
-> **Answer:** To be answered
-
-> **Question:** Will this feature be HRM restricted or can the HRM give the inputs to any user
->
-> **Answer:** To be answered
-
->**Question:** Are there any dependencies or relationships between certain skills that need to be considered when forming teams?
->
->**Answer:** To be answered
-
+> 
 >**Question:** What kind of reporting or feedback mechanisms would be helpful for HRMs to validate and evaluate the proposed team compositions?
 >
 >**Answer:** To be Answered
@@ -44,7 +32,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.4. Found out Dependencies
 
-* Currently not found
+* Dependencies found in [US001](/docs/sprintA/us001) and US04
 
 ### 1.5 Input and Output Data
 
@@ -61,15 +49,8 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
+![US005-System-Sequence-diagram](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
