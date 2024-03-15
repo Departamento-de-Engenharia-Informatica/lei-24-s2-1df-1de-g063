@@ -11,7 +11,7 @@ HRM intends to assign one or more competences to an employee
 
 **From the specifications document:**
 
->	"Assim, um colaborador tem um ocupação principal (profissão) e um conjunto de competências que o habilitam a desempenhar/assumir determinadas tarefas/responsabilidades, por exemplo: condução de viaturas de diferentes tipos (e.g. ligeiro, pesado), operação de máquinas como retroescavadoras ou tratores; poda de árvores; aplicação de fito-fármacos."
+>	"Thus, an employee has a main occupation (profession) and a set of skills that enable him/her to carry out/assume certain tasks/responsibilities, for example: driving vehicles of different types (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." This user story intends to choose an employee and to give this chosen employee new competences.
 
 **From the client clarifications:**
 

@@ -11,7 +11,8 @@ As a HRM, I want to register an employee with a profession and key attributes.
 
 **From the specifications document:**
 
->	 "A MS conta com um conjunto alargado de colaboradores que realizam as mais variadas tarefas no contexto da gestão de espaços verdes. Alguns exemplos das profissões são: projectista, orçamementista, jardineiro, electricista ou pedreiro. Assim, um colaborador tem um ocupação principal (profissão) e um conjunto de competências que o habilitam a desempenhar/assumir determinadas tarefas/responsabilidades, por exemplo: conduçãao de viaturas de diferentes tipos (e.g. ligeiro, pesado), operação de máquinas como retroescavadoras ou tratores; poda de árvores; aplicação de fito-fármacos."
+>	"MS has a wide range of employees who carry out the most varied tasks in the context of green space management. Some examples of professions are: planner, estimator, gardener, electrician or bricklayer. Thus, an employee has a main occupation (profession) and a set of skills that enable them to perform/take on certain tasks/responsibilities, for example: driving different types of vehicles (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." This user story refers to the need to register a new employee with key attributes and a profession.
+
 
 **From the client clarifications:**
 
