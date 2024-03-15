@@ -57,7 +57,7 @@ Em termos de m ́aquinas, a MS possui tractores, retroescavadoras e máquinas gi
 
 
 
-![System Sequence Diagram - Alternative One](/docs/sprintA/us006/01.requirements-engineering/svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.SVG)
+![System Sequence Diagram - Alternative One](/docs/sprintA/us006/01.requirements-engineering/svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 
 ### 1.7 Other Relevant Remarks
