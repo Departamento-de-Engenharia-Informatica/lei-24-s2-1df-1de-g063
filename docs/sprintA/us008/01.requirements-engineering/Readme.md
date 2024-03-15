@@ -5,7 +5,9 @@
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Fleet Manager responsible for overseeing the maintenance and condition of
+vehicles within the organization, I need a feature that allows me to quickly register
+vehicles that require check-up or maintenance.
 
 ### 1.2. Customer Specifications and Clarifications 
 
