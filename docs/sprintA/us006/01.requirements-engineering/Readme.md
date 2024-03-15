@@ -32,7 +32,7 @@ Em termos de m ́aquinas, a MS possui tractores, retroescavadoras e máquinas gi
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency with UC07 and UC08.
+* US07 (register a vehicle for servicing) and US08 (list the vehicles that need to be serviced) depend directly on US06 (register a vehicle) because in order to register a vehicle for servicing and which vehicles need to be serviced, it is necessary to have the vehicles registered.
 
 ### 1.5 Input and Output Data
 
