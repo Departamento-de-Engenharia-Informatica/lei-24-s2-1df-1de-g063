@@ -1,4 +1,4 @@
-# US007 - Create a Task 
+# US007 - Vehicles Check-up Registration 
 
 
 ## 1. Requirements Engineering
@@ -7,9 +7,9 @@
 
 As a Fleet Manager responsible for overseeing the maintenance and condition of 
 vehicles within the organization, I need a feature that allows me to quickly register
-vehicles to check-up.
+vehicles check-up.
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications  FALTA ISTO
 
 **From the specifications document:**
 
@@ -29,35 +29,34 @@ vehicles to check-up.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The FM should be able to register a vehicle's check-up.
-* **AC2:** The FM should be able to select the vehicle for which the check-up is being registered from a list of available vehicles that has reached Checkup Frequency limit (in Kms).
-* **AC3:** The vehicle registration functionality should allow FM to enter the necessary details such as vehicle license plate.
+* **AC1:** The system should provide a feature for the Fleet Manager (FM) to register a vehicle's check-up.
+* **AC2:** When the Fleet Manager (FM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide
+the unique identification (ID) of the vehicle undergoing the check-up, the date when the check-up was performed, 
+the updated kilometers after the check-up and the check-up results.
+* **AC3:** After the FM submits the required information, the system should validate the input data.
+* **AC4:** In case of any errors during the registration process, the system should display appropriate error messages to the FM, indicating the nature of the issue and any corrective actions required.
 
-### 1.4. Found out Dependencies perguntar aos colegas
+### 1.4. Found out Dependencies FALTA VER
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+*
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Typed data:!!!
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+* Typed data:
+    * unique identification(ID) of the vehicle
+    * the date when the check-up was performed
+    * the updated kilometers after the check-up
 	
 * Selected data:
     * a task category 
 
 **Output Data:**
 
-* List of vehicles needing check-up maintenance
 * (In)Success of the operation
 
-### 1.6. System Sequence Diagram (SSD)
+### 1.6. System Sequence Diagram (SSD) FALTA ISTO
 
 **_Other alternatives might exist._**
 
