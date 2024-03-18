@@ -13,8 +13,44 @@ hide methods
 'class Platform {
 '  -description
 '}
+class Portal{
+    comments
+    malfunctions
+}
+class Agenda{
+    tasks
+}
+class Garden{
+    description
+}
+class Medium_Sized{
+    description
+}
+class Large_Sized{
+    description
+}
+class Vehicles_Machines_Equipment{
+    description
+}
+class FM{
+}
+class HRM{
+}
+class GSM{
+}
+class Green_Spaces{
 
-class Organization {
+}
+class Team{
+    Collaborators
+}
+
+class Collaborators{
+    name
+    key attributes
+    profession
+}
+class Employees {
     name
     vatNumber
     website
@@ -30,55 +66,49 @@ class Task {
     duration
     cost
 }
-
-class Category {
-    description
-}
-
-class Employee {
+class Managers {
     name
     email
     position
     phone
 }
-
-class TechnicalSkill{
-    shortDescription
-    fullDescription
+class User {
+    name
+    email
+    password
 }
+class Organization{
 
-class ActivityArea{
-    shortDescription
-    fullDescription
-}
-
-class FeatureTS{
-    mandatory
-}
-
-'class User {
-'    name
-'    email
-'    password
-'}
-class PostalAddress{
-    street
-    zipCode
-    city
 }
 'Platform "1" -- "*" Organization : has registered >
 'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
-TechnicalSkill "*" - "1" ActivityArea: regarding an >
+Organization "1" - "0..*" Employees : has >
+Employees "1" - "0..*" Collaborators: are >
+'Task "*" -- "1" Employees: created by >
+Employees "1" -- "*" Managers : are >
+'Employees "0..1" -- "1" User: acts as >
+Collaborators -- Team : make >
+Team -- Task :  >
+Task -- Green_Spaces:  >
+Managers -- GSM: has >
+Managers -- HRM: has >
+Managers -- FM: has >
+Managers -- Team: creates >
+Managers -- Green_Spaces: manages >
+Green_Spaces -- Garden: has >
+Green_Spaces -- Medium_Sized: has >
+Green_Spaces -- Large_Sized: has >
+Vehicles_Machines_Equipment -- Team: are attributed to >
+Managers -- Collaborators: hire and register >
+Organization -- Vehicles_Machines_Equipment: have >
+Managers -- Vehicles_Machines_Equipment: choose >
+Organization -- Agenda: has >
+Agenda -- Managers: help >
+Portal -- Organization: reports >
+User -- Portal: uses >
+User -- Managers: has <
+User -- Collaborators: has <
 
-Category "*" - "*" TechnicalSkill :  : requires >
-(Category, TechnicalSkill) . FeatureTS
 
-Organization "1" -left "1" PostalAddress : located At >
 
 @enduml
