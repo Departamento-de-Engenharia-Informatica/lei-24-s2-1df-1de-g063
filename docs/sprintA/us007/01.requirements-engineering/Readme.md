@@ -7,7 +7,7 @@
 
 As a Fleet Manager responsible for overseeing the maintenance and condition of 
 vehicles within the organization, I need a feature that allows me to quickly register
-vehicles check-up.
+vehicles check-up result.
 
 ### 1.2. Customer Specifications and Clarifications  FALTA ISTO
 
@@ -19,13 +19,9 @@ vehicles check-up.
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Which attributes will you need for the vehicle's check-up?
 >
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** Plate number, date, kms at checkup.
 
 ### 1.3. Acceptance Criteria
 
@@ -56,7 +52,7 @@ the updated kilometers after the check-up and the check-up results.
 
 * (In)Success of the operation
 
-### 1.6. System Sequence Diagram (SSD) FALTA ISTO
+### 1.6. System Sequence Diagram (SSD)
 
 **_Other alternatives might exist._**
 

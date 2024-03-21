@@ -32,7 +32,8 @@ vehicles that require check-up.
 * **AC1:** The system should provide a feature for the Fleet Manager (FM) to trigger the automatic creation of a list of vehicles needing a check-up based on kilometers driven.
 * **AC2:** Once generated, the system should display the list of vehicles needing a check-up in a dedicated dashboard or interface accessible to the FM.
 * **AC3:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
-
+* **AC4:** Se tiver a menos de 5% para ir a revisao aparece na lista se ja tiver ultrapassaddo tbsssssssss
+* 
 ### 1.4. Found out Dependencies FALTA JUSTIFICAR
 
 * There is a dependency on "US006 - Vehicle Registration" as there must be at least one task category to classify the task being created.
@@ -42,7 +43,7 @@ vehicles that require check-up.
 **Input Data:**
 
 * Typed data:
-    * a reference
+    * Tap a key to generate a list
 
 * Selected data:
     * a task category 
