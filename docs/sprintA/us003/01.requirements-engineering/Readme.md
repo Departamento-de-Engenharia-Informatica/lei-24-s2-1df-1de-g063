@@ -26,7 +26,7 @@ As a HRM, I want to register an employee with a profession and key attributes.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** There has to be inserted an employee, a profession and key atributes.
+* **AC1:** name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
 * **AC2:** The profession and the atributes have to be already registred.
 * **AC3:** The employee cannot be registered yet.
 * **AC4:** If any validation errors occur, the system should provide clear error messages indicating what needs to be corrected.
