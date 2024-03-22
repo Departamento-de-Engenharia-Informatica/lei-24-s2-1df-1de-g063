@@ -1,4 +1,4 @@
-@startuml
+    @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -16,6 +16,7 @@ hide methods
 class Portal{
     comments
     malfunctions
+    task category
 }
 class Agenda{
     tasks
@@ -46,13 +47,8 @@ class Team{
 }
 
 class Collaborators{
-    name
-    birthdate
-    admission date
-    address
-    contact info (mobile and email)
-    ID doc type
-    ID number
+    competences
+    profession
 }
 class Employees {
     name
@@ -110,8 +106,7 @@ Organization -- Agenda: has >
 Agenda -- Managers: help >
 Portal -- Organization: reports >
 User -- Portal: uses >
-User -- Managers: has <
-User -- Collaborators: has <
+User -- Employees: are <
 
 
 
