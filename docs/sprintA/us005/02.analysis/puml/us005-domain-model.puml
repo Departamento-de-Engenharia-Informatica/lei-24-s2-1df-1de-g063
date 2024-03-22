@@ -17,45 +17,45 @@ hide methods
 '}
 
 class Organization {
+
+}
+
+class Team{
+    Collaborators
+}
+class Employee {
     name
     vatNumber
     website
     phoneNumber
     email
 }
-
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
-    description
-}
-
-class Employee {
+class Managers{
     name
     email
     position
     phone
 }
-
+class Collaborators{
+    name
+    birthdate
+    admission date
+    address
+    contact info
+    ID doc type
+    ID number
+}
 'class User {
 '    name
 '    email
 '    password
 '}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
+
 Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+Employee "3" -- "3" Managers : are >
+Managers "1" -- "*" Team : create >
+Collaborators "*" -- "*" Team : make <
+
+
 @enduml

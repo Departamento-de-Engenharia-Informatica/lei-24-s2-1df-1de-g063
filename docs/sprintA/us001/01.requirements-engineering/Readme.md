@@ -1,25 +1,28 @@
-# US006 - Create a Task 
+# US001 - Register skills
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Human Resources Manager (HRM), I pretend to register skills to be given to a collaborator.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	"Thus, an employee has a main occupation (job) and a set of skills
+that enable him to perform/take on certain tasks/responsibilities, for example, driving
+vehicles of different types (e.g. light, or heavy), operating machines such as backhoes
+or tractors; tree pruning; application of phytopharmaceuticals." Type of skills that can be added to a collaborator.
+ 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
+
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** it's not required to do so.
 
 > **Question:** Monetary data is expressed in any particular currency?
 >
@@ -27,33 +30,31 @@ As an organization employee, I want to create a new task in order to be further 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** Insert a skill.
+* **AC2:** The skill mustn't be already registered.
+* **AC3:** Only as HRM can do this action 
+* **AC4:** Must be inserted a code to confirm the operation.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is no dependencies.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * one or more skills
+    * an access code
+    * a confirmation/approval
 	
 * Selected data:
-    * a task category 
+    *  
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* The registered skill
+* The success (or not) of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
