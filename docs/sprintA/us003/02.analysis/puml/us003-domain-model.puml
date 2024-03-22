@@ -12,17 +12,6 @@ hide methods
 
 'title Domain Model
 
-'class Platform {
-'  -description
-'}
-
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
 
 class Managers {
     name
@@ -41,31 +30,7 @@ class New_Collaborators{
     ID doc type
     ID number
 }
-class Employee {
-    name
-    email
-    position
-    phone
-}
-class Portal{
-    comments
-    malfunctions
-    task category
-}
-class User {
-    name
-    email
-    password
-}
-
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Managers : have >
+Managers "1" -- "1" New_Collaborators : register >
 Managers "1" -- "1" HRM : have >
-HRM "1" -- "1" User: is >
-User "1" -- "1" Portal: use >
-Portal "1" -- "*" New_Collaborators: register >
-'Employee "0..1" -- "1" User: acts as >>
+
 @enduml

@@ -7,18 +7,18 @@ skinparam shadowing false
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
-
-'title Domain Model
-
-'class Platform {
-'  -description
-'}
+class Outside_User{
+    name
+    email
+    password
+}
 class Portal{
-    comments
-    malfunctions
     task category
 }
-class Agenda{
+class Malfunctions{}
+class Flaws{}
+class Comments{}
+class Schedule{
     tasks
 }
 class Garden{
@@ -82,17 +82,17 @@ class Organization{
 }
 'Platform "1" -- "*" Organization : has registered >
 'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employees : has >
+Organization "1" - "1..*" Employees : has >
 Employees "1" - "0..*" Collaborators: are >
 'Task "*" -- "1" Employees: created by >
 Employees "1" -- "*" Managers : are >
 'Employees "0..1" -- "1" User: acts as >
 Collaborators -- Team : make >
-Team -- Task :  >
+Team -- Task : attributed <
 Task -- Green_Spaces:  >
-Managers -- GSM: has >
-Managers -- HRM: has >
-Managers -- FM: has >
+Managers "1" -- GSM: has >
+Managers "1" -- HRM: has >
+Managers "1" -- FM: has >
 Managers -- Team: creates >
 Managers -- Green_Spaces: manages >
 Green_Spaces -- Garden: has >
@@ -100,14 +100,18 @@ Green_Spaces -- Medium_Sized: has >
 Green_Spaces -- Large_Sized: has >
 Vehicles_Machines_Equipment -- Team: are attributed to >
 Managers -- Collaborators: hire and register >
-Organization -- Vehicles_Machines_Equipment: have >
+Organization "1"-- Vehicles_Machines_Equipment: have >
 Managers -- Vehicles_Machines_Equipment: choose >
-Organization -- Agenda: has >
-Agenda -- Managers: help >
-Portal -- Organization: reports >
-User -- Portal: uses >
-User -- Employees: are <
-
-
+Malfunctions "1"-- "*"Task:creates >
+Flaws "*" -- "*" Task : creates >
+Green_Spaces "1..*" -- "*"Task:>
+Task "*" -- Schedule :>
+Schedule "1" -- Managers: help >
+User "1" -- "1" Portal: uses >
+User "1"-- "1..*"Employees: are <
+Outside_User "1" -- "1" Portal : reports >
+Portal "1" -- Malfunctions:>
+Portal "1" -- Flaws:>
+Portal "1" -- Comments:>
 
 @enduml

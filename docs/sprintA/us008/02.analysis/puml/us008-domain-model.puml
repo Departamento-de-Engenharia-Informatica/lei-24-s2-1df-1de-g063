@@ -31,6 +31,28 @@ class CheckUp {
 class Portal{
 
 }
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+class Employee {
+    name
+    email
+    position
+    phone
+}
+class Managers {
+    name
+    email
+    position
+    phone
+}
+Organization "1" - "0..*" Employee : has
+Employee "1" -- "*" Managers : have >
+Managers "1" -- "1" FleetManager : have >
 FleetManager "1" -- "1" Portal : uses >
 FleetManager "1" -- "0..*" Vehicle : manages >
 Vehicle "1" -- "0..*" CheckUp : has >
