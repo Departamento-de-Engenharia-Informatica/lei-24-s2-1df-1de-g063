@@ -43,7 +43,7 @@ class Green_Spaces{
 
 }
 class Team{
-    Collaborators
+    collaborators
 }
 
 class Collaborators{
@@ -72,11 +72,6 @@ class Managers {
     position
     phone
 }
-class User {
-    name
-    email
-    password
-}
 class Organization{
 
 }
@@ -86,7 +81,6 @@ Organization "1" - "1..*" Employees : has >
 Employees "1" - "0..*" Collaborators: are >
 'Task "*" -- "1" Employees: created by >
 Employees "1" -- "*" Managers : are >
-'Employees "0..1" -- "1" User: acts as >
 Collaborators -- Team : make >
 Team -- Task : attributed <
 Task -- Green_Spaces:  >
@@ -105,10 +99,8 @@ Managers -- Vehicles_Machines_Equipment: choose >
 Malfunctions "1"-- "*"Task:creates >
 Flaws "*" -- "*" Task : creates >
 Green_Spaces "1..*" -- "*"Task:>
-Task "*" -- Schedule :>
-Schedule "1" -- Managers: help >
-User "1" -- "1" Portal: uses >
-User "1"-- "1..*"Employees: are <
+Task "*" -- Schedule : goes to >
+Schedule "1" -- Managers: is managed by >
 Outside_User "1" -- "1" Portal : reports >
 Portal "1" -- Malfunctions:>
 Portal "1" -- Flaws:>

@@ -1,17 +1,17 @@
-# US003 
+# US03- As a HRM, I want to register an employee with a profession and key attributes.
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a HRM, I want to register an employee with a profession and key attributes.
+This user story refers to the need to register a new employee with key attributes and a profession.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	"MS has a wide range of employees who carry out the most varied tasks in the context of green space management. Some examples of professions are: planner, estimator, gardener, electrician or bricklayer. Thus, an employee has a main occupation (profession) and a set of skills that enable them to perform/take on certain tasks/responsibilities, for example: driving different types of vehicles (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." This user story refers to the need to register a new employee with key attributes and a profession.
+>	"MS has a wide range of employees who carry out the most varied tasks in the context of green space management. Some examples of professions are: planner, estimator, gardener, electrician or bricklayer. Thus, an employee has a main occupation (profession) and a set of skills that enable them to perform/take on certain tasks/responsibilities, for example: driving different types of vehicles (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." 
 
 
 **From the client clarifications:**

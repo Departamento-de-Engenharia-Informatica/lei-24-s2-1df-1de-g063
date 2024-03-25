@@ -22,12 +22,6 @@ activate HRM
     HRM -> System : types requested data (an employee, a profession and key atributes)
     activate System
 
-        System --> HRM : shows task category list and asks to select one (must select "Record")
-    deactivate System
-
-    HRM -> System : selects a task category
-    activate System
-
         System --> HRM : shows all data and requests confirmation
     deactivate System
 

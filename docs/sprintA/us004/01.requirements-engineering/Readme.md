@@ -1,17 +1,17 @@
-# US004 
+# US04- HRM intends to assign one or more competences to an employee
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-HRM intends to assign one or more competences to an employee
+This user story intends to choose an employee and to give this chosen employee new competences.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	"Thus, an employee has a main occupation (profession) and a set of skills that enable him/her to carry out/assume certain tasks/responsibilities, for example: driving vehicles of different types (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." This user story intends to choose an employee and to give this chosen employee new competences.
+>	"Thus, an employee has a main occupation (profession) and a set of skills that enable him/her to carry out/assume certain tasks/responsibilities, for example: driving vehicles of different types (e.g. light, heavy), operating machinery such as backhoes or tractors; pruning trees; applying phytopharmaceuticals." 
 
 **From the client clarifications:**
 
