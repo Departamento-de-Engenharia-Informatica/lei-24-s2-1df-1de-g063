@@ -2,21 +2,25 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
 'left to right direction
-
 skinparam classAttributeIconSize 0
-
 hide circle
 hide methods
 
-class Vehicle {
-  Brand
+class List_Vehicles {
+}
+
+class Vehicle{
+ Brand
   Model
   Type
   Tara
-  Current Km
-  Register Date
+  CurrentKm
+  RegisterDate
 }
 
 class FleetManager {
@@ -24,40 +28,19 @@ class FleetManager {
 
 class CheckUp {
   Date
-  Updated Kilometers
-  Check-up Results
 }
 
-class Portal{
-
-}
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-class Employee {
-    name
-    email
-    position
-    phone
-}
 class Managers {
     name
     email
     position
     phone
 }
-Organization "1" - "0..*" Employee : has
-Employee "1" -- "*" Managers : have >
-Managers "1" -- "1" FleetManager : have >
-FleetManager "1" -- "1" Portal : uses >
-FleetManager "1" -- "0..*" Vehicle : manages >
-Vehicle "1" -- "0..*" CheckUp : has >
-Portal "1" -- "0..*" Vehicle : lists >
 
+Managers "1" -- "1" FleetManager : have >
+Managers "1" -- "0..*" List_Vehicles : wants >
+Vehicle "1" -- "1" CheckUp : needing >
+List_Vehicles "1" -- "0..*" Vehicle : has >
 @enduml
 
 
