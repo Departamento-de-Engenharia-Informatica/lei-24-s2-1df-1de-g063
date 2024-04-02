@@ -75,35 +75,44 @@ class Managers {
 class Organization{
 
 }
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "1..*" Employees : has >
-Employees "1" - "0..*" Collaborators: are >
-'Task "*" -- "1" Employees: created by >
+
+Organization "1" - "1..*" Employees : have >
+Organization "1"- "1..*"Vehicles_Machines_Equipment: have >
+Employees "1" -- "*" Collaborators: are >
 Employees "1" -- "*" Managers : are >
-Collaborators -- Team : make >
-Team -- Task : attributed <
-Task -- Green_Spaces:  >
-Managers "1" -- GSM: has >
-Managers "1" -- HRM: has >
-Managers "1" -- FM: has >
-Managers -- Team: creates >
-Managers -- Green_Spaces: manages >
-Green_Spaces -- Garden: has >
-Green_Spaces -- Medium_Sized: has >
-Green_Spaces -- Large_Sized: has >
-Vehicles_Machines_Equipment -- Team: are attributed to >
-Managers -- Collaborators: hire and register >
-Organization "1"-- Vehicles_Machines_Equipment: have >
-Managers -- Vehicles_Machines_Equipment: choose >
-Malfunctions "1"-- "*"Task:creates >
-Flaws "*" -- "*" Task : creates >
-Green_Spaces "1..*" -- "*"Task:>
-Task "*" -- Schedule : goes to >
+Managers "1" -- "1"GSM: has >
+Managers "1" -- "1"HRM: has >
+Managers "1" -- "1"FM: has >
+Managers "1" -- "1..*"Team: creates >
+Managers "1"-- "1..*"Green_Spaces: manages >
+Managers "1"-- "*"Collaborators: hire and register >
+Managers "1"-- "*"Vehicles_Machines_Equipment: choose >
+Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
 Schedule "1" -- Managers: is managed by >
-Outside_User "1" -- "1" Portal : reports >
-Portal "1" -- Malfunctions:>
-Portal "1" -- Flaws:>
-Portal "1" -- Comments:>
+Green_Spaces"1" -- "*" Garden: has >
+Green_Spaces "1" -- "*" Medium_Sized: has >
+Green_Spaces "1" -- "*" Large_Sized: has >
+Green_Spaces "1..*" -- "*" Task: originates >
+Collaborators "2..*"-- "1"Team : make >
+Team"1" -- "1..*"Task : attributed <
+Task "1..*"-- "1" Green_Spaces: solved in >
+Task "*" -- "1"Schedule : goes to >
+Portal "1" -- "*"Malfunctions: receives >
+Portal "1" -- "*"Flaws: receives >
+Portal "1" -- "*"Comments: receives >
+Outside_User "1" -- "1" Portal : reports to >
+Outside_User "*" -- "1..*"Green_Spaces: use >
+Malfunctions "*"-- "*"Task: creates >
+Flaws "*" -- "*" Task : creates >
+
+
+
+
+
+
+
+
+
+
 
 @enduml
