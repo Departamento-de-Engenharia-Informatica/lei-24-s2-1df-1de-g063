@@ -7,7 +7,7 @@
 
 As a Fleet Manager responsible for overseeing the maintenance and condition of 
 vehicles within the organization, I need a feature that allows me to quickly register
-vehicles check-up result.
+vehicles check-up.
 
 ### 1.2. Customer Specifications and Clarifications  FALTA ISTO
 
@@ -27,12 +27,10 @@ vehicles check-up result.
 
 * **AC1:** The system should provide a feature for the Fleet Manager (FM) to register a vehicle's check-up.
 * **AC2:** When the Fleet Manager (FM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide
-the unique identification (ID) of the vehicle undergoing the check-up, the date when the check-up was performed, 
-the updated kilometers after the check-up and the check-up results.
+the unique identification (ID) of the vehicle undergoing the check-up, 
 * **AC3:** After the FM submits the required information, the system should validate the input data.
-* **AC4:** In case of any errors during the registration process, the system should display appropriate error messages to the FM, indicating the nature of the issue and any corrective actions required.
 
-### 1.4. Found out Dependencies FALTA VER
+### 1.4. Found out Dependencies 
 
 *
 
@@ -46,7 +44,7 @@ the updated kilometers after the check-up and the check-up results.
     * the updated kilometers after the check-up
 	
 * Selected data:
-    * a task category 
+    * Vehicle 
 
 **Output Data:**
 
@@ -58,11 +56,7 @@ the updated kilometers after the check-up and the check-up results.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us007-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
