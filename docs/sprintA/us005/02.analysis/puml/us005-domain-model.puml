@@ -37,25 +37,24 @@ class Managers{
     phone
 }
 class Collaborators{
-    name
-    birthdate
-    admission date
-    address
-    contact info
-    ID doc type
-    ID number
+    competences
+    profession
 }
-'class User {
-'    name
-'    email
-'    password
-'}
+class Task {
+    reference
+    description
+    informalDesc
+    technicalDesc
+    duration
+    cost
+}
 
 
 Organization "1" - "0..*" Employee : has >
 Employee "3" -- "3" Managers : are >
 Managers "1" -- "*" Team : create >
 Collaborators "*" -- "*" Team : make <
+Team "1" -- "1..*" Task : attributed <
 
 
 @enduml
