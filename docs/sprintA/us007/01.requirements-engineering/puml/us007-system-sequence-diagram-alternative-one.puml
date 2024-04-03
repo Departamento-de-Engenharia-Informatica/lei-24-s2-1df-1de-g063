@@ -12,7 +12,7 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : Request to register vehicles check-up result
+    Employee -> System : Request to register vehicles check-up
     activate System
 
         System --> Employee : Display vehicle selection interface

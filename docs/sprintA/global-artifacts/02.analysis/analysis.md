@@ -10,19 +10,22 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-* 
+* Task
+* Schedule
 
 ---
 
 **Transaction Line Itemss**
 
-* 
+* Malfunctions
+* Flaws
+* Comments
 
 ---
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* 
+* Portal
 
 ---
 
@@ -34,13 +37,17 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Roles of People or Organizations**
 
-* 
+* Collaborators
+* Managers
 
 ---
 
 **Places**
 
-* 
+* Green Spaces 
+* Garden 
+* Medium_Sized 
+* Large_Sized
 
 ---
 
@@ -52,7 +59,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Physical Objects**
 
-* 
+* Vehicles_Machines_Equipment
 
 ---
 
@@ -82,13 +89,13 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Organizations**
 
-* 
+* Organization
 
 ---
 
 **Other External/Collaborating Systems**
 
-* 
+* Outside_User
 
 ---
 
@@ -124,10 +131,48 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		|  Association   	|  Concept (B) |
-|----------	   		|:-------------:		|------:       |
-| C1  	| verb1    		 	| C2  |
-| ...  	| ...    		 	| ...  |
+| Concept (A) 		              |  Association   	  |                 Concept (B) |
+|-----------------------------|:-----------------:|----------------------------:|
+| Organization                |        has        |                   Employees |
+| Organization 	              |        has        | Vehicles_Machines_Equipment |
+| Employees                   |        are        |               Collaborators |
+| Employees                   |        are        |                    Managers |
+| Managers                    |        has        |                         GSM |
+| Managers                    |        has        |                         HRM |
+| Managers                    |        has        |                          FM |
+| Managers                    |      creates      |                        Team |
+| Managers                    |      manages      |                Green_Spaces |
+| Managers                    | hire and register |               Collaborators |
+| Managers                    |      choose       | Vehicles_Machines_Equipment |
+| Vehicles_Machines_Equipment | are attributed to |                        Team |
+| Schedule                    |   is managed by   |                    Managers |
+| Green_Spaces                |        has        |                      Garden |
+|Green_Spaces|        has        |                Medium_Sized |
+|Green_Spaces|        has        |                 Large_Sized |
+|Green_Spaces|    originates     |                        Task |
+|Collaborators|       make        |                        Team |
+|Team|    attributed     |                        Task |
+|Task|      goes to      |                        Schedule |
+|Portal|     receives      |                        Malfunctions |
+|Portal|     receives      |                        Flaws |
+|Portal|     receives      |                        Comments |
+|Outside_User|    reports to     |                        Portal |
+|Outside_User|        use        |                        Green_Spaces |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

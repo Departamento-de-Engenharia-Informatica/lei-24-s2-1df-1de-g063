@@ -76,8 +76,8 @@ class Organization{
 
 }
 
-Organization "1" - "1..*" Employees : have >
-Organization "1"- "1..*"Vehicles_Machines_Equipment: have >
+Organization "1" - "1..*" Employees : has >
+Organization "1"- "1..*"Vehicles_Machines_Equipment: has >
 Employees "1" -- "*" Collaborators: are >
 Employees "1" -- "*" Managers : are >
 Managers "1" -- "1"GSM: has >
