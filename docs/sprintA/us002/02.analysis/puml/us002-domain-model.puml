@@ -10,38 +10,23 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
-
-'class Platform {
-'  -description
-'}
-
-class Organization {
-
+class Managers {
+    name
+    position
+    phoneNumber
+    email
 }
 
 class Job{
     name
 }
+class HRM{
 
-class Employee {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
 }
 
-'class User {
-'    name
-'    email
-'    password
-'}
-
 'Platform "1" -- "*" Organization : has registered >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Job: owns >
+Managers "1" - "0..*" HRM: has >
 'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Job : creates >
+Managers "1" -- "0..*" Job : registers >
 'Employee "0..1" -- "1" User: acts as >
 @enduml

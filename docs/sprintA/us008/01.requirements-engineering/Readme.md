@@ -27,16 +27,18 @@ vehicles that require check-up.
 >
 > **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
 
+> **Question:** What are the criteria for the car to appear on the check-up list?
+> 
+> **Answer:** If it is over 95% of the mileage limit for check-up or if it has exceeded it.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should provide a feature for the Fleet Manager (FM) to trigger the automatic creation of a list of vehicles needing a check-up based on kilometers driven.
 * **AC2:** Once generated, the system should display the list of vehicles needing a check-up in a dedicated dashboard or interface accessible to the FM.
 * **AC3:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
-* **AC4:** Se tiver a menos de 5% para ir a revisao aparece na lista se ja tiver ultrapassaddo tbsssssssss
-* 
-### 1.4. Found out Dependencies FALTA JUSTIFICAR
 
-* There is a dependency on "US006 - Vehicle Registration" as there must be at least one task category to classify the task being created.
+### 1.4. Found out Dependencies
+
+* There is a dependency on "US006 - Vehicle Registration" as there must be all the vehicles details.
 
 ### 1.5 Input and Output Data
 
@@ -45,25 +47,18 @@ vehicles that require check-up.
 * Typed data:
     * Tap a key to generate a list
 
-* Selected data:
-    * a task category 
-
 **Output Data:**
 
 * List of vehicles needing a check-up
 * (In)Success of the operation
 
-### 1.6. System Sequence Diagram (SSD) FALTA ISTO
+### 1.6. System Sequence Diagram (SSD) 
 
 **_Other alternatives might exist._**
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 

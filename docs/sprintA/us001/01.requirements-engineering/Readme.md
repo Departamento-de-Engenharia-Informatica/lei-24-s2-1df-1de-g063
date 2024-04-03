@@ -1,4 +1,4 @@
-# US001 - Register skills
+# US01 - Register skills
 
 
 ## 1. Requirements Engineering
@@ -24,16 +24,10 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 >
 > **Answer:** it's not required to do so.
 
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Insert a skill.
-* **AC2:** The skill mustn't be already registered.
-* **AC3:** Only as HRM can do this action 
-* **AC4:** Must be inserted a code to confirm the operation.
+* **AC2:** Only as HRM can do this action
 
 ### 1.4. Found out Dependencies
 
@@ -44,7 +38,7 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 **Input Data:**
 
 * Typed data:
-    * one or more skills
+    * one skill
     * an access code
     * a confirmation/approval
 	
@@ -52,7 +46,7 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
     *  
 
 **Output Data:**
-
+  
 * The registered skill
 * The success (or not) of the operation
 

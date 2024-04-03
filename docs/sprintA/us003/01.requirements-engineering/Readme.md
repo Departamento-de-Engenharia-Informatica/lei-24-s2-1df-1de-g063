@@ -44,7 +44,6 @@ This user story refers to the need to register a new employee with key attribute
     * a name
     * a profession 
     * an attibute
-    * a code
     * confirmation of the operation
 
 	
@@ -63,7 +62,7 @@ This user story refers to the need to register a new employee with key attribute
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png](svg%2Fus003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png)
 
 
 ### 1.7 Other Relevant Remarks
