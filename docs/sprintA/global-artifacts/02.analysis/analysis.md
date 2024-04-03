@@ -10,12 +10,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-* Task
 * Schedule
 
 ---
 
-**Transaction Line Itemss**
+**Transaction Line Items**
 
 * Malfunctions
 * Flaws
@@ -31,14 +30,19 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Records**
 
-* 
+* Task
 
 ---  
 
 **Roles of People or Organizations**
 
+* Employees
 * Collaborators
 * Managers
+* GSM
+* HRM
+* FM
+* Outside_User
 
 ---
 
@@ -77,13 +81,13 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Containers**
 
-* 
+* Portal
 
 ---
 
 **Elements of Containers**
 
-* 
+* Team
 
 ---
 
@@ -95,7 +99,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Other External/Collaborating Systems**
 
-* Outside_User
+* 
 
 ---
 
