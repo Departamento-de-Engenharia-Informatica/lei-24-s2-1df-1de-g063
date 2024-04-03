@@ -1,12 +1,11 @@
-# US05 - Generate a team
+# US05 - As a HRM, I want to generate a team proposal automatically
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a HRM, I want to generate a team proposal automatically.
-
+As a Human Resource Manager (HRM), I want to streamline the process of generating team proposals by implementing an automatic generation feature. This functionality will enable me to swiftly compile comprehensive team proposals, incorporating essential details such as team members' roles, skills, and relevant project assignments.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
@@ -17,19 +16,21 @@ As a HRM, I want to generate a team proposal automatically.
  
 
 **From the client clarifications:**
-> **Question:** What inputs are needed to generate a team
+> **Question:** What other inputs are needed to generate a team
 >
-> **Answer:** To be answered
+> **Answer:** None, only the number of members and the skills needed
 > 
->**Question:** What kind of reporting or feedback mechanisms would be helpful for HRMs to validate and evaluate the proposed team compositions?
+>**Question:** Can a collaborator be in more than one team at the same time?
 >
->**Answer:** To be Answered
+>**Answer:** No
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The number of members must be given by the HRM
 * **AC2:** The skills needed must be given by the HRM
-
+* **AC3:** The HRM should have the option to validate the team generated
+* **AC4:** The system should automatically assign team members to specific roles based on their skills and availability.
+* **AC5:** The system should provide clear notifications or prompts for any missing or incomplete information required for generating the team proposal.
 ### 1.4. Found out Dependencies
 
 * Dependencies found in [US001](/docs/sprintA/us001) and US04
@@ -41,7 +42,6 @@ As a HRM, I want to generate a team proposal automatically.
 * Typed data:
     * number of members
     * skills needed
-    * to be answered...
 
 **Output Data:**
 
@@ -50,8 +50,8 @@ As a HRM, I want to generate a team proposal automatically.
 ### 1.6. System Sequence Diagram (SSD)
 
 ![US005-System-Sequence-diagram](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
-
+![US005-System-Sequence-diagram2](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_two.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+*...
