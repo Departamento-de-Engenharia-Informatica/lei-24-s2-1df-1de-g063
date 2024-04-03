@@ -1,11 +1,11 @@
-# US002 - Register a job. 
+# US02 - Register a job. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an Human Resources Manager (HRM), I want to register a job.
+As a Human Resources Manager (HRM), I want to register a job.
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
@@ -14,17 +14,15 @@ As an Human Resources Manager (HRM), I want to register a job.
 
 **From the client clarifications:**
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** 
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Insert a job name.
-* **AC2:** The job mustn't be already registered.
-* **AC3:** Only as HRM can do this action
-* **AC4:** The skill mustn't include special characters or digits. 
-* 
+* **AC2:** Only as HRM can do this action
+
 ### 1.4. Found out Dependencies
 
 * There is no dependencies.
@@ -38,7 +36,8 @@ As an Human Resources Manager (HRM), I want to register a job.
   * a confirmation/approval
 	
 * Selected data:
-  * a task category ??? 
+
+  *
 
 **Output Data:**
 
