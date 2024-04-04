@@ -11,8 +11,6 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class List_Vehicles {
-}
 
 class Vehicle{
  Brand
@@ -38,9 +36,8 @@ class Managers {
 }
 
 Managers "1" -- "1" FleetManager : have >
-Managers "1" -- "0..*" List_Vehicles : wants >
-Vehicle "1" -- "1" CheckUp : needing >
-List_Vehicles "1" -- "0..*" Vehicle : has >
+Vehicle "1" -- "1" CheckUp : needs >
+Managers "1" -- "0..*" Vehicle : lists >
 @enduml
 
 
