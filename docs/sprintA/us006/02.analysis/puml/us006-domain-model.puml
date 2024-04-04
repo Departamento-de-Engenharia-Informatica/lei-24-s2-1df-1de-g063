@@ -16,32 +16,25 @@ hide methods
 '  -description
 '}
 
-class Organization {
+class VFM {
     name
-    vatNumber
-    website
-    phoneNumber
+    password
     email
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
 
-class Category {
-    description
-}
 
-class Employee {
-    name
-    email
-    position
-    phone
+
+class Vehicle {
+    plate
+    brand
+    model
+    type
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    maintenanceFrequency
 }
 
 'class User {
@@ -50,12 +43,11 @@ class Employee {
 '    password
 '}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+'Platform "1" -- "*" VFM : has registered >
+
+VFM "1" - "0..*" Vehicle : register >
+
+
+
+
 @enduml
