@@ -16,9 +16,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Line Items**
 
-* Malfunctions
-* Flaws
-* Comments
+* 
 
 ---
 
@@ -57,7 +55,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Noteworthy Events**
 
-* 
+* Malfunctions
+* Flaws
 
 ---
 
@@ -69,7 +68,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Descriptions of Things**
 
-* 
+* Comments
 
 ---
 
@@ -105,7 +104,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Records of finance, work, contracts, legal matters**
 
-* 
+* Organization
 
 ---
 
@@ -117,7 +116,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Documents mentioned/used to perform some work/**
 
-* 
+* Schedule 
 
 ---
 
@@ -186,4 +185,4 @@ An association is a relationship between instances of objects that indicates a r
 
 **Insert below the Domain Model Diagram in a SVG format**
 
-![Domain Model](svg/project-domain-model.svg)
+![project-domain-model.svg](svg%2Fproject-domain-model.svg)

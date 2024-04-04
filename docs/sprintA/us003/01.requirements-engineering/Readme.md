@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-This user story refers to the need to register a new employee with key attributes and a profession.
+The user story involves the task of adding a new employee to the system, capturing essential details such as personal information, job role, and any other pertinent attributes necessary for their registration.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -29,8 +29,6 @@ This user story refers to the need to register a new employee with key attribute
 * **AC1:** name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
 * **AC2:** The profession and the atributes have to be already registred.
 * **AC3:** The employee cannot be registered yet.
-* **AC4:** If any validation errors occur, the system should provide clear error messages indicating what needs to be corrected.
-* **AC5:** The HRM must insert a code to perform this operation as he is the only one with the power to do it.
 
 ### 1.4. Found out Dependencies
 

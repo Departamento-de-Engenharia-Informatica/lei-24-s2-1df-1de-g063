@@ -28,8 +28,6 @@ This user story intends to choose an employee and to give this chosen employee n
 * **AC1:** All required fields must be filled in.
 * **AC2:** The employee and the competence must be already registred. 
 * **AC3:** The employee cannot already have that competence assigned to him.
-* **AC4:** The HRM must insert a code to perform this operation as he is the only one with the power to do it.
-
 
 ### 1.4. Found out Dependencies
 
