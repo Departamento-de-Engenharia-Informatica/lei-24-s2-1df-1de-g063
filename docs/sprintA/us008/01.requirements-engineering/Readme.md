@@ -1,4 +1,4 @@
-# US008 - As an FM, I want to list the vehicles needing the check-up
+  # US008 - As an FM, I want to list the vehicles needing the check-up
 
 
 ## 1. Requirements Engineering
@@ -9,14 +9,8 @@ As a Fleet Manager responsible for overseeing the maintenance and condition of
 vehicles within the organization, I need a feature that allows me to quickly list
 vehicles that require check-up.
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
-**From the specifications document:** FALTA ISTO
-
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category.
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
- 
 **From the client clarifications:**
 
 > **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?

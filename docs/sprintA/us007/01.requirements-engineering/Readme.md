@@ -9,13 +9,11 @@ As a Fleet Manager responsible for overseeing the maintenance and condition of
 vehicles within the organization, I need a feature that allows me to quickly register
 vehicles check-up.
 
-### 1.2. Customer Specifications and Clarifications  FALTA ISTO
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	Vehicles are needed to carry out the tasks assigned to the teams as well as to transport machines and equipment. This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks. As for machines, MS has tractors, backhoe loaders and rotating machines, lawn-mowers, among others. The equipment can be greatly diverse, such as sprayers, lifting platforms, chainsaws, brush cutters, blowers, ladders, cisterns and the various elements that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers.
 
 **From the client clarifications:**
 
