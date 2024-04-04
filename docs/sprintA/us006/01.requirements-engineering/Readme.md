@@ -11,8 +11,12 @@ As a Vehicle Park Manager (VMP) I want to register a vehicle
 
 **From the specifications document:**
 
->	"Este tipo de viatura pode ser apenas para passageiros ou misto, ligeiras ou pesadas, com ou sem caixa aberta.
-Em termos de m ́aquinas, a MS possui tractores, retroescavadoras e máquinas giratórias, corta-relvas, entre outros. Os equipamentos podem ser muito diversos, como pulverizadores, plataformas elevat ́orias, motosserras, motorro ̧cadoras, sopradores, es- cadas, cisternas e alfaias diversas que podem ser acopladas aos tractores, como por exemplo: grades de discos, capinadoras, escarificadores." 
+> "The Vehicle and Equipment Fleet Manager wants to register a vehicle. This type of vehicle can be passenger only or mixed,
+light or heavy, vans or trucks with open or closed boxes.
+As for machines, MS has tractors, backhoe loaders and rotating machines, lawn mowers,
+between others. The equipment can be very diverse, such as sprayers, elevators
+platforms, chainsaws, brush cutters, blowers, ladders, cisterns and the various elements
+that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers"
 
 
 
