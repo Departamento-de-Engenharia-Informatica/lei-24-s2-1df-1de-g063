@@ -37,7 +37,7 @@ class Managers {
 
 Managers "1" -- "1" FleetManager : have >
 Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
-Managers "1" -- "1..*" Vehicles_Machines_Equipment : lists >
+Managers "1" -- "1..*" Vehicles_Machines_Equipment : choose and register >
 @enduml
 
 

@@ -18,4 +18,9 @@ activate Employee
         System --> Employee : Retrieve list of vehicles needing check-up
     deactivate System
 
+    Employee -> System :  Confirms information
+    activate System
+
+        System --> Employee : (in)Success Message
+    deactivate System
 @enduml
