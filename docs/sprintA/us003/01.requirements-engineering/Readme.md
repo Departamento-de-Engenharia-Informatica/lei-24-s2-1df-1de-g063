@@ -24,8 +24,7 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
-* **AC2:** There must be inserted a new employee and it should have key attributes and a profession.
-
+* **AC2:** Registering a collaborator must include a job and a set of skills.
 
 ### 1.4. Found out Dependencies
 
@@ -57,8 +56,7 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 
 #### Alternative One
 
-![us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png](svg%2Fus003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png)
-
+![us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg%2Fus003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
