@@ -40,8 +40,8 @@ class Task {
     cost
 }
 
-Managers "1" -- "*" Team : create >
-Collaborators "*" -- "*" Team : make <
+Managers "1" -- "1..*" Team : create >
+Collaborators "2..*" -- "1" Team : make >
 Team "1" -- "1..*" Task : attributed <
 
 
