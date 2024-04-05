@@ -1,4 +1,4 @@
-# US02 - As an HRM, I want to register a job that a collaborator need to have
+# US002 - As an HRM, I want to register a job that a collaborator need to have
 
 
 ## 1. Requirements Engineering

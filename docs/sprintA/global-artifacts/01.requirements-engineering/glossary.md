@@ -12,12 +12,3 @@
 |**Large-sized park** |**Parque de grande dimensão**| multi-function space with diverse garden spaces, and woods, including varied equipment and services (for example, Parque da Cidade). |
 |**Medium-sized park** |**Parque de pequena dimensão**| green space with a few hundred or thousands of square meters with a wooded garden area, it includes some infrastructures such as toilets, drinking fountains, irrigation system, lighting, children’s playground (for example, Quinta do Covelo, Jardim de Arca de Agua). | 
 | **MS**      |**MS**| Acronym for MusgoSublime, the name of the organization. |
-
- 
-
-
-
-
-
-
-

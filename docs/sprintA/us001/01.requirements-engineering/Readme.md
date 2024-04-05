@@ -1,4 +1,4 @@
-# US01 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have
+# US001 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have
 
 
 ## 1. Requirements Engineering

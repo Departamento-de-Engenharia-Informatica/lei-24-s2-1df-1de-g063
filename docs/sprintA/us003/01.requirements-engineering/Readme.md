@@ -1,4 +1,4 @@
-# US03 - As a HRM, I want to register an employee with a profession and key attributes.
+# US003 - As an HRM, I want to register a collaborator with a job and fundamental characteristics
 
 
 ## 1. Requirements Engineering

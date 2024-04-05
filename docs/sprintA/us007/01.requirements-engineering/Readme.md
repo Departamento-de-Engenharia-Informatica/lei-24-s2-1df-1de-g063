@@ -1,4 +1,4 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up.
+# US007 - As an FM, I wish to register a vehicle’s check-up
 
 
 ## 1. Requirements Engineering
