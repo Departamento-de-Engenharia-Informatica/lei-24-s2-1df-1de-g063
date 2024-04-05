@@ -75,7 +75,7 @@ class Managers {
 class Organization{
 }
 
-class Check-Up{
+class CheckUp{
 }
 
 Organization "1" - "1..*" Employees : has >
@@ -106,8 +106,7 @@ Outside_User "1" -- "1" Portal : reports to >
 Outside_User "*" -- "1..*"Green_Spaces: use >
 Malfunctions "*"-- "*"Task: creates >
 Flaws "*" -- "*" Task : creates >
-
-
+Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
 
 
 
