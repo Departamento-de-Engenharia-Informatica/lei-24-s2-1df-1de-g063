@@ -12,15 +12,15 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System :  Request to list vehicles needing check-up
+    Employee -> System : Request to list vehicles needing check-up
     activate System
 
         System --> Employee : Retrieve list of vehicles needing check-up
     deactivate System
 
-    Employee -> System :  Confirms information
+    Employee -> System : Verifies the vehicle's information.
     activate System
 
-        System --> Employee : (in)Success Message
+        System --> Employee : Sends a message indicating that the process has been terminated.
     deactivate System
 @enduml

@@ -12,18 +12,11 @@ hide circle
 hide methods
 
 class Vehicles_Machines_Equipment {
-  Brand
-  Model
-  Type
-  Tare
-  Current Km
-  Register Date
+  description
 }
 
 class CheckUp {
-  Date
-  Updated Kilometers
-  Check-up Results
+  date
 }
 
 class FleetManager {
@@ -37,8 +30,7 @@ class Managers {
     phone
 }
 Managers "1" -- "1" CheckUp : register >
-Managers "1" -- "1" FleetManager : have >
-Vehicles_Machines_Equipment "1" -- "1" CheckUp : need >
-Managers "1" -- "0..*" Vehicles_Machines_Equipment : choose and register >
+Managers "1" -- "1" FleetManager : has >
+Vehicles_Machines_Equipment "1" -- "1" CheckUp : has <
 
 @enduml

@@ -26,8 +26,8 @@ vehicles that require check-up.
 > **Answer:** If it is over 95% of the mileage limit for check-up or if it has exceeded it.
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The system should provide a feature for the Fleet Manager (FM) to trigger the automatic creation of a list of vehicles needing a check-up based on kilometers driven.
-* **AC2:** Once generated, the system should display the list of vehicles needing a check-up in a dedicated dashboard or interface accessible to the FM.
+* **AC1:** The system should allow FM to generate a list of vehicles requiring a check-up.
+* **AC2:** After generating the list, the system should present it in a dedicated dashboard or interface accessible to the FM, showcasing the vehicles requiring a check-up.
 * **AC3:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
 
 ### 1.4. Found out Dependencies
@@ -41,10 +41,13 @@ vehicles that require check-up.
 * Typed data:
     * Tap a key to generate a list
 
+* Selected data:
+  * Vehicle
+  
 **Output Data:**
 
-* List of vehicles needing a check-up
-* (In)Success of the operation
+  * List of vehicles needing a check-up
+  * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD) 
 

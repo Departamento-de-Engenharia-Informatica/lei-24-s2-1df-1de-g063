@@ -110,14 +110,6 @@ Outside_User "*" -- "1..*"Green_Spaces: use >
 Malfunctions "*"-- "*"Task: creates >
 Flaws "*" -- "*" Task : creates >
 Managers "1" -- "1" CheckUp: register >
-
-
-
-
-
-
-
-
-
+CheckUp "1" -- "1" Vehicles_Machines_Equipment: has >
 
 @enduml
