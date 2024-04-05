@@ -1,11 +1,11 @@
-# US01 - Register skills
+# US01 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Human Resources Manager (HRM), I pretend to register skills to be given to a collaborator.
+As a Human Resources Manager (HRM), who is responsible for managing human resources, teams needed on ongoing projects and defining the skills of the employees, I pretend to register skills to be given to a collaborator.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -18,16 +18,22 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
  
 
 **From the client clarifications:**
-
-> **Question:** Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
+> **Question:** "Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?"
 
 >
-> **Answer:** it's not required to do so.
+> **Answer:** "All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)"
+
+> **Question:** "Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?"
+
+>
+> **Answer:** "it's not required to do so."
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Insert a skill.
-* **AC2:** Only as HRM can do this action
+* **AC2:** The skill mustn't have special characters or digits. 
+* **AC3:** The skill mustn't be already registered.
+* **AC4:** Only as HRM can do this action.
 
 ### 1.4. Found out Dependencies
 
