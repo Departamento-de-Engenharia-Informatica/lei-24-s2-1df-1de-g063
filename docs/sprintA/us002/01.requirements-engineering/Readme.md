@@ -22,8 +22,7 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 
 * **AC1:** Insert a job name.
 * **AC2:** The skill mustn't have special characters or digits.
-* **AC3:** The job mustn't be already registered.
-* **AC4:** Only as HRM can do this action.
+* **AC3:** Only as HRM can do this action.
 
 ### 1.4. Found out Dependencies
 
