@@ -12,7 +12,7 @@ hide circle
 hide methods
 
 
-class Vehicle{
+class Vehicles_Machines_Equipment{
  Brand
   Model
   Type
@@ -36,8 +36,8 @@ class Managers {
 }
 
 Managers "1" -- "1" FleetManager : have >
-Vehicle "1" -- "1" CheckUp : needs >
-Managers "1" -- "0..*" Vehicle : lists >
+Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
+Managers "1" -- "1..*" Vehicles_Machines_Equipment : lists >
 @enduml
 
 

@@ -6,7 +6,10 @@ _Specifies functionalities that:
 &nbsp; &nbsp; (i) are common across several US/UC;  
 &nbsp; &nbsp; (ii) are not related to US/UC, namely: Audit, Reporting and Security._
 
-(fill in here)
+Each manager will only be able to register and modify their specific data by using a security code.
+All the inserted data will be printed and will only be stored when and if the manager confirms it.
+
+
 
 ## Usability
 
@@ -14,7 +17,7 @@ _Evaluates the user interface. It has several subcategories,
 among them: error prevention; interface aesthetics and design; help and
 documentation; consistency and standards._
 
-(fill in here )
+
 
 ## Reliability
 
