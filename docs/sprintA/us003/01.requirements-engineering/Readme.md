@@ -1,4 +1,4 @@
-# US03- As a HRM, I want to register an employee with a profession and key attributes.
+# US03 - As a HRM, I want to register an employee with a profession and key attributes.
 
 
 ## 1. Requirements Engineering
@@ -16,19 +16,16 @@ The user story involves the task of adding a new employee to the system, capturi
 
 **From the client clarifications:**
 
-> **Question:** Is there any limit to the number of employees per profession?
+> **Question:** What should be the accepted format for the emails? Should only specific email services be accepted?
 >
-> **Answer:** 
-
-> **Question:** Do I have to show an approval message?
->
-> **Answer:** 
+> **Answer:** A valid email address consists of an email prefix and an email domain, both in acceptable formats.
+The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
-* **AC2:** The profession and the atributes have to be already registred.
-* **AC3:** The employee cannot be registered yet.
+* **AC1:** Name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
+* **AC2:** There must be inserted a new employee and it should have key attributes and a profession.
+
 
 ### 1.4. Found out Dependencies
 
