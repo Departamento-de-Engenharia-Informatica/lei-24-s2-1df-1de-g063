@@ -73,7 +73,9 @@ class Managers {
     phone
 }
 class Organization{
+}
 
+class Check-Up{
 }
 
 Organization "1" - "1..*" Employees : has >
@@ -86,7 +88,7 @@ Managers "1" -- "1"FM: has >
 Managers "1" -- "1..*"Team: creates >
 Managers "1"-- "1..*"Green_Spaces: manages >
 Managers "1"-- "*"Collaborators: hire and register >
-Managers "1"-- "*"Vehicles_Machines_Equipment: choose >
+Managers "1"-- "*"Vehicles_Machines_Equipment: choose and list >
 Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
 Schedule "1" -- Managers: is managed by >
 Green_Spaces"1" -- "*" Garden: has >
