@@ -76,6 +76,7 @@ class Organization{
 }
 
 class CheckUp{
+    date
 }
 
 Organization "1" - "1..*" Employees : has >
@@ -90,6 +91,7 @@ Managers "1"-- "1..*"Green_Spaces: manages >
 Managers "1"-- "*"Collaborators: hire and register >
 Managers "1"-- "*"Vehicles_Machines_Equipment: choose and list >
 Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
+Vehicles_Machines_Equipment "*" -- "1" CheckUp: need >
 Schedule "1" -- Managers: is managed by >
 Green_Spaces"1" -- "*" Garden: has >
 Green_Spaces "1" -- "*" Medium_Sized: has >
@@ -106,7 +108,8 @@ Outside_User "1" -- "1" Portal : reports to >
 Outside_User "*" -- "1..*"Green_Spaces: use >
 Malfunctions "*"-- "*"Task: creates >
 Flaws "*" -- "*" Task : creates >
-Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
+
+
 
 
 
