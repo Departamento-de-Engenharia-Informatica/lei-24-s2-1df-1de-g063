@@ -16,16 +16,19 @@ hide methods
 '  -description
 '}
 
-class VFM {
+class FM {
+
+}
+
+class Managers {
     name
-    password
     email
+    position
+    phone
 }
 
 
-
-
-class Vehicle {
+class Vehicles_Machines_Equipment {
     plate
     brand
     model
@@ -43,11 +46,11 @@ class Vehicle {
 '    password
 '}
 
-'Platform "1" -- "*" VFM : has registered >
+'Platform "1" -- "*" FM : has registered >
 
-VFM "1" - "0..*" Vehicle : register >
+Managers "1"-- "*"Vehicles_Machines_Equipment: register and choose >
 
-
+Managers "1" -- "1"FM: has >
 
 
 @enduml

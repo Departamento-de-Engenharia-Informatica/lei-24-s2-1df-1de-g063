@@ -5,18 +5,18 @@
 
 ### 1.1. User Story Description
 
-As a Vehicle Park Manager (VMP) I want to register a vehicle
+As a Vehicle and Equipment Fleet Manager (FM) I want to register a vehicle
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
-> "The Vehicle and Equipment Fleet Manager wants to register a vehicle. This type of vehicle can be passenger only or mixed,
+> "This type of vehicle can be passenger only or mixed,
 light or heavy, vans or trucks with open or closed boxes.
 As for machines, MS has tractors, backhoe loaders and rotating machines, lawn mowers,
 between others. The equipment can be very diverse, such as sprayers, elevators
 platforms, chainsaws, brush cutters, blowers, ladders, cisterns and the various elements
-that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers"
+that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers."
 
 
 
@@ -31,7 +31,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 * **AC1:** A car must be entered
 * **AC2:** The car must not already be registered.
-* **AC3:** The VMP must insert a code to perform this operation as he is the only one with the power to do it.
+* **AC3:** The VFM must insert a code to perform this operation as he is the only one with the power to do it.
 * **AC4:** The attributes that should be used to describe a vehicle are: Make, Model, Type, Tare, Gross Weight, Current Kms, Registration Date, Acquisition Date and Overhaul Frequency (in Kms).
 
 ### 1.4. Found out Dependencies

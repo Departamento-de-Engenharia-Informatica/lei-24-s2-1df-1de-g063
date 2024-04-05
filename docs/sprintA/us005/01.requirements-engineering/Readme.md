@@ -31,6 +31,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 * **AC3:** The HRM should have the option to validate the team generated
 * **AC4:** The system should automatically assign team members to specific roles based on their skills and availability.
 * **AC5:** The system should provide clear notifications or prompts for any missing or incomplete information required for generating the team proposal.
+* **AC6:** The system should provide clear notification in case of insufficient collaborators to make the team needed.
 ### 1.4. Found out Dependencies
 
 * Dependencies found in [US001](/docs/sprintA/us001) and US04
@@ -49,7 +50,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![US005-System-Sequence-diagram](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![US005-System-Sequence-diagram1](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 ![US005-System-Sequence-diagram2](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_two.svg)
 
 ### 1.7 Other Relevant Remarks

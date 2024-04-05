@@ -28,8 +28,8 @@ class HRM{
 }
 
 'Platform "1" -- "*" Organization : has registered >
-Managers "1" - "0..*" HRM: has >
+Managers "1" - "*" HRM: has >
 'Task "*" -- "1" Employee: created by >
-Managers "1" -- "0..*" Skill : registers >
+Managers "1" -- "*" Skill : register >
 'Employee "0..1" -- "1" User: acts as >
 @enduml
