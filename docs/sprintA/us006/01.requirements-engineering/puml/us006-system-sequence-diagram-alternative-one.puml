@@ -12,22 +12,22 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new vehicle
+    Employee -> System : Requests to register a vehicle
     activate System
 
-        System --> Employee : requests data
+        System --> Employee : Requests data
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : Types requested data(e.g. brand, model, check-up frequency)
     activate System
 
-        System --> Employee : shows the vehicle created
+        System --> Employee : Display the vehicle that has been created
     deactivate System
 
-    Employee -> System : confirms data
+    Employee -> System : Confirms data
     activate System
 
-        System --> Employee : displays operation success
+        System --> Employee : Displays success message
     deactivate System
 
 

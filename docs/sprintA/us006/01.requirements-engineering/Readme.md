@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment Fleet Manager (FM) I want to register a vehicle
+As a Vehicle and Equipment Fleet Manager (FM) I want to register a vehicle.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -61,7 +61,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 
 
-![System Sequence Diagram - Alternative One](/docs/sprintA/us006/01.requirements-engineering/svg/us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
 
 
 ### 1.7 Other Relevant Remarks
