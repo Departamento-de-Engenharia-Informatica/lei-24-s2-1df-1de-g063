@@ -31,9 +31,8 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Insert a skill.
-* **AC2:** The skill mustn't have special characters or digits. 
-* **AC3:** The skill mustn't be already registered.
-* **AC4:** Only as HRM can do this action.
+* **AC2:** The skill mustn't have special characters or digits.
+* **AC3:** Only as HRM can do this action.
 
 ### 1.4. Found out Dependencies
 
