@@ -12,9 +12,14 @@ However, be aware, this is a pedagogical simplification. On further projects and
 
 # Use Cases / User Stories
 
-| UC/US | Description                                   |                   
-|:------|:----------------------------------------------|
-| US001 | [Short name for US001](../../us001/Readme.md) |
-| ...   | ...                                           |
-| US006 | [Create a Task](../../us006/Readme.md)        |
-| ...   | ...                                           |
+| UC/US | Description                                           |                   
+|:------|:------------------------------------------------------|
+| US001 | [Register Skills](/docs/SprintA/us001)                |
+| US002 | [Register a Job](/docs/SprintA/us002)                 |
+| US003 | [Register Employee](/docs/SprintA/us003)              |
+| US004 | [Assign Competences to Employee](/docs/SprintA/us004) |
+| US005 | [Generate teams](/docs/SprintA/us005)                 |
+ | US006 | [Register a Vehicle](/docs/SprintA/us006)             |
+| US007 | [Register vehicle check up](/docs/SprintA/us007)      |
+| US008 | [List check up](/docs/SprintA/us008)                  |
+

@@ -6,13 +6,14 @@
 ### 1.1. User Story Description
 
 As a Human Resource Manager (HRM), I want to streamline the process of generating team proposals by implementing an automatic generation feature. This functionality will enable me to swiftly compile comprehensive team proposals, incorporating essential details such as team members' roles, skills, and relevant project assignments.
+
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Teams are temporary associations of employees who will carry out a set of tasks in one or more green spaces.
+>"Teams are temporary associations of employees who will carry out a set of tasks in one or more green spaces." this part from the assignment helps understanding what the client means by creating a team, it's an useful form of contextualization.
 
->	When creating multipurpose teams, the number of members and the set of skills that must be covered are crucial.
+>"When creating multipurpose teams, the number of members and the set of skills that must be covered are crucial." this sentence already defines two important Acceptance Criteria.
  
 
 **From the client clarifications:**
@@ -34,7 +35,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 * **AC6:** The system should provide clear notification in case of insufficient collaborators to make the team needed.
 ### 1.4. Found out Dependencies
 
-* Dependencies found in [US001](/docs/sprintA/us001) and US04
+* Dependencies found in [Register skills](/docs/sprintA/us001) and [HRM intends to assign one or more competences to an employee](/docs/sprintA/us004)
 
 ### 1.5 Input and Output Data
 
@@ -50,8 +51,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![US005-System-Sequence-diagram1](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
-![US005-System-Sequence-diagram2](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_two.svg)
+![US005-System-Sequence-diagram1](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
 
