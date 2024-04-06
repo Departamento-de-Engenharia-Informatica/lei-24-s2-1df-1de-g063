@@ -1,4 +1,4 @@
-# US05 - As a HRM, I want to generate a team proposal automatically
+# US005 - As a HRM, I want to generate a team proposal automatically
 
 
 ## 1. Requirements Engineering

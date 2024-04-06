@@ -134,33 +134,39 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		              |  Association   	  |                 Concept (B) |
-|-----------------------------|:-----------------:|----------------------------:|
-| Organization                |        has        |                   Employees |
-| Organization 	              |        has        | Vehicles_Machines_Equipment |
-| Employees                   |        are        |               Collaborators |
-| Employees                   |        are        |                    Managers |
-| Managers                    |        has        |                         GSM |
-| Managers                    |        has        |                         HRM |
-| Managers                    |        has        |                          FM |
-| Managers                    |      creates      |                        Team |
-| Managers                    |      manages      |                Green_Spaces |
-| Managers                    | hire and register |               Collaborators |
-| Managers                    |      choose       | Vehicles_Machines_Equipment |
-| Vehicles_Machines_Equipment | are attributed to |                        Team |
-| Schedule                    |   is managed by   |                    Managers |
-| Green_Spaces                |        has        |                      Garden |
-|Green_Spaces|        has        |                Medium_Sized |
-|Green_Spaces|        has        |                 Large_Sized |
-|Green_Spaces|    originates     |                        Task |
-|Collaborators|       make        |                        Team |
-|Team|    attributed     |                        Task |
-|Task|      goes to      |                        Schedule |
-|Portal|     receives      |                        Malfunctions |
-|Portal|     receives      |                        Flaws |
-|Portal|     receives      |                        Comments |
-|Outside_User|    reports to     |                        Portal |
-|Outside_User|        use        |                        Green_Spaces |
+| Concept (A) 		              |   Association   	   |                 Concept (B) |
+|-----------------------------|:-------------------:|----------------------------:|
+| Organization                |         has         |                   Employees |
+| Organization 	              |         has         | Vehicles_Machines_Equipment |
+| Employees                   |         are         |               Collaborators |
+| Employees                   |         are         |                    Managers |
+| Managers                    |         has         |                         GSM |
+| Managers                    |         has         |                         HRM |
+| Managers                    |         has         |                          FM |
+| Managers                    |       creates       |                        Team |
+| Managers                    |       manages       |                Green_Spaces |
+| Managers                    |  hire and register  |               Collaborators |
+| Managers                    | choose and register | Vehicles_Machines_Equipment |
+|Managers|      register       |                        Jobs |
+|Managers|      register       |Skill|
+| Vehicles_Machines_Equipment |  are attributed to  |                        Team |
+|Vehicles_Machines_Equipment|need|CheckUp|
+| Schedule                    |    is managed by    |                    Managers |
+| Green_Spaces                |         has         |                      Garden |
+|Green_Spaces|         has         |                Medium_Sized |
+|Green_Spaces|         has         |                 Large_Sized |
+|Green_Spaces|     originates      |                        Task |
+|Collaborators|        make         |                        Team |
+|Team|     attributed      |                        Task |
+|Task|       goes to       |                    Schedule |
+|Portal|      receives       |                Malfunctions |
+|Portal|      receives       |                       Flaws |
+|Portal|      receives       |                    Comments |
+|Outside_User|     reports to      |                      Portal |
+|Outside_User|         use         |                Green_Spaces |
+|Skill|    attributed to    |collaborators|
+|Jobs|      given to       |collaborators|
+|CheckUp|has|Vehicles_Machines_Equipment|
 
 
 

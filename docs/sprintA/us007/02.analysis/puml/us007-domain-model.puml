@@ -11,19 +11,12 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-class Vehicle {
-  Brand
-  Model
-  Type
-  Tare
-  Current Km
-  Register Date
+class Vehicles_Machines_Equipment {
+  description
 }
 
 class CheckUp {
-  Date
-  Updated Kilometers
-  Check-up Results
+  date
 }
 
 class FleetManager {
@@ -37,8 +30,7 @@ class Managers {
     phone
 }
 Managers "1" -- "1" CheckUp : register >
-Managers "1" -- "1" FleetManager : have >
-Vehicle "1" -- "1" CheckUp : has <
-Managers "1" -- "0..*" Vehicle : manages >
+Managers "1" -- "1" FleetManager : has >
+Vehicles_Machines_Equipment "1" -- "1" CheckUp : has <
 
 @enduml

@@ -1,4 +1,4 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up.
+# US007 - As an FM, I wish to register a vehicle’s check-up
 
 
 ## 1. Requirements Engineering
@@ -24,9 +24,9 @@ vehicles check-up.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should provide a feature for the Fleet Manager (FM) to register a vehicle's check-up.
-* **AC2:** When the Fleet Manager (FM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide
-the unique identification (ID) of the vehicle undergoing the check-up, 
-* **AC3:** After the FM submits the required information, the system should validate the input data.
+* **AC2:** The system should allow Fleet Managers to select the vehicle for which they want to register a check-up.
+* **AC3:** When the Fleet Manager (FM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide the unique identification (ID) of the vehicle undergoing the check-up.
+* **AC4:** The Fleet Manager should receive a confirmation message indicating successful registration of the check-up.
 
 ### 1.4. Found out Dependencies 
 
@@ -37,16 +37,18 @@ the unique identification (ID) of the vehicle undergoing the check-up,
 **Input Data:**
 
 * Typed data:
-    * unique identification(ID) of the vehicle
-    * the date when the check-up was performed
-    * the updated kilometers after the check-up
+    * Unique identification(ID) of the vehicle
+    * The date of the scheduled check-up.
+    * The kilometers at check-up
 	
 * Selected data:
     * Vehicle 
 
 **Output Data:**
 
-* (In)Success of the operation
+  * Vehicle information
+  * (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 

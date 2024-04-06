@@ -1,4 +1,4 @@
-# US04- HRM intends to assign one or more competences to an employee
+# US004 -  As an HRM, I want to assign one or more skills to a collaborator
 
 
 ## 1. Requirements Engineering
@@ -26,7 +26,7 @@ This user story intends to choose an employee and to give this chosen employee n
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The employee and the competence must be already registred. 
+* **AC2:** 
 * **AC3:** The employee cannot already have that competence assigned to him.
 
 ### 1.4. Found out Dependencies

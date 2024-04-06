@@ -24,10 +24,10 @@ activate Employee
         System --> Employee : Display Vehicle details
     deactivate System
 
-    Employee -> System : Enter check-up result
+    Employee -> System : Registers check-up
     activate System
 
-        System --> Employee :  Confirmation of check-up result registration
+        System --> Employee :  Confirmation of check-up registration
     deactivate System
 
 @enduml
