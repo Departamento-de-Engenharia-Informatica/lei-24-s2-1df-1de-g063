@@ -32,7 +32,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 * **AC1:** A car must be entered
 * **AC2:** The car must not already be registered.
-* **AC3:** The VFM must insert a code to perform this operation as he is the only one with the power to do it.
+* **AC3:** This operation can only be performed by FM
 * **AC4:** The attributes that should be used to describe a vehicle are: Make, Model, Type, Tare, Gross Weight, Current Kms, Registration Date, Acquisition Date and Overhaul Frequency (in Kms).
 
 ### 1.4. Found out Dependencies
