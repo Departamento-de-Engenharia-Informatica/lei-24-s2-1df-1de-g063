@@ -29,10 +29,9 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** A car must be entered
-* **AC2:** The car must not already be registered.
-* **AC3:** The VFM must insert a code to perform this operation as he is the only one with the power to do it.
-* **AC4:** The attributes that should be used to describe a vehicle are: Make, Model, Type, Tare, Gross Weight, Current Kms, Registration Date, Acquisition Date and Overhaul Frequency (in Kms).
+* **AC1:** The system should allow the FM to register a vehicle.
+* **AC2:** The system should provide a form for the Fleet Manager to input details of a new vehicle, including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms), and a description.
+* **AC3:** Once the vehicle registration is successful the system should store the vehicle details.
 
 ### 1.4. Found out Dependencies
 
@@ -43,17 +42,15 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * an access code
-    * a vehicle
-    * vehicle characteristics
+    * Vehicle details
+    * vehicle description
+
 * Selected data:
-    * a task category 
+    * None
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* Success/Failure status of the vehicle registration operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
