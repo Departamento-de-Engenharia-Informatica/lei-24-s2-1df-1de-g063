@@ -57,7 +57,7 @@ This user story intends to choose an employee and to give this chosen employee n
 
 #### Alternative One
 
-![us004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png](svg%2Fus004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.png)
+![us004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg%2Fus004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
