@@ -35,10 +35,6 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 * Typed data: 
   * one job
   * a confirmation/approval
-	
-* Selected data:
-
-  *
 
 **Output Data:**
 

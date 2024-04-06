@@ -46,9 +46,6 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
     * one skill
     * an access code
     * a confirmation/approval
-	
-* Selected data:
-    *  
 
 **Output Data:**
   
@@ -66,7 +63,3 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 #### Alternative Two
 
 ![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
-
-### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.

@@ -37,7 +37,7 @@ An acceptable system failure will occur in the event of the user forcing the sys
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
-(fill in here )
+(The system must have a fast response and start-up time. The time to recover from failures, errors or crashes must be fast as well. )
 
 ## Supportability
 
@@ -45,7 +45,7 @@ _The supportability requirements gathers several characteristics, such as:
 testability, adaptability, maintainability, compatibility,
 configurability, installability, scalability and more._
 
-he system should be designed with built-in testing capabilities to facilitate unit testing, integration testing, and system testing.
+The system should be designed with built-in testing capabilities to facilitate unit testing, integration testing, and system testing.
 The system architecture should allow for easy adaptation to future changes in requirements or technologies.
 Code should be well-documented and structured to facilitate maintenance by future developers.
 The system should allow administrators to configure settings such as user permissions and system preferences easily.
@@ -74,7 +74,7 @@ The system should not exceed predefined resource limits such as maximum memory a
 _Specifies or constraints the features inherent to the interaction of the
 system being developed with other external systems._
 
-(fill in here)
+(The Domain modules and SSD must be in .svg and .puml. Use cases must be on markdown (.md). The code must be writen in java and the compiled program in .jar .)
 
 ### Physical Constraints
 
