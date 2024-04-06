@@ -37,7 +37,7 @@ An acceptable system failure will occur in the event of the user forcing the sys
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
-(The system must have a fast response and start-up time. The time to recover from failures, errors or crashes must be fast as well. )
+The system must have a fast response and start-up time. The time to recover from failures, errors or crashes must be fast as well.
 
 ## Supportability
 
