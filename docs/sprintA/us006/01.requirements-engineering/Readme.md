@@ -23,8 +23,9 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 **From the client clarifications:**
 
 > **Question:** 
->
-> **Answer:** 
+>Can a FM register no vehicles or does he have to regsiter at least one?
+> 
+> **Answer:** The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to registering a vehicle, no vehicles will be registered but that would be rather odd.
 
 
 ### 1.3. Acceptance Criteria
