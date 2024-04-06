@@ -49,6 +49,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 **Output Data:**
 
 * Generated team
+* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
