@@ -6,7 +6,7 @@ skinparam packageStyle rectangle
 skinparam rectangle{
     BorderColor yellow
 }
-
+left to right direction
 actor "Human Resources Manager" as HRM
 actor "Vehicle Fleet Manager" as VFM
 
@@ -23,9 +23,9 @@ HRM --> UC2
 HRM --> UC3
 HRM --> UC4
 HRM --> UC5
-FM --> UC6
-FM --> UC7
-FM --> UC8
+VFM --> UC6
+VFM --> UC7
+VFM --> UC8
 
 
 
