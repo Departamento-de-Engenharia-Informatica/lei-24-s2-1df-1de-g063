@@ -45,6 +45,11 @@ _The supportability requirements gathers several characteristics, such as:
 testability, adaptability, maintainability, compatibility,
 configurability, installability, scalability and more._
 
+he system should be designed with built-in testing capabilities to facilitate unit testing, integration testing, and system testing.
+The system architecture should allow for easy adaptation to future changes in requirements or technologies.
+Code should be well-documented and structured to facilitate maintenance by future developers.
+The system should allow administrators to configure settings such as user permissions and system preferences easily.
+The system installation process should be straightforward and well-documented.
 
 ## +
 
@@ -52,7 +57,7 @@ configurability, installability, scalability and more._
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
 
-(fill in here )
+The system must be developed using Java.
 
 ### Implementation Constraints
 
@@ -60,17 +65,19 @@ _Specifies or constraints the code or construction of a system such
 such as: mandatory standards/patterns, implementation languages,
 database integrity, resource limits, operating system._
 
-(fill in here )
+Java is the required language for coding.
+The system must ensure data integrity through proper database management and transaction handling.
+The system should not exceed predefined resource limits such as maximum memory allocation and CPU usage.
 
 ### Interface Constraints
 
 _Specifies or constraints the features inherent to the interaction of the
 system being developed with other external systems._
 
-(fill in here )
+(fill in here)
 
 ### Physical Constraints
 
 _Specifies a limitation or physical requirement regarding the hardware used to house the system, as for example: material, shape, size or weight._
 
-(fill in here )
+The system should be deployable on standard computer hardware commonly used in office environments, including desktops and laptops.
