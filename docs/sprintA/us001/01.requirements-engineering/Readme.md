@@ -30,9 +30,8 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** Insert a skill.
-* **AC2:** The skill mustn't have special characters or digits.
-* **AC3:** Only as HRM can do this action.
+* **AC1:** The system should allow the HRM to register skills that a collaborator may have.
+* **AC2:** Only as HRM can do this action.
 
 ### 1.4. Found out Dependencies
 
@@ -44,7 +43,6 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 
 * Typed data:
     * one skill
-    * an access code
     * a confirmation/approval
 
 **Output Data:**
@@ -58,3 +56,6 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 
 ![System Sequence Diagram - Alternative One](svg/us001-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
+### 1.7 Other Relevant Remarks
+
+* The client said in a question of the forum that he wanted the system to rejects special digits or numbers in the registration of the skills, but we decided to apply that to the whole program so instead of being an AC it is on FURPS+ .

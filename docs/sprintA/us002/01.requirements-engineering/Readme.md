@@ -21,9 +21,8 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** Insert a job name.
-* **AC2:** The skill mustn't have special characters or digits.
-* **AC3:** Only as HRM can do this action.
+* **AC1:** The system should allow the HRM to register jobs that a collaborator may have.
+* **AC2:** Only as HRM can do this action.
 
 ### 1.4. Found out Dependencies
 
@@ -49,5 +48,3 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 ![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
-
-* The client only answered the question relative to special characters and digits to the US01(Register a skill), but I chose to apply that AC to this US too.
