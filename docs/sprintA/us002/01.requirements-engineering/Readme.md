@@ -14,9 +14,10 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** "Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?"
+
 >
-> **Answer:** 
+> **Answer:** "All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)"
 
 ### 1.3. Acceptance Criteria
 
@@ -43,15 +44,9 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
