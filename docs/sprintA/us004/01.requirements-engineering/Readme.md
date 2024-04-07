@@ -17,17 +17,11 @@ This user story intends to choose an employee and to give this chosen employee n
 
 > **Question:** How to only allow the HRM to make this action?
 >
-> **Answer:** 
-
-> **Question:** 
-> 
-> **Answer:**
-> 
+> **Answer:** (The client did not answer my question)
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** 
-* **AC3:** The employee cannot already have that competence assigned to him.
+* **AC1:** The system should allow the HRM to assign one or more skills to a collaborator.
+* **AC32** The employee cannot already have that competence assigned to him.
 
 ### 1.4. Found out Dependencies
 
@@ -41,15 +35,12 @@ This user story intends to choose an employee and to give this chosen employee n
     * an employee
     * a competence
     * confirmation of the operation
-	
-* Selected data:
-    * a task category 
 
 **Output Data:**
 
-* List of information inserted
-* Confirmation of the operation
-* (In)Success of the operation
+  * List of information inserted
+    * Confirmation of the operation
+    * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -57,8 +48,6 @@ This user story intends to choose an employee and to give this chosen employee n
 
 #### Alternative One
 
-![us004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg%2Fus004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![us004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg/us004-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.

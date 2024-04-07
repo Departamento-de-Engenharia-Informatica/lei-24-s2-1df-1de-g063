@@ -48,3 +48,5 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 ![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
+
+* As in the US001 we decided to apply the special characters and digits to all the system, so it's on FURPS+ .

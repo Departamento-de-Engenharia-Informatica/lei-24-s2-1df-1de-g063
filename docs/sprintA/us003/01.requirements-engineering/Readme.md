@@ -37,12 +37,8 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 * Typed data:
     * a name
     * a profession 
-    * an attibute
+    * an attribute
     * confirmation of the operation
-
-	
-* Selected data:
-    * a task category 
 
 **Output Data:**
 
@@ -56,8 +52,6 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 
 #### Alternative One
 
-![us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg%2Fus003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg](svg/us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
