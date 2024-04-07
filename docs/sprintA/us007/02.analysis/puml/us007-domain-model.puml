@@ -19,7 +19,7 @@ class CheckUp {
   date
 }
 
-class FleetManager {
+class VFM {
 
 }
 
@@ -30,7 +30,7 @@ class Managers {
     phone
 }
 Managers "1" -- "1" CheckUp : register >
-Managers "1" -- "1" FleetManager : has >
+Managers "1" -- "1" VFM : has >
 Vehicles_Machines_Equipment "1" -- "1" CheckUp : has <
 
 @enduml

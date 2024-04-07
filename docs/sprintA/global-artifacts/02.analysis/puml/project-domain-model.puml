@@ -33,7 +33,7 @@ class Large_Sized{
 class Vehicles_Machines_Equipment{
     description
 }
-class FM{}
+class VFM{}
 class HRM{}
 class GSM{}
 class Green_Spaces{
@@ -82,7 +82,7 @@ Employees "1" -- "*" Collaborators: are >
 Employees "1" -- "*" Managers : are >
 Managers "1" -- "1"GSM: has >
 Managers "1" -- "1"HRM: has >
-Managers "1" -- "1"FM: has >
+Managers "1" -- "1"VFM: has >
 Managers "1" -- "1..*"Team: creates >
 Managers "1"-- "1..*"Green_Spaces: manages >
 Managers "1"-- "*"Collaborators: hire and register >

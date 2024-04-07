@@ -16,7 +16,7 @@ hide methods
 '  -description
 '}
 
-class FM {
+class VFM {
 
 }
 
@@ -50,7 +50,7 @@ class Vehicles_Machines_Equipment {
 
 Managers "1"-- "*"Vehicles_Machines_Equipment: register and choose >
 
-Managers "1" -- "1"FM: has >
+Managers "1" -- "1"VFM: has >
 
 
 @enduml

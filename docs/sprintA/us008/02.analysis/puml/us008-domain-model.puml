@@ -21,7 +21,7 @@ class Vehicles_Machines_Equipment{
   RegisterDate
 }
 
-class FleetManager {
+class VFM {
 }
 
 class CheckUp {
@@ -35,7 +35,7 @@ class Managers {
     phone
 }
 
-Managers "1" -- "1" FleetManager : have >
+Managers "1" -- "1" VFM : have >
 Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
 Managers "1" -- "1..*" Vehicles_Machines_Equipment : choose and register >
 @enduml

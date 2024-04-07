@@ -39,7 +39,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Managers
 * GSM
 * HRM
-* FM
+* VFM
 * Outside_User
 
 ---
@@ -142,15 +142,15 @@ An association is a relationship between instances of objects that indicates a r
 | Employees                   |         are         |                    Managers |
 | Managers                    |         has         |                         GSM |
 | Managers                    |         has         |                         HRM |
-| Managers                    |         has         |                          FM |
+| Managers                    |         has         |                         VFM |
 | Managers                    |       creates       |                        Team |
 | Managers                    |       manages       |                Green_Spaces |
 | Managers                    |  hire and register  |               Collaborators |
 | Managers                    | choose and register | Vehicles_Machines_Equipment |
 |Managers|      register       |                        Jobs |
-|Managers|      register       |Skill|
+|Managers|      register       |                       Skill |
 | Vehicles_Machines_Equipment |  are attributed to  |                        Team |
-|Vehicles_Machines_Equipment|need|CheckUp|
+|Vehicles_Machines_Equipment|need|                     CheckUp |
 | Schedule                    |    is managed by    |                    Managers |
 | Green_Spaces                |         has         |                      Garden |
 |Green_Spaces|         has         |                Medium_Sized |
@@ -164,9 +164,9 @@ An association is a relationship between instances of objects that indicates a r
 |Portal|      receives       |                    Comments |
 |Outside_User|     reports to      |                      Portal |
 |Outside_User|         use         |                Green_Spaces |
-|Skill|    attributed to    |collaborators|
-|Jobs|      given to       |collaborators|
-|CheckUp|has|Vehicles_Machines_Equipment|
+|Skill|    attributed to    |               collaborators |
+|Jobs|      given to       |               collaborators |
+|CheckUp|has| Vehicles_Machines_Equipment |
 
 
 
@@ -191,4 +191,4 @@ An association is a relationship between instances of objects that indicates a r
 
 **Insert below the Domain Model Diagram in a SVG format**
 
-![project-domain-model.svg](svg%2Fproject-domain-model.svg)
+![project-domain-model.svg](svg/project-domain-model.svg)

@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment Fleet Manager (FM) I want to register a vehicle.
+As a Vehicle and Equipment Fleet Manager (VFM) I want to register a vehicle.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -29,8 +29,8 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The system should allow the FM to register a vehicle.
-* **AC2:** The system should provide a form for the Fleet Manager to input details of a new vehicle, including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms), and a description.
+* **AC1:** The system should allow the VFM to register a vehicle.
+* **AC2:** The system should provide a form for the Vehicle and Equipment Fleet Manager to input details of a new vehicle, including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms), and a description.
 * **AC3:** Once the vehicle registration is successful the system should store the vehicle details.
 
 ### 1.4. Found out Dependencies
