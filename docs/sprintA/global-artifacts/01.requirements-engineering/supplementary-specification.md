@@ -30,7 +30,7 @@ _Refers to the integrity, compliance and interoperability of the software. The r
 
 In case of failure storing the data the user will be given the option to start over.
 All the dates must be in the dd-mm-aaaa format.
-For every name stored in the system there can only be 6 names inserted and it cannot contain any digit or special character.
+For every name stored in the system there can only be 6 names inserted, and it cannot contain any digit or special character, neither do the skills nor the jobs.
 An acceptable system failure will occur in the event of the user forcing the system to store information in a format not supported, what will happen nis that the user will have to repeat the action until it´s in a supported format.
 
 ## Performance
@@ -74,7 +74,7 @@ The system should not exceed predefined resource limits such as maximum memory a
 _Specifies or constraints the features inherent to the interaction of the
 system being developed with other external systems._
 
-(The Domain modules and SSD must be in .svg and .puml. Use cases must be on markdown (.md). The code must be writen in java and the compiled program in .jar .)
+The system doesn't need to interact with other external systems. The only interactions are between the user and the system.
 
 ### Physical Constraints
 
