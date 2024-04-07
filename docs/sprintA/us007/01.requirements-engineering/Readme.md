@@ -60,4 +60,4 @@ vehicles check-up.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None
