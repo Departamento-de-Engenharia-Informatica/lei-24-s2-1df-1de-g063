@@ -22,9 +22,9 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:**"Can a FM register no vehicles or does he have to regsiter at least one?"
 >
-> **Answer:** 
+> **Answer:**"The VFM is a role or system user profile that has the rights to perform some system actions (like the ones described by the US06, US07 and US08). In theory If there is no need to registering a vehicle, no vehicles will be registered but that would be rather odd." 
 
 
 ### 1.3. Acceptance Criteria
@@ -51,6 +51,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 **Output Data:**
 
 * Success/Failure status of the vehicle registration operation
+* Confirmation of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -62,5 +63,3 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 
 ### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.

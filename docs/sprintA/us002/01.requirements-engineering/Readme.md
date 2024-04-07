@@ -39,6 +39,7 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 **Output Data:**
 
 * The registered job
+* Confirmation of the operation
 * The success (or not) of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

@@ -12,13 +12,13 @@ hide methods
 
 class Managers {
     name
-    position
-    phoneNumber
     email
+    position
+    phone
 }
 
 class Job{
-    name
+
 }
 class HRM{
 

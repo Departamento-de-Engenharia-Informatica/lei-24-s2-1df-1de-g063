@@ -48,6 +48,7 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 **Output Data:**
   
 * The registered skill
+* Confirmation of the operation
 * The success (or not) of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

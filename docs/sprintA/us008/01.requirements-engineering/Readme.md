@@ -1,4 +1,4 @@
-  # US008 - As an FM, I want to list the vehicles needing the check-up
+# US008 - As an FM, I want to list the vehicles needing the check-up
 
 
 ## 1. Requirements Engineering
@@ -23,7 +23,7 @@ vehicles that require check-up.
 
 > **Question:** What are the criteria for the car to appear on the check-up list?
 > 
-> **Answer:** If the vehicle is within 5% of reaching the mileage limit for a check-up or exceed that limit.
+> **Answer:** If the vehicle is within 5% of reaching the km limit for a check-up or exceed that limit.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should allow VFM to generate a list of vehicles requiring a check-up.
@@ -60,4 +60,4 @@ vehicles that require check-up.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* On the assignment the check-up list isn't mentioned, so I skipped the "from the specification document" point.

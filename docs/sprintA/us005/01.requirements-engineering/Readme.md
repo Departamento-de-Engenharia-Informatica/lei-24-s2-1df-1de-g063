@@ -53,8 +53,6 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![US005-System-Sequence-diagram1](/docs/sprintA/us005/01.requirements-engineering/svg/us005-system-sequence-diagram.svg)
+![US005-System-Sequence-diagram1](svg/us005-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
-
-*...

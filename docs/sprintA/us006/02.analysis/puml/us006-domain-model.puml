@@ -29,15 +29,7 @@ class Managers {
 
 
 class Vehicles_Machines_Equipment {
-    plate
-    brand
-    model
-    type
-    grossWeight
-    currentKm
-    registerDate
-    acquisitionDate
-    maintenanceFrequency
+    description
 }
 
 'class User {
