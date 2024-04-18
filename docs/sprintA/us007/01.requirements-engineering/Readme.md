@@ -37,11 +37,13 @@ vehicles check-up.
 **Input Data:**
 
 * Typed data:
+
     * Unique identification(ID) of the vehicle
     * The date of the scheduled check-up.
     * The kilometers at check-up
 	
 * Selected data:
+
     * Vehicle 
 
 **Output Data:**
