@@ -87,30 +87,30 @@ local.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
+Sprint B/.idea/**/workspace.xml
+Sprint B/.idea/**/tasks.xml
+Sprint B/.idea/**/usage.statistics.xml
+Sprint B/.idea/**/dictionaries
+Sprint B/.idea/**/shelf
 
 # AWS User-specific
-.idea/**/aws.xml
+Sprint B/.idea/**/aws.xml
 
 # Generated files
-.idea/**/contentModel.xml
+Sprint B/.idea/**/contentModel.xml
 
 # Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+Sprint B/.idea/**/dataSources/
+Sprint B/.idea/**/dataSources.ids
+Sprint B/.idea/**/dataSources.local.xml
+Sprint B/.idea/**/sqlDataSources.xml
+Sprint B/.idea/**/dynamic.xml
+Sprint B/.idea/**/uiDesigner.xml
+Sprint B/.idea/**/dbnavigator.xml
 
 # Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+Sprint B/.idea/**/gradle.xml
+Sprint B/.idea/**/libraries
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
@@ -129,7 +129,7 @@ local.properties
 cmake-build-*/
 
 # Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+Sprint B/.idea/**/mongoSettings.xml
 
 # File-based project format
 *.iws
@@ -144,7 +144,7 @@ out/
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+Sprint B/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -153,26 +153,26 @@ crashlytics-build.properties
 fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+Sprint B/.idea/httpRequests
 
 # Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
+Sprint B/.idea/caches/build_file_checksums.ser
 
 ### Intellij+all Patch ###
 # Ignores the whole .idea folder and all .iml files
 # See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
-.idea/
+Sprint B/.idea/
 
 # Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
 *.iml
 modules.xml
-.idea/misc.xml
+Sprint B/.idea/misc.xml
 *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint
+Sprint B/.idea/sonarlint
 
 ### Java ###
 # Compiled class file
