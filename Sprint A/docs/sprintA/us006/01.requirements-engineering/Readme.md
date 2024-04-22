@@ -35,7 +35,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 ### 1.4. Found out Dependencies
 
-* US07 (register a vehicle for servicing) and US08 (list the vehicles that need to be serviced) depend directly on US06 (register a vehicle) because in order to register a vehicle for servicing and which vehicles need to be serviced, it is necessary to have the vehicles registered.
+*  US8 does not depend on any other.
 
 ### 1.5 Input and Output Data
 
