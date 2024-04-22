@@ -42,8 +42,15 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 **Input Data:**
 
 * Typed data:
-    * Vehicle details
-    * vehicle description
+    * Brand
+    * Model
+    * Type
+    * Tare Weight
+    * Gross Weight
+    * Current Km
+    * Register Date
+    * Acquisition Date
+    * Check-up Frequency
 
 * Selected data:
     * None
