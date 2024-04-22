@@ -21,7 +21,7 @@ class Managers {
 }
 class HRM{
 }
-class New_Collaborators{
+class Collaborators{
     name
     birthdate
     admission date
@@ -30,7 +30,9 @@ class New_Collaborators{
     ID doc type
     ID number
 }
-Managers "1" -- "1" New_Collaborators : register >
+Skill "1..*" -- "1"Collaborators: attributed to >
+Jobs "1" -- "1"Collaborators: given to >
+Managers "1"-- "*"Collaborators: hire and register >
 Managers "1" -- "1" HRM : have >
 
 @enduml

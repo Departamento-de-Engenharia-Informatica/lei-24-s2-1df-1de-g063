@@ -21,7 +21,7 @@ This user story intends to choose an employee and to give this chosen employee n
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should allow the HRM to assign one or more skills to a collaborator.
-* **AC32** The employee cannot already have that competence assigned to him.
+* **AC2:** The employee cannot already have that competence assigned to him.
 
 ### 1.4. Found out Dependencies
 
@@ -34,7 +34,6 @@ This user story intends to choose an employee and to give this chosen employee n
 * Typed data:
     * an employee
     * a competence
-    * confirmation of the operation
 
 **Output Data:**
 
