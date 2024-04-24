@@ -19,7 +19,7 @@ vehicles that require check-up.
 
 > **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
 >
-> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
+> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
 
 > **Question:** What are the criteria for the car to appear on the check-up list?
 > 
@@ -34,6 +34,7 @@ vehicles that require check-up.
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US006 - Vehicle Registration" as there must be all the vehicles details.
+* Dependencia -> vai haver um "homem" responsavel por atualizar os kms
 
 ### 1.5 Input and Output Data
 
