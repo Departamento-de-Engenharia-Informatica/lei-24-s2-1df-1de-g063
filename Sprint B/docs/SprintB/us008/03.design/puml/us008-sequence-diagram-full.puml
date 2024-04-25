@@ -1,0 +1,86 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Vehicle Fleet Manager" as VFM
+participant ":CheckupListUI" as UI
+participant ":CheckupListController" as CTRL
+participant "Repositories" as Rep
+participant "repositories:\nRepositories" as Repositories
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicleDetails:\nVehicleDetails" as VehicleDetails
+
+activate VFM
+
+VFM -> UI : Request to list vehicles needing check-up
+
+    activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getCheckUpList()
+        activate CTRL
+
+            CTRL -> Rep : getInstance()
+            activate Rep
+
+                Rep --> CTRL : repositories
+            deactivate Rep
+
+            CTRL -> Repositories : getVehicleRepository()
+            activate Repositories
+
+            Repositories --> CTRL : VehicleRepository
+            deactivate Repositories
+
+
+            CTRL -> VehicleRepository : getCheckUpList()
+            activate VehicleRepository
+
+                VehicleRepository -> VehicleDetails : getVehicleKm()
+                activate VehicleDetails
+
+                VehicleDetails --> VehicleRepository : VehicleKm
+                deactivate VehicleDetails
+
+            VehicleRepository --> CTRL : CheckUpList
+            deactivate VehicleRepository
+
+            CTRL --> UI : CheckUpList
+        deactivate CTRL
+
+        UI --> VFM : Shows list of vehicles needing check-up
+
+        deactivate UI
+        VFM -> UI : Verifies the details of a vehicle
+        activate UI
+
+        UI -> CTRL : getVehicleDetails()
+        activate CTRL
+
+            CTRL -> Rep : getInstance()
+            activate Rep
+
+                Rep --> CTRL : repositories
+            deactivate Rep
+            CTRL -> Repositories : getVehicleRepository()
+            activate Repositories
+
+                Repositories --> CTRL : VehicleRepository
+            deactivate Repositories
+
+            CTRL -> VehicleDetails : getVehicleDetails()
+            activate VehicleDetails
+
+                VehicleDetails --> CTRL : VehicleDetails
+            deactivate VehicleDetails
+            CTRL --> UI : VehicleDetails
+        deactivate CTRL
+        UI --> VFM : Shows vehicle details
+    deactivate UI
+
+@enduml
