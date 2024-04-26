@@ -17,7 +17,7 @@ class ApplicationSession
 
 class UserSession
 {
-    + getUserEmail()
+    +getUserEmail()
 }
 
 class Employee {
@@ -27,7 +27,7 @@ class Employee {
     - phone
 }
 
-class Task {
+class Collaborator {
     - String reference
     - String description
     - String informalDescription
@@ -35,16 +35,11 @@ class Task {
     - Integer duration
     - Double cost
 
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+    + Collaborator(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, collaboratorRecord)
 }
 
-class TaskCategory {
-    - String description
 
-    + TaskCategory(description)
-}
-
-class Organization {
+class Employee {
     - String name
     - String vatNumber
     - String website
@@ -54,18 +49,18 @@ class Organization {
     - addTask(task)
     - validateTask(task)
     + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
+    + Employee(name, vatNumber, webSite, phone, email, postalAddress, manager)
+    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, collaboratorRecordDescription)
     - getEmployeeByEmail(email)
 
 '  +saveTask(task)
 }
 
-class TaskCategoryRepository {
+class CollaboratorRecordRepository {
     + getTaskCategoryByDescription(description)
 }
 
-class OrganizationRepository {
+class EmployeeRepository {
     + getOrganizationByEmployeeEmail(email)
 }
 
@@ -76,55 +71,55 @@ class Repositories {
     + getOrganizationRepository()
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
+class RegisterCollaboratorController {
+    + RegisterCollaboratorController(organizationRepository, collaboratorRecordRepository)
     + getTaskCategories()
     + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
+    - getTaskCategoryByDescription(collaboratorRecordDescription)
     - getEmployeeFromSession()
 }
 
-note right of CreateTaskController
+note right of RegisterCollaboratorController
     - userEmail is obtained
     from the user session
     - categoryDescription
     is retrieved from selected data
 end note
 
-note bottom of TaskCategoryRepository
+note bottom of CollaboratorRecordRepository
     - used for displaying
     the category list
 end note
 
-class CreateTaskUI {
+class RegisterCollaboratorUI {
 }
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+RegisterCollaboratorUI .> RegisterCollaboratorController
 
-CreateTaskController .> Repositories : repositories
+RegisterCollaboratorController .> Repositories : repositories
 
-Repositories -> "1" TaskCategoryRepository
+Repositories -> "1" CollaboratorRecordRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+RegisterCollaboratorController ..> Collaborator
+RegisterCollaboratorController ..> EmployeeRepository : organizationRepository
+RegisterCollaboratorController ..> CollaboratorRecordRepository : CollaboratorRecordRepository
 
-Repositories --> "1" OrganizationRepository
+Repositories --> "1" EmployeeRepository
 
-OrganizationRepository --> "*" Organization
+EmployeeRepository --> "*" Employee
 ApplicationSession --> "1" UserSession : userSession
 
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
+RegisterCollaboratorController ..> "1" Employee : organization
+RegisterCollaboratorController ..> ApplicationSession
+RegisterCollaboratorController ..> UserSession
 
-Organization --> "*" Employee : employs
+CollaboratorRecordRepository "1" --> "*" Collaborator : collaboratorRecord
+Employee "1" --> "1..*" Collaborator : register
+
+
+Employee --> "*" Employee : employs
 
 @enduml
