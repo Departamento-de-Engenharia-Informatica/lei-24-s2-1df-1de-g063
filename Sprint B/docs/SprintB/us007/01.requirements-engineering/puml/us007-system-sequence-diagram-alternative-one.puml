@@ -12,7 +12,7 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : Request to register vehicles check-up
+    Employee -> System : Request to register vehicles check-up result
     activate System
 
         System --> Employee : Display vehicle selection interface
@@ -24,10 +24,10 @@ activate Employee
         System --> Employee : Display Vehicle details
     deactivate System
 
-    Employee -> System : Registers check-up
+    Employee -> System : Registers results
     activate System
 
-        System --> Employee :  Confirmation of check-up registration
+        System --> Employee :  Confirmation of results registration
     deactivate System
 
 @enduml
