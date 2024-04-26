@@ -17,7 +17,7 @@ class ApplicationSession
 
 class UserSession
 {
-    + getUserEmail()
+    +getUserEmail()
 }
 
 class Employee {
