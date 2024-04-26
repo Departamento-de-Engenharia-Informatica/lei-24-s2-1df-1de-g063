@@ -37,18 +37,19 @@ VFM -> UI : Request to list vehicles needing check-up
             Repositories --> CTRL : VehicleRepository
             deactivate Repositories
 
+            loop
+                CTRL -> VehicleRepository : getVehicle()
+                activate VehicleRepository
 
-            CTRL -> VehicleRepository : getVehicle()
-            activate VehicleRepository
+                    VehicleRepository -> VehicleDetails : getVehicleKm()
+                    activate VehicleDetails
 
-                VehicleRepository -> VehicleDetails : getVehicleKm()
-                activate VehicleDetails
+                    VehicleDetails --> VehicleRepository : VehicleKm
+                    deactivate VehicleDetails
 
-                VehicleDetails --> VehicleRepository : VehicleKm
-                deactivate VehicleDetails
-
-            VehicleRepository --> CTRL : Vehicle
-            deactivate VehicleRepository
+                    VehicleRepository --> CTRL : Vehicle
+                deactivate VehicleRepository
+            end
 
             CTRL --> UI : CheckUpList
         deactivate CTRL
