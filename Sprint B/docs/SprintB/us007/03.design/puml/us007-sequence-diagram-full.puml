@@ -13,7 +13,7 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "VehicleDetails:\n vehicleDetails" as VehicleDetails
-
+participant "checkUp:\n CheckUp" as CheckUp
 activate ADM
 
         ADM -> UI : Request to register vehicles check-up result
@@ -38,12 +38,18 @@ activate ADM
 
                     PLAT --> CTRL: VehicleRepository
                 deactivate PLAT
+                loop
+                    CTRL -> VehicleRepository : getVehicle()
+                    activate VehicleRepository
 
-                CTRL -> VehicleRepository : getVehicleList()
-                activate VehicleRepository
+                        VehicleRepository -> CheckUp :getVehicle()
+                            activate CheckUp
 
-                    VehicleRepository --> CTRL : VehicleList
-                deactivate VehicleRepository
+                            CheckUp -> VehicleRepository :Vehicle
+                            deactivate CheckUp
+                        VehicleRepository --> CTRL : Vehicle
+                    deactivate VehicleRepository
+                end
 
                 CTRL --> UI : VehicleList
             deactivate CTRL
@@ -71,6 +77,11 @@ activate ADM
     ADM -> UI : Registers results
     activate UI
 
+        UI -> CheckUp : registResult()
+        activate CheckUp
+
+        CheckUp --> UI : Result
+        deactivate CheckUp
         UI --> ADM : Confirmation of results registration
     deactivate UI
 
