@@ -6,8 +6,8 @@
 ### 1.1. User Story Description
 
 As a Vehicle and Equipment Fleet Manager responsible for overseeing the maintenance and condition of 
-vehicles within the organization, I need a feature that allows me to quickly register
-vehicles check-up.
+vehicles within the organization, I need a feature that allows me to quickly register a
+vehicles check-up result.
 
 ### 1.2. Customer Specifications and Clarifications
 
