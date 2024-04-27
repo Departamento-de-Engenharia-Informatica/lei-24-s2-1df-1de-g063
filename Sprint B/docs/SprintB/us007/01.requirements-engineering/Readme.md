@@ -23,10 +23,9 @@ vehicles check-up result.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The system should provide a feature for the Vehicle and Equipment Fleet Manager (VFM) to register a vehicle's check-up.
-* **AC2:** The system should allow Vehicle and Equipment Fleet Managers to select the vehicle for which they want to register a check-up.
-* **AC3:** When the Vehicle and Equipment Fleet Manager (VFM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide the unique identification (ID) of the vehicle undergoing the check-up.
-* **AC4:** The Vehicle and Equipment Fleet Manager should receive a confirmation message indicating successful registration of the check-up.
+* **AC1:** The system should provide a feature for the Vehicle and Equipment Fleet Manager (VFM) to register a vehicle's check-up result.
+* **AC2:** The system should allow Vehicle and Equipment Fleet Managers to select the vehicle for which they want to register the result.
+* **AC4:** The Vehicle and Equipment Fleet Manager should receive a confirmation message indicating successful registration of the results.
 
 ### 1.4. Found out Dependencies 
 
