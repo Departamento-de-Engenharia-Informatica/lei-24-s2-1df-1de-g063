@@ -47,28 +47,53 @@ activate ADM
                 CTRL -> CollaboratorRecordRepository : getCollaboratorRecord()
                 activate CollaboratorRecordRepository
 
-                    CollaboratorRecordRepository --> CTRL : collaboratorRecordList
+                    CollaboratorRecordRepository --> CTRL : collaboratorRecord
                 deactivate CollaboratorRecordRepository
 
-                CTRL --> UI : CollaboratorRecordList
+
+                CTRL --> UI : CollaboratorRecord
             deactivate CTRL
 
-            UI --> ADM : requests data (a collaborator, a profession and key atributes)
+            UI --> ADM : requests data (a collaborator)
         deactivate UI
 
     ADM -> UI : types requested data (a collaborator, a profession and key atributes)
     activate UI
+    UI -> CTRL : getSkills()
+                activate CTRL
 
-        UI --> ADM :  shows all typed data and requests confirmation
+                    CTRL -> RepositorySingleton : getInstance()
+                    activate RepositorySingleton
+
+                        RepositorySingleton --> CTRL: repositories
+                    deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getSkillsRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL: SkillsRepository
+                    deactivate PLAT
+
+                    CTRL -> CollaboratorRecordRepository : getSkills()
+                    activate CollaboratorRecordRepository
+
+                        CollaboratorRecordRepository --> CTRL : SkillsList
+                    deactivate CollaboratorRecordRepository
+
+
+                    CTRL --> UI : SkillsList
+                deactivate CTRL
+
+        UI --> ADM : asks to select a set of skills
     deactivate UI
 
-    ADM -> UI : confirms data
+    ADM -> UI : selects the intended skills
     activate UI
 
-        UI --> ADM : accepts confirmation
+        UI --> ADM : ask to select a job
     deactivate UI
 
-    ADM -> UI : submits data
+    ADM -> UI : selects the intended job
     activate UI
 
         UI -> CTRL : registerCollaborator(new collabporator required info)

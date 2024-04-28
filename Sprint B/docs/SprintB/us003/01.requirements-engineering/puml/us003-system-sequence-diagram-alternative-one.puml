@@ -16,17 +16,28 @@ activate HRM
 
     activate System
 
-        System --> HRM : requests data (an employee, a profession and key atributes)
+        System --> HRM : requests data (an employee)
+
+    HRM -> System : types requested data (an employee)
     deactivate System
 
-    HRM -> System : types requested data (an employee, a profession and key atributes)
-    activate System
+
+    System -> HRM : asks to select a set of skills
+     activate System
+    HRM -> System : selects the intended skills
+    deactivate System
+
+
+
+    System -> HRM : ask to select a job
+       activate System
+    HRM -> System : selects the intended job
+    deactivate System
+
 
         System --> HRM : shows all data and requests confirmation
-    deactivate System
-
-    HRM -> System : confirms data
     activate System
+    HRM -> System : confirms data
 
         System --> HRM : displays operation success
     deactivate System

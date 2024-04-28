@@ -36,7 +36,8 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 
 * Typed data:
     * a name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number
-    * a profession 
+* Selected data:
+    * a profession
     * an attribute
   
 **Output Data:**
