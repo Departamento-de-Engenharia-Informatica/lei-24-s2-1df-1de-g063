@@ -24,11 +24,7 @@ class VehicleRepository{
 
 }
 
-class VehicleDetails{
-
-}
-
-class CheckUp{
+class Vehicle{
 
 }
 
@@ -42,15 +38,15 @@ class Manager{
 
 RegisterResultUI .> RegisterResultController
 RegisterResultController ..> Repositories : repositories
-Repositories -> "1" VehicleRepository
-RegisterResultController ..> VehicleRepository : VehicleRepository
-RegisterResultController ..> Manager
-RegisterResultController ..> EmployeeRepository
-RegisterResultController ..> CheckUp
-RegisterResultController ..> VehicleDetails
-VehicleRepository "1" -> "1*" VehicleDetails : vehicleDetails
-VehicleRepository "1" -> "1" CheckUp
-EmployeeRepository --> "1" Manager
-Manager "1" --> "1" CheckUp : register
+Repositories -> Repositories : instance
+Repositories "1" --> "1" VehicleRepository
+VehicleRepository "1" --> "1*" Vehicle
+Repositories "1" --> "1" EmployeeRepository
+EmployeeRepository "1" --> "1*"Manager
+Vehicle "1" <- "1" Manager : registers
+'RegisterResultController ..> VehicleRepository : vehicleRepository'
+'RegisterResultController ..> EmployeeRepository : employeeRepository'
+'RegisterResultController ..> Manager'
+'RegisterResultController ..> Vehicle'
 
 @enduml

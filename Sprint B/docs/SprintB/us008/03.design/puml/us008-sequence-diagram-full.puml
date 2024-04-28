@@ -12,7 +12,7 @@ participant ":CheckupListController" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicleDetails:\nVehicleDetails" as VehicleDetails
+participant "vehicle:\nVehicle" as Vehicle
 
 activate VFM
 
@@ -41,11 +41,11 @@ VFM -> UI : Request to list vehicles needing check-up
                 CTRL -> VehicleRepository : getVehicle()
                 activate VehicleRepository
 
-                    VehicleRepository -> VehicleDetails : getVehicleKm()
-                    activate VehicleDetails
+                    VehicleRepository -> Vehicle : getVehicleKm()
+                    activate Vehicle
 
-                    VehicleDetails --> VehicleRepository : VehicleKm
-                    deactivate VehicleDetails
+                    Vehicle --> VehicleRepository : VehicleKm
+                    deactivate Vehicle
 
                     VehicleRepository --> CTRL : Vehicle
                 deactivate VehicleRepository
@@ -74,12 +74,12 @@ VFM -> UI : Request to list vehicles needing check-up
                 Repositories --> CTRL : VehicleRepository
             deactivate Repositories
 
-            CTRL -> VehicleDetails : getVehicleDetails()
-            activate VehicleDetails
+            CTRL -> Vehicle : getVehicleDetails()
+            activate Vehicle
 
-                VehicleDetails --> CTRL : VehicleDetails
-            deactivate VehicleDetails
-            CTRL --> UI : VehicleDetails
+                Vehicle --> CTRL : Vehicle
+            deactivate Vehicle
+            CTRL --> UI : Vehicle
         deactivate CTRL
         UI --> VFM : Shows vehicle details
     deactivate UI

@@ -25,7 +25,7 @@ class VehicleRepository{
 
 }
 
-class VehicleDetails{
+class Vehicle{
 
 }
 
@@ -33,6 +33,6 @@ CheckupListUI .> CheckupListController
 CheckupListController ..> Repositories : repositories
 Repositories -> "1" VehicleRepository
 CheckupListController ..> VehicleRepository : VehicleRepository
-VehicleRepository --> VehicleDetails : VehicleDetails
+VehicleRepository --> Vehicle : VehicleDetails
 
 @enduml
