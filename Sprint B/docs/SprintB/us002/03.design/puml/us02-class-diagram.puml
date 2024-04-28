@@ -17,7 +17,7 @@ class Jobs {
 
 class Manager {
     - String name
-    - String role
+    - String position
     - String phone
     - String email
 
@@ -27,7 +27,7 @@ class Manager {
 }
 
 class JobsRepository {
-    + getTaskCategoryByDescription(description)
+    + getJobsByDescription(description)
 }
 
 class EmployeeRepository {
@@ -44,7 +44,7 @@ class Repositories {
 class RegisterJobController {
     + RegisterJobController(organizationRepository, taskCategoryRepository)
     + getJobList()
-    + createJob(skills needed)
+    + createJob(skills)
 }
 
 note bottom of JobsRepository
