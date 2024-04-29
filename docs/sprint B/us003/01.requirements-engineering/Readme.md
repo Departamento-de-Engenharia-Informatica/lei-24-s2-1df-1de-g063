@@ -43,6 +43,7 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 **Output Data:**
 
 * List of information inserted
+* Confirmation of the operation
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

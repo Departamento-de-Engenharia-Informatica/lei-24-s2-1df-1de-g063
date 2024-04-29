@@ -13,22 +13,33 @@ participant ":System" as System
 activate HRM
 
     HRM -> System : asks to register an employee with a profession and key attributes
-    activate System
-    System --> HRM : requests data (an employee)
-    deactivate System
-    HRM -> System : types requested data (an employee)
-    activate System
-    System -> HRM : asks to select a set of skills
-    deactivate System
-    HRM -> System : selects the intended skills
-    activate System
-    System -> HRM : ask to select a job
-    deactivate System
-    HRM -> System : selects the intended job
-    activate System
-           System --> HRM : displays all data and operation success
-   deactivate System
 
-deactivate HRM
+    activate System
+
+        System --> HRM : requests data (an employee)
+
+    HRM -> System : types requested data (an employee)
+    deactivate System
+
+
+    System -> HRM : asks to select a set of skills
+     activate System
+    HRM -> System : selects the intended skills
+    deactivate System
+
+
+
+    System -> HRM : ask to select a job
+       activate System
+    HRM -> System : selects the intended job
+    deactivate System
+
+
+        System --> HRM : shows all data and requests confirmation
+    activate System
+    HRM -> System : confirms data
+
+        System --> HRM : displays operation success
+    deactivate System
 
 @enduml
