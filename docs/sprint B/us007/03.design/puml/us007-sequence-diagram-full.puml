@@ -1,0 +1,84 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Organization Employee" as ADM
+participant ":RegisterResultUI" as UI
+participant ":RegisterResultController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "Vehicle:\n vehicle" as Vehicle
+activate ADM
+
+        ADM -> UI : Request to register vehicles check-up result
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getVehicleList()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getVehicleRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: VehicleRepository
+                deactivate PLAT
+                loop
+                    CTRL -> VehicleRepository : getVehicle()
+                    activate VehicleRepository
+
+                        VehicleRepository --> CTRL : Vehicle
+                    deactivate VehicleRepository
+                end
+
+                CTRL --> UI : VehicleList
+            deactivate CTRL
+
+            UI --> ADM : Display vehicle selection interface
+        deactivate UI
+
+    ADM -> UI : Select vehicle
+    activate UI
+
+        UI -> CTRL : getVehicleDetails()
+        activate CTRL
+
+            CTRL -> Vehicle : getVehicleDetails()
+            activate Vehicle
+
+                Vehicle --> CTRL : VehicleDetails
+            deactivate Vehicle
+
+        CTRL --> UI : Vehicle
+        deactivate CTRL
+        UI --> ADM : Display Vehicle details
+    deactivate UI
+
+    ADM -> UI : Registers results
+    activate UI
+
+        UI -> Vehicle : registerResult()
+        activate Vehicle
+
+        Vehicle --> UI : Result
+        deactivate Vehicle
+        UI --> ADM : Confirmation of results registration
+    deactivate UI
+
+
+
+deactivate ADM
+
+@enduml

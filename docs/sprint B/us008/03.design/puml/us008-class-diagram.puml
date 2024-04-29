@@ -1,0 +1,38 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class CheckupListUI{
+
+}
+
+class CheckupListController{
+
+}
+
+class Repositories{
+
+}
+
+class VehicleRepository{
+
+}
+
+class Vehicle{
+
+}
+
+CheckupListUI .> CheckupListController
+CheckupListController ..> Repositories : repositories
+Repositories -> "1" VehicleRepository
+CheckupListController ..> VehicleRepository : VehicleRepository
+VehicleRepository --> Vehicle : VehicleDetails
+
+@enduml
