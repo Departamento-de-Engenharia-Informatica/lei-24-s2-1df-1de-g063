@@ -23,7 +23,7 @@ class Manager {
 
     + anyEmployeeHasEmail(email)
     + Manager(name, role, phone, email, postalAddress, manager)
-    + createJob((skills needed)
+    + createJob(skills needed)
 }
 
 class JobsRepository {
