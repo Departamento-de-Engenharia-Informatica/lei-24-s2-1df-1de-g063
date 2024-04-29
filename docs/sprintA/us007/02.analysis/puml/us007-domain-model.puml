@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+class Vehicles_Machines_Equipment {
+  description
+}
+
+class CheckUp {
+  date
+}
+
+class VFM {
+
+}
+
+class Managers {
+    name
+    email
+    position
+    phone
+}
+Managers "1" -- "1" CheckUp : register >
+Managers "1" -- "1" VFM : has >
+Vehicles_Machines_Equipment "1" -- "1" CheckUp : has <
+
+@enduml

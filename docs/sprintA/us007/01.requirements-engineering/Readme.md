@@ -1,59 +1,56 @@
-# US006 - Create a Task 
+# US007 - As an FM, I wish to register a vehicle’s check-up
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Vehicle and Equipment Fleet Manager responsible for overseeing the maintenance and condition of 
+vehicles within the organization, I need a feature that allows me to quickly register
+vehicles check-up.
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	Vehicles are needed to carry out the tasks assigned to the teams as well as to transport machines and equipment. This type of vehicle can be only for passengers or mixed, light or heavy, open box or closed vans or trucks. As for machines, MS has tractors, backhoe loaders and rotating machines, lawn-mowers, among others. The equipment can be greatly diverse, such as sprayers, lifting platforms, chainsaws, brush cutters, blowers, ladders, cisterns and the various elements that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers.
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Which attributes will you need for the vehicle's check-up?
 >
-> **Answer:** Duration is estimated in days.
-
-> **Question:** Monetary data is expressed in any particular currency?
->
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** Plate number, date, kms at checkup.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The system should provide a feature for the Vehicle and Equipment Fleet Manager (VFM) to register a vehicle's check-up.
+* **AC2:** The system should allow Vehicle and Equipment Fleet Managers to select the vehicle for which they want to register a check-up.
+* **AC3:** When the Vehicle and Equipment Fleet Manager (VFM) initiates the registration process for a vehicle's check-up, the system interface should prompt the FM to provide the unique identification (ID) of the vehicle undergoing the check-up.
+* **AC4:** The Vehicle and Equipment Fleet Manager should receive a confirmation message indicating successful registration of the check-up.
 
-### 1.4. Found out Dependencies
+### 1.4. Found out Dependencies 
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is no dependencies.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+
+    * Unique identification(ID) of the vehicle
+    * The date of the scheduled check-up.
+    * The kilometers at check-up
 	
 * Selected data:
-    * a task category 
+
+    * Vehicle 
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+  * Vehicle information
+  * (In)Success of the operation
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -61,12 +58,6 @@ As an organization employee, I want to create a new task in order to be further 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative One](svg/us007-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
-
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
