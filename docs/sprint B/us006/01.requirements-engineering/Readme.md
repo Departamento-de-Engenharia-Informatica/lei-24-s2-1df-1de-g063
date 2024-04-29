@@ -64,9 +64,7 @@ that can be attached to tractors, such as disc harrows, weeders, aerators and sc
 
 **_Other alternatives might exist._**
 
-
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg\us006-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 
 ### 1.7 Other Relevant Remarks

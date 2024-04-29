@@ -18,7 +18,7 @@ activate Employee
         System --> Employee : Requests data
     deactivate System
 
-    Employee -> System : Types requested data(e.g. brand, model, check-up frequency)
+    Employee -> System : Types requested data(brand, model, check-up frequency, vehicleID, type, tare, grossWeight, currentKm, registerDate, acquisitionDate)
     activate System
 
         System --> Employee : Display the vehicle that has been created
