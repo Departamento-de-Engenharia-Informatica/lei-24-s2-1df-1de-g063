@@ -20,34 +20,6 @@ activate ADM
 
         activate UI
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
-
-            UI -> CTRL : getTaskCategories()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getTaskCategoryRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: taskCategoryRepository
-                deactivate PLAT
-
-                CTRL -> TaskCategoryRepository : getTaskCategories()
-                activate TaskCategoryRepository
-
-                    TaskCategoryRepository --> CTRL : taskCategoryList
-                deactivate TaskCategoryRepository
-
-                CTRL --> UI : taskCategoryList
-            deactivate CTRL
-
             UI --> ADM : Requests data
         deactivate UI
 
