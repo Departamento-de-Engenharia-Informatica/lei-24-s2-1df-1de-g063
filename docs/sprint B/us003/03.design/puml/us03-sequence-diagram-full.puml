@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
+actor "HRM" as ADM
 participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -71,11 +71,11 @@ activate ADM
                         PLAT --> CTRL: SkillsRepository
                     deactivate PLAT
 
-                    CTRL -> CollaboratorRecordRepository : getSkills()
-                    activate CollaboratorRecordRepository
+                    CTRL -> SkillsRepository : getSkills()
+                    activate SkillsRepository
 
-                        CollaboratorRecordRepository --> CTRL : SkillsList
-                    deactivate CollaboratorRecordRepository
+                        SkillsRepository --> CTRL : SkillsList
+                    deactivate SkillsRepository
 
 
                     CTRL --> UI : SkillsList
@@ -86,17 +86,36 @@ activate ADM
 
     ADM -> UI : selects the intended skills
     activate UI
+        UI -> CTRL : getJobs()
+                    activate CTRL
 
-        UI --> ADM : ask to select a job
-    deactivate UI
+                        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
 
-    ADM -> UI : selects the intended job
-    activate UI
+                            RepositorySingleton --> CTRL: repositories
+                        deactivate RepositorySingleton
 
-        UI -> CTRL : registerCollaborator(new collabporator required info)
-        activate CTRL
+                        CTRL -> PLAT : getJobsRepository()
+                        activate PLAT
 
-            CTRL -> CTRL : setCollaboratorByDescription(new collaborator required info)
+                            PLAT --> CTRL: JobsRepository
+                        deactivate PLAT
+
+                        CTRL -> JobsRepository : getJobs()
+                        activate JobsRepository
+
+                            JobsRepository --> CTRL : JobsList
+                        deactivate JobsRepository
+
+
+                        CTRL --> UI : JobsList
+                    deactivate CTRL
+
+            UI --> ADM : ask to select a job
+        deactivate UI
+        ADM -> UI : selects the intended job
+        activate UI
+        UI -> CTRL : getcollaboratorRecord()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -105,97 +124,27 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : setColllaboratorToRecordRepository()
+                CTRL -> PLAT : getCollaboratorRecordRepository()
                 activate PLAT
 
-                    PLAT -> CTRL : collaboratorRecordRepository
+                    PLAT --> CTRL: collaboratorRecordRepository
                 deactivate PLAT
 
-                CTRL -> CollaboratorRecordRepository : setCollaboratorByDescription(new collaborator required info)
+                CTRL -> CollaboratorRecordRepository : setCollaboratorRecord()
                 activate CollaboratorRecordRepository
 
                     CollaboratorRecordRepository --> CTRL : collaboratorRecord
                 deactivate CollaboratorRecordRepository
-                    CTRL --> CTRL : collaboratorRecord
+
+
+                CTRL --> UI : CollaboratorRecord
             deactivate CTRL
 
-            |||
-            CTRL -> CTRL : getCollaboratorFromSession()
-            activate CTRL
-
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
+            UI --> ADM : displays all data and operation success
+        deactivate UI
 
 
-                CTRL -> APP: getCurrentSession()
-                activate APP
 
-                    APP --> CTRL: currentSession
-                deactivate APP
-
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
-
-
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
-
-
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
-
-                    loop [for each organization
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
-
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
-
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
-
-                    ORG --> CTRL : employee
-                deactivate ORG
-
-                CTRL --> CTRL : employee
-            deactivate CTRL
-
-            |||
-            CTRL -> ORG: registerCollaborator(employee required (new employee required info))
-            activate ORG
-
-                ORG -> EMPLOYEE**: register(new collaborator (collaborator required info))
-                ORG -> ORG: addCollaborator (new collaborator))
-
-
-                activate ORG
-                    ORG -> ORG: validateRegistration(task)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
-
-                ORG --> CTRL : task
-
-            deactivate ORG
-
-            CTRL --> UI: resgistration
-            deactivate CTRL
-            UI --> ADM: displays operation success
-    deactivate UI
 
 deactivate ADM
 
