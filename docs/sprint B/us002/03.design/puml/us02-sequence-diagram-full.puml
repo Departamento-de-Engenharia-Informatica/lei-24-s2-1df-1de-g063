@@ -8,10 +8,10 @@ autonumber
 'hide footbox
 actor "Organization Employee" as ADM
 participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
+participant ":RegisterJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "JobsRepository:\nJobsRepository" as JobsRepository
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
@@ -21,7 +21,7 @@ participant "task\n:Task" as TAREFA
 
 activate ADM
 
-        ADM -> UI : asks to create a new task
+        ADM -> UI : asks to register a new job
 
         activate UI
 
@@ -29,7 +29,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getTaskCategories()
+            UI -> CTRL : getJobs()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -38,43 +38,44 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getTaskCategoryRepository()
+                CTRL -> PLAT : getJobsRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: taskCategoryRepository
+                    PLAT --> CTRL: JobsRepository
                 deactivate PLAT
 
-                CTRL -> TaskCategoryRepository : getTaskCategories()
-                activate TaskCategoryRepository
+                CTRL -> JobsRepository : getTaskCategories()
+                activate JobsRepository
 
-                    TaskCategoryRepository --> CTRL : taskCategoryList
-                deactivate TaskCategoryRepository
+                    JobsRepository --> CTRL : JobsList
+                deactivate JobsRepository
 
-                CTRL --> UI : taskCategoryList
+                CTRL --> UI : JobsList
             deactivate CTRL
 
-            UI --> ADM : shows task category list\n and asks to sleect one
+            UI --> ADM : requests data (name of the job)
         deactivate UI
 
-    ADM -> UI : selects a task category
+    ADM -> UI : types requested data
     activate UI
 
-        UI --> ADM : requests data
+        UI --> ADM : shows all data and requests confirmation
     deactivate UI
 
-    ADM -> UI : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
+    ADM -> UI : Confirms data
     activate UI
 
-        UI --> ADM : shows selected category and requested data
+        UI --> ADM : displays operation success
     deactivate UI
 
     ADM -> UI : submits data
     activate UI
 
-        UI -> CTRL : createTask(reference,\ndescription,\ninformalDescription,\ntechnicalDescription,\nduration, cost,\ntaskCategoryDescription)
+        UI -> CTRL : createJob(reference,\ndescription,\ninformalDescription,\ntechnicalDescription,\nduration, cost,\ntaskCategoryDescription)
+        'ns se devo meter  createJob ou registerJob'
         activate CTRL
 
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
+            CTRL -> CTRL : getJobsByDescription(JobsDescription)
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -83,18 +84,18 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getTaskCategoryRepository()
+                CTRL -> PLAT : getJobsRepository()
                 activate PLAT
 
-                    PLAT -> CTRL : taskCategoryRepository
+                    PLAT -> CTRL : JobsRepository
                 deactivate PLAT
 
-                CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-                activate TaskCategoryRepository
+                CTRL -> JobsRepository : getJobsByDescription(JobsDescription)
+                activate JobsRepository
 
-                    TaskCategoryRepository --> CTRL : taskCategory
-                deactivate TaskCategoryRepository
-                    CTRL --> CTRL : taskCategory
+                    JobsRepository --> CTRL : Jobs
+                deactivate JobsRepository
+                    CTRL --> CTRL : Jobs
             deactivate CTRL
 
             |||
