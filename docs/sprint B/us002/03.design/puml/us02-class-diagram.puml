@@ -42,6 +42,8 @@ class Repositories {
 }
 
 class RegisterJobController {
+
+    + getCollaboratorRecord()
     + RegisterJobController(organizationRepository, taskCategoryRepository)
     + getJobList()
     + createJob(skills)
