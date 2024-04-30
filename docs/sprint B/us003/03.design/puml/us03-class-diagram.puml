@@ -60,7 +60,7 @@ note right of JobsRepository
      (every job is there represented regardless the skills of the collaborator in question)
 end note
 
-class EmployeeRepository {
+class CollaboratorRepository {
     + getOrganizationByManagerEmail(email)
     + getCollaboratorRecord()
 }
@@ -86,7 +86,7 @@ note right of RegisterCollaboratorController
     is retrieved from selected data
 end note
 
-note left of EmployeeRepository
+note left of CollaboratorRepository
     - used for accessing a list of
     registered collaborators
 end note
@@ -106,15 +106,15 @@ RegisterCollaboratorUI .> RegisterCollaboratorController
 RegisterCollaboratorController .> Repositories : repositories
 
 RegisterCollaboratorController ..> Collaborator
-RegisterCollaboratorController ..> EmployeeRepository : EmployeeRepository
+RegisterCollaboratorController ..> CollaboratorRepository : CollaboratorRepository
 
-Repositories --> "1" EmployeeRepository
+Repositories --> "1" CollaboratorRepository
 
-EmployeeRepository --> "*" Manager
+CollaboratorRepository --> "*" Manager
 
 RegisterCollaboratorController ..> "1" Manager
 
-EmployeeRepository "1" --> "*" Collaborator : collaboratorRecord
+CollaboratorRepository "1" --> "*" Collaborator : collaboratorRecord
 Manager "1" --> "1..*" Collaborator : register
 
 Repositories --> "1" SkillsRepository
