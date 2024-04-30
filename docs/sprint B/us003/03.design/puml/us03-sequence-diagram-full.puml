@@ -11,13 +11,10 @@ participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "skillsRepository:\nSkillsRepository" as SkillsRepository
+participant "jobsRepository:\nJobsRepository" as JobsRepository
 participant "collaboratorRecordRepository:\nCollaboratorRecordRepository" as CollaboratorRecordRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "Collaborator \n:New Collaborator" as EMPLOYEE
+
 
 activate ADM
 
