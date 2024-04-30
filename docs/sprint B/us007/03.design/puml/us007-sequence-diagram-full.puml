@@ -69,7 +69,7 @@ activate ADM
     ADM -> UI : Registers results
     activate UI
 
-        UI -> Vehicle : registerResult()
+        UI -> Vehicle : setResult()
         activate Vehicle
 
         Vehicle --> UI : Result
