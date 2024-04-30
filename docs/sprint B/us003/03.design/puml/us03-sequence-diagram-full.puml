@@ -11,6 +11,8 @@ participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "skillsRepository:\nSkillsRepository" as SkillsRepository
+participant "jobsRepository:\nJobsRepository" as JobsRepository
 participant "collaboratorRecordRepository:\nCollaboratorRecordRepository" as CollaboratorRecordRepository
 
 
