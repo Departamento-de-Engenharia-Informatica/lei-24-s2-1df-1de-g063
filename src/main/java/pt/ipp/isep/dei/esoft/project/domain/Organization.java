@@ -174,4 +174,9 @@ public class Organization {
 
         return clone;
     }
+
+    public Optional<Collaborator> registerCollaborator(String name, int ano, int mes, int dia, String jobTitle, String address, int cellNumber, int idNumber, String idDocType) {
+        Optional<Collaborator> newCollaborator = null;
+        return newCollaborator;
+    }
 }

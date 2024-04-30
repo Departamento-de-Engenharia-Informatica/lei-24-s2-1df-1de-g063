@@ -8,6 +8,7 @@ public class Repositories {
     private final OrganizationRepository organizationRepository;
     private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
+    public CollaboratorRecordRepository getCollaboratorRecordRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -34,5 +35,8 @@ public class Repositories {
 
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
+    }
+
+    public CollaboratorRecordRepository getCollaboratorRecordRepository() {
     }
 }
