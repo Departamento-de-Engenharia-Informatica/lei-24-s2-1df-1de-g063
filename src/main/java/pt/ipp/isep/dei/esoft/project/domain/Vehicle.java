@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 public class Vehicle {
-
     private String brand;
     private String model;
     private float tareWeight;
@@ -10,4 +9,6 @@ public class Vehicle {
     private String registerDate;
     private String acquisitionDate;
     private String checkUpFrequency;
+
+
 }
