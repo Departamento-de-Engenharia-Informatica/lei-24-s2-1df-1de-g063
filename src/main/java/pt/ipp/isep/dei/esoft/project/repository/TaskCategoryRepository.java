@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class TaskCategoryRepository {
-
     private final List<TaskCategory> taskCategories;
     public TaskCategoryRepository() {
         taskCategories = new ArrayList<>();
