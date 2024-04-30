@@ -37,6 +37,9 @@ public class Repositories {
         return authenticationRepository;
     }
 
+
     public CollaboratorRecordRepository getCollaboratorRecordRepository() {
+
+        return null;
     }
 }
