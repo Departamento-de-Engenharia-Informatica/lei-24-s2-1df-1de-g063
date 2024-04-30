@@ -25,10 +25,13 @@ public class Collaborator {
             "Março", "Abril", "Maio", "Junho",
             "Julho", "Agosto", "Setembro",
             "Outubro", "Novembro", "Dezembro"};
-    public Collaborator(String name, int age, String jobTitle) {
+    public Collaborator(String name, int age, String jobTitle, String address, int cell_number, int id_number) {
         this.name = name;
         this.age = age;
         this.jobTitle = jobTitle;
+        this.address = address;
+        this.cell_number = cell_number;
+        this.id_number = id_number;
     }
 
     public void displayInfo() {
@@ -55,7 +58,19 @@ class HRMSystem {
         System.out.print("Job Title: ");
         String jobTitle = scanner.nextLine();
 
-        Collaborator collaborator = new Collaborator(name, age, jobTitle);
+        System.out.println("Address:");
+        String address = scanner.nextLine();
+
+        System.out.println("Cellphone number:");
+        int cell_phone = scanner.nextInt();
+
+        System.out.println("ID number:");
+        int id_number = scanner.nextInt();
+
+
+
+
+        Collaborator collaborator = new Collaborator(name, age, jobTitle, address, cell_phone, id_number);
 
         System.out.println("\nCollaborator registered successfully.");
         collaborator.displayInfo();
