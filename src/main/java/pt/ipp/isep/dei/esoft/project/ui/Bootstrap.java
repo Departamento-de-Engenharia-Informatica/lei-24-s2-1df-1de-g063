@@ -54,5 +54,8 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
+
+        authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@this.app","vfm",
+                AuthenticationController.ROLE_VFM);
     }
 }
