@@ -3,14 +3,15 @@ package pt.ipp.isep.dei.esoft.project.domain;
 public class Vehicle {
     private String brand;
     private String model;
-    private float tareWeight;
-    private float grossWeight;
-    private float currentKm;
+    private double tareWeight;
+    private double grossWeight;
+    private double currentKm;
     private String registerDate;
     private String acquisitionDate;
     private String checkUpFrequency;
+    private String maintenance;
 
-    public Vehicle(String brand,String model,float tareWeight,float grossWeight,float currentKm,String registerDate,String acquisitionDate) {
+    public Vehicle(String brand,String model,double tareWeight,double grossWeight,double currentKm,String registerDate,String acquisitionDate) {
         this.brand = brand;
         this.model = model;
         this.tareWeight = tareWeight;
@@ -18,6 +19,16 @@ public class Vehicle {
         this.currentKm = currentKm;
         this.registerDate = registerDate;
         this.acquisitionDate = acquisitionDate;
+        this.checkUpFrequency = checkUpFrequency;
+    }
+
+
+    public String getMaintenance() {
+        return maintenance;
+    }
+
+    public void setMaintenance(String maintenance) {
+        this.maintenance = maintenance;
     }
 
     public String getBrand() {
@@ -28,59 +39,18 @@ public class Vehicle {
         return model;
     }
 
-    public float getTareWeight() {
-        return tareWeight;
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", tareWeight=" + tareWeight +
+                ", grossWeight=" + grossWeight +
+                ", currentKm=" + currentKm +
+                ", registerDate='" + registerDate + '\'' +
+                ", acquisitionDate='" + acquisitionDate + '\'' +
+                ", checkUpFrequency='" + checkUpFrequency + '\'' +
+                '}';
     }
 
-    public float getGrossWeight() {
-        return grossWeight;
-    }
-
-    public float getCurrentKm() {
-        return currentKm;
-    }
-
-    public String getRegisterDate() {
-        return registerDate;
-    }
-
-    public String getAcquisitionDate() {
-        return acquisitionDate;
-    }
-
-    public String getCheckUpFrequency() {
-        return checkUpFrequency;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setTareWeight(float tareWeight) {
-        this.tareWeight = tareWeight;
-    }
-
-    public void setGrossWeight(float grossWeight) {
-        this.grossWeight = grossWeight;
-    }
-
-    public void setCurrentKm(float currentKm) {
-        this.currentKm = currentKm;
-    }
-
-    public void setRegisterDate(String registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public void setAcquisitionDate(String acquisitionDate) {
-        this.acquisitionDate = acquisitionDate;
-    }
-
-    public void setCheckUpFrequency(String checkUpFrequency) {
-        this.checkUpFrequency = checkUpFrequency;
-    }
 }

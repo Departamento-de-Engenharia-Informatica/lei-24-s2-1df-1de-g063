@@ -19,4 +19,5 @@ public class VehicleRepository {
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
+
 }
