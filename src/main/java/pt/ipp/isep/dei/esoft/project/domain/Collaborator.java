@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Collaborator {
     private String name;
-    private int age;
     private String jobTitle;
     private String address;
     private int cell_number;
