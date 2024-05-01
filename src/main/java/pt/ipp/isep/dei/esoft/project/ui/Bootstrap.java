@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
@@ -25,7 +26,6 @@ public class Bootstrap implements Runnable {
         Organization organization = new Organization("This Company");
         organization.addEmployee(new Employee("admin@this.app"));
         organization.addEmployee(new Employee("employee@this.app"));
-        organization.addEmployee(new Employee("vfm@this.app"));
         organizationRepository.add(organization);
     }
 
@@ -43,6 +43,7 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
+
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
@@ -55,6 +56,9 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
+
+        authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@this.app", "hrm",
+                AuthenticationController.ROLE_HRM);
 
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@this.app","vfm",
                 AuthenticationController.ROLE_VFM);

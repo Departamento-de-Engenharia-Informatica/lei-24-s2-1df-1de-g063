@@ -1,20 +1,45 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
+import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.repository.*;
+
+import java.util.List;
+import java.util.Optional;
 
 public class SkillController {
 
     private SkillsRepository skillsRepository;
 
-    public boolean addSkill(String skill) {
-        try {
-            Skill skill1 = new Skill(skill);
-            skillsRepository.add(skill1);
-        }catch (Exception e) {
-            System.err.println(e);
-            return false;
-        }
-        return true;
+    public SkillController(SkillsRepository skillsRepository) {
+        this.skillsRepository = skillsRepository;
     }
+
+    public SkillController() {
+        getSkillRepository();
+    }
+
+    private SkillsRepository getSkillRepository() {
+        if (skillsRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+
+            //Get the TaskCategoryRepository
+            skillsRepository = repositories.getSkillsRepository();
+        }
+        return skillsRepository;
+    }
+
+
+
+    public Optional<Skill> createSkill(String skillName) {
+
+        Optional<Skill> skill = Optional.of(new Skill(skillName));
+
+        return skill;
+    }
+
+    public List<String> getSkills() {
+        SkillsRepository skillRepository = getSkillRepository();
+        return skillRepository.getSkills();
+    }
+
 }
