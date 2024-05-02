@@ -12,19 +12,20 @@ participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nvehicleRepository" as TaskCategoryRepository
-
+participant "Vehicle:\n vehicle"
 
 activate ADM
 
         ADM -> UI : Requests to register a vehicle
 
         activate UI
+        UI -> CTRL** : create
 
             UI --> ADM : Requests data
         deactivate UI
 
 
-    ADM -> UI : Types requested data (brand, model, check-up frequency,)
+    ADM -> UI : Types requested data (brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
     activate UI
 
         UI --> ADM : shows selected category and requested data
@@ -51,8 +52,11 @@ activate ADM
                 deactivate PLAT
 
                 CTRL -> TaskCategoryRepository : registerVehicle(brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
-                activate TaskCategoryRepository
 
+                activate TaskCategoryRepository
+                TaskCategoryRepository -> "Vehicle:\n vehicle":registerVehicle(brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
+                TaskCategoryRepository -> TaskCategoryRepository : addVehicle
+                TaskCategoryRepository -> TaskCategoryRepository : validateVehicle
                     TaskCategoryRepository --> CTRL : success
                 deactivate TaskCategoryRepository
 
