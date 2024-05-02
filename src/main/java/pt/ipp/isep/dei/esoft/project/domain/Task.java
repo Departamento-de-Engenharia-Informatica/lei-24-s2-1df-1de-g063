@@ -3,23 +3,24 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Objects;
 
 public class Task {
-    private String name;
-    private String jobTitle;
-    private String address;
-    private int cell_number;
-    private int id_number;
-    private String id_doc_type;
-    private int ano;
-    private int mes;
-    private int dia;
-    private String email;
-    public Task(String Name, String jobTitle, String address, String id_doc_type,
-                int cell_number, double id_number, Job job, Skill skill) {
+    private final String reference;
+    private String description;
+    private String informalDescription;
+    private String technicalDescription;
+    private int duration;
+    private double cost;
+
+    private TaskCategory taskCategory;
+
+    private Employee employee;
+
+    public Task(String reference, String description, String informalDescription, String technicalDescription,
+                int duration, double cost, TaskCategory taskCategory, Employee employee) {
 
         validateReference(reference);
-        this.name = name;
-        this.jobTitle = jobTitle;
-        this.address = address;
+        this.reference = reference;
+        this.description = description;
+        this.informalDescription = informalDescription;
         this.technicalDescription = technicalDescription;
         this.duration = duration;
         this.cost = cost;
@@ -62,3 +63,4 @@ public class Task {
                 this.duration, this.cost, this.taskCategory, this.employee);
     }
 }
+

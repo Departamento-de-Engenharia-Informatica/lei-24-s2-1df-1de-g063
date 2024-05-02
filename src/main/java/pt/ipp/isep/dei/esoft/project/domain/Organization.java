@@ -9,6 +9,8 @@ public class Organization {
     private final String vatNumber;
     private final List<Employee> employees;
     private final List<Task> tasks;
+    private final List<Job> jobs;
+    private final List<Collaborator> collaborators;
     private String name;
     private String website;
     private String phone;
@@ -24,6 +26,8 @@ public class Organization {
         this.vatNumber = vatNumber;
         employees = new ArrayList<>();
         tasks = new ArrayList<>();
+        jobs = new ArrayList<Job>();
+        collaborators = new ArrayList<Collaborator>();
     }
 
     /**
@@ -105,6 +109,61 @@ public class Organization {
         return !tasks.contains(task);
     }
 
+    public Optional<Job> registerJob(String jobName, Employee employee) {
+        Optional<Job> optionalValue = Optional.empty();
+
+        Job job = new Job(jobName);
+
+        if (addJob(job)) {
+            optionalValue = Optional.of(job);
+        }
+        return optionalValue;
+    }
+
+    private boolean addJob(Job job) {
+        boolean success = false;
+        if (validate(job)) {
+            success = jobs.add(job.clone());
+        }
+        return success;
+    }
+    private boolean validate(Job job) {
+        return jobsDoNotContain(job);
+    }
+    private boolean jobsDoNotContain(Job job) {
+        return !jobs.contains(job);
+    }
+
+
+
+
+    public Optional<Collaborator> registerCollaborator(String name, int year, int month, int day, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
+        Optional<Collaborator> optionalValue = Optional.empty();
+
+        Collaborator collaborator = new Collaborator(name, year, month, day, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
+
+        if (addCollaborator(collaborator)) {
+            optionalValue = Optional.of(collaborator);
+        }
+        return optionalValue;
+    }
+
+    private boolean addCollaborator(Collaborator collaborator) {
+        boolean success = false;
+        if (validate(collaborator)) {
+            success = collaborators.add(collaborator.clone());
+        }
+        return success;
+    }
+    private boolean validate(Collaborator collaborator) {
+        return collaboratorsDoNotContain(collaborator);
+    }
+    private boolean collaboratorsDoNotContain(Collaborator collaborator) {
+        return !collaborators.contains(collaborator);
+    }
+
+
+
     /**
      * This methos checks if the organization has an employee with the given email.
      *
@@ -172,11 +231,11 @@ public class Organization {
             clone.tasks.add(in.clone());
         }
 
+        for (Job in : this.jobs) {
+            clone.jobs.add(in.clone());
+        }
+
         return clone;
     }
 
-    public Optional<Collaborator> registerCollaborator(String name, int ano, int mes, int dia, String jobTitle, String address, int cellNumber, int idNumber, String idDocType) {
-        Optional<Collaborator> newCollaborator = null;
-        return newCollaborator;
-    }
 }

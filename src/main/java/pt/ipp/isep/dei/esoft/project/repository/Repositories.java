@@ -9,6 +9,7 @@ public class Repositories {
     private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
     public CollaboratorRecordRepository getCollaboratorRecordRepository;
+    private JobRepository jobRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -41,5 +42,14 @@ public class Repositories {
     public CollaboratorRecordRepository getCollaboratorRecordRepository() {
 
         return null;
+    }
+
+
+    public JobRepository getJobRepository() {
+        return jobRepository;
+    }
+
+    public void setJobRepository(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
     }
 }
