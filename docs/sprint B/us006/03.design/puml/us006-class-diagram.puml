@@ -42,7 +42,7 @@ class Vehicle {
     - acquisitionDate
     - checkupFrequency
 
-    + Vehicle(brand, model, vehicleID, type, grossWeight, tare, currentKm, registerDate, acquisitionDate, checkupFrequency)
+    + Vehicle(brand, model, vehicleID, \ntype, grossWeight, tare, currentKm, \nregisterDate, acquisitionDate, checkupFrequency)
     + equals()
     + needsCheckup()
 
@@ -53,7 +53,7 @@ class Vehicle {
 class VehicleRepository {
     -getVehicleTypesList
 
-    +
+
 }
 
 class Repositories {
@@ -69,7 +69,7 @@ class Repositories {
 
 class RegisterVehicleController {
     + RegisterVehicleController()
-    + registerVehicle(brand, model, vehicleID, type, grossWeight, tare, currentKm, registerDate, acquisitionDate, checkupFrequency)
+    + registerVehicle(brand, model, vehicleID, \ntype, grossWeight, tare, currentKm, \nregisterDate, acquisitionDate, checkupFrequency)
     - getVehicleRepository()
     - getVehicleTypesList()
 }

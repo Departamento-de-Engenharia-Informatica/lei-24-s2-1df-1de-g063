@@ -17,15 +17,34 @@ class RegisterResultController{
 }
 
 class Repositories{
-
+    - Repositories()
+    + getInstance() : Repositories
+    + getCollaboatorRepository()
+    + getVehicleRepository()
+    + getSkillRepository()
+    + getJobRepository()
+    + getAuthenticationRepository()
 }
 
 class VehicleRepository{
-
+    -getVehicleTypesList
 }
 
 class Vehicle{
+    - brand
+    - model
+    - vehicleID
+    - type
+    - grossWeight
+    - tare
+    - currentKm
+    - registerDate
+    - acquisitionDate
+    - checkupFrequency
 
+    + Vehicle(brand, model, vehicleID, \ntype, grossWeight, tare, currentKm, \nregisterDate, acquisitionDate, checkupFrequency)
+    + equals()
+    + needsCheckup()
 }
 
 class EmployeeRepository{
