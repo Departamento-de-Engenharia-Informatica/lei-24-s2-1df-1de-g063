@@ -21,14 +21,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//---------------------------------------------------------US06------------------------------------------------------------------------------------------------------
-//        VehicleRepository vehicleRepository = new VehicleRepository();
-//
-//        vehicleRepository.addVehicle(new Vehicle("Toyota", "Corolla", 1500.0, 1800.0, 10000.0, "2022-01-01", "2021-01-01"));
-//        vehicleRepository.addVehicle(new Vehicle("Ford", "Focus", 1400.0, 1700.0, 9000.0, "2021-01-01", "2020-01-01"));
-//        vehicleRepository.addVehicle(new Vehicle("Honda", "Civic", 1600.0, 1900.0, 11000.0, "2020-01-01", "2019-01-01"));
-//
-//        System.out.println(vehicleRepository.getVehicles());
+
 ////---------------------------------------------------------US07------------------------------------------------------------------------------------------------------
 //
 //        System.out.println("Introduza o nome do veículo que quer apontar o resultado do checkup:");

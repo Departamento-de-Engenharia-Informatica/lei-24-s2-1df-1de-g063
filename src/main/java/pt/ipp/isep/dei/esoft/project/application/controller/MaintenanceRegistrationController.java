@@ -1,27 +1,35 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 
 public class MaintenanceRegistrationController {
 
+    private OrganizationRepository organizationRepository;
     private VehicleRepository vehicleRepository;
     private AuthenticationRepository authenticationRepository;
 
-    public MaintenanceRegistrationController(){
+    public MaintenanceRegistrationController(OrganizationRepository organizationRepository, OrganizationRepository organizationRepository1, OrganizationRepository organizationRepository2){
         getVehicleRepository();
         getAuthenticationRepository();
+        getOrganizationRepository();
     }
 
     //Allows receiving the repositories as parameters for testing purposes
-    public MaintenanceRegistrationController(VehicleRepository vehicleRepository,
-                                AuthenticationRepository authenticationRepository) {
+    public MaintenanceRegistrationController(OrganizationRepository organizationRepository,
+                                             VehicleRepository vehicleRepository,
+                                             AuthenticationRepository authenticationRepository) {
+        this.organizationRepository = organizationRepository;
         this.vehicleRepository = vehicleRepository;
         this.authenticationRepository = authenticationRepository;
     }
@@ -36,6 +44,15 @@ public class MaintenanceRegistrationController {
         return vehicleRepository;
     }
 
+    private OrganizationRepository getOrganizationRepository() {
+        if (organizationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            organizationRepository = repositories.getOrganizationRepository();
+        }
+        return organizationRepository;
+
+    }
+
     public AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -46,20 +63,12 @@ public class MaintenanceRegistrationController {
         return authenticationRepository;
     }
 
-    public Optional<Vehicle> MaintenanceRegistration(String brand,String model,double tareWeight,double grossWeight,double currentKm,String registerDate,String acquisitionDate) {
+//    public Optional<Vehicle> MaintenanceRegistration(String brand,String model,double tareWeight,double grossWeight,double currentKm,String registerDate,String acquisitionDate) {
+//
+//    }
 
-        TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-        Employee employee = getEmployeeFromSession();
-        Optional<Organization> organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-        Optional<Task> newTask = Optional.empty();
-
-        if (organization.isPresent()) {
-            newTask = organization.get()
-                    .createTask(reference, description, informalDescription, technicalDescription, duration, cost,
-                            taskCategory, employee);
-        }
-        return newTask;
+    private List<Vehicle> getVehicles() {
+        List<Vehicle> vehicles = vehicleRepository.getVehicles();
+        return vehicles;
     }
 }
