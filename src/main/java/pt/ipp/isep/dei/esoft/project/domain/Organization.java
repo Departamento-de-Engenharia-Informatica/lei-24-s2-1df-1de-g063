@@ -137,10 +137,10 @@ public class Organization {
 
 
 
-    public Optional<Collaborator> registerCollaborator(String name, int year, int month, int day, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
+    public Optional<Collaborator> registerCollaborator(String name, String date, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
         Optional<Collaborator> optionalValue = Optional.empty();
 
-        Collaborator collaborator = new Collaborator(name, year, month, day, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
+        Collaborator collaborator = new Collaborator(name,date, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
 
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);

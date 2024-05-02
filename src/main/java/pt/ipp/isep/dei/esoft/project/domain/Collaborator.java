@@ -10,17 +10,13 @@ public class Collaborator {
     private int cellNumber;
     private int idNumber;
     private String idDocType;
-    private int year;
-    private int month;
-    private int day;
+    private String date;
     private String email;
     private String skill;
 
-    public Collaborator(String name, int year, int month, int day, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
+    public Collaborator(String name, String date, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
         this.name = name;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.date= date;
         this.jobTitle = jobTitle;
         this.address = address;
         this.cellNumber = cellNumber;
@@ -58,7 +54,7 @@ public class Collaborator {
         return Objects.hash(idNumber);
     }
     public Collaborator clone() {
-        return new Collaborator(name, year, month, day, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
+        return new Collaborator(name,date, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
     }
 
     @Override
@@ -66,13 +62,12 @@ public class Collaborator {
         return "Collaborator{" +
                 "name='" + name + '\'' +
                 ", jobTitle='" + jobTitle + '\'' +
+                ", Skill='" + skill + '\'' +
                 ", address='" + address + '\'' +
                 ", cellNumber=" + cellNumber +
                 ", idNumber=" + idNumber +
                 ", idDocType='" + idDocType + '\'' +
-                ", year=" + year +
-                ", month=" + month +
-                ", day=" + day +
+                ", date =" + date +
                 ", email='" + email + '\'' +
                 '}';
     }
