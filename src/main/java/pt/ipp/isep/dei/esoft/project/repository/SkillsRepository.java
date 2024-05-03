@@ -6,37 +6,31 @@ import java.util.List;
 import java.util.Optional;
 
 public class SkillsRepository {
-    private List<String> skills;
+
+    private List<Skill> skills;
+
+
     public SkillsRepository() {
         skills = new ArrayList<>();
     }
 
-    public void addSkill(String skill) {
+    public void addSkill(Skill skill) {
         skills.add(skill);
     }
 
-    public Optional<Skill> add(Skill skill) {
+//    public List<Skill> add(Skill skill) {
+//        List<Skill> newSkill;
+//        if (skills.contains(skill)) {
+//            throw new IllegalArgumentException("Skill already exists.");
+//        }
+//
+//        skills.add(skill);
+//
+//        return newSkill;
+//    }
 
-        Optional<Skill> newSkill = Optional.empty();
-        boolean operationSuccess = false;
 
-        if (validateSkill(skill)) {
-            newSkill = Optional.of(skill.clone());
-            operationSuccess = skills.add(newSkill.get().toString());
-        }
-
-        if (!operationSuccess) {
-            newSkill = Optional.empty();
-        }
-
-        return newSkill;
-    }
-
-    private boolean validateSkill(Skill skill) {
-        boolean isValid = !skills.contains(skill);
-        return isValid;
-    }
-    public List<String> getSkills() {
+    public List<Skill> getSkills() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(skills);
     }

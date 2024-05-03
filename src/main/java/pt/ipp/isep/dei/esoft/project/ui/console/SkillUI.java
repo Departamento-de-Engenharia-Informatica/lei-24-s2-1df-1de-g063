@@ -9,9 +9,11 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class SkillUI implements Runnable {
+
     private final SkillController controller;
     private String skillName;
     private SkillsRepository skillsRepository;
+    private Skill skill;
 
     public SkillUI() {
         this.controller = new SkillController();
@@ -27,19 +29,21 @@ public class SkillUI implements Runnable {
         requestData();
 
         submitData();
+
+        printSkills();
+    }
+
+    private void printSkills (){
+        List<Skill> skills = controller.getSkills();
+        for (Skill skill : skills) {
+            System.out.println(skill);
+        }
     }
 
     private void submitData() {
 
-
-        skillsRepository.addSkill(skillName);
-        Optional<Skill> skill = getController().createSkill(skillName);
-
-        if (skill.isPresent()) {
-            System.out.println("\nSkill successfully registered!");
-        } else {
-            System.out.println("\nSkill is already registered!");
-        }
+        skill=controller.createSkill(skillName);
+        controller.registerSkill(skill);
 
     }
 

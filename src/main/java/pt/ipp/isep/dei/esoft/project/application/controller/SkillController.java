@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SkillController {
 
@@ -12,6 +11,24 @@ public class SkillController {
 
     public SkillController(SkillsRepository skillsRepository) {
         this.skillsRepository = skillsRepository;
+    }
+
+    private boolean validateSkill(Skill skill) {
+        List<Skill> skills = skillsRepository.getSkills();
+        boolean valid = true;
+        for (Skill s : skills) {
+            if (s.toString().equals(skill.toString())){
+                System.out.println("Skill already exists");
+                valid=false;
+            }else if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
+                System.out.println("Skill has invalid characters");
+                valid=false;
+            } else if (!skill.toString().matches("abcdefghijklmnopqrstuvwxyz")) {
+                System.out.println("Insert a skill");
+                valid=false;
+            }
+        }
+        return valid;
     }
 
     public SkillController() {
@@ -22,22 +39,32 @@ public class SkillController {
         if (skillsRepository == null) {
             Repositories repositories = Repositories.getInstance();
 
-            //Get the TaskCategoryRepository
+
             skillsRepository = repositories.getSkillsRepository();
         }
         return skillsRepository;
     }
 
+    public void registerSkill(Skill skill) {
 
+        if (!validateSkill(skill)) {
+            System.out.println("Skill has not been registered");
+        } else{
+            System.out.println("Skill registered successfully");
+            skillsRepository.addSkill(skill);
+        }
 
-    public Optional<Skill> createSkill(String skillName) {
+    }
 
-        Optional<Skill> skill = Optional.of(new Skill(skillName));
+    public Skill createSkill (String skillName) {
+
+        Skill skill = new Skill(skillName);
 
         return skill;
     }
 
-    public List<String> getSkills() {
+
+    public List<Skill> getSkills() {
         SkillsRepository skillRepository = getSkillRepository();
         return skillRepository.getSkills();
     }
