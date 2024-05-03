@@ -31,8 +31,8 @@ public class SkillUI implements Runnable {
 
     private void submitData() {
 
-        skillsRepository.addSkill(skillName);
 
+        skillsRepository.addSkill(skillName);
         Optional<Skill> skill = getController().createSkill(skillName);
 
         if (skill.isPresent()) {
