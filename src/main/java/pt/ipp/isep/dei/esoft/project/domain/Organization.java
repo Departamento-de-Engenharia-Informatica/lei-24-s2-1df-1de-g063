@@ -10,7 +10,6 @@ public class Organization {
     private final List<Employee> employees;
     private final List<Task> tasks;
     private final List<Job> jobs;
-    private final List<Collaborator> collaborators;
     private String name;
     private String website;
     private String phone;
@@ -26,8 +25,7 @@ public class Organization {
         this.vatNumber = vatNumber;
         employees = new ArrayList<>();
         tasks = new ArrayList<>();
-        jobs = new ArrayList<Job>();
-        collaborators = new ArrayList<Collaborator>();
+        jobs = new ArrayList<>();
     }
 
     /**
@@ -51,7 +49,6 @@ public class Organization {
      * @param cost                 The cost of the task to be created.
      * @param taskCategory         The task category of the task to be created.
      * @param employee             The employee of the task to be created.
-     * @return
      */
     public Optional<Task> createTask(String reference, String description, String informalDescription,
                                      String technicalDescription, int duration, double cost,
@@ -133,35 +130,6 @@ public class Organization {
     private boolean jobsDoNotContain(Job job) {
         return !jobs.contains(job);
     }
-
-
-
-
-    public Optional<Collaborator> registerCollaborator(String name, String date, String jobTitle, String skill, String address, int cellNumber, int idNumber, String idDocType, String email) {
-        Optional<Collaborator> optionalValue = Optional.empty();
-
-        Collaborator collaborator = new Collaborator(name,date, jobTitle, skill, address, cellNumber, idNumber, idDocType, email);
-
-        if (addCollaborator(collaborator)) {
-            optionalValue = Optional.of(collaborator);
-        }
-        return optionalValue;
-    }
-
-    private boolean addCollaborator(Collaborator collaborator) {
-        boolean success = false;
-        if (validate(collaborator)) {
-            success = collaborators.add(collaborator.clone());
-        }
-        return success;
-    }
-    private boolean validate(Collaborator collaborator) {
-        return collaboratorsDoNotContain(collaborator);
-    }
-    private boolean collaboratorsDoNotContain(Collaborator collaborator) {
-        return !collaborators.contains(collaborator);
-    }
-
 
 
     /**
