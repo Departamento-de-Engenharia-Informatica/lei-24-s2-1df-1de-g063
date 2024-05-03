@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,11 @@ import java.util.Scanner;
 
 
 public class MaintenanceRegistrationController {
-
     private OrganizationRepository organizationRepository;
     private VehicleRepository vehicleRepository;
     private AuthenticationRepository authenticationRepository;
 
-    public MaintenanceRegistrationController(OrganizationRepository organizationRepository, OrganizationRepository organizationRepository1, OrganizationRepository organizationRepository2){
+    public MaintenanceRegistrationController(){
         getVehicleRepository();
         getAuthenticationRepository();
         getOrganizationRepository();
@@ -63,12 +63,14 @@ public class MaintenanceRegistrationController {
         return authenticationRepository;
     }
 
-//    public Optional<Vehicle> MaintenanceRegistration(String brand,String model,double tareWeight,double grossWeight,double currentKm,String registerDate,String acquisitionDate) {
-//
-//    }
+    public Vehicle Vehicle(String brand) {
 
-    private List<Vehicle> getVehicles() {
-        List<Vehicle> vehicles = vehicleRepository.getVehicles();
-        return vehicles;
+
+
+    }
+
+    private Employee getEmployeeFromSession() {
+        Email email = getAuthenticationRepository().getCurrentUserSession().getUserId();
+        return new Employee(email.getEmail());
     }
 }
