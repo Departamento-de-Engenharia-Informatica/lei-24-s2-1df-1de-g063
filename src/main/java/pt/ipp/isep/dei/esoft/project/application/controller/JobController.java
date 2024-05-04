@@ -13,24 +13,25 @@ public class JobController {
             this.jobRepository = jobRepository;
         }
 
-        private boolean validateJob(Job job) {
-            List<Job> jobs = jobRepository.getJobs();
-            boolean valid = true;
-            for (Job j : jobs) {
-                if (j.toString().equalsIgnoreCase(job.toString())){
-                    System.out.println("Job already exists");
-                    valid=false;
-                } else if (job.toString().matches("abcdefghijklmnopqrstuvwxyz")) {
-                    System.out.println("Insert a job");
-                    valid=false;
-                }
-                else if (job.toString().matches("%€£ºª§&+-<>/|#*$")) {
-                    System.out.println("Job has invalid characters");
-                    valid = false;
-                }
-            }
-            return valid;
+    private boolean validateJob(Job job) {
+        List<Job> jobs = jobRepository.getJobs();
+        boolean valid = true;
+        System.out.println(job.toString());
+        if (job.toString().matches("%€£ºª§&+-<>/|#*$")){
+            System.out.println("Job has invalid characters");
+            valid=false;
+        } else if (job.toString().equalsIgnoreCase("")) {
+            System.out.println("Insert a job");
+            valid=false;
         }
+        for (Job j : jobs) {
+            if (j.toString().equals(job.toString())){
+                System.out.println("Job already exists");
+                valid=false;
+            }
+        }
+        return valid;
+    }
 
         public JobController() {
             getJobRepository();

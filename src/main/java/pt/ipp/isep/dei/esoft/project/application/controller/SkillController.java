@@ -16,15 +16,17 @@ public class SkillController {
     private boolean validateSkill(Skill skill) {
         List<Skill> skills = skillsRepository.getSkills();
         boolean valid = true;
+        System.out.println(skill.toString());
+        if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
+            System.out.println("Skill has invalid characters");
+            valid=false;
+        } else if (skill.toString().equalsIgnoreCase("")) {
+            System.out.println("Insert a skill");
+            valid=false;
+        }
         for (Skill s : skills) {
-            if (s.toString().equalsIgnoreCase(skill.toString())) {
+            if (s.toString().equals(skill.toString())){
                 System.out.println("Skill already exists");
-                valid = false;
-            }else if (!skill.toString().matches("abcdefghijklmnopqrstuvwxyz")) {
-                System.out.println("Insert a skill");
-                valid=false;
-            }else if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
-                System.out.println("Skill has invalid characters");
                 valid=false;
             }
         }

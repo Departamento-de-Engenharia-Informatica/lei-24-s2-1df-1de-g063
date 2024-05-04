@@ -45,6 +45,7 @@ public class Repositories {
     public JobRepository getJobRepository() {
         return jobRepository;
     }
+
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }

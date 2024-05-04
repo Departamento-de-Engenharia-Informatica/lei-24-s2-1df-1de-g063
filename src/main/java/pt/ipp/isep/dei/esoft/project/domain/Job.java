@@ -19,10 +19,10 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job{" +
-                "job_name='" + job_name + '\'' +
-                '}';
+        if (this.job_name != null) {
+            return job_name ;
+        }else{
+            return "";
+        }
     }
-
-
 }
