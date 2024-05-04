@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
+import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MainMenuUI;
 import java.util.Scanner;
 

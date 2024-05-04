@@ -10,24 +10,18 @@ import pt.isep.lei.esoft.auth.domain.model.Email;
 
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class RegisterVehicleController {
-    private OrganizationRepository organizationRepository;
     private VehicleRepository vehicleRepository;
     private AuthenticationRepository authenticationRepository;
 
     public RegisterVehicleController(){
-        getVehicleRepository();
+        this.vehicleRepository = VehicleRepository.getInstance();
         getAuthenticationRepository();
-        getOrganizationRepository();
     }
 
-    public RegisterVehicleController(OrganizationRepository organizationRepository,
-                                             VehicleRepository vehicleRepository,
-                                             AuthenticationRepository authenticationRepository) {
-        this.organizationRepository = organizationRepository;
-        this.vehicleRepository = vehicleRepository;
+    public RegisterVehicleController(VehicleRepository vehicleRepository,
+                                     AuthenticationRepository authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
     }
 
@@ -35,20 +29,11 @@ public class RegisterVehicleController {
         if (vehicleRepository == null) {
             Repositories repositories = Repositories.getInstance();
 
-            //Get the TaskCategoryRepository
             vehicleRepository = repositories.getVehicleRepository();
         }
         return vehicleRepository;
     }
 
-    private OrganizationRepository getOrganizationRepository() {
-        if (organizationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            organizationRepository = repositories.getOrganizationRepository();
-        }
-        return organizationRepository;
-
-    }
 
     public AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
@@ -60,24 +45,9 @@ public class RegisterVehicleController {
         return authenticationRepository;
     }
 
-    public Optional<Vehicle> RegisterVehicle(String brand, String model, double tareWeight,
-                                             double grossWeight, double currentKm, LocalDate registerDate,
-                                             LocalDate acquisitionDate, String checkUpFrequency) {
-        Employee employee = getEmployeeFromSession();
-        Optional<Organization> organization = getOrganizationRepository().getOrganizationByEmployee(employee);
 
-        Optional<Vehicle> newVehicle = Optional.empty();
-
-        if (organization.isPresent()) {
-            newVehicle = organization.get()
-                    .createVehicle(brand, model, tareWeight, grossWeight, currentKm, registerDate,
-                            acquisitionDate, checkUpFrequency, employee);
-        }
-        return newVehicle;
+    public Vehicle createVehicle(String brand,String model,double tareWeight,double grossWeight,double currentKm,LocalDate registerDate,LocalDate acquisitionDate,double checkUpFrequency) {
+        return new Vehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
     }
 
-    private Employee getEmployeeFromSession() {
-        Email email = getAuthenticationRepository().getCurrentUserSession().getUserId();
-        return new Employee(email.getEmail());
-    }
 }

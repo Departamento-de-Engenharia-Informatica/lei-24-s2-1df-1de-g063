@@ -15,12 +15,14 @@ public class MaintenanceRegistrationUI implements Runnable{
     Scanner scan = new Scanner(System.in);
 
     private final MaintenanceRegistrationController controller;
-    private final VehicleRepository vehicleRepository; // Added VehicleRepository
+    private final VehicleRepository vehicleRepository;
     private String brand;
+    private String model;
     private String maintenance;
+
     public MaintenanceRegistrationUI() {
         controller = new MaintenanceRegistrationController();
-        vehicleRepository = new VehicleRepository(); // Instantiated JobRepository
+        vehicleRepository = VehicleRepository.getInstance();
     }
 
     private MaintenanceRegistrationController getController() {
@@ -31,7 +33,6 @@ public class MaintenanceRegistrationUI implements Runnable{
         System.out.println("\n\n--- Vehicle Maintenance Result ------------------------");
         requestData();
         submitData();
-        printMaintenance(); // Added printing jobs after submitting data
     }
 
     private void requestData() {
@@ -53,33 +54,15 @@ public class MaintenanceRegistrationUI implements Runnable{
     }
 
     private void submitData() {
-        List<Vehicle> vehicles = vehicleRepository.getVehicles();
-        int contador = 0;
-        int index = 0;
+        brand = requestBrand();
+        model = requestModel();
+        int index = controller.findVehicle(brand,model);
 
-        for(Vehicle vehicle : vehicles) {
-            if(vehicle.getBrand().equals(requestBrand())){
-                if(vehicle.getModel().equals(requestModel())){
-                    index = contador;
-                }
-            }
-            contador++;
-        }
         Vehicle selectedVehicle = vehicleRepository.getVehicles().get(index);
 
-       // Optional<Vehicle> maintenance = getController().Re
+        selectedVehicle.setMaintenance(maintenance);
+
+        System.out.println(selectedVehicle.getMaintenance());
     }
 
-    private void printMaintenance() {
-        maintenance = Vehicle.getMaintenance();
-
-        System.out.println("\n--- Maintenance Results -------------------------");
-//        if (vehicles.isEmpty()) {
-//            System.out.println("No vehicles registered yet.");
-//        } else {
-//            for (Vehicle vehicle : vehicles) {
-//                System.out.println(vehicle); // Assuming Job class has overridden toString() method
-//            }
-//        }
-    }
 }

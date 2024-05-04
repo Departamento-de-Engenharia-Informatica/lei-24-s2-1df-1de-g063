@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.VfmUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
@@ -18,9 +19,11 @@ import java.util.Objects;
 
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
+    private final VehicleRepository vehicleRepository;
 
     public AuthenticationUI() {
-        ctrl = new AuthenticationController();
+        this.ctrl = new AuthenticationController();
+        this.vehicleRepository = new VehicleRepository();
     }
 
     public void run() {

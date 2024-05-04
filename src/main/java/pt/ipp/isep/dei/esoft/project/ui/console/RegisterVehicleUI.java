@@ -14,7 +14,7 @@ public class RegisterVehicleUI implements Runnable{
     Scanner scan = new Scanner(System.in);
 
     private final RegisterVehicleController controller;
-    private final VehicleRepository vehicleRepository; // Added VehicleRepository
+    private final VehicleRepository vehicleRepository;
     private String brand;
     private String model;
     private double tareWeight;
@@ -22,11 +22,12 @@ public class RegisterVehicleUI implements Runnable{
     private double currentKm;
     private LocalDate registerDate;
     private LocalDate acquisitionDate;
-    private String checkUpFrequency;
+    private double checkUpFrequency;
+    private Vehicle vehicle;
 
     public RegisterVehicleUI() {
-        controller = new RegisterVehicleController();
-        vehicleRepository = new VehicleRepository(); // Instantiated JobRepository
+        this.controller = new RegisterVehicleController();
+        this.vehicleRepository = VehicleRepository.getInstance();
     }
 
     private RegisterVehicleController getController() {
@@ -98,41 +99,26 @@ public class RegisterVehicleUI implements Runnable{
         return Km;
     }
 
-    private String requestRegisterDate() {
-        System.out.println("Register Date: ");
-        return scan.nextLine();
-    }
-
-    private String requestAcquisitionDate() {
-        System.out.println("Acquisition Date: ");
-        return scan.nextLine();
-    }
-
-    private String requestCheckUpFrequency() {
+    private double requestCheckUpFrequency() {
         System.out.println("Check-Up Frequency: ");
-        return scan.nextLine();
+        return scan.nextDouble();
     }
 
     private void submitData() {
-        Optional<Vehicle> vehicle = getController().RegisterVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
-
-        if (vehicle.isPresent()) {
-            System.out.println("\nVehicle successfully registered!");
-            vehicleRepository.addVehicle(vehicle.get()); // Adding the registered vehicle to the repository
-        } else {
-            System.out.println("\nVehicle not registered!");
-        }
+        vehicle = controller.createVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
+        System.out.println(vehicle);
+        vehicleRepository.addVehicle(vehicle);
     }
 
     private void printVehicles() {
         List<Vehicle> vehicles = vehicleRepository.getVehicles();
         System.out.println("\n--- Vehicles List -------------------------");
         if (vehicles.isEmpty()) {
-            System.out.println("No vehicles registered yet.");
+           System.out.println("No vehicles registered yet.");
         } else {
-            for (Vehicle vehicle : vehicles) {
-                System.out.println(vehicle); // Assuming Job class has overridden toString() method
-            }
+           for (Vehicle vehicle : vehicles) {
+               System.out.println(vehicle);
+           }
         }
     }
 }

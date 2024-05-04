@@ -157,31 +157,6 @@ public class Organization {
         return !employees.contains(employee);
     }
 
-    public Optional<Vehicle> createVehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm, LocalDate registerDate, LocalDate acquisitionDate, String checkUpFrequency, Employee employee) {
-        Optional<Vehicle> optionalValue = Optional.empty();
-
-        Vehicle vehicle = new Vehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
-
-        if (addVehicle(vehicle)) {
-            optionalValue = Optional.of(vehicle);
-        }
-        return optionalValue;
-    }
-
-    private boolean addVehicle(Vehicle vehicle) {
-        boolean success = false;
-        if (validate(vehicle)) {
-            success = vehicles.add(vehicle.clone());
-        }
-        return success;
-    }
-    private boolean validate(Vehicle vehicle) {
-        return VehiclesDoNotContain(vehicle);
-    }
-    private boolean VehiclesDoNotContain(Vehicle vehicle) {
-        return !vehicles.contains(vehicle);
-    }
-
     //Clone organization
     public Organization clone() {
         Organization clone = new Organization(this.vatNumber);
@@ -197,11 +172,6 @@ public class Organization {
 
         for (Task in : this.tasks) {
             clone.tasks.add(in.clone());
-        }
-
-
-        for (Vehicle in : this.vehicles) {
-            clone.vehicles.add(in.clone());
         }
 
         return clone;

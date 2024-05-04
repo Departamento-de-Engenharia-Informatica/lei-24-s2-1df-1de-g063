@@ -15,21 +15,17 @@ import java.util.Scanner;
 
 
 public class MaintenanceRegistrationController {
-    private OrganizationRepository organizationRepository;
     private VehicleRepository vehicleRepository;
     private AuthenticationRepository authenticationRepository;
 
     public MaintenanceRegistrationController(){
-        getVehicleRepository();
+        this.vehicleRepository = VehicleRepository.getInstance();
         getAuthenticationRepository();
-        getOrganizationRepository();
     }
 
     //Allows receiving the repositories as parameters for testing purposes
-    public MaintenanceRegistrationController(OrganizationRepository organizationRepository,
-                                             VehicleRepository vehicleRepository,
+    public MaintenanceRegistrationController(VehicleRepository vehicleRepository,
                                              AuthenticationRepository authenticationRepository) {
-        this.organizationRepository = organizationRepository;
         this.vehicleRepository = vehicleRepository;
         this.authenticationRepository = authenticationRepository;
     }
@@ -44,15 +40,6 @@ public class MaintenanceRegistrationController {
         return vehicleRepository;
     }
 
-    private OrganizationRepository getOrganizationRepository() {
-        if (organizationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            organizationRepository = repositories.getOrganizationRepository();
-        }
-        return organizationRepository;
-
-    }
-
     public AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -62,12 +49,22 @@ public class MaintenanceRegistrationController {
         }
         return authenticationRepository;
     }
+    public int findVehicle(String brand,String model) {
+        List<Vehicle> vehicles = vehicleRepository.getVehicles();
+        int contador = 0;
+        int index = 0;
 
-    public Vehicle Vehicle(String brand) {
-
-
-
+        for(Vehicle vehicle : vehicles) {
+            if(vehicle.getBrand().equals(brand)){
+                if(vehicle.getModel().equals(model)){
+                    index = contador;
+                }
+            }
+            contador++;
+        }
+        return index;
     }
+
 
     private Employee getEmployeeFromSession() {
         Email email = getAuthenticationRepository().getCurrentUserSession().getUserId();
