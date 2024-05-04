@@ -18,17 +18,6 @@ public class SkillsRepository {
         skills.add(skill);
     }
 
-//    public List<Skill> add(Skill skill) {
-//        List<Skill> newSkill;
-//        if (skills.contains(skill)) {
-//            throw new IllegalArgumentException("Skill already exists.");
-//        }
-//
-//        skills.add(skill);
-//
-//        return newSkill;
-//    }
-
 
     public List<Skill> getSkills() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
