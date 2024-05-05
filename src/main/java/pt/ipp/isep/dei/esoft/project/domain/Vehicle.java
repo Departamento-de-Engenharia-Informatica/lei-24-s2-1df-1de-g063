@@ -11,6 +11,7 @@ public class Vehicle {
     private LocalDate registerDate;
     private LocalDate acquisitionDate;
     private double checkUpFrequency;
+    private double lastMaintenanceKm = 0;
     private String maintenance;
 
     public Vehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
@@ -34,6 +35,14 @@ public class Vehicle {
         this.maintenance = maintenance;
     }
 
+    public double getLastMaintenanceKm() {
+        return lastMaintenanceKm;
+    }
+
+    public void setLastMaintenanceKm(double lastMaintenanceKm) {
+        this.lastMaintenanceKm = lastMaintenanceKm;
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -42,6 +51,13 @@ public class Vehicle {
         return model;
     }
 
+    public double getCurrentKm(){
+        return currentKm;
+    }
+
+    public double getCheckUpFrequency() {
+        return checkUpFrequency;
+    }
 
     @Override
     public String toString() {

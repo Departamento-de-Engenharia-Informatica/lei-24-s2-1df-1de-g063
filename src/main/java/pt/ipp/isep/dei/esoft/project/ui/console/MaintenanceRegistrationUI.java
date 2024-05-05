@@ -1,14 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.MaintenanceRegistrationController;
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterVehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class MaintenanceRegistrationUI implements Runnable{
@@ -16,9 +13,11 @@ public class MaintenanceRegistrationUI implements Runnable{
 
     private final MaintenanceRegistrationController controller;
     private final VehicleRepository vehicleRepository;
-    private String brand;
-    private String model;
     private String maintenance;
+    private double lastMaintenanceKm;
+    private int userChoice;
+    private int choice;
+
 
     public MaintenanceRegistrationUI() {
         controller = new MaintenanceRegistrationController();
@@ -30,39 +29,74 @@ public class MaintenanceRegistrationUI implements Runnable{
     }
 
     public void run() {
+        printVehicles();
         System.out.println("\n\n--- Vehicle Maintenance Result ------------------------");
         requestData();
         submitData();
     }
 
+    private void printVehicles() {
+        choice = 0;
+        List<Vehicle> vehicles = vehicleRepository.getVehicles();
+        System.out.println("\n--- Vehicles List -------------------------");
+        if (vehicles.isEmpty()) {
+            System.out.println("No vehicles registered yet.");
+        } else {
+            for (Vehicle vehicle : vehicles) {
+                System.out.printf("%d - %s%n",choice,vehicle);
+                choice++;
+            }
+        }
+    }
+
     private void requestData() {
-        brand = requestBrand();
-        model = requestModel();
+        userChoice = requestUserChoice();
         maintenance = requestMaintenance();
+        lastMaintenanceKm = requestLastMaintenanceKm();
     }
-    private String requestBrand(){
-        System.out.println("Brand: ");
-        return scan.nextLine();
-    }
-    private String requestModel(){
-        System.out.println("Model: ");
-        return scan.nextLine();
+    private int requestUserChoice() {
+        boolean isValid = false;
+
+        while(!isValid){
+            System.out.println("Enter your choice: ");
+            userChoice = scan.nextInt();
+            if(userChoice <= choice-1){
+                isValid = true;
+            }
+        }
+        return userChoice;
     }
     private String requestMaintenance() {
+        scan.nextLine();
         System.out.println("Maintenance: ");
         return scan.nextLine();
     }
 
-    private void submitData() {
-        brand = requestBrand();
-        model = requestModel();
-        int index = controller.findVehicle(brand,model);
+    private double requestLastMaintenanceKm() {
+        double LastMaintenanceKm = 0;
+        boolean validInput = false;
 
-        Vehicle selectedVehicle = vehicleRepository.getVehicles().get(index);
+        while (!validInput) {
+            System.out.println("Last Maintenance Km: ");
+            String input = scan.nextLine();
+
+            try {
+                LastMaintenanceKm = Double.parseDouble(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        return LastMaintenanceKm;
+    }
+
+
+    private void submitData() {
+        Vehicle selectedVehicle = vehicleRepository.getVehicles().get(userChoice);
 
         selectedVehicle.setMaintenance(maintenance);
-
-        System.out.println(selectedVehicle.getMaintenance());
+        selectedVehicle.setLastMaintenanceKm(lastMaintenanceKm);
     }
 
 }

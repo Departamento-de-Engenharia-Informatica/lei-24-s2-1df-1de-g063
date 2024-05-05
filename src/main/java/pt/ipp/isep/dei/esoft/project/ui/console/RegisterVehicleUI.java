@@ -38,18 +38,18 @@ public class RegisterVehicleUI implements Runnable{
         System.out.println("\n\n--- Register Vehicle ------------------------");
         requestData();
         submitData();
-        printVehicles(); // Added printing jobs after submitting data
+        printVehicles();
     }
 
     private void requestData() {
         brand = requestBrand();
         model = requestModel();
-        tareWeight = requestTareWeight();
-        grossWeight = requestGrossWeight();
-        currentKm = requestCurrentKm();
+        tareWeight = requestNumbers("Tare Weight: ");
+        grossWeight = requestNumbers("Gross Weight: ");
+        currentKm = requestNumbers("Current Km: ");
         registerDate = requestDate("Register Date (dd/MM/yyyy): ");
         acquisitionDate = requestDate("Acquisition Date (dd/MM/yyyy): ");
-        checkUpFrequency = requestCheckUpFrequency();
+        checkUpFrequency = requestNumbers("Check Up Frequency: ");
 
     }
 
@@ -82,31 +82,27 @@ public class RegisterVehicleUI implements Runnable{
         return scan.nextLine();
     }
 
-    private double requestTareWeight() {
-        System.out.println("Tare Weight: ");
-        return scan.nextDouble();
-    }
+    private double requestNumbers(String prompt) {
+        double number = 0;
+        boolean validInput = false;
 
-    private double requestGrossWeight() {
-        System.out.println("Gross Weight: ");
-        return scan.nextDouble();
-    }
+        while (!validInput) {
+            System.out.println(prompt);
+            String input = scan.nextLine();
 
-    private double requestCurrentKm() {
-        System.out.println("Current Km: ");
-        double Km = scan.nextDouble();
-        scan.nextLine();
-        return Km;
-    }
+            try {
+                number = Double.parseDouble(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
 
-    private double requestCheckUpFrequency() {
-        System.out.println("Check-Up Frequency: ");
-        return scan.nextDouble();
+        return number;
     }
 
     private void submitData() {
         vehicle = controller.createVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
-        System.out.println(vehicle);
         vehicleRepository.addVehicle(vehicle);
     }
 
