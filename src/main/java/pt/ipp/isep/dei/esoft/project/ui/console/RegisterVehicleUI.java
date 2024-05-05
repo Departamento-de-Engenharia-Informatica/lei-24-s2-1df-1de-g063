@@ -14,7 +14,7 @@ public class RegisterVehicleUI implements Runnable{
     Scanner scan = new Scanner(System.in);
 
     private final RegisterVehicleController controller;
-    private final VehicleRepository vehicleRepository; // Added VehicleRepository
+    private final VehicleRepository vehicleRepository;
     private String brand;
     private String model;
     private double tareWeight;
@@ -22,11 +22,12 @@ public class RegisterVehicleUI implements Runnable{
     private double currentKm;
     private LocalDate registerDate;
     private LocalDate acquisitionDate;
-    private String checkUpFrequency;
+    private double checkUpFrequency;
+    private Vehicle vehicle;
 
     public RegisterVehicleUI() {
-        controller = new RegisterVehicleController();
-        vehicleRepository = new VehicleRepository(); // Instantiated JobRepository
+        this.controller = new RegisterVehicleController();
+        this.vehicleRepository = VehicleRepository.getInstance();
     }
 
     private RegisterVehicleController getController() {
@@ -37,18 +38,18 @@ public class RegisterVehicleUI implements Runnable{
         System.out.println("\n\n--- Register Vehicle ------------------------");
         requestData();
         submitData();
-        printVehicles(); // Added printing jobs after submitting data
+        printVehicles();
     }
 
     private void requestData() {
         brand = requestBrand();
         model = requestModel();
-        tareWeight = requestTareWeight();
-        grossWeight = requestGrossWeight();
-        currentKm = requestCurrentKm();
+        tareWeight = requestNumbers("Tare Weight: ");
+        grossWeight = requestNumbers("Gross Weight: ");
+        currentKm = requestNumbers("Current Km: ");
         registerDate = requestDate("Register Date (dd/MM/yyyy): ");
         acquisitionDate = requestDate("Acquisition Date (dd/MM/yyyy): ");
-        checkUpFrequency = requestCheckUpFrequency();
+        checkUpFrequency = requestNumbers("Check Up Frequency: ");
 
     }
 
@@ -81,58 +82,39 @@ public class RegisterVehicleUI implements Runnable{
         return scan.nextLine();
     }
 
-    private double requestTareWeight() {
-        System.out.println("Tare Weight: ");
-        return scan.nextDouble();
-    }
+    private double requestNumbers(String prompt) {
+        double number = 0;
+        boolean validInput = false;
 
-    private double requestGrossWeight() {
-        System.out.println("Gross Weight: ");
-        return scan.nextDouble();
-    }
+        while (!validInput) {
+            System.out.println(prompt);
+            String input = scan.nextLine();
 
-    private double requestCurrentKm() {
-        System.out.println("Current Km: ");
-        double Km = scan.nextDouble();
-        scan.nextLine();
-        return Km;
-    }
+            try {
+                number = Double.parseDouble(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
 
-    private String requestRegisterDate() {
-        System.out.println("Register Date: ");
-        return scan.nextLine();
-    }
-
-    private String requestAcquisitionDate() {
-        System.out.println("Acquisition Date: ");
-        return scan.nextLine();
-    }
-
-    private String requestCheckUpFrequency() {
-        System.out.println("Check-Up Frequency: ");
-        return scan.nextLine();
+        return number;
     }
 
     private void submitData() {
-        Optional<Vehicle> vehicle = getController().RegisterVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
-
-        if (vehicle.isPresent()) {
-            System.out.println("\nVehicle successfully registered!");
-            vehicleRepository.addVehicle(vehicle.get()); // Adding the registered vehicle to the repository
-        } else {
-            System.out.println("\nVehicle not registered!");
-        }
+        vehicle = controller.createVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
+        vehicleRepository.addVehicle(vehicle);
     }
 
     private void printVehicles() {
         List<Vehicle> vehicles = vehicleRepository.getVehicles();
         System.out.println("\n--- Vehicles List -------------------------");
         if (vehicles.isEmpty()) {
-            System.out.println("No vehicles registered yet.");
+           System.out.println("No vehicles registered yet.");
         } else {
-            for (Vehicle vehicle : vehicles) {
-                System.out.println(vehicle); // Assuming Job class has overridden toString() method
-            }
+           for (Vehicle vehicle : vehicles) {
+               System.out.println(vehicle);
+           }
         }
     }
 }

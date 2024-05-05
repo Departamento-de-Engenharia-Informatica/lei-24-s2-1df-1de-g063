@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 
+import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.CreateTaskUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterVehicleUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 
 public class AdminUI implements Runnable {
+
     public AdminUI() {
     }
 
