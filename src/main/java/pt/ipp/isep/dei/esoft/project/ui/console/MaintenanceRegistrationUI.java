@@ -55,15 +55,25 @@ public class MaintenanceRegistrationUI implements Runnable{
         lastMaintenanceKm = requestLastMaintenanceKm();
     }
     private int requestUserChoice() {
+        int userChoice = 0;
         boolean isValid = false;
 
-        while(!isValid){
+        while (!isValid) {
             System.out.println("Enter your choice: ");
-            userChoice = scan.nextInt();
-            if(userChoice <= choice-1){
-                isValid = true;
+            String input = scan.nextLine();
+
+            try {
+                userChoice = Integer.parseInt(input);
+                if (userChoice >= 0 && userChoice <= choice - 1) {
+                    isValid = true;
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 0 and " + (choice - 1) + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
             }
         }
+
         return userChoice;
     }
     private String requestMaintenance() {
