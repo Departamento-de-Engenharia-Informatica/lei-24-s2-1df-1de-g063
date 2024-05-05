@@ -8,13 +8,17 @@ public class Repositories {
     private final OrganizationRepository organizationRepository;
     private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
-    public CollaboratorRecordRepository getCollaboratorRecordRepository;
-    private JobRepository jobRepository;
+    private final CollaboratorRecordRepository collaboratorRecordRepository;
+    private final SkillsRepository skillsRepository;
+    private final JobRepository jobRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
         taskCategoryRepository = new TaskCategoryRepository();
         authenticationRepository = new AuthenticationRepository();
+        skillsRepository = new SkillsRepository();
+        jobRepository = new JobRepository();
+        collaboratorRecordRepository = new CollaboratorRecordRepository();
     }
 
     public static Repositories getInstance() {
@@ -34,22 +38,17 @@ public class Repositories {
         return taskCategoryRepository;
     }
 
-    public AuthenticationRepository getAuthenticationRepository() {
-        return authenticationRepository;
+    public SkillsRepository getSkillsRepository() {
+        return skillsRepository;
     }
-
-
-    public CollaboratorRecordRepository getCollaboratorRecordRepository() {
-
-        return null;
-    }
-
 
     public JobRepository getJobRepository() {
         return jobRepository;
     }
-
-    public void setJobRepository(JobRepository jobRepository) {
-        this.jobRepository = jobRepository;
+    public CollaboratorRecordRepository getCollaboratorRecordRepository() {
+        return collaboratorRecordRepository;
+    }
+    public AuthenticationRepository getAuthenticationRepository() {
+        return authenticationRepository;
     }
 }

@@ -41,31 +41,31 @@ public class Organization {
     /**
      * This method creates a new task.
      *
-     * @param reference            The reference of the task to be created.
-     * @param description          The description of the task to be created.
-     * @param informalDescription  The informal description of the task to be created.
-     * @param technicalDescription The technical description of the task to be created.
-     * @param duration             The duration of the task to be created.
-     * @param cost                 The cost of the task to be created.
-     * @param taskCategory         The task category of the task to be created.
-     * @param employee             The employee of the task to be created.
+     * @param name            The reference of the task to be created.
+     * @param email          The description of the task to be created.
+     * @param address  The informal description of the task to be created.
+     * @param phone The technical description of the task to be created.
+     * @param job             The duration of the task to be created.
+     * @param skills                 The cost of the task to be created.
+     * @param taxpayerNumber         The task category of the task to be created.
+     * @param citizenNumber             The employee of the task to be created.
+     * @param admissionDate
+     * @param birthDate
+     * @param IDtype
      */
-    public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                     String technicalDescription, int duration, double cost,
-                                     TaskCategory taskCategory, Employee employee) {
+    public Optional<Collaborator> createCollaborator(String email, String name, String address, int phone, String job, String skills, String birthDate, String IDtype, String taxpayerNumber, int citizenNumber, int admissionDate) {
 
         //TODO: we could also check if the employee works for the organization before proceeding
         //checkIfEmployeeWorksForOrganization(employee);
 
         // When a Task is added, it should fail if the Task already exists in the list of Tasks.
         // In order to not return null if the operation fails, we use the Optional class.
-        Optional<Task> optionalValue = Optional.empty();
+        Optional<Collaborator> optionalValue = Optional.empty();
 
-        Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                taskCategory, employee);
+        Collaborator collaborator = new Collaborator(email, name, address, phone, job, birthDate, IDtype, taxpayerNumber, citizenNumber, skills, admissionDate);
 
-        if (addTask(task)) {
-            optionalValue = Optional.of(task);
+        if (addCollaborator(collaborator)) {
+            optionalValue = Optional.of(collaborator);
         }
         return optionalValue;
     }
@@ -73,14 +73,14 @@ public class Organization {
     /**
      * This method adds a task to the list of tasks.
      *
-     * @param task The task to be added.
+     * @param collaborator The task to be added.
      * @return True if the task was added successfully.
      */
-    private boolean addTask(Task task) {
+    private boolean addCollaborator(Collaborator collaborator) {
         boolean success = false;
-        if (validate(task)) {
+        if (validate(collaborator)) {
             // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
-            success = tasks.add(task.clone());
+            success = collaborators.add(collaborator.clone());
         }
         return success;
 
@@ -89,21 +89,20 @@ public class Organization {
     /**
      * This method validates the task, checking for duplicates.
      *
-     * @param task The task to be validated.
+     * @param collaborator The task to be validated.
      * @return True if the task is valid.
      */
-    private boolean validate(Task task) {
-        return tasksDoNotContain(task);
+    private boolean validate(Collaborator collaborator) {return collaboratorsDoNotContain(collaborator);
     }
 
     /**
      * This method checks if the task is already in the list of tasks.
      *
-     * @param task The task to be checked.
+     * @param collaborator The task to be checked.
      * @return True if the task is not in the list of tasks.
      */
-    private boolean tasksDoNotContain(Task task) {
-        return !tasks.contains(task);
+    private boolean collaboratorsDoNotContain(Collaborator collaborator) {
+        return !collaborators.contains(collaborator);
     }
 
     public Optional<Job> registerJob(String jobName, Employee employee) {
