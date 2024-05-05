@@ -29,4 +29,6 @@ public class CollaboratorRecordRepository {
         return Optional.empty();
     }
 
+    public void RegisterCollaborator(String name, String email, String address, int phone, String job, String skills, String birthDate, String iDtype, int taxpayerNumber, int citizenNumber, String admissionDate) {
+    }
 }

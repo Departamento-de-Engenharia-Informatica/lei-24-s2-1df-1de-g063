@@ -16,22 +16,6 @@ public class Collaborator {
     private String IDtype;
     private int taxpayerNumber;
     private int citizenNumber;
-
-    public Collaborator(String email, String name, String address, int phone, String job, String birthDate, String IDtype, String taxpayerNumber, int citizenNumber, int skills, int admissionDate) {
-        this.email = email;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.job = job;
-        this.skills = (List<Skill>) skills;
-        this.birthDate = birthDate;
-        this.IDtype = IDtype;
-        this.taxpayerNumber = taxpayerNumber;
-        this.citizenNumber = citizenNumber;
-
-
-    }
-
     public Collaborator(String email, String name, String address, String phone, Job job, String birthDate, String IDtype, int taxpayerNumber, int citizenNumber, List<Skill> skills) {
         this.email = email;
         this.name = name;
@@ -44,6 +28,38 @@ public class Collaborator {
         this.citizenNumber = citizenNumber;
         this.skills = skills;
     }
+
+    public Collaborator(String email, String name, String address, int phone, String job, String birthDate, String iDtype, String taxpayerNumber, int citizenNumber, String skills, int admissionDate) {
+    }
+
+
+//    public Collaborator(String email, String name, String address, int phone, String job, String birthDate, String IDtype, String taxpayerNumber, int citizenNumber, int skills, int admissionDate) {
+//        this.email = email;
+//        this.name = name;
+//        this.address = address;
+//        this.phone = phone;
+//        this.job = job;
+//        this.skills = (List<Skill>) skills;
+//        this.birthDate = birthDate;
+//        this.IDtype = IDtype;
+//        this.taxpayerNumber = taxpayerNumber;
+//        this.citizenNumber = citizenNumber;
+//
+//
+//    }
+//
+//    public Collaborator(String email, String name, String address, String phone, Job job, String birthDate, String IDtype, int taxpayerNumber, int citizenNumber, List<Skill> skills) {
+//        this.email = email;
+//        this.name = name;
+//        this.address = address;
+//        this.phone = phone;
+//        this.job = job;
+//        this.birthDate = birthDate;
+//        this.IDtype = IDtype;
+//        this.taxpayerNumber = taxpayerNumber;
+//        this.citizenNumber = citizenNumber;
+//        this.skills = skills;
+//    }
 
     public String getName() {
         return name;
@@ -150,7 +166,7 @@ public class Collaborator {
         if (this.skills.contains(skill)) {
             throw new IllegalArgumentException("Collaborator already contains the skill");
         }
-        if (skill.getSkills().contains(null)) {
+        if (skill.getSkill().contains(null)) {
             throw new IllegalArgumentException("No parameter of the skill cannot be null");
         }
         this.skills.add(skill);
