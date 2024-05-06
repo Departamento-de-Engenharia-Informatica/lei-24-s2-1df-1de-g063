@@ -7,7 +7,6 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.Optional;
 import java.util.List;
 
 public class RegisterVehicleUI implements Runnable{
@@ -47,15 +46,15 @@ public class RegisterVehicleUI implements Runnable{
         tareWeight = requestNumbers("Tare Weight: ");
         grossWeight = requestNumbers("Gross Weight: ");
         currentKm = requestNumbers("Current Km: ");
-        registerDate = requestDate("Register Date (dd/MM/yyyy): ");
-        acquisitionDate = requestDate("Acquisition Date (dd/MM/yyyy): ");
+        registerDate = requestDate("Register Date (yyyy/MM/dd): ");
+        acquisitionDate = requestDate("Acquisition Date (yyyy/MM/dd): ");
         checkUpFrequency = requestNumbers("Check Up Frequency: ");
 
     }
 
     private LocalDate requestDate(String prompt) {
         LocalDate date = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         boolean isValid = false;
 
         while (!isValid) {
@@ -65,7 +64,7 @@ public class RegisterVehicleUI implements Runnable{
                 date = LocalDate.parse(input, formatter);
                 isValid = true;
             } catch (Exception e) {
-                System.out.println("Invalid date format. Please enter the date in the format dd/MM/yyyy:");
+                System.out.println("Invalid date format. Please enter the date in the format yyyy/MM/dd:");
             }
         }
 

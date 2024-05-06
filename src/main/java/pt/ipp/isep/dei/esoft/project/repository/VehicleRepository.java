@@ -12,6 +12,7 @@ public class VehicleRepository {
     public VehicleRepository() {
         vehicles = new ArrayList<>();
     }
+
     public static VehicleRepository getInstance() {
         if (instance == null) {
             instance = new VehicleRepository();

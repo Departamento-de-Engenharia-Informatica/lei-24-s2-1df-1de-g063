@@ -16,6 +16,7 @@ public class JobUI implements Runnable {
 
     public JobUI() {
         this.controller = new JobController();
+        this.jobRepository = JobRepository.getInstance();
     }
 
     private JobController getController() {
@@ -39,13 +40,38 @@ public class JobUI implements Runnable {
         }
     }
 
+    private boolean validateJob(Job job) {
+        List<Job> jobs = jobRepository.getJobs();
+        boolean valid = true;
+        System.out.println(job.toString());
+        if (job.toString().matches("%€£ºª§&+-<>/|#*$")){
+            System.out.println("Job has invalid characters");
+            valid=false;
+        } else if (job.toString().equalsIgnoreCase("")) {
+            System.out.println("Insert a job");
+            valid=false;
+        }
+        for (Job j : jobs) {
+            if (j.toString().equals(job.toString())){
+                System.out.println("Job already exists");
+                valid=false;
+            }
+        }
+        return valid;
+    }
+
     private void submitData() {
 
         job=controller.createJob(jobName);
-        controller.registerJob(job);
+        if (!validateJob(job)) {
+            System.out.println("Job has not been registered");
+        } else{
+            System.out.println("Job registered successfully");
+            jobRepository.addJob(job);
+        }
 
     }
-
+    
     private void requestData() {
 
         jobName = requestJobName();

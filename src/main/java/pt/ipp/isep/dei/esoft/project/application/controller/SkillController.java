@@ -2,39 +2,33 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 
 import java.util.List;
 
 public class SkillController {
 
     private SkillsRepository skillsRepository;
-
-    public SkillController(SkillsRepository skillsRepository) {
-        this.skillsRepository = skillsRepository;
-    }
-
-    private boolean validateSkill(Skill skill) {
-        List<Skill> skills = skillsRepository.getSkills();
-        boolean valid = true;
-        System.out.println(skill.toString());
-        if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
-            System.out.println("Skill has invalid characters");
-            valid=false;
-        } else if (skill.toString().equalsIgnoreCase("")) {
-            System.out.println("Insert a skill");
-            valid=false;
-        }
-        for (Skill s : skills) {
-            if (s.toString().equals(skill.toString())){
-                System.out.println("Skill already exists");
-                valid=false;
-            }
-        }
-        return valid;
-    }
+    private AuthenticationRepository authenticationRepository;
 
     public SkillController() {
         getSkillRepository();
+        getAuthenticationRepository();
+    }
+
+    public SkillController(AuthenticationRepository authenticationRepository) {
+        this.skillsRepository = SkillsRepository.getInstance();
+        this.authenticationRepository = new AuthenticationRepository();
+    }
+
+    public AuthenticationRepository getAuthenticationRepository() {
+        if (authenticationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+
+            //Get the AuthenticationRepository
+            authenticationRepository = repositories.getAuthenticationRepository();
+        }
+        return authenticationRepository;
     }
 
     private SkillsRepository getSkillRepository() {
@@ -45,17 +39,6 @@ public class SkillController {
             skillsRepository = repositories.getSkillsRepository();
         }
         return skillsRepository;
-    }
-
-    public void registerSkill(Skill skill) {
-
-        if (!validateSkill(skill)) {
-            System.out.println("Skill has not been registered");
-        } else{
-            System.out.println("Skill registered successfully");
-            skillsRepository.addSkill(skill);
-        }
-
     }
 
     public Skill createSkill (String skillName) {

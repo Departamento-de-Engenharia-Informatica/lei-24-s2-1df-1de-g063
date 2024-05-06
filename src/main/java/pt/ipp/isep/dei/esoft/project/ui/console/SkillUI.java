@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class SkillUI implements Runnable {
@@ -17,6 +16,27 @@ public class SkillUI implements Runnable {
 
     public SkillUI() {
         this.controller = new SkillController();
+        this.skillsRepository = SkillsRepository.getInstance();
+    }
+
+    private boolean validateSkill(Skill skill) {
+        List<Skill> skills = skillsRepository.getSkills();
+        boolean valid = true;
+        System.out.println(skill.toString());
+        if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
+            System.out.println("Skill has invalid characters");
+            valid=false;
+        } else if (skill.toString().equalsIgnoreCase("")) {
+            System.out.println("Insert a skill");
+            valid=false;
+        }
+        for (Skill s : skills) {
+            if (s.toString().equals(skill.toString())){
+                System.out.println("Skill already exists");
+                valid=false;
+            }
+        }
+        return valid;
     }
 
     private SkillController getController() {
@@ -43,7 +63,13 @@ public class SkillUI implements Runnable {
     private void submitData() {
 
         skill=controller.createSkill(skillName);
-        controller.registerSkill(skill);
+
+        if (!validateSkill(skill)) {
+            System.out.println("Skill has not been registered");
+        } else{
+            System.out.println("Skill registered successfully");
+            skillsRepository.addSkill(skill);
+        }
 
     }
 

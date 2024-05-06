@@ -4,7 +4,6 @@ public class Job {
 
     private final String job_name;
 
-
     public Job(String job_name) {
         this.job_name = job_name;
     }

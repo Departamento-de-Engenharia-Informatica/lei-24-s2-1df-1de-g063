@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRepository {
-
     private List<Job> jobs;
+    private static JobRepository instance;
 
+    public static JobRepository getInstance() {
+        if (instance == null) {
+            instance = new JobRepository();
+        }
+        return instance;
+    }
 
     public JobRepository() {
         jobs = new ArrayList<>();

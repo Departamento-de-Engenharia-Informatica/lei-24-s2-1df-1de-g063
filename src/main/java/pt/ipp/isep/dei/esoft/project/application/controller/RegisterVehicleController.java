@@ -1,13 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
-import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
-import pt.isep.lei.esoft.auth.domain.model.Email;
-
 
 import java.time.LocalDate;
 
@@ -16,13 +12,13 @@ public class RegisterVehicleController {
     private AuthenticationRepository authenticationRepository;
 
     public RegisterVehicleController(){
-        this.vehicleRepository = VehicleRepository.getInstance();
+        getVehicleRepository();
         getAuthenticationRepository();
     }
 
-    public RegisterVehicleController(VehicleRepository vehicleRepository,
-                                     AuthenticationRepository authenticationRepository) {
+    public RegisterVehicleController(AuthenticationRepository authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
+        this.vehicleRepository = VehicleRepository.getInstance();
     }
 
     public VehicleRepository getVehicleRepository() {

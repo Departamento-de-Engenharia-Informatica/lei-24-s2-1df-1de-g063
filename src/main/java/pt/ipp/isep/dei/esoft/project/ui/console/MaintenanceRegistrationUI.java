@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.MaintenanceRegistrat
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,6 +53,7 @@ public class MaintenanceRegistrationUI implements Runnable{
         maintenance = requestMaintenance();
         lastMaintenanceKm = requestLastMaintenanceKm();
     }
+
     private int requestUserChoice() {
         int userChoice = 0;
         boolean isValid = false;
@@ -76,6 +76,7 @@ public class MaintenanceRegistrationUI implements Runnable{
 
         return userChoice;
     }
+
     private String requestMaintenance() {
         scan.nextLine();
         System.out.println("Maintenance: ");
