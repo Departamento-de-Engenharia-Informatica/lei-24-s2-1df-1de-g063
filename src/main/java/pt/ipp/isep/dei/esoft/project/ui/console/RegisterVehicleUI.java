@@ -58,7 +58,7 @@ public class RegisterVehicleUI implements Runnable{
         boolean isValid = false;
 
         while (!isValid) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             String input = scan.nextLine();
             try {
                 date = LocalDate.parse(input, formatter);
@@ -72,12 +72,12 @@ public class RegisterVehicleUI implements Runnable{
     }
 
     private String requestBrand() {
-        System.out.println("Brand: ");
+        System.out.print("Brand: ");
         return scan.nextLine();
     }
 
     private String requestModel() {
-        System.out.println("Model: ");
+        System.out.print("Model: ");
         return scan.nextLine();
     }
 
@@ -86,7 +86,7 @@ public class RegisterVehicleUI implements Runnable{
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             String input = scan.nextLine();
 
             try {
@@ -106,13 +106,15 @@ public class RegisterVehicleUI implements Runnable{
     }
 
     private void printVehicles() {
+        int contador = 0;
         List<Vehicle> vehicles = vehicleRepository.getVehicles();
         System.out.println("\n--- Vehicles List -------------------------");
         if (vehicles.isEmpty()) {
            System.out.println("No vehicles registered yet.");
         } else {
            for (Vehicle vehicle : vehicles) {
-               System.out.println(vehicle);
+               System.out.printf("%d - %s%n", contador, vehicle);
+               contador++;
            }
         }
     }

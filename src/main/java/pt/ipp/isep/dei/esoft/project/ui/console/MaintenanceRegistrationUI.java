@@ -17,7 +17,6 @@ public class MaintenanceRegistrationUI implements Runnable{
     private int userChoice;
     private int choice;
 
-
     public MaintenanceRegistrationUI() {
         controller = new MaintenanceRegistrationController();
         vehicleRepository = VehicleRepository.getInstance();
@@ -59,7 +58,7 @@ public class MaintenanceRegistrationUI implements Runnable{
         boolean isValid = false;
 
         while (!isValid) {
-            System.out.println("Enter your choice: ");
+            System.out.print("Enter your choice: ");
             String input = scan.nextLine();
 
             try {
@@ -79,7 +78,7 @@ public class MaintenanceRegistrationUI implements Runnable{
 
     private String requestMaintenance() {
         scan.nextLine();
-        System.out.println("Maintenance: ");
+        System.out.print("Maintenance: ");
         return scan.nextLine();
     }
 
@@ -88,7 +87,7 @@ public class MaintenanceRegistrationUI implements Runnable{
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println("Last Maintenance Km: ");
+            System.out.print("Last Maintenance Km: ");
             String input = scan.nextLine();
 
             try {

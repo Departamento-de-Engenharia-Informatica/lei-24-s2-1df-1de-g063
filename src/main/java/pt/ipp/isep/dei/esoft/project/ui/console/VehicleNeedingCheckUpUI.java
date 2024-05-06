@@ -28,7 +28,6 @@ public class VehicleNeedingCheckUpUI implements Runnable {
     }
 
     public void run() {
-        System.out.println("\n\n--- Vehicle Needing Check-Up List ------------------------");
         printVehicles();
     }
 
