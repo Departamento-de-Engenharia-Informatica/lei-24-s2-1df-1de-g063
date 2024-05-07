@@ -12,11 +12,6 @@ public class VehicleNeedingCheckUpUI implements Runnable {
 
     private final VehicleNeedingCheckUpController controller;
     private final VehicleRepository vehicleRepository;
-    private double currentKm;
-    private double checkUpFrequency;
-    private double lastMaintenanceKm;
-    private Vehicle vehicle;
-
 
     public VehicleNeedingCheckUpUI() {
         this.controller = new VehicleNeedingCheckUpController();

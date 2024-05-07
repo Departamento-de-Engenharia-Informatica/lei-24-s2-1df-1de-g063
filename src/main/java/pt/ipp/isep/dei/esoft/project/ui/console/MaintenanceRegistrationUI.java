@@ -78,7 +78,7 @@ public class MaintenanceRegistrationUI implements Runnable{
 
     private String requestMaintenance() {
         scan.nextLine();
-        System.out.print("Maintenance: ");
+        System.out.print("Maintenance Result: ");
         return scan.nextLine();
     }
 

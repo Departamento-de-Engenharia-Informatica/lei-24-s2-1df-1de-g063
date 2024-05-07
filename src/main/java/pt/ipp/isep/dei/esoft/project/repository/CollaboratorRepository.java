@@ -28,4 +28,14 @@ public class CollaboratorRepository {
         return collaborators;
     }
 
+    public void saveCollaborator(Collaborator collaborator) {
+        boolean updated = false;
+        for (int i = 0; i < collaborators.size() && !updated; i++) {
+            if (collaborators.get(i).equals(collaborator)) {
+                collaborators.set(i, collaborator);
+                updated = true;
+            }
+        }
+    }
+
 }

@@ -13,7 +13,6 @@ public class MaintenanceRegistrationController {
         getAuthenticationRepository();
     }
 
-    //Allows receiving the repositories as parameters for testing purposes
     public MaintenanceRegistrationController(VehicleRepository vehicleRepository,
                                              AuthenticationRepository authenticationRepository) {
         this.vehicleRepository = vehicleRepository;

@@ -1,21 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 public class Collaborator {
-    private static Collaborator instance;
-    private String name;
-    private String adress;
+    private final String name;
+    private final String adress;
     private final String email;
-    private String phoneNumber;
-    private String idType;
-    private String idNumber;
-    private LocalDate birthDate;
-    private LocalDate admissionDate;
+    private final String phoneNumber;
+    private final String idType;
+    private final String idNumber;
+    private final LocalDate birthDate;
+    private final LocalDate admissionDate;
     private final String job;
     private List<Skill> skill;
 
