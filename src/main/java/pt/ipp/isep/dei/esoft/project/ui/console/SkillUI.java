@@ -11,8 +11,7 @@ public class SkillUI implements Runnable {
 
     private final SkillController controller;
     private String skillName;
-    private SkillsRepository skillsRepository;
-    private Skill skill;
+    private final SkillsRepository skillsRepository;
 
     public SkillUI() {
         this.controller = new SkillController();
@@ -22,13 +21,12 @@ public class SkillUI implements Runnable {
     private boolean validateSkill(Skill skill) {
         List<Skill> skills = skillsRepository.getSkills();
         boolean valid = true;
-        System.out.println(skill.toString());
-        if (skill.toString().matches("%€£ºª§&+-<>/|#*$")){
+
+        if (skill == null || skill.toString().trim().isEmpty()) {
+            valid = false;
+        } else if (!skill.toString().matches("[a-zA-Z0-9\\s]+")) {
             System.out.println("Skill has invalid characters");
-            valid=false;
-        } else if (skill.toString().equalsIgnoreCase("")) {
-            System.out.println("Insert a skill");
-            valid=false;
+            valid = false;
         }
         for (Skill s : skills) {
             if (s.toString().equals(skill.toString())){
@@ -36,6 +34,8 @@ public class SkillUI implements Runnable {
                 valid=false;
             }
         }
+
+
         return valid;
     }
 
@@ -62,7 +62,7 @@ public class SkillUI implements Runnable {
 
     private void submitData() {
 
-        skill=controller.createSkill(skillName);
+        Skill skill = controller.createSkill(skillName);
 
         if (!validateSkill(skill)) {
             System.out.println("Skill has not been registered");

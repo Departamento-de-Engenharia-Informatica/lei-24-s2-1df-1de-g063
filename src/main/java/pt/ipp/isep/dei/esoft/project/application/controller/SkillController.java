@@ -31,7 +31,7 @@ public class SkillController {
         return authenticationRepository;
     }
 
-    private SkillsRepository getSkillRepository() {
+    public SkillsRepository getSkillRepository() {
         if (skillsRepository == null) {
             Repositories repositories = Repositories.getInstance();
 

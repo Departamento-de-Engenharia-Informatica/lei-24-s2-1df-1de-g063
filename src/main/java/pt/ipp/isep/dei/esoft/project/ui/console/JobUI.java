@@ -43,13 +43,12 @@ public class JobUI implements Runnable {
     private boolean validateJob(Job job) {
         List<Job> jobs = jobRepository.getJobs();
         boolean valid = true;
-        System.out.println(job.toString());
-        if (job.toString().matches("%€£ºª§&+-<>/|#*$")){
+
+        if (job == null || job.toString().trim().isEmpty()) {
+            valid = false;
+        } else if (!job.toString().matches("[a-zA-Z0-9\\s]+")) {
             System.out.println("Job has invalid characters");
-            valid=false;
-        } else if (job.toString().equalsIgnoreCase("")) {
-            System.out.println("Insert a job");
-            valid=false;
+            valid = false;
         }
         for (Job j : jobs) {
             if (j.toString().equals(job.toString())){
@@ -57,6 +56,7 @@ public class JobUI implements Runnable {
                 valid=false;
             }
         }
+
         return valid;
     }
 

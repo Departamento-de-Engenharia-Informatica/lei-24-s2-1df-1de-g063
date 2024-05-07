@@ -29,10 +29,6 @@ public class RegisterVehicleUI implements Runnable{
         this.vehicleRepository = VehicleRepository.getInstance();
     }
 
-    private RegisterVehicleController getController() {
-        return controller;
-    }
-
     public void run() {
         System.out.println("\n\n--- Register Vehicle ------------------------");
         requestData();

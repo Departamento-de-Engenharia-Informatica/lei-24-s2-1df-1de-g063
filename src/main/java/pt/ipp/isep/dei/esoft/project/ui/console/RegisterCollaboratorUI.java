@@ -152,14 +152,21 @@ public class RegisterCollaboratorUI implements Runnable{
         System.out.println("\n--- Jobs List -------------------------");
         if (jobs.isEmpty()) {
             System.out.println("No jobs registered yet.");
+            return "";
         } else {
-            for (Job job : jobs) {
-                System.out.println(job);
+            for (int i = 0; i < jobs.size(); i++) {
+                System.out.printf("%d - %s%n", i + 1, jobs.get(i));
+            }
+            System.out.print("Choose a job (enter the number): ");
+            int choice = scan.nextInt();
+            scan.nextLine();
+            if (choice > 0 && choice <= jobs.size()) {
+                return jobs.get(choice - 1).toString();
+            } else {
+                System.out.println("Invalid choice. Please choose a valid job.");
+                return requestJob();
             }
         }
-        System.out.print("Collaborator job: ");
-        job = scan.nextLine();
-        return job;
     }
 
 
@@ -169,10 +176,12 @@ public class RegisterCollaboratorUI implements Runnable{
     }
 
     private void printCollaborator() {
+        int contador = 1;
         List<Collaborator> collaborators = collaboratorRepository.getCollaborators();
         System.out.println("\n--- Collaborators List -------------------------");
         for (Collaborator collaborator : collaborators) {
-            System.out.println(collaborator);
+            System.out.printf("%d - %s%n",contador,collaborator);
+            contador++;
         }
     }
 

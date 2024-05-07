@@ -54,7 +54,7 @@ public class MaintenanceRegistrationUI implements Runnable{
     }
 
     private int requestUserChoice() {
-        int userChoice = 0;
+        userChoice = 0;
         boolean isValid = false;
 
         while (!isValid) {
