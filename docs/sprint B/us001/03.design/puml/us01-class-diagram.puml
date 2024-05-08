@@ -15,15 +15,7 @@ class Skills {
     + Skills(description)
 }
 
-class Manager {
-    - String name
-    - String role
-    - String phone
-    - String email
-
-    + anyEmployeeHasEmail(email)
-    + Manager(name, role, phone, email, postalAddress, manager)
-    + createSkill()
+class HRM {
 }
 
 class SkillsRepository {
@@ -37,14 +29,13 @@ class EmployeeRepository {
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getJobsRepository()
-    + getEmployeeRepository()
+    + getSkillsRepository()
 }
 
-class RegisterSkillsController {
-    + RegisterSkillsController(employeeRepository, SkillsRepository)
-    + getJobList()
-    + createJob(skills needed)
+class SkillsController {
+    + SkillsController( SkillsRepository)
+    + getSkills()
+    + createSkill (String skillName)
 }
 
 note bottom of SkillsRepository
@@ -52,27 +43,27 @@ note bottom of SkillsRepository
     the skills
 end note
 
-class RegisterSkillsUI {
+class SkillsUI {
 }
 
 Repositories -> Repositories : instance
 
-RegisterSkillsUI .> RegisterSkillsController
+SkillsUI .> SkillsController
 
-RegisterSkillsController .> Repositories : repositories
+SkillsController .> Repositories : repositories
 
 Repositories -> "1" SkillsRepository
 
-RegisterSkillsController ..> Skills : jobs
-RegisterSkillsController ..> EmployeeRepository : employeeRepository
+SkillsController ..> Skills : jobs
+SkillsController ..> EmployeeRepository : employeeRepository
 
 
 Repositories --> "1" EmployeeRepository
 
-EmployeeRepository --> "*" Manager
+EmployeeRepository --> "*" HRM
 
-RegisterSkillsController ..> "1" Manager : manager
+SkillsController ..> "1" HRM : manager
 SkillsRepository "1" --> "*" Skills : jobs
-Manager "1" --> "1..*" Skills : register
+HRM "1" --> "1..*" Skills : register
 
 @enduml
