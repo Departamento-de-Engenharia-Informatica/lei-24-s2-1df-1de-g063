@@ -3,14 +3,14 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.time.LocalDate;
 
 public class Vehicle {
-    private String brand;
-    private String model;
-    private double tareWeight;
-    private double grossWeight;
+    private final String brand;
+    private final String model;
+    private final double tareWeight;
+    private final double grossWeight;
     private double currentKm;
-    private LocalDate registerDate;
-    private LocalDate acquisitionDate;
-    private double checkUpFrequency;
+    private final LocalDate registerDate;
+    private final LocalDate acquisitionDate;
+    private final double checkUpFrequency;
     private double lastMaintenanceKm = 0;
     private String maintenance;
 
@@ -51,6 +51,22 @@ public class Vehicle {
         return model;
     }
 
+    public double getTareWeight() {
+        return tareWeight;
+    }
+
+    public double getGrossWeight() {
+        return grossWeight;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    public LocalDate getAcquisitionDate() {
+        return acquisitionDate;
+    }
+
     public double getCurrentKm(){
         return currentKm;
     }
@@ -72,6 +88,4 @@ public class Vehicle {
                 ", checkUpFrequency='" + checkUpFrequency + '\'' +
                 '}';
     }
-
-
 }

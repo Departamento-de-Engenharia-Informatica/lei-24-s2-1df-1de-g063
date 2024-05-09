@@ -7,72 +7,61 @@ autonumber
 
 'hide footbox
 actor "Organization Employee" as ADM
-participant ":RegisterResultUI" as UI
-participant ":RegisterResultController" as CTRL
+participant ":MaintenanceRegistrationUI" as UI
+participant ":MaintenanceRegistrationController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "Vehicle:\n vehicle" as Vehicle
 activate ADM
 
-        ADM -> UI : Request to register vehicles check-up result
+    ADM -> UI : Request to register vehicles check-up result
 
-        activate UI
-
-            UI -> CTRL** : create
-
-            UI -> CTRL : getVehicleList()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getVehicleRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: VehicleRepository
-                deactivate PLAT
-                loop
-                    CTRL -> VehicleRepository : getVehicle()
-                    activate VehicleRepository
-
-                        VehicleRepository --> CTRL : Vehicle
-                    deactivate VehicleRepository
-                end
-
-                CTRL --> UI : VehicleList
-            deactivate CTRL
-
-            UI --> ADM : Display vehicle selection interface
-        deactivate UI
-
-    ADM -> UI : Select vehicle
     activate UI
 
-        UI -> CTRL : getVehicleDetails()
+        UI -> CTRL** : create
+
+        UI -> CTRL : getVehicleList()
         activate CTRL
 
-            CTRL -> Vehicle : getVehicleDetails()
-            activate Vehicle
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                Vehicle --> CTRL : VehicleDetails
-            deactivate Vehicle
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
 
-        CTRL --> UI : Vehicle
+            CTRL -> PLAT : getVehicleRepository()
+            activate PLAT
+
+                PLAT --> CTRL: VehicleRepository
+            deactivate PLAT
+
+            CTRL -> VehicleRepository : getVehicles()
+            activate VehicleRepository
+
+                VehicleRepository --> CTRL : Vehicles
+            deactivate VehicleRepository
+
+
+            CTRL --> UI : VehicleList
         deactivate CTRL
-        UI --> ADM : Display Vehicle details
+
+        UI --> ADM : Display vehicle selection interface
+    deactivate UI
+
+    ADM -> UI : Selects a vehicle
+    activate UI
+
+        UI --> ADM :Confirms the selection
     deactivate UI
 
     ADM -> UI : Registers results
     activate UI
 
-        UI -> Vehicle : setResult()
+        UI -> Vehicle : setMaintenance()
         activate Vehicle
 
-        Vehicle --> UI : Result
+        Vehicle --> UI : Maintenance
         deactivate Vehicle
         UI --> ADM : Confirmation of results registration
     deactivate UI

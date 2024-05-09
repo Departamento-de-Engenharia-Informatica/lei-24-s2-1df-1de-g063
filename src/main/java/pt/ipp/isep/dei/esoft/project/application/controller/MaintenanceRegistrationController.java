@@ -23,7 +23,6 @@ public class MaintenanceRegistrationController {
         if (vehicleRepository == null) {
             Repositories repositories = Repositories.getInstance();
 
-            //Get the TaskCategoryRepository
             vehicleRepository = repositories.getVehicleRepository();
         }
         return vehicleRepository;

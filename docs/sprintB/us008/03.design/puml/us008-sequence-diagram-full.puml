@@ -7,8 +7,8 @@ autonumber
 
 'hide footbox
 actor "Vehicle Fleet Manager" as VFM
-participant ":CheckupListUI" as UI
-participant ":CheckupListController" as CTRL
+participant ":VehiclesNeedingCheckUpUI" as UI
+participant ":VehiclesNeedingController" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
@@ -22,7 +22,7 @@ VFM -> UI : Request to list vehicles needing check-up
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getCheckUpList()
+        UI -> CTRL : getVehiclesNeedingCheckUp()
         activate CTRL
 
             CTRL -> Rep : getInstance()
@@ -37,51 +37,21 @@ VFM -> UI : Request to list vehicles needing check-up
             Repositories --> CTRL : VehicleRepository
             deactivate Repositories
 
-            loop
-                CTRL -> VehicleRepository : getVehicle()
-                activate VehicleRepository
 
-                    VehicleRepository -> Vehicle : getVehicleKm()
-                    activate Vehicle
+            CTRL -> VehicleRepository : getVehicles()
+            activate VehicleRepository
 
-                    Vehicle --> VehicleRepository : VehicleKm
-                    deactivate Vehicle
+                VehicleRepository --> CTRL : Vehicles
+            deactivate VehicleRepository
 
-                    VehicleRepository --> CTRL : Vehicle
-                deactivate VehicleRepository
-            end
 
-            CTRL --> UI : CheckUpList
+            CTRL --> UI : VehiclesNeedingCheckUp
         deactivate CTRL
 
         UI --> VFM : Shows list of vehicles needing check-up
 
-        deactivate UI
-        VFM -> UI : Verifies the details of a vehicle
-        activate UI
-
-        UI -> CTRL : getVehicleDetails()
-        activate CTRL
-
-            CTRL -> Rep : getInstance()
-            activate Rep
-
-                Rep --> CTRL : repositories
-            deactivate Rep
-            CTRL -> Repositories : getVehicleRepository()
-            activate Repositories
-
-                Repositories --> CTRL : VehicleRepository
-            deactivate Repositories
-
-            CTRL -> Vehicle : getVehicleDetails()
-            activate Vehicle
-
-                Vehicle --> CTRL : Vehicle
-            deactivate Vehicle
-            CTRL --> UI : Vehicle
-        deactivate CTRL
-        UI --> VFM : Shows vehicle details
     deactivate UI
+
+deactivate VFM
 
 @enduml

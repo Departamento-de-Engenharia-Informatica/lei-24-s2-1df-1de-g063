@@ -27,9 +27,8 @@ vehicles that require check-up.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should allow VFM to generate a list of vehicles requiring a check-up.
-* **AC2:** After generating the list, the system should present it in a dedicated dashboard or interface accessible to the VFM, showcasing the vehicles requiring a check-up.
-* **AC3:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
-* **AC4:** The system should automatically include vehicles in the list if they are within 5% of reaching the mileage limit or if exceeds it.
+* **AC2:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
+* **AC3:** The system should automatically include vehicles in the list if they are within 5% of reaching the mileage limit or if exceeds it.
 
 ### 1.4. Found out Dependencies
 

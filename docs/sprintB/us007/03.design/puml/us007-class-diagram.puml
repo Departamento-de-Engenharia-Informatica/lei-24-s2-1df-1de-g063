@@ -44,9 +44,6 @@ VehicleRepository "1" --> "1*" Vehicle
 Repositories "1" --> "1" EmployeeRepository
 EmployeeRepository "1" --> "1*"Manager
 Vehicle "1" <- "1" Manager : registers
-'RegisterResultController ..> VehicleRepository : vehicleRepository'
-'RegisterResultController ..> EmployeeRepository : employeeRepository'
-'RegisterResultController ..> Manager'
-'RegisterResultController ..> Vehicle'
+
 
 @enduml

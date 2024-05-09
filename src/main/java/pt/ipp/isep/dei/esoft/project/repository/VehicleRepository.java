@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class VehicleRepository {
     private static VehicleRepository instance;
-    private List<Vehicle> vehicles;
+    private final List<Vehicle> vehicles;
 
     public VehicleRepository() {
         vehicles = new ArrayList<>();

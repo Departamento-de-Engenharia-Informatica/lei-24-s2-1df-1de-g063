@@ -19,7 +19,7 @@ public class MaintenanceRegistrationUI implements Runnable{
 
     public MaintenanceRegistrationUI() {
         controller = new MaintenanceRegistrationController();
-        vehicleRepository = VehicleRepository.getInstance();
+        vehicleRepository = controller.getVehicleRepository();
     }
 
     private MaintenanceRegistrationController getController() {
@@ -27,24 +27,31 @@ public class MaintenanceRegistrationUI implements Runnable{
     }
 
     public void run() {
-        printVehicles();
-        System.out.println("\n\n--- Vehicle Maintenance Result ------------------------");
-        requestData();
-        submitData();
+        boolean verification = printVehicles();
+        if(verification){
+            System.out.println("\n\n--- Vehicle Maintenance Result ------------------------");
+            requestData();
+            submitData();
+        }
     }
 
-    private void printVehicles() {
+
+    private boolean printVehicles() {
+        boolean verification = true;
         choice = 0;
         List<Vehicle> vehicles = vehicleRepository.getVehicles();
         System.out.println("\n--- Vehicles List -------------------------");
         if (vehicles.isEmpty()) {
             System.out.println("No vehicles registered yet.");
+            verification = false;
+            return verification;
         } else {
             for (Vehicle vehicle : vehicles) {
                 System.out.printf("%d - %s%n",choice,vehicle);
                 choice++;
             }
         }
+        return verification;
     }
 
     private void requestData() {
@@ -77,7 +84,6 @@ public class MaintenanceRegistrationUI implements Runnable{
     }
 
     private String requestMaintenance() {
-        scan.nextLine();
         System.out.print("Maintenance Result: ");
         return scan.nextLine();
     }
@@ -101,12 +107,13 @@ public class MaintenanceRegistrationUI implements Runnable{
         return LastMaintenanceKm;
     }
 
-
     private void submitData() {
         Vehicle selectedVehicle = vehicleRepository.getVehicles().get(userChoice);
-
+        System.out.println(selectedVehicle);
         selectedVehicle.setMaintenance(maintenance);
         selectedVehicle.setLastMaintenanceKm(lastMaintenanceKm);
     }
+
+
 
 }

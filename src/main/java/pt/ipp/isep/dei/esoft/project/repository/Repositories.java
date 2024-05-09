@@ -25,9 +25,9 @@ public class Repositories {
 
     public static Repositories getInstance() {
         if (instance == null) {
-            synchronized (Repositories.class) {
-                instance = new Repositories();
-            }
+
+            instance = new Repositories();
+
         }
         return instance;
     }
@@ -41,21 +41,22 @@ public class Repositories {
     }
 
     public CollaboratorRepository getCollaboratorRepository(){
-        return collaboratorRepository;
+        return CollaboratorRepository.getInstance();
     }
 
     public SkillsRepository getSkillsRepository() {
-        return skillsRepository;
+        return SkillsRepository.getInstance();
     }
 
     public JobRepository getJobRepository() {
-        return jobRepository;
+        return JobRepository.getInstance();
     }
 
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
+
     public VehicleRepository getVehicleRepository(){
-        return vehicleRepository;
+        return VehicleRepository.getInstance();
     }
 }

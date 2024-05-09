@@ -15,14 +15,14 @@ activate Employee
     Employee -> System : Request to register vehicles check-up result
     activate System
 
-        System --> Employee : Display vehicle selection interface
+        System --> Employee : Display vehicle selection list
     deactivate System
 
-    Employee -> System : Select vehicle
-    activate System
+    Employee -> System : Selects a vehicle
+     activate System
 
-        System --> Employee : Display Vehicle details
-    deactivate System
+            System --> Employee :Confirms the selection
+        deactivate System
 
     Employee -> System : Registers results
     activate System

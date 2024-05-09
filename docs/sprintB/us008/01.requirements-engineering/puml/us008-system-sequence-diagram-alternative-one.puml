@@ -18,9 +18,4 @@ activate Employee
         System --> Employee : Retrieve list of vehicles needing check-up
     deactivate System
 
-    Employee -> System : Verifies the details of a vehicle
-    activate System
-
-        System --> Employee : Shows vehicle details
-    deactivate System
 @enduml

@@ -16,9 +16,9 @@ public class RegisterVehicleController {
         getAuthenticationRepository();
     }
 
-    public RegisterVehicleController(AuthenticationRepository authenticationRepository) {
+    public RegisterVehicleController(AuthenticationRepository authenticationRepository, VehicleRepository vehicleRepository) {
         this.authenticationRepository = authenticationRepository;
-        this.vehicleRepository = VehicleRepository.getInstance();
+        this.vehicleRepository = vehicleRepository;
     }
 
     public VehicleRepository getVehicleRepository() {
@@ -29,7 +29,6 @@ public class RegisterVehicleController {
         }
         return vehicleRepository;
     }
-
 
     public AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
