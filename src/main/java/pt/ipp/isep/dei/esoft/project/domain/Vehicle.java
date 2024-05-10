@@ -51,22 +51,6 @@ public class Vehicle {
         return model;
     }
 
-    public double getTareWeight() {
-        return tareWeight;
-    }
-
-    public double getGrossWeight() {
-        return grossWeight;
-    }
-
-    public LocalDate getRegisterDate() {
-        return registerDate;
-    }
-
-    public LocalDate getAcquisitionDate() {
-        return acquisitionDate;
-    }
-
     public double getCurrentKm(){
         return currentKm;
     }

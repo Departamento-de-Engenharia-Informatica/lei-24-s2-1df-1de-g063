@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
@@ -7,15 +8,16 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 public class MaintenanceRegistrationController {
     private VehicleRepository vehicleRepository;
     private AuthenticationRepository authenticationRepository;
+    private String maintenance;
+    private double lastMaintenanceKm;
 
     public MaintenanceRegistrationController(){
-        this.vehicleRepository = VehicleRepository.getInstance();
         getAuthenticationRepository();
     }
 
     public MaintenanceRegistrationController(VehicleRepository vehicleRepository,
                                              AuthenticationRepository authenticationRepository) {
-        this.vehicleRepository = vehicleRepository;
+        this.vehicleRepository = VehicleRepository.getInstance();
         this.authenticationRepository = authenticationRepository;
     }
 

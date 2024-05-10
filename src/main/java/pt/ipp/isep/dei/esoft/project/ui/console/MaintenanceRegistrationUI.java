@@ -95,7 +95,6 @@ public class MaintenanceRegistrationUI implements Runnable{
         while (!validInput) {
             System.out.print("Last Maintenance Km: ");
             String input = scan.nextLine();
-
             try {
                 LastMaintenanceKm = Double.parseDouble(input);
                 validInput = true;
@@ -113,7 +112,5 @@ public class MaintenanceRegistrationUI implements Runnable{
         selectedVehicle.setMaintenance(maintenance);
         selectedVehicle.setLastMaintenanceKm(lastMaintenanceKm);
     }
-
-
 
 }
