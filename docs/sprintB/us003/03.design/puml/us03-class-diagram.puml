@@ -1,0 +1,127 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class Manager {
+    - name
+    - email
+    - role
+    - phone
+}
+
+class Collaborator {
+    - String reference
+    - String description
+    - String informalDescription
+    - String technicalDescription
+    - Integer duration
+    - Double cost
+
+    + setCollaboratorRecord(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, collaboratorRecord)
+}
+
+
+class Manager {
+    - String name
+    - String vatNumber
+    - String website
+    - String phone
+    - String email
+
+    + anyManagerHasEmail(email)
+    + Manager(name, vatNumber, webSite, phone, email, postalAddress, manager)
+    + setCollaboratorRecord(name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number)
+    - getManagerByEmail(email)
+
+'  +saveTask(task)
+}
+class Skills{}
+class SkillsRepository{
+    +getSkills()
+}
+class Jobs{}
+class JobsRepository{
+    +getJobs()
+}
+note left of SkillsRepository
+    - used to access the list of
+     skills that a collaborator may have
+end note
+note right of JobsRepository
+    - used to access the list of jobs that a collaborator may have
+     (every job is there represented regardless the skills of the collaborator in question)
+end note
+
+class CollaboratorRepository {
+    + getOrganizationByManagerEmail(email)
+    + getCollaboratorRecord()
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getTaskCategoryRepository()
+    + getOrganizationRepository()
+}
+
+class RegisterCollaboratorController {
+    + RegisterCollaboratorController(EmployeeRepository)
+    + getCollaboratorRecord()
+    + setCollaboratorRecord(name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number)
+    - getEmployeeFromSession()
+}
+
+note right of RegisterCollaboratorController
+    - userEmail is obtained
+    from the user session
+    - categoryDescription
+    is retrieved from selected data
+end note
+
+note left of CollaboratorRepository
+    - used for accessing a list of
+    registered collaborators
+end note
+
+
+note left of Manager
+    - is this necessary?
+end note
+
+class RegisterCollaboratorUI {
+}
+
+Repositories -> Repositories : instance
+
+RegisterCollaboratorUI .> RegisterCollaboratorController
+
+RegisterCollaboratorController .> Repositories : repositories
+
+RegisterCollaboratorController ..> Collaborator
+RegisterCollaboratorController ..> CollaboratorRepository : CollaboratorRepository
+
+Repositories --> "1" CollaboratorRepository
+
+CollaboratorRepository --> "*" Manager
+
+RegisterCollaboratorController ..> "1" Manager
+
+CollaboratorRepository "1" --> "*" Collaborator : collaboratorRecord
+Manager "1" --> "1..*" Collaborator : register
+
+Repositories --> "1" SkillsRepository
+Repositories --> "1" JobsRepository
+SkillsRepository --> "*"Skills
+JobsRepository --> "*"Jobs
+Skills "1..*" --> "1" Collaborator : given to
+Jobs "1"--> "1" Collaborator : assigned to
+
+@enduml

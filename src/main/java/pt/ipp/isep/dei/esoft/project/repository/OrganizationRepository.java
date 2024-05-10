@@ -21,7 +21,7 @@ public class OrganizationRepository {
 
         for (Organization organization : organizations) {
             if (organization.employs(employee)) {
-                returnOrganization = Optional.of(organization);
+                returnOrganization = Optional.of(organization.clone());
             }
         }
 

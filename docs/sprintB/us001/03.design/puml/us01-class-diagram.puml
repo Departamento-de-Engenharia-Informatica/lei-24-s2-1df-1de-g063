@@ -1,0 +1,84 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Skill {
+    - String name
+
+    + Skill(skill_name: String)
+    + getName:(skill_name: String)
+    + toString(): String
+}
+
+class SkillsRepository {
+
+    - instance: SkillsRepository
+    - skills: List<Jobs>
+    + getInstance(): SkillsRepository
+    + SkillsRepository()
+    + addSkill(skill: Skill): void
+    + getSkills(description)
+
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillsRepository()
+}
+
+class SkillController {
+    - skillsRepository: SkillsRepository
+    - authenticationRepository: AuthenticationRepository
+
+    +SkillController ()
+    + RegisterSkillController(organizationRepository, skillsRepository)
+    + getSkillRepository()
+    + getAuthenticationRepository()
+    + createSkill(skill_name: String): Skill
+    + getSkills(): List<Skill>
+}
+
+note bottom of SkillsRepository
+    - used for accessing
+    the skills
+end note
+
+class SkillUI {
+    -controller: SkillController
+    -skillName: String
+    -skillsRepository: SkillsRepository
+    -skill: Skill
+
+    +SkillUI()
+    -getController(): SkillController
+    +run(): void
+    -printSkills(): void
+    -validateSkill(skill: Skill): boolean
+    -submitData(): void
+    -requestData(): void
+    -requestSkillName(): String
+}
+
+Repositories -> Repositories : instance
+
+SkillUI .> SkillController
+
+SkillController .> Repositories : repositories
+
+Repositories -> "1" SkillsRepository
+
+
+
+SkillsRepository "1" --> "*" Skill : skills
+SkillController "1" --> "1..*" Skill : register
+
+@enduml

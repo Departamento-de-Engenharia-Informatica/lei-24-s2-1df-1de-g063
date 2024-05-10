@@ -1,80 +1,62 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
 
 public class Collaborator {
-    private String name;
-    private int age;
-    private String jobTitle;
-    private String address;
-    private int cell_number;
-    private int id_number;
-    private int ano;
-    private int mes;
-    private int dia;
-    private static final int ANO_POR_OMISSAO = 1;
-    private static final int MES_POR_OMISSAO = 1;
-    private static final int DIA_POR_OMISSAO = 1;
-    private static String[] nomeDiaDaSemana = {"Domingo", "Segunda-feira",
-            "Terça-feira", "Quarta-feira",
-            "Quinta-feira", "Sexta-feira",
-            "Sábado"};
-    private static int[] diasPorMes = {  0, 31, 28, 31, 30, 31, 30, 31, 31, 30,
-            31, 30, 31};
-    private static String[] nomeMes = {"Inválido", "Janeiro", "Fevereiro",
-            "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro",
-            "Outubro", "Novembro", "Dezembro"};
-    public Collaborator(String name, int age, String jobTitle, String address, int cell_number, int id_number) {
+    private final String name;
+    private final String adress;
+    private final String email;
+    private final String phoneNumber;
+    private final String idType;
+    private final String idNumber;
+    private final LocalDate birthDate;
+    private final LocalDate admissionDate;
+    private final String job;
+    private List<Skill> skill;
+
+    public Collaborator(String name, String adress, String email, String phoneNumber, String idType, String idNumber, LocalDate birthDate, LocalDate admissionDate, String job) {
         this.name = name;
-        this.age = age;
-        this.jobTitle = jobTitle;
-        this.address = address;
-        this.cell_number = cell_number;
-        this.id_number = id_number;
+        this.adress = adress;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.idType = idType;
+        this.idNumber = idNumber;
+        this.birthDate = birthDate;
+        this.admissionDate = admissionDate;
+        this.job = job;
     }
 
-    public void displayInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Job Title: " + jobTitle);
+    public List<Skill> getSkill() {
+        return skill;
     }
-}
 
-class HRMSystem {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the HRM System");
-        System.out.println("Please enter collaborator details:");
-
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-
-        System.out.print("Job Title: ");
-        String jobTitle = scanner.nextLine();
-
-        System.out.println("Address:");
-        String address = scanner.nextLine();
-
-        System.out.println("Cellphone number:");
-        int cell_phone = scanner.nextInt();
-
-        System.out.println("ID number:");
-        int id_number = scanner.nextInt();
-
-
-
-
-        Collaborator collaborator = new Collaborator(name, age, jobTitle, address, cell_phone, id_number);
-
-        System.out.println("\nCollaborator registered successfully.");
-        collaborator.displayInfo();
-
-        scanner.close();
+    public void setSkill(List<Skill> skill) {
+        this.skill = skill;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Collaborator that = (Collaborator) o;
+        return Objects.equals(idNumber, that.idNumber) && Objects.equals(name, that.name) && Objects.equals(adress, that.adress) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(idType, that.idType) && Objects.equals(birthDate, that.birthDate) && Objects.equals(admissionDate, that.admissionDate) && Objects.equals(job, that.job);
+    }
+
+    @Override
+    public String toString() {
+        return "Collaborator{" +
+                "name='" + name + '\'' +
+                ", adress='" + adress + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", idType='" + idType + '\'' +
+                ", idNumber=" + idNumber +
+                ", birthDate=" + birthDate +
+                ", admissionDate=" + admissionDate +
+                ", job='" + job + '\'' +
+                '}';
+    }
+
 }

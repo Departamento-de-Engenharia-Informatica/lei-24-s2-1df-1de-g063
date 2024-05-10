@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.menu.HrmUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.menu.VfmUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
@@ -17,9 +20,11 @@ import java.util.Objects;
 
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
+    private final VehicleRepository vehicleRepository;
 
     public AuthenticationUI() {
-        ctrl = new AuthenticationController();
+        this.ctrl = new AuthenticationController();
+        this.vehicleRepository = new VehicleRepository();
     }
 
     public void run() {
@@ -45,7 +50,8 @@ public class AuthenticationUI implements Runnable {
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
-
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }

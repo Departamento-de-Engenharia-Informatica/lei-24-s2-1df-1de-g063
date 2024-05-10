@@ -1,0 +1,83 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Job {
+    - String name
+
+    + Job(job_name: String)
+    + getName:(job_name: String)
+    + toString(): String
+}
+
+class JobRepository {
+
+    - instance: JobRepository
+    - jobs: List<Jobs>
+    + getInstance(): JobRepository
+    + JobRepository()
+    + addJob(job: Job): void
+    + getJobs(description)
+
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getJobRepository()
+}
+
+class RegisterJobController {
+    - jobRepository: JobRepository
+    - authenticationRepository: AuthenticationRepository
+
+    + RegisterJobController(authenticationRepository: AuthenticationRepository)
+    + getJobRepository()
+    + getAuthenticationRepository()
+    + createJob(job_name: String): Job
+    + getJobs(): List<Job>
+}
+
+note bottom of JobRepository
+    - used for accessing
+    the jobs
+end note
+
+class RegisterJobUI {
+    -controller: RegisterJobController
+    -jobName: String
+    -jobRepository: JobRepository
+    -job: Job
+
+    + RegisterJobUI()
+    -getController(): RegisterJobController
+    +run(): void
+    -printJobs(): void
+    -validateJob(job: Job): boolean
+    -submitData(): void
+    -requestData(): void
+    -requestJobName(): String
+}
+
+Repositories -> Repositories : instance
+
+RegisterJobUI .> RegisterJobController
+
+RegisterJobController .> Repositories : repositories
+
+Repositories -> "1" JobRepository
+
+
+
+JobRepository "1" --> "*" Job : jobs
+RegisterJobController "1" --> "1..*" Job : register
+
+@enduml

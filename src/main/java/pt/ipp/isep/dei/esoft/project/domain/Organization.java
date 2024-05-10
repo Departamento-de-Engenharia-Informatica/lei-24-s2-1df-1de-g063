@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class Organization {
     private String website;
     private String phone;
     private String email;
-
+    private final List<Vehicle> vehicles;
     /**
      * This method is the constructor of the organization.
      *
@@ -24,6 +25,7 @@ public class Organization {
         this.vatNumber = vatNumber;
         employees = new ArrayList<>();
         tasks = new ArrayList<>();
+        vehicles = new ArrayList<>();
     }
 
     /**
