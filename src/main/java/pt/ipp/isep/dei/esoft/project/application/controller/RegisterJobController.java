@@ -6,17 +6,17 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 
 import java.util.List;
 
-public class JobController {
+public class RegisterJobController {
 
     private JobRepository jobRepository;
     private AuthenticationRepository authenticationRepository;
 
-    public JobController() {
+    public RegisterJobController() {
         getJobRepository();
         getAuthenticationRepository();
     }
 
-    public JobController(AuthenticationRepository authenticationRepository) {
+    public RegisterJobController(AuthenticationRepository authenticationRepository) {
         this.jobRepository = JobRepository.getInstance();
         this.authenticationRepository = authenticationRepository;
     }

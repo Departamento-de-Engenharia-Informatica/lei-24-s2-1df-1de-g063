@@ -9,42 +9,42 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class Skills {
-    - String description
-
-    + Skills(description)
-}
-
-class Manager {
+class Skill {
     - String name
-    - String role
-    - String phone
-    - String email
 
-    + anyEmployeeHasEmail(email)
-    + Manager(name, role, phone, email, postalAddress, manager)
-    + createSkill()
+    + Skill(skill_name: String)
+    + getName:(skill_name: String)
+    + toString(): String
 }
 
 class SkillsRepository {
-    + getSkills()
+
+    - instance: SkillsRepository
+    - skills: List<Jobs>
+    + getInstance(): SkillsRepository
+    + SkillsRepository()
+    + addSkill(skill: Skill): void
+    + getSkills(description)
+
 }
 
-class EmployeeRepository {
-    + getOrganizationByEmployeeEmail(email)
-}
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getJobsRepository()
-    + getEmployeeRepository()
+    + getSkillsRepository()
 }
 
-class RegisterSkillsController {
-    + RegisterSkillsController(employeeRepository, SkillsRepository)
-    + getJobList()
-    + createJob(skills needed)
+class SkillController {
+    - skillsRepository: SkillsRepository
+    - authenticationRepository: AuthenticationRepository
+
+    +SkillController ()
+    + RegisterSkillController(organizationRepository, skillsRepository)
+    + getSkillRepository()
+    + getAuthenticationRepository()
+    + createSkill(skill_name: String): Skill
+    + getSkills(): List<Skill>
 }
 
 note bottom of SkillsRepository
@@ -52,27 +52,33 @@ note bottom of SkillsRepository
     the skills
 end note
 
-class RegisterSkillsUI {
+class SkillUI {
+    -controller: SkillController
+    -skillName: String
+    -skillsRepository: SkillsRepository
+    -skill: Skill
+
+    +SkillUI()
+    -getController(): SkillController
+    +run(): void
+    -printSkills(): void
+    -validateSkill(skill: Skill): boolean
+    -submitData(): void
+    -requestData(): void
+    -requestSkillName(): String
 }
 
 Repositories -> Repositories : instance
 
-RegisterSkillsUI .> RegisterSkillsController
+SkillUI .> SkillController
 
-RegisterSkillsController .> Repositories : repositories
+SkillController .> Repositories : repositories
 
 Repositories -> "1" SkillsRepository
 
-RegisterSkillsController ..> Skills : jobs
-RegisterSkillsController ..> EmployeeRepository : employeeRepository
 
 
-Repositories --> "1" EmployeeRepository
-
-EmployeeRepository --> "*" Manager
-
-RegisterSkillsController ..> "1" Manager : manager
-SkillsRepository "1" --> "*" Skills : jobs
-Manager "1" --> "1..*" Skills : register
+SkillsRepository "1" --> "*" Skill : skills
+SkillController "1" --> "1..*" Skill : register
 
 @enduml

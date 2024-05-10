@@ -1,25 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.JobController;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class JobUI implements Runnable {
+public class RegisterJobUI implements Runnable {
 
-    private final JobController controller;
+    private final RegisterJobController controller;
     private String jobName;
     private JobRepository jobRepository;
     private Job job;
 
-    public JobUI() {
-        this.controller = new JobController();
+    public RegisterJobUI() {
+        this.controller = new RegisterJobController();
         this.jobRepository = JobRepository.getInstance();
     }
 
-    private JobController getController() {
+    private RegisterJobController getController() {
         return controller;
     }
 

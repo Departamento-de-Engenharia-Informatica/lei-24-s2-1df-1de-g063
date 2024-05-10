@@ -13,10 +13,6 @@ public class Skill {
         return this.skill_name;
     }
 
-    public Skill clone() {
-        return new Skill(this.skill_name);
-    }
-
     @Override
     public String toString() {
         if (this.skill_name != null) {
