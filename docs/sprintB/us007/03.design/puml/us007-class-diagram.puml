@@ -14,11 +14,13 @@ class MaintenanceRegistrationUI {
 
 class MaintenanceRegistrationController {
     -vehicleRepository: VehicleRepository
-    -authenticationRepository: AuthenticationRepository
-    +MaintenanceRegistrationController(vehicleRepository: VehicleRepository, authenticationRepository: AuthenticationRepository)
+    +MaintenanceRegistrationController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
     +getVehicleRepository(): VehicleRepository
-    +getAuthenticationRepository(): AuthenticationRepository
 }
+
+note right of MaintenanceRegistrationController
+    - Vehicle is retrieved from selected data
+end note
 
 class Repositories{
     - Repositories()

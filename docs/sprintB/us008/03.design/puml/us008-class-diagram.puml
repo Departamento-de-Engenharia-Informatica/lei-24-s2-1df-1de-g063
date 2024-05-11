@@ -13,14 +13,21 @@ class VehicleNeedingCheckUpUI{
 
 }
 
+note left of VehicleNeedingCheckUpUI
+    - Responsible for displaying vehicles needing check-up
+end note
+
 class VehicleNeedingCheckUpController{
     -vehicleRepository: VehicleRepository
-    -authenticationRepository: AuthenticationRepository
-    +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, authenticationRepository: AuthenticationRepository)
+    +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
     +getVehicleRepository(): VehicleRepository
     +getVehiclesNeedingCheckUp(): List<Vehicle>
-    +getAuthenticationRepository(): AuthenticationRepository
 }
+
+note right of VehicleNeedingCheckUpController
+    - Handles requests related to vehicles needing check-up
+    - getVehiclesNeedingCheckUp(): List<Vehicle>: Retrieves a list of vehicles needing check-up
+end note
 
 class Repositories{
     - Repositories()
