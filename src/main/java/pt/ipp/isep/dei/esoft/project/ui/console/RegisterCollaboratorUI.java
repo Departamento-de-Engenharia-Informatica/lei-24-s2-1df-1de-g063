@@ -113,7 +113,7 @@ public class RegisterCollaboratorUI implements Runnable{
             idNumber = scan.nextLine().trim();
 
             if (idType.equals("cartão de cidadão")) {
-                isValid = idNumber.matches("\\d{9}");
+                isValid = idNumber.matches("\\d{8}");
             } else if (idType.equals("passaporte")) {
                 isValid = idNumber.matches("[a-zA-Z]{2}\\d{6}");
             } else {

@@ -17,16 +17,15 @@ public class JobRepository {
     }
 
     public JobRepository() {
-        jobs = new ArrayList<>();
+        this.jobs = new ArrayList<>();
     }
 
     public void addJob(Job job) {
         jobs.add(job);
     }
 
-
     public List<Job> getJobs() {
-        //This is a defensive copy, so that the repository cannot be modified from the outside.
-        return List.copyOf(jobs);
+        // This is a defensive copy, so that the repository cannot be modified from the outside.
+        return new ArrayList<>(jobs);
     }
 }
