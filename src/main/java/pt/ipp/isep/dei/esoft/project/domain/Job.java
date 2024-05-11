@@ -15,10 +15,6 @@ public class Job {
         return this.job_name;
     }
 
-    public Job clone() {
-        return new Job(this.job_name);
-    }
-
     @Override
     public String toString() {
         return job_name ;
