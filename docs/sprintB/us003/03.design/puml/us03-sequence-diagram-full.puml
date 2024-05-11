@@ -6,14 +6,14 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "HRM" as ADM
+actor "Organization Employee" as ADM
 participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillsRepository:\nSkillsRepository" as SkillsRepository
-participant "jobsRepository:\nJobsRepository" as JobsRepository
 participant "collaboratorRecordRepository:\nCollaboratorRecordRepository" as CollaboratorRecordRepository
+participant "SkillsRepository:\nSkillsRepository" as SkillsRepository
+participant "JobRepository:\nJobRepository" as JobRepository
 
 
 activate ADM
@@ -52,10 +52,11 @@ activate ADM
             deactivate CTRL
 
             UI --> ADM : requests data (a collaborator)
-        deactivate UI
+                    deactivate UI
 
-    ADM -> UI : types requested data (a collaborator, a profession and key atributes)
-    activate UI
+                ADM -> UI : types requested data (a collaborator, a profession and key atributes)
+        activate UI
+
     UI -> CTRL : getSkills()
                 activate CTRL
 
@@ -80,12 +81,11 @@ activate ADM
 
                     CTRL --> UI : SkillsList
                 deactivate CTRL
-
-        UI --> ADM : asks to select a set of skills
+                        UI -> ADM : asks to select a set of skills
     deactivate UI
+                            ADM -> UI : selects the intended skills
+            activate UI
 
-    ADM -> UI : selects the intended skills
-    activate UI
         UI -> CTRL : getJobs()
                     activate CTRL
 
@@ -95,57 +95,51 @@ activate ADM
                             RepositorySingleton --> CTRL: repositories
                         deactivate RepositorySingleton
 
-                        CTRL -> PLAT : getJobsRepository()
+                        CTRL -> PLAT : getJobRepository()
                         activate PLAT
 
-                            PLAT --> CTRL: JobsRepository
+                            PLAT --> CTRL: JobRepository
                         deactivate PLAT
 
-                        CTRL -> JobsRepository : getJobs()
-                        activate JobsRepository
+                        CTRL -> JobRepository : getJobs()
+                        activate JobRepository
 
-                            JobsRepository --> CTRL : JobsList
-                        deactivate JobsRepository
+                            JobRepository --> CTRL : JobsList
+                        deactivate JobRepository
 
 
                         CTRL --> UI : JobsList
                     deactivate CTRL
+                        UI -> ADM : asks to select a job
 
-            UI --> ADM : ask to select a job
         deactivate UI
-        ADM -> UI : selects the intended job
-        activate UI
-        UI -> CTRL : getcollaboratorRecord()
-            activate CTRL
+                                    ADM -> UI : selects a Job
+            activate UI
+             UI -> CTRL : getcollaboratorRecord()
+                        activate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+                            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+                                RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
 
-                CTRL -> PLAT : getCollaboratorRecordRepository()
-                activate PLAT
+                            CTRL -> PLAT : getCollaboratorRecordRepository()
+                            activate PLAT
 
-                    PLAT --> CTRL: collaboratorRecordRepository
-                deactivate PLAT
+                                PLAT --> CTRL: collaboratorRecordRepository
+                            deactivate PLAT
 
-                CTRL -> CollaboratorRecordRepository : setCollaboratorRecord()
-                activate CollaboratorRecordRepository
+                            CTRL -> CollaboratorRecordRepository : setCollaboratorRecord()
+                            activate CollaboratorRecordRepository
 
-                    CollaboratorRecordRepository --> CTRL : collaboratorRecord
-                deactivate CollaboratorRecordRepository
-
-
-                CTRL --> UI : CollaboratorRecord
-            deactivate CTRL
-
-            UI --> ADM : displays all data and operation success
-        deactivate UI
+                                CollaboratorRecordRepository --> CTRL : collaboratorRecord
+                            deactivate CollaboratorRecordRepository
 
 
-
-
-deactivate ADM
+                            CTRL --> UI : CollaboratorRecord
+                        deactivate CTRL
+                                UI --> ADM : shows all data and displays operation success
+deactivate UI
 
 @enduml

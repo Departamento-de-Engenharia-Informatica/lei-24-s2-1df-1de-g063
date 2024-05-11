@@ -7,11 +7,11 @@ autonumber
 
 'hide footbox
 actor "Organization HRM" as HRM
-participant ":RegisterJobUI" as UI
-participant ":RegisterJobController" as CTRL
+participant ":SkillUI" as UI
+participant ":SkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "JobRepository:\nJobRepository" as JobRepository
+participant "SkillsRepository:\nSkillsRepository" as SkillsRepository
 
 
 activate HRM
@@ -21,7 +21,7 @@ activate HRM
      activate UI
 
             UI -> CTRL** : create
-            UI -> CTRL : getJobRepository()
+            UI -> CTRL : getSkillRepository()
 
      activate CTRL
 
@@ -33,31 +33,30 @@ activate HRM
 
      deactivate RepositorySingleton
 
-            CTRL -> PLAT : getJobRepository()
+            CTRL -> PLAT : getSkillRepository()
 
      activate PLAT
 
-            PLAT -> CTRL : jobRepository
+            PLAT -> CTRL : skillsRepository
      deactivate PLAT
 
-            CTRL -> JobRepository : getJobs()
-     activate JobRepository
+            CTRL -> SkillsRepository : getSkills()
+     activate SkillsRepository
 
-            JobRepository -> CTRL : job
-
-     deactivate JobRepository
-            CTRL -> UI : jobRepository
+            SkillsRepository -> CTRL : skill
+     deactivate SkillsRepository
+            CTRL -> UI : skillsRepository
      deactivate CTRL
-     UI --> HRM : requests data (name of the Job)
+     UI --> HRM : requests data (name of the skill)
      deactivate UI
 
      HRM -> UI : types requested data
      activate UI
 
-            UI -> JobRepository: addJob (Job job)
+            UI -> SkillsRepository: addSkill (Skill skill)
 
-     activate JobRepository
-     deactivate JobRepository
+     activate SkillsRepository
+     deactivate SkillsRepository
 
      UI --> HRM : displays operation success
      deactivate UI
