@@ -36,14 +36,12 @@ The prefix appears to the left of the @ symbol. The domain appears to the right 
 
 * Typed data:
     * a name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number
-* Selected data:
-    * a profession
-    * an attribute
+    * a job
+    * one or more skills
   
 **Output Data:**
 
 * List of information inserted
-* Confirmation of the operation
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
