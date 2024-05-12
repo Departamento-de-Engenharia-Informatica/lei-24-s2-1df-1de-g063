@@ -7,7 +7,7 @@ autonumber
 actor "HRM" as HRM
 participant ":System" as System
 activate HRM
-    HRM -> System : asks to register an employee with a profession and key attributes
+    HRM -> System : asks to register a collaborator with a profession and key attributes
     activate System
         System --> HRM : requests data (a collaborator and its pernsonal data)
         deactivate System

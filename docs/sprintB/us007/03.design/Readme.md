@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US007 - As an FM, I wish to register a vehicle’s check-up
 
 ## 3. Design - User Story Realization 
 
@@ -6,46 +6,40 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID                                       | Question: Which class is responsible for...           | Answer                            | Justification (with patterns)                                                                           |
+|:-----------------------------------------------------|:------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------|
+| Step 1: Request to register vehicles check-up result | ... interacting with the actor?                       | MaintenanceRegistrationUI         | Pure Fabrication                                                                                        |
+|                                                      | ... coordinating the US?                              | MaintenanceRegistrationController | Controller - Orchestrates the use case, coordinating actions between UI and other parts of the system.  |
+| Step 2: Display vehicle selection interface          | ... providing the Vehicles needing check-up list?     | VehicleRepository                 | Creator - Manages vehicle data and is responsible for providing the list of vehicles needing check-ups. |
+|                                                      | ... displaying the form containing the list of jobs?  | MaintenanceRegistrationUI         | IE - is responsible for user interactions.                                                              |
+| Step 3: Selects a vehicle                            | ... temporarily keeping the inputted data?            | MaintenanceRegistrationUI         | Information Expert - Holds user inputs temporarily until further processing.                            |
+| Step 4: Confirms the selection                       | ... displaying all information before submitting?     | MaintenanceRegistrationUI         | IE - is responsible for user interactions.                                                              |
+| Step 5: Registers results                            | ... validating the data?                              | MaintenanceRegistrationUI         | Information Expert - Directly interacts with the user and validates user inputs.                        |
+|                                                      | ... instantiating a new check-up result?              | Vehicle                           | Creator - Responsible for creating new instances of check-up results.                                   |
+|                                                      | ... saving the inputted data?                         | Vehicle                           | Creator - Has information about check-up results and is responsible for saving them.                    |
+| Step 6: Confirmation of results registration         | ... informing operation success?                      | MaintenanceRegistrationUI         | IE - is responsible for user interactions.                                                              |
+
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Vehicles_Machines_Equipment promoted to Vehicle
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* MaintenanceRegistrationUI  
+* MaintenanceRegistrationController
 
 
 ## 3.2. Sequence Diagram (SD)
-
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us007-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -53,24 +47,16 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us007-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Get Vehicles**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Get Vehicles](svg/us007-sequence-diagram-partial-get-Vehicles.svg)
 
-**Get Task Category Object**
+**Set Maintenance**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
-
-**Get Employee**
-
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Partial - Set Maintenance](svg/us007-sequence-diagram-partial-set-Maintenance.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us007-class-diagram.svg)

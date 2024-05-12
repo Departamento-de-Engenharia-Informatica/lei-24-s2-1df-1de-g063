@@ -2,10 +2,6 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
 
-/**
- * The Repositories class provides access to various repositories used in the application.
- * It manages the creation and retrieval of repository instances.
- */
 public class Repositories {
 
     private static Repositories instance; // Singleton instance of Repositories.
@@ -37,7 +33,9 @@ public class Repositories {
      */
     public static Repositories getInstance() {
         if (instance == null) {
+
             instance = new Repositories();
+
         }
         return instance;
     }

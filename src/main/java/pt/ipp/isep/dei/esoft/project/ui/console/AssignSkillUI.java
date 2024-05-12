@@ -118,15 +118,15 @@ public class AssignSkillUI implements Runnable {
             }
         }
 
-        List<Skill> existingSkills = selectedCollaborator.getSkill();
+        List<Skill> existingSkills = selectedCollaborator.getSkills();
 
         if (existingSkills!= null) {
             existingSkills.addAll(selectedSkills);
         } else {
-            selectedCollaborator.setSkill(selectedSkills);
+            selectedCollaborator.setSkills(selectedSkills);
         }
 
-        System.out.println(selectedCollaborator.getSkill());
+        System.out.println(selectedCollaborator.getSkills());
     }
 
 }

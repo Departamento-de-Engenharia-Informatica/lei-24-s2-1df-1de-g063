@@ -6,46 +6,41 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | RegisterCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | RegisterCollaboratorController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...                               | Answer                                                            | Justification (with patterns)                                                                                 |
+|:---------------|:--------------------------------------------------------------------------|:------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... asking to register a collaborator with a profession and key attributes| RegisterCollaboratorUI                                            | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | 	... coordinating the US?                                                 | RegisterCollaboratorController                                    | Controller                                                                                                    |
+| 			  		        | 	... instantiating a new Collaborator?                                    | RegisterCollaboratorUI                                            | Creator (Rule 1): in the DM Employees.                                                                        |
+| Step 2  		     | 		... requests data (a collaborator and its pernsonal data)					          | RegisterCollaboratorUI                                            | IE: is responsible for user interactions.                                                                     |
+| Step 3  		     | 	... saving the typed data?                                               | RegisterCollaboratorController                                    | IE: object created in step 1 has its own data.                                                                |
+| Step 4  		     | 	... validating the inputted skills?                                      | Collaborator                                                      | Information Expert - Directly interacts with the user and validates user inputs.                              |
+|                | ... asking to select a set of skills                                      | RegisterCollaboratorUI                                            | IE: object created in step 1 has one or more skills.                                                          |
+| Step 5         | ... ask to select a job                                                   | RegisterCollaboratorUI                                            | IE: object created in step 1 is classified in one Job.                                                        |
+| Step 6	        | 	... saving the skills and job assigned?                                  | RegisterCollaboratorController                                    | Creator - has all inputted information and is responsible for saving it.                                      |
+| Step 7 		      | 			... register the new collaborator with skills and a job?				           | RegisterCollaboratorController                                    | Has all information                                                                                           |              
+| Step 9  		     | 	... informing operation success?                                         | RegisterCollaboratorUI                                            | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Collaborators is promoted to Collaborator
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterCollaboratorUI  
+* RegisterCollaboratorController
 
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
+_**Note that SSD - Alternative One is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![us03-sequence-diagram-full.svg](svg%2Fus03-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -53,24 +48,24 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![us03-sequence-diagram-split.svg](svg%2Fus03-sequence-diagram-split.svg)
 
 **Get Task Category List Partial SD**
 
 ![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
 
-**Get Task Category Object**
+**Jobs**
 
 ![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
 
-**Get Employee**
+**Skills List**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
+![us03-sequence-diagram-partial-Skills-List.svg](svg%2Fus03-sequence-diagram-partial-Skills-List.svg)
 
-**Create Task**
+**Verify Collaborator**
 
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![us03-sequence-diagram-partial-VerifyCollaborator.svg](svg%2Fus03-sequence-diagram-partial-VerifyCollaborator.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![us03-class-diagram.svg](svg%2Fus03-class-diagram.svg)

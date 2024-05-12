@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "RegisterCollaboratorUI" as UI
+participant "Collaborator" as CO
+participant "RegisterCollaboratorController" as CTL
+
+autonumber 11
+-> UI: types requested data (collaborator's requested data)
+
+autonumber 11.1
+activate UI
+    group Verify Collaborator
+
+        UI -> CO**: equals(Object o)
+        CO -> UI: validates Collaborator
+    end
+
+    autonumber 12
+    UI --> CTL : getSkills()
+deactivate UI
+
+
+@enduml

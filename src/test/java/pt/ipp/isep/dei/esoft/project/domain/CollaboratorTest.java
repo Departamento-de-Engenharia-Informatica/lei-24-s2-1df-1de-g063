@@ -24,9 +24,9 @@ class CollaboratorTest {
                 "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
                 LocalDate.now(), "Developer");
         List<Skill> skills = new ArrayList<>();
-        collaborator.setSkill(skills);
+        collaborator.setSkills(skills);
         skills.add(new Skill("Java"));
-        assertEquals(1, collaborator.getSkill().size());
+        assertEquals(1, collaborator.getSkills().size());
     }
 
     @Test
