@@ -57,7 +57,7 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 **Skill Registration**
 
-![us001-sequence-diagram-partial-Skill-registration.png](svg/us001-sequence-diagram-partial-Skill-registration.png)
+![us001-sequence-diagram-partial-Skill-registration.png](svg/us001-sequence-diagram-partial-Skill-registration.svg)
 
 ## 3.3. Class Diagram (CD)
 
