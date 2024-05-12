@@ -276,7 +276,7 @@ public class Vehicle {
 ## 6. Integration and Demo
 Simulate how the VehicleNeedingCheckUpController interacts with the VehicleRepository to retrieve vehicles that need check-up:
 
-* We instantiate the VehicleRepository and AuthenticationRepository.
+* We instantiate the VehicleRepository.
 * We create a VehicleNeedingCheckUpController with the repositories.
 * We add a vehicle to the repository and set its last maintenance kilometer reading.
 * We call the getVehiclesNeedingCheckUp() method of the controller to retrieve vehicles needing check-up.
