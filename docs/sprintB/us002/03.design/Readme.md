@@ -37,7 +37,7 @@ _**Note that SSD - Alternative one is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![us002-sequence-diagram-full.svg](svg%2Fus002-sequence-diagram-full.svg)
+![us002-sequence-diagram-full.svg](svg/us002-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,21 +45,21 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![us002-sequence-diagram-split.svg](svg%2Fus002-sequence-diagram-split.svg)
+![us002-sequence-diagram-split.svg](svg/us002-sequence-diagram-split.svg)
 
 **Job Registration**
 
-![us002-sequence-diagram-partial-job-registration.svg](svg%2Fus002-sequence-diagram-partial-job-registration.svg)
+![us002-sequence-diagram-partial-job-registration.svg](svg/us002-sequence-diagram-partial-job-registration.svg)
 
 **Get Job Repository**
 
-![us002-sequence-diagram-partial-get-job-repository.svg](svg%2Fus002-sequence-diagram-partial-get-job-repository.svg)
+![us002-sequence-diagram-partial-get-job-repository.svg](svg/us002-sequence-diagram-partial-get-job-repository.svg)
 
 **Add Job to Repository**
 
-![us002-sequence-diagram-partial-add-to-jobRepository.svg](svg%2Fus002-sequence-diagram-partial-add-to-jobRepository.svg)
+![us002-sequence-diagram-partial-add-to-jobRepository.svg](svg/us002-sequence-diagram-partial-add-to-jobRepository.svg)
 
 
 ## 3.3. Class Diagram (CD)
 
-![us002-class-diagram.svg](svg%2Fus002-class-diagram.svg)
+![us002-class-diagram.svg](svg/us002-class-diagram.svg)
