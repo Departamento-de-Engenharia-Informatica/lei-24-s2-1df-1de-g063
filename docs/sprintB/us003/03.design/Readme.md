@@ -40,7 +40,7 @@ _**Note that SSD - Alternative One is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![us03-sequence-diagram-full.svg](svg%2Fus03-sequence-diagram-full.svg)
+![us03-sequence-diagram-full.svg](svg/us03-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -48,24 +48,20 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![us03-sequence-diagram-split.svg](svg%2Fus03-sequence-diagram-split.svg)
-
-**Get Task Category List Partial SD**
-
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![us03-sequence-diagram-split.svg](svg/us03-sequence-diagram-split.svg)
 
 **Jobs**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![Sequence Diagram - Partial - Get Task Category Object](svg/us03-sequence-diagram-partial-Jobs.svg)
 
 **Skills List**
 
-![us03-sequence-diagram-partial-Skills-List.svg](svg%2Fus03-sequence-diagram-partial-Skills-List.svg)
+![us03-sequence-diagram-partial-Skills-List.svg](svg/us03-sequence-diagram-partial-Skills-List.svg)
 
 **Verify Collaborator**
 
-![us03-sequence-diagram-partial-VerifyCollaborator.svg](svg%2Fus03-sequence-diagram-partial-VerifyCollaborator.svg)
+![us03-sequence-diagram-partial-VerifyCollaborator.svg](svg/us03-sequence-diagram-partial-VerifyCollaborator.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![us03-class-diagram.svg](svg%2Fus03-class-diagram.svg)
+![us03-class-diagram.svg](svg/us03-class-diagram.svg)

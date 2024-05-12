@@ -1,69 +1,162 @@
-# US006 - Create a Task 
+# US004 - Assign Skills to Collaborator
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Ensure a collaborator object is successfully created with all properties initialized correctly.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
-	
+    @Test
+    void ensureCollaboratorIsCreatedSuccessfully() {
+        Collaborator collaborator = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertNotNull(collaborator);
+    }
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Ensure the list of skills for a collaborator can be modified.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test
+    void ensureSkillListIsMutable() {
+        Collaborator collaborator = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        List<Skill> skills = new ArrayList<>();
+        collaborator.setSkills(skills);
+        skills.add(new Skill("Java"));
+        assertEquals(1, collaborator.getSkills().size());
+    }
 
-_It is also recommended to organize this content by subsections._ 
+**Test 3:** Verify that comparing the same object results in equality.
+
+    @Test
+    void testEqualsSameObject() {
+        Collaborator collaborator = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertEquals(collaborator, collaborator);
+    }
+
+**Test 4:** Ensure comparing with a different class returns inequality.
+
+    @Test
+    void testEqualsDifferentClass() {
+        Collaborator collaborator = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertNotEquals(collaborator, new Object());
+    }
+
+**Test 5:** Assert inequality when comparing with null.
+
+    @Test
+    void testEqualsNull() {
+        Collaborator collaborator = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertNotEquals(collaborator, null);
+    }
+
+**Test 6:** Verify inequality when comparing different collaborator objects.
+
+    @Test
+    void testEqualsDifferentObject() {
+        Collaborator collaborator1 = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        Collaborator collaborator2 = new Collaborator("Jane Smith", "456 Oak St", "jane.smith@example.com",
+                "987554321", "cartão de cidadão", "98765432", LocalDate.of(1995, 5, 5),
+                LocalDate.now(), "Tester");
+        assertNotEquals(collaborator1, collaborator2);
+    }
+
+**Test 7:** Assert inequality when comparing the same object with different attribute values.
+
+    @Test
+    void testEqualsSameObjectDifferentValues() {
+        Collaborator collaborator1 = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123-456-7890", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        Collaborator collaborator2 = new Collaborator("John Doe", "456 Oak St", "john.doe@example.com",
+                "123556789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertNotEquals(collaborator1, collaborator2);
+    }
+
+**Test 8:** Ensure equality when comparing two identical collaborator objects.
+
+    @Test
+    void testEqualsSameObjectSameValues() {
+        Collaborator collaborator1 = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        Collaborator collaborator2 = new Collaborator("John Doe", "123 Main St", "john.doe@example.com",
+                "123456789", "cartão de cidadão", "12345678", LocalDate.of(1990, 1, 1),
+                LocalDate.now(), "Developer");
+        assertEquals(collaborator1, collaborator2);
+    }
+
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class AssignSkillController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+package pt.ipp.isep.dei.esoft.project.application.controller;
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
+public class AssignSkillController {
+    private CollaboratorRepository collaboratorRepository;
+    private SkillsRepository skillsRepository;
+    private AuthenticationRepository authenticationRepository;
     
-	return newTask;
-}
-```
-
-### Class Organization
-
-```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
+    public AssignSkillController(){
+        getCollaboratorRepository();
+        getSkillsRepository();
+        getAuthenticationRepository();
+    }
     
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
+    public AssignSkillController(AuthenticationRepository authenticationRepository) {
+        this.authenticationRepository = authenticationRepository;
+        this.collaboratorRepository = CollaboratorRepository.getInstance();
+    }
+    
+    public CollaboratorRepository getCollaboratorRepository() {
+        if (collaboratorRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            collaboratorRepository = repositories.getCollaboratorRepository();
+        }
+        return collaboratorRepository;
+    }
+    
+    public SkillsRepository getSkillsRepository() {
+        if(skillsRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            skillsRepository = repositories.getSkillsRepository();
+        }
+        return skillsRepository;
+    }
+    
+    public AuthenticationRepository getAuthenticationRepository() {
+        if (authenticationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            authenticationRepository = repositories.getAuthenticationRepository();
+        }
+        return authenticationRepository;
+    }
 }
+
 ```
 
 
 ## 6. Integration and Demo 
+Let's consider a scenario where we have a system for managing collaborators and their skills. We'll integrate the Collaborator class with a CollaboratorRepository class, and then demonstrate how to add collaborators, retrieve their information, and manipulate their skills.
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
+* We create two Collaborator objects.
+* We add these collaborators to the CollaboratorRepository.
+* We retrieve all collaborators from the repository and display their information.
+* We manipulate the skills of one collaborator (collaborator1) by adding Java and Python skills.
+* We display the updated information of collaborator1.
 
 
 ## 7. Observations

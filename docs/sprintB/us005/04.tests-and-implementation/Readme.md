@@ -1,23 +1,41 @@
-# US006 - Create a Task 
+# US005 - Generate a Team Proposal
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Test adding a member to a team.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
-	
+    @Test
+    public void testAddMember() {
+        team.addMember(collaborator1);
+        assertEquals(1, team.getMembers().size());
+        assertEquals(collaborator1, team.getMembers().get(0));
+    }
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Test removing a member from a team.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test
+    public void testRemoveMember() {
+        team.addMember(collaborator1);
+        team.addMember(collaborator2);
+        assertEquals(2, team.getMembers().size());
+
+        team.removeMember(collaborator1);
+        assertEquals(1, team.getMembers().size());
+        assertEquals(collaborator2, team.getMembers().get(0));
+    }
+
+**Test 3:** Test the toString() method of the team class.
+
+    @Test
+    public void testToString() {
+        team.addMember(collaborator1);
+        team.addMember(collaborator2);
+
+        String expected = "Members:\n" +
+                "- John Doe\n" +
+                "- Jane Smith\n";
+        assertEquals(expected, team.toString());
+    }
 
 _It is also recommended to organize this content by subsections._ 
 
@@ -27,43 +45,82 @@ _It is also recommended to organize this content by subsections._
 ### Class CreateTaskController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+public class GenerateTeamController {
+    private final CollaboratorRepository collaboratorRepository;
+    private final SkillsRepository skillsRepository;
+    private final TeamRepository teamRepository;
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
     
-	return newTask;
-}
-```
-
-### Class Organization
-
-```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
+    public GenerateTeamController() {
+        this.collaboratorRepository = CollaboratorRepository.getInstance();
+        this.skillsRepository = SkillsRepository.getInstance();
+        this.teamRepository = TeamRepository.getInstance();
+    }
     
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+    public Team generateTeamProposal(int minTeamSize, int maxTeamSize, List<Skill> requiredSkills) {
+        List<Collaborator> allCollaborators = collaboratorRepository.getCollaborators();
+        List<Collaborator> filteredCollaborators = filterCollaboratorsBySkills(allCollaborators, requiredSkills);
 
-    addTask(task);
-        
-    return task;
+        if (filteredCollaborators.size() < minTeamSize) {
+            System.out.println("Insufficient collaborators available.");
+            return null;
+        } else if (filteredCollaborators.size() > maxTeamSize) {
+            List<Collaborator> selectedCollaborators = selectCollaborators(filteredCollaborators, maxTeamSize);
+            Team team = new Team();
+            team.setMembers(selectedCollaborators);
+            return team;
+        } else {
+            Team team = new Team();
+            team.setMembers(filteredCollaborators);
+            return team;
+        }
+    }
+    
+    private List<Collaborator> filterCollaboratorsBySkills(List<Collaborator> collaborators, List<Skill> requiredSkills) {
+        List<Collaborator> filteredCollaborators = new ArrayList<>();
+        for (Collaborator collaborator : collaborators) {
+            if (!isCollaboratorInTeam(collaborator)) {
+                boolean hasAllSkills = true;
+                for (Skill requiredSkill : requiredSkills) {
+                    if (!collaborator.hasSkill(requiredSkill)) {
+                        hasAllSkills = false;
+                        break;
+                    }
+                }
+                if (hasAllSkills) {
+                    filteredCollaborators.add(collaborator);
+                }
+            }
+        }
+        return filteredCollaborators;
+    }
+    
+    private boolean isCollaboratorInTeam(Collaborator collaborator) {
+        for (Team team : teamRepository.getTeams()) {
+            if (team.getMembers().contains(collaborator)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<Collaborator> selectCollaborators(List<Collaborator> collaborators, int maxTeamSize) {
+        return collaborators.subList(0, maxTeamSize);
+    }
 }
+
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+Let's consider a scenario where we have a Team class that manages members.
 
-* For demo purposes some tasks are bootstrapped while system starts.
+* We create a Team object named "Development Team".
+* We create two Collaborator objects.
+* We add these collaborators to the team.
+* We display the team's information before and after removing a member.
 
 
 ## 7. Observations
