@@ -11,9 +11,6 @@ skinparam classAttributeIconSize 0
 
 
 
-class VehicleTypeRepository{
-}
-
 class VFM {
 }
 
@@ -51,9 +48,7 @@ class Vehicle {
 }
 
 class VehicleRepository {
-    -getVehicleTypesList
 
-    +
 }
 
 class Repositories {
@@ -71,7 +66,6 @@ class RegisterVehicleController {
     + RegisterVehicleController()
     + registerVehicle(brand, model, vehicleID, type, grossWeight, tare, currentKm, registerDate, acquisitionDate, checkupFrequency)
     - getVehicleRepository()
-    - getVehicleTypesList()
 }
 
 
@@ -91,7 +85,6 @@ RegisterVehicleController ..> VehicleRepository : getVehicleRepository
 
 RegisterVehicleController..> "1" Vehicle : Vehicle
 
-RegisterVehicleController ..> VehicleTypeRepository
 
 VehicleRepository --> Vehicle
 
