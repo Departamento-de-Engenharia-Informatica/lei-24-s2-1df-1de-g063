@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for assigning skills to collaborators.
+ */
 public class AssignSkillUI implements Runnable {
-    Scanner scan = new Scanner(System.in);
 
+    private final Scanner scanner = new Scanner(System.in);
     private final AssignSkillController controller;
     private final CollaboratorRepository collaboratorRepository;
     private final SkillsRepository skillsRepository;
@@ -20,16 +23,18 @@ public class AssignSkillUI implements Runnable {
     private int userChoiceCollaborator;
     private int userChoiceSkill;
 
+    /**
+     * Constructs an instance of AssignSkillUI.
+     */
     public AssignSkillUI() {
         controller = new AssignSkillController();
-        this.collaboratorRepository = CollaboratorRepository.getInstance();
-        this.skillsRepository = SkillsRepository.getInstance();
+        collaboratorRepository = CollaboratorRepository.getInstance();
+        skillsRepository = SkillsRepository.getInstance();
     }
 
-    private AssignSkillController getController() {
-        return controller;
-    }
-
+    /**
+     * Runs the assign skill user interface.
+     */
     public void run() {
         printCollaboratorList();
         requestDataCollaborator();
@@ -47,7 +52,7 @@ public class AssignSkillUI implements Runnable {
             System.out.println("No Collaborators registered yet.");
         } else {
             for (Collaborator collaborator : collaborators) {
-                System.out.printf("%d - %s%n",choice,collaborator);
+                System.out.printf("%d - %s%n", choice, collaborator);
                 choice++;
             }
         }
@@ -61,34 +66,34 @@ public class AssignSkillUI implements Runnable {
             System.out.println("No Skills registered yet.");
         } else {
             for (Skill skill : skills) {
-                System.out.printf("%d - %s%n",choice,skill);
+                System.out.printf("%d - %s%n", choice, skill);
                 choice++;
             }
         }
     }
 
-    private void requestDataCollaborator(){
-        userChoiceCollaborator = requestUserChoice();
+    private void requestDataCollaborator() {
+        userChoiceCollaborator = requestUserChoice("collaborator");
     }
 
-    private void requestDataSkill(){
-        userChoiceSkill = requestUserChoice();
+    private void requestDataSkill() {
+        userChoiceSkill = requestUserChoice("skill");
     }
 
-    private int requestUserChoice(){
+    private int requestUserChoice(String type) {
         int userChoice = 0;
         boolean isValid = false;
 
         while (!isValid) {
-            System.out.println("Enter your choice: ");
-            String input = scan.nextLine();
+            System.out.printf("Enter your choice for %s: ", type);
+            String input = scanner.nextLine();
 
             try {
                 userChoice = Integer.parseInt(input);
                 if (userChoice >= 0 && userChoice <= choice - 1) {
                     isValid = true;
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between 0 and " + (choice - 1) + ".");
+                    System.out.printf("Invalid choice. Please enter a number between 0 and %d.%n", choice - 1);
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
@@ -109,7 +114,7 @@ public class AssignSkillUI implements Runnable {
             selectedSkills.add(selectedSkill);
 
             System.out.println("Do you want to add another skill? (yes/no)");
-            String input = scan.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase();
             if (!input.equals("yes")) {
                 continueSelectingSkills = false;
             } else {
@@ -120,7 +125,7 @@ public class AssignSkillUI implements Runnable {
 
         List<Skill> existingSkills = selectedCollaborator.getSkills();
 
-        if (existingSkills!= null) {
+        if (existingSkills != null) {
             existingSkills.addAll(selectedSkills);
         } else {
             selectedCollaborator.setSkills(selectedSkills);
@@ -128,5 +133,4 @@ public class AssignSkillUI implements Runnable {
 
         System.out.println(selectedCollaborator.getSkills());
     }
-
 }

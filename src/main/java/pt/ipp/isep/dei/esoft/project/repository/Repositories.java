@@ -11,6 +11,8 @@ public class Repositories {
     private final CollaboratorRepository collaboratorRepository;
     private final VehicleRepository vehicleRepository;
 
+    private final TeamRepository teamRepository;
+
     private Repositories() {
         organizationRepository = new OrganizationRepository();
         taskCategoryRepository = new TaskCategoryRepository();
@@ -19,6 +21,7 @@ public class Repositories {
         jobRepository = new JobRepository();
         collaboratorRepository = new CollaboratorRepository();
         vehicleRepository = new VehicleRepository();
+        teamRepository = new TeamRepository();
     }
 
     public static Repositories getInstance() {
@@ -56,5 +59,9 @@ public class Repositories {
 
     public VehicleRepository getVehicleRepository(){
         return VehicleRepository.getInstance();
+    }
+
+    public TeamRepository getTeamRepository() {
+        return TeamRepository.getInstance();
     }
 }

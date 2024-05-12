@@ -7,6 +7,12 @@ import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import java.util.List;
 import java.util.Scanner;
 
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * User interface for registering jobs.
+ */
 public class RegisterJobUI implements Runnable {
 
     private final RegisterJobController controller;
@@ -14,26 +20,26 @@ public class RegisterJobUI implements Runnable {
     private JobRepository jobRepository;
     private Job job;
 
+    /**
+     * Constructs an instance of RegisterJobUI.
+     */
     public RegisterJobUI() {
         this.controller = new RegisterJobController();
         this.jobRepository = JobRepository.getInstance();
     }
 
-    private RegisterJobController getController() {
-        return controller;
-    }
-
+    /**
+     * Runs the job registration process.
+     */
+    @Override
     public void run() {
         System.out.println("\n\n--- Register Job ------------------------");
-
         requestData();
-
         submitData();
-
         printJobs();
     }
 
-    private void printJobs (){
+    private void printJobs() {
         List<Job> jobs = controller.getJobs();
         for (Job job : jobs) {
             System.out.println(job);
@@ -51,9 +57,9 @@ public class RegisterJobUI implements Runnable {
             valid = false;
         }
         for (Job j : jobs) {
-            if (j.toString().equals(job.toString())){
+            if (j.toString().equals(job.toString())) {
                 System.out.println("Job already exists");
-                valid=false;
+                valid = false;
             }
         }
 
@@ -61,21 +67,17 @@ public class RegisterJobUI implements Runnable {
     }
 
     private void submitData() {
-
-        job=controller.createJob(jobName);
+        job = controller.createJob(jobName);
         if (!validateJob(job)) {
             System.out.println("Job has not been registered");
-        } else{
+        } else {
             System.out.println("Job registered successfully");
             jobRepository.addJob(job);
         }
-
     }
-    
+
     private void requestData() {
-
         jobName = requestJobName();
-
     }
 
     private String requestJobName() {
@@ -83,5 +85,4 @@ public class RegisterJobUI implements Runnable {
         System.out.print("Job name: ");
         return input.nextLine();
     }
-
 }

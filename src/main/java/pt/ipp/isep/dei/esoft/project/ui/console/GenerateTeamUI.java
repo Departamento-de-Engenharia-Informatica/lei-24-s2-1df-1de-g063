@@ -12,112 +12,92 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * User interface for generating a team proposal based on specified criteria.
+ */
 public class GenerateTeamUI implements Runnable {
     private final GenerateTeamController controller;
     private final JobRepository jobRepository;
     private final SkillsRepository skillsRepository;
-
     private final TeamRepository teamRepository;
     private final Scanner scanner;
-
     private int maxSize;
-
     private int minSize;
-
     private int choice;
     private List<Skill> selectedSkills = new ArrayList<>();
-
     private boolean error = false;
-
     private Team teamProposal;
 
-    // Define any additional fields needed to collect team information
-
+    /**
+     * Constructs an instance of GenerateTeamUI.
+     */
     public GenerateTeamUI() {
         this.controller = new GenerateTeamController();
         this.jobRepository = JobRepository.getInstance();
         this.skillsRepository = SkillsRepository.getInstance();
         this.scanner = new Scanner(System.in);
-        this.teamRepository = new TeamRepository();
+        this.teamRepository = TeamRepository.getInstance();
     }
 
+    /**
+     * Runs the generate team user interface.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Generate Team ------------------------");
-        // Call methods to collect team information
         requestData();
-        // Call method to submit team data
-
+        if (!error) {
             submitData();
-        if(!error){
-            printTeam();
-
+            if (!error) {
+                printTeam();
+            }
         }
-
     }
 
     private void requestData() {
         Scanner sc = new Scanner(System.in);
 
-        // Request and validate max team size
         System.out.println("Max team size?");
-        while (!sc.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid integer value.");
-            sc.nextLine(); // Consume invalid input
-        }
-        maxSize = sc.nextInt();
-        sc.nextLine(); // Consume newline character
+        maxSize = requestIntegerInput(sc);
 
-        // Request and validate min team size
         System.out.println("Min team size?");
-        while (!sc.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid integer value.");
-            sc.nextLine(); // Consume invalid input
-        }
-        minSize = sc.nextInt();
-        sc.nextLine(); // Consume newline character
+        minSize = requestIntegerInput(sc);
 
-        // Choose skills from the list
         System.out.println("Choose the skills from the following list:");
-        boolean error = printSkillList();
+        error = printSkillList();
         if (!error) {
             boolean continueSelectingSkills = true;
             selectedSkills.clear();
             while (continueSelectingSkills) {
-                // Request and validate skill choice
-                int choice;
-                System.out.println("Enter the number corresponding to the skill:");
-                while (!sc.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a valid integer value.");
-                    sc.nextLine(); // Consume invalid input
-                }
-                choice = sc.nextInt();
-                sc.nextLine(); // Consume newline character
-
-                // Validate skill choice
-                if (choice < 0 || choice >= skillsRepository.getSkills().size()) {
+                int choice = requestIntegerInput(sc);
+                if (choice >= 0 && choice < skillsRepository.getSkills().size()) {
+                    Skill selectedSkill = skillsRepository.getSkills().get(choice);
+                    selectedSkills.add(selectedSkill);
+                    System.out.println("Do you want to add another skill? (yes/no)");
+                    String input = sc.nextLine().toLowerCase();
+                    if (!input.equals("yes")) {
+                        continueSelectingSkills = false;
+                    }
+                } else {
                     System.out.println("Invalid choice. Please select a number within the range.");
-                    continue;
-                }
-
-                Skill selectedSkill = skillsRepository.getSkills().get(choice);
-                selectedSkills.add(selectedSkill);
-
-                // Ask if user wants to add another skill
-                System.out.println("Do you want to add another skill? (yes/no)");
-                String input = sc.nextLine().toLowerCase();
-                if (!input.equals("yes")) {
-                    continueSelectingSkills = false;
                 }
             }
             System.out.println(selectedSkills);
         }
     }
 
-
+    private int requestIntegerInput(Scanner scanner) {
+        int value;
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a valid integer value.");
+            scanner.nextLine(); // Consume invalid input
+        }
+        value = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+        return value;
+    }
 
     private void submitData() {
-
         boolean generateAnother = true;
         while (generateAnother) {
             teamProposal = controller.generateTeamProposal(minSize, maxSize, selectedSkills);
@@ -133,8 +113,6 @@ public class GenerateTeamUI implements Runnable {
                     System.out.println("Team added to repository.");
                 }
             }
-
-            // Ask the user if they want to generate another team
             System.out.println("Do you want to generate another team? (yes/no)");
             String input = scanner.nextLine().toLowerCase();
             if (!input.equals("yes")) {
@@ -143,17 +121,13 @@ public class GenerateTeamUI implements Runnable {
         }
     }
 
-
-
     private void printTeam() {
-        if(!error){
+        if (!error) {
             System.out.println("Team members: ");
             System.out.println(teamProposal.getMembers());
-
         }
-
-
     }
+
     private boolean printSkillList() {
         choice = 0;
         List<Skill> skills = skillsRepository.getSkills();
@@ -163,12 +137,10 @@ public class GenerateTeamUI implements Runnable {
             return true;
         } else {
             for (Skill skill : skills) {
-                System.out.printf("%d - %s%n",choice,skill);
+                System.out.printf("%d - %s%n", choice, skill);
                 choice++;
             }
             return false;
         }
     }
-
-    // Implement any additional methods needed to collect team information
 }

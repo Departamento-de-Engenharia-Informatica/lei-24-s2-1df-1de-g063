@@ -7,34 +7,42 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import java.util.List;
 import java.util.Scanner;
 
-public class MaintenanceRegistrationUI implements Runnable{
-    Scanner scan = new Scanner(System.in);
+import java.util.List;
+import java.util.Scanner;
 
+/**
+ * User interface for registering maintenance information for vehicles.
+ */
+public class MaintenanceRegistrationUI implements Runnable {
     private final MaintenanceRegistrationController controller;
     private final VehicleRepository vehicleRepository;
+    private final Scanner scanner;
     private String maintenance;
     private double lastMaintenanceKm;
     private int userChoice;
     private int choice;
 
+    /**
+     * Constructs an instance of MaintenanceRegistrationUI.
+     */
     public MaintenanceRegistrationUI() {
-        controller = new MaintenanceRegistrationController();
-        vehicleRepository = controller.getVehicleRepository();
+        this.controller = new MaintenanceRegistrationController();
+        this.vehicleRepository = controller.getVehicleRepository();
+        this.scanner = new Scanner(System.in);
     }
 
-    private MaintenanceRegistrationController getController() {
-        return controller;
-    }
-
+    /**
+     * Runs the maintenance registration user interface.
+     */
+    @Override
     public void run() {
         boolean verification = printVehicles();
-        if(verification){
+        if (verification) {
             System.out.println("\n\n--- Vehicle Maintenance Result ------------------------");
             requestData();
             submitData();
         }
     }
-
 
     private boolean printVehicles() {
         boolean verification = true;
@@ -44,10 +52,9 @@ public class MaintenanceRegistrationUI implements Runnable{
         if (vehicles.isEmpty()) {
             System.out.println("No vehicles registered yet.");
             verification = false;
-            return verification;
         } else {
             for (Vehicle vehicle : vehicles) {
-                System.out.printf("%d - %s%n",choice,vehicle);
+                System.out.printf("%d - %s%n", choice, vehicle);
                 choice++;
             }
         }
@@ -66,7 +73,7 @@ public class MaintenanceRegistrationUI implements Runnable{
 
         while (!isValid) {
             System.out.print("Enter your choice: ");
-            String input = scan.nextLine();
+            String input = scanner.nextLine();
 
             try {
                 userChoice = Integer.parseInt(input);
@@ -85,32 +92,30 @@ public class MaintenanceRegistrationUI implements Runnable{
 
     private String requestMaintenance() {
         System.out.print("Maintenance Result: ");
-        return scan.nextLine();
+        return scanner.nextLine();
     }
 
     private double requestLastMaintenanceKm() {
-        double LastMaintenanceKm = 0;
+        double lastMaintenanceKm = 0;
         boolean validInput = false;
 
         while (!validInput) {
             System.out.print("Last Maintenance Km: ");
-            String input = scan.nextLine();
+            String input = scanner.nextLine();
             try {
-                LastMaintenanceKm = Double.parseDouble(input);
+                lastMaintenanceKm = Double.parseDouble(input);
                 validInput = true;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
             }
         }
 
-        return LastMaintenanceKm;
+        return lastMaintenanceKm;
     }
 
     private void submitData() {
         Vehicle selectedVehicle = vehicleRepository.getVehicles().get(userChoice);
-        System.out.println(selectedVehicle);
         selectedVehicle.setMaintenance(maintenance);
         selectedVehicle.setLastMaintenanceKm(lastMaintenanceKm);
     }
-
 }

@@ -9,11 +9,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 
-public class RegisterVehicleUI implements Runnable{
-    Scanner scan = new Scanner(System.in);
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
 
+/**
+ * User interface for registering vehicles.
+ */
+public class RegisterVehicleUI implements Runnable {
     private final RegisterVehicleController controller;
     private final VehicleRepository vehicleRepository;
+    private final Scanner scan;
+
     private String brand;
     private String model;
     private double tareWeight;
@@ -24,28 +32,24 @@ public class RegisterVehicleUI implements Runnable{
     private double checkUpFrequency;
     private Vehicle vehicle;
 
+    /**
+     * Constructs an instance of RegisterVehicleUI.
+     */
     public RegisterVehicleUI() {
         this.controller = new RegisterVehicleController();
         this.vehicleRepository = controller.getVehicleRepository();
+        this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Runs the vehicle registration process.
+     */
+    @Override
     public void run() {
         System.out.println("\n\n--- Register Vehicle ------------------------");
         requestData();
         submitData();
         printVehicles();
-    }
-
-    private void requestData() {
-        brand = requestBrand();
-        model = requestModel();
-        tareWeight = requestNumbers("Tare Weight: ");
-        grossWeight = requestNumbers("Gross Weight: ");
-        currentKm = requestNumbers("Current Km: ");
-        registerDate = requestDate("Register Date (yyyy/MM/dd): ");
-        acquisitionDate = requestDate("Acquisition Date (yyyy/MM/dd): ");
-        checkUpFrequency = requestNumbers("Check Up Frequency: ");
-
     }
 
     private LocalDate requestDate(String prompt) {
@@ -96,8 +100,19 @@ public class RegisterVehicleUI implements Runnable{
         return number;
     }
 
+    private void requestData() {
+        brand = requestBrand();
+        model = requestModel();
+        tareWeight = requestNumbers("Tare Weight: ");
+        grossWeight = requestNumbers("Gross Weight: ");
+        currentKm = requestNumbers("Current Km: ");
+        registerDate = requestDate("Register Date (yyyy/MM/dd): ");
+        acquisitionDate = requestDate("Acquisition Date (yyyy/MM/dd): ");
+        checkUpFrequency = requestNumbers("Check Up Frequency: ");
+    }
+
     private void submitData() {
-        vehicle = controller.createVehicle(brand,model,tareWeight,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency);
+        vehicle = controller.createVehicle(brand, model, tareWeight, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency);
         vehicleRepository.addVehicle(vehicle);
     }
 
@@ -106,12 +121,12 @@ public class RegisterVehicleUI implements Runnable{
         List<Vehicle> vehicles = vehicleRepository.getVehicles();
         System.out.println("\n--- Vehicles List -------------------------");
         if (vehicles.isEmpty()) {
-           System.out.println("No vehicles registered yet.");
+            System.out.println("No vehicles registered yet.");
         } else {
-           for (Vehicle vehicle : vehicles) {
-               System.out.printf("%d - %s%n", contador, vehicle);
-               contador++;
-           }
+            for (Vehicle vehicle : vehicles) {
+                System.out.printf("%d - %s%n", contador, vehicle);
+                contador++;
+            }
         }
     }
 }

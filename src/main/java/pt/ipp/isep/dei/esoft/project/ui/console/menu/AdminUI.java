@@ -11,17 +11,26 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Paulo Maio pam@isep.ipp.pt
- */
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * The AdminUI class provides a user interface for administrative tasks.
+ * It allows administrators to choose from a menu of options.
+ */
 public class AdminUI implements Runnable {
 
+    /**
+     * Constructs a new AdminUI object.
+     */
     public AdminUI() {
     }
 
+    /**
+     * Runs the admin interface.
+     */
     public void run() {
-        List<MenuItem> options = new ArrayList<MenuItem>();
+        List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Create Task", new CreateTaskUI()));
         options.add(new MenuItem("Register Vehicle", new RegisterVehicleUI()));
         options.add(new MenuItem("Add Skill", new SkillUI()));
