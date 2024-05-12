@@ -248,13 +248,11 @@ public class Vehicle {
 ## 6. Integration and Demo
 Simulate how the MaintenanceRegistrationController interacts with the VehicleRepository and AuthenticationRepository:
 
-* Instantiates the VehicleRepository and AuthenticationRepository.
+* Instantiates the VehicleRepository.
 * Creates a MaintenanceRegistrationController with the repositories.
 * Adds a vehicle to the repository.
 * Sets maintenance for the added vehicle.
 * Prints the vehicle information.
-* Tries to authenticate a user (which is simulated here).
-
 
 ## 7. Observations
 

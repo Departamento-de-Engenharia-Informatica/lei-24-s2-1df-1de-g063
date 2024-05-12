@@ -3,13 +3,13 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":CreateTaskController" as CTRL
+participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "vehicleRepository:\nvehicleRepository" as TaskCategoryRepository
 
 autonumber 12
--> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
+-> CTRL : registerVehicle (brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
 
 autonumber 12.1
 
@@ -21,22 +21,22 @@ activate CTRL
             RepositorySingleton --> CTRL: repositories
         deactivate RepositorySingleton
 
-        CTRL -> PLAT : getTaskCategoryRepository()
+        CTRL -> PLAT : getVeehicleRepository()
         activate PLAT
 
-            PLAT -> CTRL : taskCategoryRepository
+            PLAT -> CTRL : vehicleRepository
         deactivate PLAT
 
-        CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
+        CTRL -> TaskCategoryRepository : registerVehicle (brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
         activate TaskCategoryRepository
 
-            TaskCategoryRepository --> CTRL : taskCategory
+            TaskCategoryRepository --> CTRL : success
         deactivate TaskCategoryRepository
 
     end group
 
     autonumber 13
-    <-- CTRL : taskCategory
+    <-- CTRL : success
 
 deactivate CTRL
 

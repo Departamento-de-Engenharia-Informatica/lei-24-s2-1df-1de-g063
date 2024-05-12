@@ -31,13 +31,13 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
+_**Note that SSD - Alternative one is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![us002-sequence-diagram-full.svg](svg%2Fus002-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,24 +45,21 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![us002-sequence-diagram-split.svg](svg%2Fus002-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Job Registration**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![us002-sequence-diagram-partial-job-registration.svg](svg%2Fus002-sequence-diagram-partial-job-registration.svg)
 
-**Get Task Category Object**
+**Get Job Repository**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![us002-sequence-diagram-partial-get-job-repository.svg](svg%2Fus002-sequence-diagram-partial-get-job-repository.svg)
 
-**Get Employee**
+**Add Job to Repository**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
+![us002-sequence-diagram-partial-add-to-jobRepository.svg](svg%2Fus002-sequence-diagram-partial-add-to-jobRepository.svg)
 
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![us002-class-diagram.svg](svg%2Fus002-class-diagram.svg)

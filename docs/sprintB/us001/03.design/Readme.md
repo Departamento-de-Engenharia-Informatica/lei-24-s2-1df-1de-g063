@@ -37,7 +37,7 @@ _**Note that SSD - Alternative one is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![us001-sequence-diagram-full.svg](svg%2Fus001-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,24 +45,20 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![us001-sequence-diagram-split.png](svg%2Fus001-sequence-diagram-split.png)
 
-**Get Task Category List Partial SD**
+**Add skill to skillRepository**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![us001-sequence-diagram-partial-add-skill-to-skillRepository.svg](svg%2Fus001-sequence-diagram-partial-add-skill-to-skillRepository.svg)
 
-**Get Task Category Object**
+**Get skill Repository**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+![us001-sequence-diagram-partial-get-skill-repository.svg](svg%2Fus001-sequence-diagram-partial-get-skill-repository.svg)
 
-**Get Employee**
+**Skill Registration**
 
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![us001-sequence-diagram-partial-Skill-registration.png](svg%2Fus001-sequence-diagram-partial-Skill-registration.png)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![us01-class-diagram.svg](svg%2Fus01-class-diagram.svg)
