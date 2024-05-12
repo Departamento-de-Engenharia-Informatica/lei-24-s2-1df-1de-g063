@@ -1,0 +1,77 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Vehicle Fleet Manager" as ADM
+participant ":MaintenanceRegistrationUI" as UI
+participant ":MaintenanceRegistrationController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "Vehicle:\n vehicle" as Vehicle
+activate ADM
+
+    ADM -> UI : Request to register vehicles check-up result
+
+    activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getVehicleRepository()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getVehicleRepository()
+            activate PLAT
+
+                PLAT --> CTRL: VehicleRepository
+            deactivate PLAT
+
+            CTRL -> VehicleRepository : getVehicles()
+            activate VehicleRepository
+
+                VehicleRepository --> CTRL : Vehicles
+            deactivate VehicleRepository
+
+
+            CTRL --> UI : VehicleRepository
+        deactivate CTRL
+
+        UI --> ADM : Display vehicle selection interface
+    deactivate UI
+
+    ADM -> UI : Selects a vehicle
+    activate UI
+
+        UI --> ADM :Confirms the selection
+    deactivate UI
+
+    ADM -> UI : Registers results
+    activate UI
+
+        UI -> Vehicle : setMaintenance()
+        activate Vehicle
+
+        Vehicle --> UI : Maintenance
+
+        UI -> Vehicle : setLastMaintenanceKm()
+
+        Vehicle --> UI : LastMaintenanceKm
+        deactivate Vehicle
+        UI --> ADM : Confirmation of results registration
+    deactivate UI
+
+
+
+deactivate ADM
+
+@enduml

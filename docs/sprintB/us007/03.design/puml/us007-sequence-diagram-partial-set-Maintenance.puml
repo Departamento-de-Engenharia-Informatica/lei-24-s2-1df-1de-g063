@@ -1,0 +1,25 @@
+@startuml
+
+participant ":MaintenanceRegistrationUI" as UI
+participant "Vehicle:\n vehicle" as Vehicle
+
+autonumber
+
+ -> UI : Registers results
+activate UI
+
+    group set Maintenance
+        UI -> Vehicle : setMaintenance()
+        activate Vehicle
+
+        Vehicle --> UI : Maintenance
+
+        UI -> Vehicle : setLastMaintenanceKm()
+
+        Vehicle --> UI : LastMaintenanceKm
+        deactivate Vehicle
+    end
+    <--UI  : Confirmation of results registration
+deactivate UI
+
+@enduml

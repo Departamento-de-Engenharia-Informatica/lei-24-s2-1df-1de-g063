@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant SkillUI as UI
+participant SkillController as CTRL
+participant SkillRepository as skillRepository
+participant Skill as skill
+participant Repositories as PLAT
+
+
+-> UI: asks to register a new skill
+
+activate UI
+    group get the Skill Repository
+
+        UI -> CTRL : getSkillRepository()
+
+         activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+
+             activate RepositorySingleton
+
+                    RepositorySingleton -> CTRL : repositories
+
+             deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getSkillRepository()
+
+             activate PLAT
+
+                    PLAT -> CTRL : skillRepository
+             deactivate PLAT
+
+                    CTRL -> SkillRepository : getSkills()
+             activate SkillRepository
+
+                    skillRepository -> CTRL : skill
+
+             deactivate SkillRepository
+                    CTRL -> UI : skillRepository
+             deactivate CTRL
+    end
+
+    <-- UI :requests data (name of the skill)
+deactivate UI
+
+
+@enduml

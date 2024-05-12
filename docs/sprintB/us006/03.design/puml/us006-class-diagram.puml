@@ -1,0 +1,99 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+
+class VFM {
+}
+
+class SystemUser {
+    name
+    email
+    password
+    phone
+}
+
+class TaskCategory {
+    - String description
+
+    + TaskCategory(description)
+}
+
+class Vehicle {
+    - brand
+    - model
+    - vehicleID
+    - type
+    - grossWeight
+    - tare
+    - currentKm
+    - registerDate
+    - acquisitionDate
+    - checkupFrequency
+
+    + Vehicle(brand, model, vehicleID, type, grossWeight, tare, currentKm, registerDate, acquisitionDate, checkupFrequency)
+    + equals()
+    + needsCheckup()
+
+
+'  +saveTask(task)
+}
+
+class VehicleRepository {
+    -getVehicleTypesList
+
+    +
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getCollaboatorRepository()
+    + getVehicleRepository()
+    + getSkillRepository()
+    + getJobRepository()
+    + getAuthenticationRepository()
+
+}
+
+class RegisterVehicleController {
+    + RegisterVehicleController()
+    + registerVehicle(brand, model, vehicleID, type, grossWeight, tare, currentKm, registerDate, acquisitionDate, checkupFrequency)
+    - getVehicleRepository()
+    - getVehicleTypesList()
+}
+
+
+
+Repositories -> Repositories : instance
+
+
+RegisterVehicleUI .> RegisterVehicleController
+
+RegisterVehicleController .> Repositories : repositories
+
+Repositories -> "1" VehicleRepository
+
+RegisterVehicleController ..> TaskCategory
+
+RegisterVehicleController ..> VehicleRepository : getVehicleRepository
+
+RegisterVehicleController..> "1" Vehicle : Vehicle
+
+RegisterVehicleController ..> VehicleTypeRepository
+
+VehicleRepository --> Vehicle
+
+VFM --> SystemUser
+
+Vehicle --> "*" VFM : registered by
+
+@enduml

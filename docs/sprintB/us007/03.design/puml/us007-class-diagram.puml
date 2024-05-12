@@ -1,0 +1,55 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+class MaintenanceRegistrationUI {
+
+}
+
+class MaintenanceRegistrationController {
+    -vehicleRepository: VehicleRepository
+    +MaintenanceRegistrationController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
+    +getVehicleRepository(): VehicleRepository
+}
+
+note right of MaintenanceRegistrationController
+    - Vehicle is retrieved from selected data
+end note
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+class VehicleRepository{
+    -vehicles: List<Vehicle>
+    +getVehicles(): List<Vehicle>
+}
+
+class Vehicle{
+    -checkUpFrequency: double
+    -lastMaintenanceKm: double
+    -maintenance: String
+    +Vehicle(brand: String, model: String, tareWeight: double, \ngrossWeight: double, currentKm: double, registerDate: LocalDate, \nacquisitionDate: LocalDate, checkUpFrequency: double)
+    +setMaintenance(maintenance: String)
+    +getLastMaintenanceKm(): double
+    +setLastMaintenanceKm(lastMaintenanceKm: double)
+    +getCurrentKm(): double
+    +getCheckUpFrequency(): double
+}
+
+MaintenanceRegistrationUI .> MaintenanceRegistrationController
+MaintenanceRegistrationController ..> Repositories : repositories
+Repositories -> Repositories : instance
+Repositories --> "1" VehicleRepository
+VehicleRepository "1" --> "1*" Vehicle : vehicle
+MaintenanceRegistrationController ..> VehicleRepository : vehicleRepository
+
+@enduml

@@ -64,13 +64,3 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 ![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
 
 **Get Employee**
-
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
-
-## 3.3. Class Diagram (CD)
-
-![Class Diagram](svg/us006-class-diagram.svg)

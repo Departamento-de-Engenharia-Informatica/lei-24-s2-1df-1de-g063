@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "skillsRepository:\nSkillsRepository" as SkillsRepository
+
+autonumber 12
+-> CTRL : getSkills()
+
+autonumber 12.1
+
+activate CTRL
+    group Get Skills
+        activate CTRL
+
+                            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
+
+                                RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
+
+                            CTRL -> PLAT : getSkillsRepository()
+                            activate PLAT
+
+                                PLAT --> CTRL: SkillsRepository
+                            deactivate PLAT
+
+                            CTRL -> SkillsRepository : getSkills()
+                            activate SkillsRepository
+
+                                SkillsRepository --> CTRL : SkillsList
+                            deactivate SkillsRepository
+
+
+
+                        deactivate CTRL
+
+
+
+    end group
+
+    autonumber 13
+<-- CTRL : SkillsList
+deactivate CTRL
+
+
+@enduml
