@@ -23,6 +23,17 @@ public class SkillsRepository {
         skills.add(skill);
     }
 
+    public Skill getSkillByName(String skillName) {
+        for (Skill skill : skills) {
+            if (skill.getName().equalsIgnoreCase(skillName)) {
+                return skill;
+            }
+        }
+        // Return null if no skill with the given name is found
+        return null;
+    }
+
+
     public List<Skill> getSkills() {
         //This is a defensive copy, so that the repository cannot be modified from the outside.
         return List.copyOf(skills);

@@ -14,7 +14,7 @@ public class Collaborator {
     private final LocalDate birthDate;
     private final LocalDate admissionDate;
     private final String job;
-    private List<Skill> skill;
+    private List<Skill> skills;
 
     public Collaborator(String name, String adress, String email, String phoneNumber, String idType, String idNumber, LocalDate birthDate, LocalDate admissionDate, String job) {
         this.name = name;
@@ -28,12 +28,23 @@ public class Collaborator {
         this.job = job;
     }
 
-    public List<Skill> getSkill() {
-        return skill;
+    public List<Skill> getSkills() {
+        return skills;
     }
 
-    public void setSkill(List<Skill> skill) {
-        this.skill = skill;
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public String getName(){ return name;}
+
+    public boolean hasSkill(Skill skill){
+        for (Skill s : skills) {
+            if (s.equals(skill)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
