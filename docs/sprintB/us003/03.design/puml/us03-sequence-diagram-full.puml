@@ -11,7 +11,7 @@ participant ":RegisterCollaboratorUI" as UI
 participant ":RegisterCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "collaboratorRecordRepository:\nCollaboratorRecordRepository" as CollaboratorRecordRepository
+participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "SkillsRepository:\nSkillsRepository" as SkillsRepository
 participant "JobRepository:\nJobRepository" as JobRepository
 
@@ -35,17 +35,17 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getCollaboratorRecordRepository()
+                CTRL -> PLAT : getCollaboratorRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: collaboratorRecordRepository
+                    PLAT --> CTRL: collaboratorRepository
                 deactivate PLAT
 
-                CTRL -> CollaboratorRecordRepository : getCollaboratorRecord()
-                activate CollaboratorRecordRepository
+                CTRL -> CollaboratorRepository : getCollaboratorRecord()
+                activate CollaboratorRepository
 
-                    CollaboratorRecordRepository --> CTRL : collaboratorRecord
-                deactivate CollaboratorRecordRepository
+                    CollaboratorRepository --> CTRL : collaboratorRecord
+                deactivate CollaboratorRepository
 
 
                 CTRL --> UI : CollaboratorRecord
@@ -124,22 +124,22 @@ activate ADM
                                 RepositorySingleton --> CTRL: repositories
                             deactivate RepositorySingleton
 
-                            CTRL -> PLAT : getCollaboratorRecordRepository()
+                            CTRL -> PLAT : getCollaboratorRepository()
                             activate PLAT
 
-                                PLAT --> CTRL: collaboratorRecordRepository
+                                PLAT --> CTRL: collaboratorRepository
                             deactivate PLAT
 
-                            CTRL -> CollaboratorRecordRepository : setCollaboratorRecord()
-                            activate CollaboratorRecordRepository
+                            CTRL -> CollaboratorRepository : setCollaboratorRecord()
+                            activate CollaboratorRepository
 
-                                CollaboratorRecordRepository --> CTRL : collaboratorRecord
-                            deactivate CollaboratorRecordRepository
+                                CollaboratorRepository --> CTRL : collaboratorRecord
+                            deactivate CollaboratorRepository
 
 
                             CTRL --> UI : CollaboratorRecord
                         deactivate CTRL
                                 UI --> ADM : shows all data and displays operation success
-deactivate UI
+deactivate UI
 
 @enduml
