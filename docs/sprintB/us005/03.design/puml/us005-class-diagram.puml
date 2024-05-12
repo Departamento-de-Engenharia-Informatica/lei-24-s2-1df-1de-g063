@@ -1,0 +1,84 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class GenerateTeamUI{
+}
+
+class GenerateTeamController{
+    -CollaboratorRepository
+    -SkillsRepository
+    -TeamRepository
+    +generateTeamProposal(int minTeamSize, int maxTeamSize, List<Skill> requiredSkills)
+    +filterCollaboratorsBySkills(List<Collaborator> collaborators, List<Skill> requiredSkills)
+
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    +getSkillRepository()
+    +getCollaboratorRepository()
+}
+
+class TeamRepository{
+-teams : List<Team>
++addTeams(Team team)
++getTeams()
+}
+class CollaboratorRepository {
+    -collaborators : List<Collaborator>
+    +getCollaborators()
+
+}
+class SkillRepository {
+    +getSkill()
+    -skills : List<Skill>
+}
+class Collaborator{
+    +Collaborator(String name, String address, String email, String phoneNumber, String idType,
+                                          String idNumber, LocalDate birthDate, LocalDate admissionDate, String job)
+    -name : String
+    -address : String
+    -email : String
+    -phoneNumber : String
+    -idType : String
+    -idNumber : String
+    -birthDate : LocalDate
+    -admissionDate : LocalDate
+    -job : String
+    -skills : List<Skill>
+    +setSkills(List<Skill> skills)
+}
+class Team{
+ -members : List<Collaborators>
+ +getMembers()
+ +setMembers(List<Collaborator> members)
+ +addMember(Collaborator member)
+ +removeMember(Collaborator member)
+
+}
+class Skill{
+    +Skill(String Skill)
+}
+GenerateTeamUI .> GenerateTeamController
+GenerateTeamController ..> Repositories : repositories
+Repositories -->"1" SkillRepository
+Repositories -->"1" CollaboratorRepository
+Repositories -->"1" TeamRepository
+SkillRepository "1"-->"1*" Skill
+CollaboratorRepository "1"-->"1" Collaborator
+TeamRepository "1"--"1*" Team
+Repositories -> Repositories : instance
+GenerateTeamController ..> SkillRepository  : skillRepository
+GenerateTeamController ..> CollaboratorRepository : collaboratorRepository
+GenerateTeamController ..> TeamRepository : teamRepository
+
+@enduml

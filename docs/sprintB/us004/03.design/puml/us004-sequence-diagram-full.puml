@@ -1,0 +1,83 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+autonumber
+
+actor "Human Resources Manager" as HRM
+participant AssignSkillUI as UI
+participant AssignSkillController as CTRL
+participant Repositories as Repositories
+participant "Repositories \n:Repositories" as plat
+participant CollaboratorRepository
+participant SkillRepository
+participant "Collaborator \n :collaborator" as collaborator
+
+activate HRM
+HRM -> UI: asks to assign one or more competences to an employee
+activate UI
+UI -> HRM: requests data (an employee and the competence to assign)
+HRM -> UI: types requested data
+
+UI -> CTRL**: create
+
+
+UI -> CTRL: getCollaboratorRepository()
+activate CTRL
+CTRL -> Repositories: getInstance()
+activate Repositories
+
+Repositories --> CTRL: Instance
+deactivate Repositories
+CTRL -> plat: getCollaboratorRepository()
+activate plat
+plat --> CTRL: collaboratorRepository
+deactivate plat
+CTRL -> CollaboratorRepository: getCollaborator()
+activate CollaboratorRepository
+CollaboratorRepository -> CTRL : CollaboratorRepository
+deactivate CollaboratorRepository
+CTRL -> UI: CollaboratorRepository
+deactivate CTRL
+UI -> CTRL : getSkillRepository()
+activate CTRL
+CTRL -> Repositories: getInstance()
+activate Repositories
+Repositories -> CTRL : Instance
+deactivate Repositories
+CTRL -> plat: getSkillRepository()
+activate plat
+plat --> CTRL: skillRepository
+deactivate plat
+CTRL -> SkillRepository: getSkill()
+activate SkillRepository
+SkillRepository -> CTRL : Skill
+deactivate SkillRepository
+CTRL -> UI: SkillRepository
+deactivate CTRL
+
+
+
+UI --> HRM: shows list of collaborators and their skills
+deactivate UI
+
+HRM -> UI: specifies collaborator and skills to assign
+activate UI
+
+UI -> CTRL: assignSkills(collaborator, skills)
+activate CTRL
+
+CTRL --> collaborator: setSkills(collaborator, skills)
+activate collaborator
+collaborator --> CTRL: success
+deactivate collaborator
+
+CTRL --> UI: success
+deactivate CTRL
+
+UI --> HRM: displays operation success
+deactivate UI
+
+@enduml
