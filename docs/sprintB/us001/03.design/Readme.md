@@ -37,7 +37,7 @@ _**Note that SSD - Alternative one is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![us001-sequence-diagram-full.svg](svg%2Fus001-sequence-diagram-full.svg)
+![us001-sequence-diagram-full.svg](svg/us001-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,20 +45,20 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![us001-sequence-diagram-split.png](svg%2Fus001-sequence-diagram-split.png)
+![us001-sequence-diagram-split.png](svg/us001-sequence-diagram-split.svg)
 
 **Add skill to skillRepository**
 
-![us001-sequence-diagram-partial-add-skill-to-skillRepository.svg](svg%2Fus001-sequence-diagram-partial-add-skill-to-skillRepository.svg)
+![us001-sequence-diagram-partial-add-skill-to-skillRepository.svg](svg/us001-sequence-diagram-partial-add-skill-to-skillRepository.svg)
 
 **Get skill Repository**
 
-![us001-sequence-diagram-partial-get-skill-repository.svg](svg%2Fus001-sequence-diagram-partial-get-skill-repository.svg)
+![us001-sequence-diagram-partial-get-skill-repository.svg](svg/us001-sequence-diagram-partial-get-skill-repository.svg)
 
 **Skill Registration**
 
-![us001-sequence-diagram-partial-Skill-registration.png](svg%2Fus001-sequence-diagram-partial-Skill-registration.png)
+![us001-sequence-diagram-partial-Skill-registration.png](svg/us001-sequence-diagram-partial-Skill-registration.png)
 
 ## 3.3. Class Diagram (CD)
 
-![us01-class-diagram.svg](svg%2Fus01-class-diagram.svg)
+![us01-class-diagram.svg](svg/us01-class-diagram.svg)
