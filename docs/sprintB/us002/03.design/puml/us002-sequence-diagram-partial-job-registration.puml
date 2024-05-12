@@ -6,18 +6,18 @@ skinparam shadowing false
 
 
 'hide footbox
-participant SkillUI as UI
-participant SkillController as CTRL
-participant SkillRepository as skillRepository
-participant Skill as skill
+participant RegisterJobUI as UI
+participant RegisterJobController as CTRL
+participant JobRepository as jobRepository
+participant Job as job
 participant Repositories as PLAT
 
 
 -> UI: types requested data
 activate UI
 
-    group Skill registration
-        UI --> UI: validateSkill(Skill skill)
+    group Job registration
+        UI --> UI: validateJob(Job job)
     end
     <-- UI : displays operation success
 deactivate CTRL

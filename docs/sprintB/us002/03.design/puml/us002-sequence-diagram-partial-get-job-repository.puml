@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant RegisterJobUI as UI
+participant RegisterJobController as CTRL
+participant JobRepository as jobRepository
+participant Job as job
+participant Repositories as PLAT
+
+
+-> UI: asks to register a new job
+
+activate UI
+    group get the Job Repository
+
+        UI -> CTRL : getJobRepository()
+
+         activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+
+             activate RepositorySingleton
+
+                    RepositorySingleton -> CTRL : repositories
+
+             deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getJobRepository()
+
+             activate PLAT
+
+                    PLAT -> CTRL : jobRepository
+             deactivate PLAT
+
+                    CTRL -> JobRepository : getJobs()
+             activate JobRepository
+
+                    JobRepository -> CTRL : job
+
+             deactivate JobRepository
+                    CTRL -> UI : jobRepository
+             deactivate CTRL
+    end
+
+    <-- UI :requests data (name of the Job)
+deactivate UI
+
+
+@enduml

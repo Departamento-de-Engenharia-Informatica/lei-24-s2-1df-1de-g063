@@ -11,7 +11,7 @@ participant ":SkillUI" as UI
 participant ":SkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "SkillsRepository:\nSkillsRepository" as SkillsRepository
 
 
 activate HRM
@@ -24,9 +24,6 @@ activate HRM
             UI -> CTRL : getSkillRepository()
 
      activate CTRL
-     ref over UI, SkillRepository
-        get SkillRepository
-     endref
 
             CTRL -> RepositorySingleton : getInstance()
 
@@ -40,32 +37,26 @@ activate HRM
 
      activate PLAT
 
-            PLAT -> CTRL : SkillRepository
+            PLAT -> CTRL : skillsRepository
      deactivate PLAT
 
-            CTRL -> SkillRepository : getSkills()
-     activate SkillRepository
+            CTRL -> SkillsRepository : getSkills()
+     activate SkillsRepository
 
-            SkillRepository -> CTRL : skill
-
-     deactivate SkillRepository
-            CTRL -> UI : SkillRepository
+            SkillsRepository -> CTRL : skill
+     deactivate SkillsRepository
+            CTRL -> UI : skillsRepository
      deactivate CTRL
-     UI --> HRM : requests data (name of the Skill)
+     UI --> HRM : requests data (name of the skill)
      deactivate UI
 
      HRM -> UI : types requested data
      activate UI
-     ref over UI, CTRL
-        skill registration
-     endref
 
-            UI -> SkillRepository: addSkills (Skill skill)
-     ref over UI,SkillRepository
-        add to SkillRepository
-     endref
-     activate SkillRepository
-     deactivate SkillRepository
+            UI -> SkillsRepository: addSkill (Skill skill)
+
+     activate SkillsRepository
+     deactivate SkillsRepository
 
      UI --> HRM : displays operation success
      deactivate UI
