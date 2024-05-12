@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Vehicle Fleet Manager" as ADM
 participant ":MaintenanceRegistrationUI" as UI
 participant ":MaintenanceRegistrationController" as CTRL
 participant ":Repositories" as RepositorySingleton
@@ -21,7 +21,7 @@ activate ADM
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehicleList()
+        UI -> CTRL : getVehicleRepository()
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -43,7 +43,7 @@ activate ADM
             deactivate VehicleRepository
 
 
-            CTRL --> UI : VehicleList
+            CTRL --> UI : VehicleRepository
         deactivate CTRL
 
         UI --> ADM : Display vehicle selection interface
@@ -62,6 +62,10 @@ activate ADM
         activate Vehicle
 
         Vehicle --> UI : Maintenance
+
+        UI -> Vehicle : setLastMaintenanceKm()
+
+        Vehicle --> UI : LastMaintenanceKm
         deactivate Vehicle
         UI --> ADM : Confirmation of results registration
     deactivate UI
