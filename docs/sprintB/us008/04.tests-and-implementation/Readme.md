@@ -1,4 +1,4 @@
-# US008 - Create a Task 
+# US008 - As an FM, I want to list the vehicles needing the check-up
 
 ## 4. Tests 
 

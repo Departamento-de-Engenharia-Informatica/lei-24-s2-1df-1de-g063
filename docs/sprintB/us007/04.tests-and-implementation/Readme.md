@@ -1,4 +1,4 @@
-# US007 - Create a Task 
+# US007 - As an FM, I wish to register a vehicle’s check-up
 
 ## 4. Tests 
 
