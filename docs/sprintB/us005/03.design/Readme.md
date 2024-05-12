@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+US005 - As a HRM, I want to generate a team proposal automatically
 
 ## 3. Design - User Story Realization 
 
@@ -6,35 +6,38 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID                                                                | Question: Which class is responsible for...                                       | Answer               | Justification (with patterns) |
+|:------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|:---------------------|:------------------------------|
+| Step 1 : asks to create a new team                                            | 	... interacting with the actor?                                                  | GenerateTeamUI         | Pure Fabrication              |
+| 			  		                                                                       | 	... coordinating the US?                                                         | CreateTeamController | Controller                    |
+| Step 2 : requests data(team name, min team size, max team size, description 	 | 	... displaying the form for the actor to input data?						                       | CreateTeamUI         | Information Expert            |
+| Step 3 : types requested data.                                                | ... temporarily keeping the inputted data?                                        | GenerateTeamUI         | Information Expert            |
+| Step 4 : shows skill category list and asks to select one or more  		         | 	...displaying the list of skills registered for the actor to select one or more? | GenerateTeamUI         | Information Expert            |
+| Step 5 : selects one or more skill(s) 		                                      | 	... temporarily keeping the selected data?                                       | GenerateTeamUI         | Information Expert            |
+| Step 6 : shows all data and requests confirmation.                            | ... displaying all information before submitting?                                 | GenerateTeamUI         | Information Expert            |    
+|                                                                               | ... displaying the form for the actor to confirm?                                 | GenerateTeamUI         | Information Expert            |
+| Step 7 : confirms data.                                                       | ... generate a team proposal?                                                     | GenerateTeamController | Pure Fabrication              |
+| 			  		                                                                       | 	... saving the team proposal?                                                    | GenerateTeamUI         | Information Expert            | 
+| Step 8 : shows team proposal and asks to confirm		                            | 	... displaying the team proposal before creates a team?                          | GenerateTeamUI         | Information Experts           | 
+| Step 9 : confirms team proposal.                                              | ... instantiating a new team?                                                     | TeamRepository       | Pure Fabrication              |
+|                                                                               | ... saving the team data?                                                         | Team                 | Information Expert            |
+|                                                                               | ... validating the data locally (mandatory data)?                                 | Team                 | Information Expert            |
+|                                                                               | ... validating the data globally (duplicate data)?                                | TeamRepository       | Information Expert            |
+|                                                                               | ... saving the created team?                                                      | TeamRepository       | Information Expert            |
+| Step 10 : displays operation success.                                         | ... informing operation success?                                                  | GenerateTeamUI         | Information Expert            |
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Collaborators
+* Team
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* GenerateTeamUI
+* GenerateTeamController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -45,32 +48,8 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
-
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
-
-**Get Task Category List Partial SD**
-
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
-
-**Get Task Category Object**
-
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
-
-**Get Employee**
-
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Full](svg/us005-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us005-class-diagram.)
