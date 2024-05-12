@@ -33,13 +33,13 @@ This user story intends to choose an employee and to give this chosen employee n
 
 * Typed data:
     * an employee
-    * a competence
+    * a skill
 
 **Output Data:**
 
   * List of information inserted
-    * Confirmation of the operation
-    * (In)Success of the operation
+  * Confirmation of the operation
+  * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 

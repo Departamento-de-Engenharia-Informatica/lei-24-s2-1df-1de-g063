@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+
+'hide footbox
+participant SkillUI as UI
+participant SkillController as CTRL
+participant SkillRepository as skillRepository
+participant Skill as skill
+participant Repositories as PLAT
+
+
+-> UI: types requested data
+activate UI
+
+    group Skill registration
+        UI --> UI: validateSkill(Skill skill)
+    end
+    <-- UI : displays operation success
+deactivate CTRL
+
+@enduml

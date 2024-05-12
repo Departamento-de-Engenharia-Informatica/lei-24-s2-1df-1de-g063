@@ -6,6 +6,9 @@ public class Skill {
 
 
     public Skill(String skill_name) {
+        if (skill_name == null) {
+            throw new IllegalArgumentException("Skill name cannot be null");
+        }
         this.skill_name = skill_name;
     }
 
@@ -15,12 +18,6 @@ public class Skill {
 
     @Override
     public String toString() {
-        if (this.skill_name != null) {
-            return skill_name ;
-        }else{
-            return "";
-        }
+        return skill_name ;
     }
-
-
 }

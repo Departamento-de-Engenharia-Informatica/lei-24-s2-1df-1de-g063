@@ -21,12 +21,6 @@ activate HRM
     HRM -> System : types requested data
     activate System
 
-          System --> HRM : shows all data and requests confirmation
-    deactivate System
-
-    HRM -> System : confirms data
-    activate System
-
         System --> HRM : displays operation success
     deactivate System
 

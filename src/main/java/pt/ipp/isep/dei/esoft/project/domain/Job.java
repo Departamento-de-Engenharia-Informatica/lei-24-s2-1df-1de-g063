@@ -5,6 +5,9 @@ public class Job {
     private final String job_name;
 
     public Job(String job_name) {
+        if (job_name == null) {
+            throw new IllegalArgumentException("Job name cannot be null");
+        }
         this.job_name = job_name;
     }
 
@@ -14,10 +17,6 @@ public class Job {
 
     @Override
     public String toString() {
-        if (this.job_name != null) {
-            return job_name ;
-        }else{
-            return "";
-        }
+        return job_name ;
     }
 }

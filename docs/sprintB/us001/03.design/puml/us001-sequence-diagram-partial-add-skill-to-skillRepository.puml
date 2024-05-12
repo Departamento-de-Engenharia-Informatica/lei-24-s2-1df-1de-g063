@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant SkillUI as UI
+participant SkillController as CTRL
+participant SkillRepository as skillRepository
+participant Skill as skill
+participant Repositories as PLAT
+
+
+
+UI--> CTRL: Skill
+activate CTRL
+    group add skill to skillRepository
+        CTRL -> skillRepository : addSkill(Skill skill)
+        activate skillRepository
+
+            skillRepository --> CTRL: skill registered
+        deactivate skillRepository
+        <-CTRL: Success of registration
+        deactivate CTRL
+    end group
+
+@enduml
