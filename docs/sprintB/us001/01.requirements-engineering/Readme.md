@@ -42,7 +42,7 @@ or tractors; tree pruning; application of phytopharmaceuticals." Type of skills 
 **Input Data:**
 
 * Typed data:
-    * one skill
+    * the name of a skill
     * a confirmation/approval
 
 **Output Data:**

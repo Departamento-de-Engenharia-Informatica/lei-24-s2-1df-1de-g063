@@ -16,7 +16,7 @@ participant "JobRepository:\nJobRepository" as JobRepository
 
 activate HRM
 
-     HRM -> UI : asks to register a new skill
+     HRM -> UI : asks to register a new job
 
      activate UI
 

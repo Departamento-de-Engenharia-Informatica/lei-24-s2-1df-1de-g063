@@ -6,87 +6,68 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
-participant "organization\n:Organization" as ORG
+actor "Organization HRM" as HRM
+participant ":SkillUI" as UI
+participant ":SkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillRepository:\nSkillRepository" as SkillRepository
 
-activate ADM
 
-    ADM -> UI : asks to create a new task
+activate HRM
 
-    activate UI
+     HRM -> UI : asks to register a new skill
 
-        UI -> CTRL** : create
-        UI -> CTRL : getTaskCategories()
-        ref over CTRL
-            Get Task Category List
+     activate UI
 
-        end ref
+            UI -> CTRL** : create
+            UI -> CTRL : getSkillRepository()
 
-        activate CTRL
+     activate CTRL
+     ref over UI, SkillRepository
+        get SkillRepository
+     endref
 
-            CTRL --> UI : taskCategoryList
-        deactivate CTRL
+            CTRL -> RepositorySingleton : getInstance()
 
-        UI --> ADM : shows task category list and asks to sleect one
-    deactivate UI
+     activate RepositorySingleton
 
-    ADM -> UI : selects a task category
-    activate UI
+            RepositorySingleton -> CTRL : repositories
 
-        UI --> ADM : requests data
-    deactivate UI
+     deactivate RepositorySingleton
 
-    ADM -> UI : types requested data (reference, description,\ninformal description, technical description,\nduration, cost)
-    activate UI
+            CTRL -> PLAT : getSkillRepository()
 
-        UI --> ADM : shows selected category and requested data
-    deactivate UI
+     activate PLAT
 
-    ADM -> UI : submits data
-    activate UI
+            PLAT -> CTRL : SkillRepository
+     deactivate PLAT
 
-        UI -> CTRL : createTask(reference, description, informalDescription,\ntechnicalDescription,duration, cost, taskCategoryDescription)
-        activate CTRL
+            CTRL -> SkillRepository : getSkills()
+     activate SkillRepository
 
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
-            activate CTRL
+            SkillRepository -> CTRL : skill
 
-                ref over CTRL
-                    Get Task Category Object
+     deactivate SkillRepository
+            CTRL -> UI : SkillRepository
+     deactivate CTRL
+     UI --> HRM : requests data (name of the Skill)
+     deactivate UI
 
-                end ref
+     HRM -> UI : types requested data
+     activate UI
+     ref over UI, CTRL
+        skill registration
+     endref
 
-                CTRL --> CTRL : taskCategory
-            deactivate CTRL
+            UI -> SkillRepository: addSkills (Skill skill)
+     ref over UI,SkillRepository
+        add to SkillRepository
+     endref
+     activate SkillRepository
+     deactivate SkillRepository
 
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
+     UI --> HRM : displays operation success
+     deactivate UI
 
-                ref over CTRL
-                    Get Employee
-
-                end ref
-                CTRL -> CTRL : employee
-            deactivate CTRL
-
-            CTRL -> ORG: createTask(reference, description, informalDescription,\ntechnicalDescription, duration, cost, taskCategory, employee)
-            activate ORG
-
-                ref over ORG
-                    Create Task
-
-                end
-
-                ORG --> CTRL : task
-            deactivate ORG
-
-            CTRL --> UI: task
-            deactivate CTRL
-            UI --> ADM: displays operation success
-    deactivate UI
-
-deactivate ADM
-
-@enduml
+ @enduml

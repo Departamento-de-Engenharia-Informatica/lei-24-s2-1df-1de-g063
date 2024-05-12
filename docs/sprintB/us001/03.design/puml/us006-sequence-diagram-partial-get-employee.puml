@@ -3,70 +3,49 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+participant SkillUI as UI
+participant SkillController as CTRL
+participant SkillRepository as skillRepository
+participant Skill as skill
+participant Repositories as PLAT
 
 
-'hide footbox
-participant ":CreateTaskController" as CTRL
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
+-> UI: asks to register a new skill
 
-autonumber 14
--> CTRL : getEmployeeFromSession()
-autonumber 14.1
-activate CTRL
+activate UI
+    group get the Skill Repository
 
-    group Get Employee
-        CTRL -> _APP: getInstance()
-        activate _APP
-            _APP -> CTRL: appSession
-        deactivate _APP
+        UI -> CTRL : getSkillRepository()
 
-        CTRL -> APP: getCurrentSession()
-        activate APP
+         activate CTRL
 
-            APP --> CTRL: currentSession
-        deactivate APP
+                    CTRL -> RepositorySingleton : getInstance()
 
-        CTRL -> SESSAO: email = getUserEmail()
-        activate SESSAO
+             activate RepositorySingleton
 
-            SESSAO --> CTRL: email
-        deactivate SESSAO
+                    RepositorySingleton -> CTRL : repositories
 
-        CTRL -> PLAT: getOrganizationRepository()
-        activate PLAT
+             deactivate RepositorySingleton
 
-            PLAT --> CTRL: organizationRepository
-        deactivate PLAT
+                    CTRL -> PLAT : getSkillRepository()
 
-        CTRL -> OrganizationRepository: getOrganizationByUserEmail(email)
-        activate OrganizationRepository
+             activate PLAT
 
-            loop [for each organization
-                OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                activate ORG
+                    PLAT -> CTRL : skillRepository
+             deactivate PLAT
 
-                     ORG --> OrganizationRepository : true/false
-                deactivate ORG
-            end
+                    CTRL -> SkillRepository : getSkills()
+             activate SkillRepository
 
-            OrganizationRepository --> CTRL : organization
+                    skillRepository -> CTRL : skill
 
-        deactivate OrganizationRepository
-
-        CTRL -> ORG: getEmployeeByEmail(email)
-        activate ORG
-
-            ORG --> CTRL : employee
-        deactivate ORG
+             deactivate SkillRepository
+                    CTRL -> UI : skillRepository
+             deactivate CTRL
     end
-    autonumber 15
-    <-- CTRL : employee
-deactivate CTRL
+
+    <-- UI :requests data (name of the skill)
+deactivate UI
+
 
 @enduml

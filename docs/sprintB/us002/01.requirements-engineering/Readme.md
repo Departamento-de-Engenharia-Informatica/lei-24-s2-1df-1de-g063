@@ -33,7 +33,7 @@ As a Human Resources Manager (HRM),who is responsible for managing human resourc
 **Input Data:**
 
 * Typed data: 
-  * one job
+  * the name of a job
   * a confirmation/approval
 
 **Output Data:**

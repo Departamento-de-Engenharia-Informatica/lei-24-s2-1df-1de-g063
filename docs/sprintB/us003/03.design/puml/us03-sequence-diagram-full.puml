@@ -26,7 +26,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getcollaboratorRecord()
+            UI -> CTRL : getCollaboratorRepository()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -115,7 +115,7 @@ activate ADM
         deactivate UI
                                     ADM -> UI : selects a Job
             activate UI
-             UI -> CTRL : getcollaboratorRecord()
+             UI -> CTRL : getCollaboratorRepository()
                         activate CTRL
 
                             CTRL -> RepositorySingleton : getInstance()
