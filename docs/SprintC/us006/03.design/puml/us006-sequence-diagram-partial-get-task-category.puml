@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nvehicleRepository" as TaskCategoryRepository
+
+autonumber 12
+-> CTRL : registerVehicle (brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
+
+autonumber 12.1
+
+activate CTRL
+    group Get Task Category
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getVeehicleRepository()
+        activate PLAT
+
+            PLAT -> CTRL : vehicleRepository
+        deactivate PLAT
+
+        CTRL -> TaskCategoryRepository : registerVehicle (brand, model, vehicleID, type, tare,\ngrossWeight, currentKm, registerDate, \nacquisitionDate, checkupFrequency)
+        activate TaskCategoryRepository
+
+            TaskCategoryRepository --> CTRL : success
+        deactivate TaskCategoryRepository
+
+    end group
+
+    autonumber 13
+    <-- CTRL : success
+
+deactivate CTRL
+
+
+@enduml

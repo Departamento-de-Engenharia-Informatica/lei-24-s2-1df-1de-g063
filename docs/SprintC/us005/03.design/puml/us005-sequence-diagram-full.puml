@@ -1,0 +1,90 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Human Resources\nManager" as HRM
+participant ":GenerateTeamProposalUI" as UI
+participant ":TeamProposalController" as CTRL
+participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
+participant "teamProposalRepository:\nTeamProposalRepository" as TeamProposalRepository
+
+activate HRM
+
+HRM -> UI : asks to create a new team proposal
+activate UI
+
+UI --> HRM : requests number of team members (MaxTeamSize, MinTeamSize)
+
+deactivate UI
+HRM -> UI: specifies number of team members
+activate UI
+
+UI -> HRM : requests skills needed
+deactivate UI
+HRM -> UI: specifies skills needed
+activate UI
+
+UI -> CTRL** : create
+
+
+UI -> CTRL : generateTeamProposal(minTeamSize, maxTeamSize, skills)
+activate CTRL
+CTRL -> CollaboratorRepository : filterCollaboratorsBySkills(List<Collaborator> collaborators, List<Skill> requiredSkills)
+
+activate CollaboratorRepository
+
+CollaboratorRepository --> CTRL : collaboratorList
+deactivate CollaboratorRepository
+
+alt Successful generation
+    CTRL --> UI : generated team proposal
+    deactivate CTRL
+
+    UI --> HRM : shows the generated team proposal and requests confirmation
+    deactivate UI
+
+    alt Team generated accepted
+        HRM -> UI : confirms data
+        activate UI
+
+        UI -> CTRL : confirmTeamProposal()
+        activate CTRL
+
+        CTRL -> TeamProposalRepository: addTeams(teamProposal)
+        activate TeamProposalRepository
+
+        TeamProposalRepository --> CTRL : success
+        deactivate TeamProposalRepository
+
+        CTRL --> UI: success
+        deactivate CTRL
+
+        UI --> HRM: displays operation success
+        deactivate UI
+    end
+
+    alt Team generated rejected
+        HRM -> UI : rejects data
+        activate UI
+
+
+        UI --> HRM: displays operation rejected
+        deactivate UI
+
+    end
+end
+
+alt Failure in generation
+
+    CTRL --> UI : Couldn't generate team proposal
+    activate CTRL
+    activate UI
+    deactivate CTRL
+
+    UI --> HRM : displays error message
+end
+
+@enduml

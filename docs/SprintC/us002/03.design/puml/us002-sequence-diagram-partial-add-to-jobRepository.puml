@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant RegisterJobUI as UI
+participant RegisterJobController as CTRL
+participant JobRepository as jobRepository
+participant Job as job
+participant Repositories as PLAT
+
+
+
+UI--> CTRL: Job
+activate CTRL
+    group add job to jobRepository
+        CTRL -> jobRepository : addJob(Job job)
+        activate jobRepository
+
+            jobRepository --> CTRL: job registered
+        deactivate jobRepository
+        <-CTRL: Success of registration
+        deactivate CTRL
+    end group
+
+@enduml

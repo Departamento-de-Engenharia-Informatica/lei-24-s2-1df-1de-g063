@@ -1,0 +1,172 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+class Collaborator {
+    - String name
+    - String adress
+    - String email
+    - String phoneNumber
+    - String idType
+    - String idNumber
+    - LocalDate birthDate
+    - LocalDate admissionDate
+    - String job
+    - List<Skill> skill
+
+    +getSkill()
+    +setSkill(List<Skill> skill)
+    +equals(Object o)
+    +toString()
+
+}
+
+class Skill {
+    - String name
+
+    + Skill(skill_name: String)
+    + getName:(skill_name: String)
+    + toString(): String
+}
+class SkillsRepository {
+
+    - instance: SkillsRepository
+    - skills: List<Jobs>
+    + getInstance(): SkillsRepository
+    + SkillsRepository()
+    + addSkill(skill: Skill): void
+    + getSkills(description)
+
+}
+
+class Job {
+    - String name
+
+    + Job(job_name: String)
+    + getName:(job_name: String)
+    + toString(): String
+}
+
+class JobRepository {
+
+    - instance: JobRepository
+    - jobs: List<Jobs>
+    + getInstance(): JobRepository
+    + JobRepository()
+    + addJob(job: Job): void
+    + getJobs(description)
+
+}
+
+note right of SkillsRepository
+    - used to access the list of
+     skills that a collaborator may have
+end note
+
+note right of JobRepository
+    - used to access the list of jobs that a collaborator may have
+     (every job is there represented regardless the skills of the collaborator in question)
+end note
+
+class CollaboratorRepository {
+    -List<Collaborator> collaborators
+    -CollaboratorRepository instance
+
+    +CollaboratorRepository()
+    +getInstance()
+    +addCollaborator(Collaborator collaborator)
+    +getCollaborators()
+    +saveCollaborator(Collaborator collaborator)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getJobRepository()
+    + getSkillsRepository()
+    + getCollaboratorRepository()
+}
+
+class RegisterCollaboratorController {
+    -JobRepository jobRepository
+    -CollaboratorRepository collaboratorRepository
+    -AuthenticationRepository authenticationRepository
+
+    + RegisterCollaboratorController(EmployeeRepository)
+    + getCollaboratorRecord()
+    + setCollaboratorRecord(name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number)
+    - getEmployeeFromSession()
+}
+
+note top of RegisterCollaboratorController
+    - userEmail is obtained
+    from the user session
+    - categoryDescription
+    is retrieved from selected data
+end note
+
+note left of CollaboratorRepository
+    - used for accessing a list of
+    registered collaborators
+end note
+
+
+
+
+class RegisterCollaboratorUI {
+    RegisterCollaboratorController controller
+    CollaboratorRepository collaboratorRepository
+    JobRepository jobRepository
+    String name
+    String adress
+    String email
+    String phoneNumber
+    String idType
+    String idNumber
+    LocalDate birthDate
+    LocalDate admissionDate
+    String job
+    Collaborator collaborator
+
+    +RegisterCollaboratorUI()
+    +run()
+    -getController()
+    -requestData()
+    -requestName()
+    -requestAdress()
+    -requestEmail()
+    -requestPhoneNumber()
+    -requestIdType()
+    -requestIdNumber(String idType)
+    -requestDate(String prompt)
+    -requestJob()
+    -submitData()
+    -printCollaborator()
+}
+
+Repositories -> Repositories : instance
+
+RegisterCollaboratorUI .> RegisterCollaboratorController
+
+RegisterCollaboratorController .> Repositories : repositories
+
+RegisterCollaboratorController ..> CollaboratorRepository : CollaboratorRepository
+
+Repositories --> "1" CollaboratorRepository
+
+CollaboratorRepository "1" --> "*" Collaborator : has data
+
+Repositories --> "1" SkillsRepository
+Repositories --> "1" JobRepository
+SkillsRepository "1" --> "*"Skill
+JobRepository "1" --> "*"Job
+Skill "1..*" --> "1" Collaborator : given to
+Job "1"--> "1" Collaborator : assigned to
+
+@enduml
