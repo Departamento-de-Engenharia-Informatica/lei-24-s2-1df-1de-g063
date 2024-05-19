@@ -28,8 +28,7 @@ As a Green Space Manager I have the need to keep track of the things that need t
 
 **Input Data:**
 * Typed data:
-  * date (?)
-
+  * date
 * Selected data:
   * green space
   * To-Do List entry

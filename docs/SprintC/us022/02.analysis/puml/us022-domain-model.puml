@@ -11,21 +11,11 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-
-class Vehicles_Machines_Equipment{
- Brand
-  Model
-  Type
-  Tara
-  CurrentKm
-  RegisterDate
+class GSM {
 }
 
-class VFM {
-}
-
-class CheckUp {
-  Date
+class Agenda{
+    task description
 }
 
 class Managers {
@@ -35,9 +25,8 @@ class Managers {
     phone
 }
 
-Managers "1" -- "1" VFM : have >
-Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
-Managers "1" -- "1..*" Vehicles_Machines_Equipment : choose and register >
+Managers "1" -- "1" GSM : have >
+Managers "1" -- "1" Agenda: manages >
 @enduml
 
 

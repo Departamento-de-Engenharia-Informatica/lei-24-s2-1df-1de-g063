@@ -20,10 +20,10 @@ activate GSM
         deactivate System
     GSM -> System : selects the To-Do List entry
     activate System
-    ''System --> GSM : asks to type the intended date
-        ''deactivate System
-    ''GSM --> System : selects the intended date
-    ''activate System
+    System --> GSM : asks to type the intended date
+        deactivate System
+    GSM --> System : selects the intended date
+    activate System
            System --> GSM : displays all data and operation success
            deactivate System
 deactivate GSM
