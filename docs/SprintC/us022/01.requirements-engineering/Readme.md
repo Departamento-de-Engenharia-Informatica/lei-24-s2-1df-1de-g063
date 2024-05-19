@@ -27,6 +27,8 @@ As a Green Space Manager I have the need to keep track of the things that need t
 ### 1.5 Input and Output Data
 
 **Input Data:**
+* Typed data:
+  * date (?)
 
 * Selected data:
   * green space
