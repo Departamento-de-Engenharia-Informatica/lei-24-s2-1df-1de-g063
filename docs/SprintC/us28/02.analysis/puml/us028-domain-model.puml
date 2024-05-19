@@ -35,13 +35,18 @@ class Collaborators {
     ID number
 }
 
-class Agenda{
-    tasks
+class ToDoList{
+    task description
 }
 
-Task "1" -- "1" Agenda : goes to >
+class Agenda{
+    task description
+}
+
+Task "1" -- "1" ToDoList : goes to >
 Team "1" -- "1" Task : attributed <
 Collaborators "1" -- "1..*" Team : make >
+ToDoList "1" -- "1" Agenda : goes to >
 @enduml
 
 
