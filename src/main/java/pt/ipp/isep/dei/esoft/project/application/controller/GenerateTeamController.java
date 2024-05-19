@@ -2,9 +2,9 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.util.ArrayList;
@@ -69,6 +69,25 @@ public class GenerateTeamController {
     }
 
     /**
+     * Retrieves a skill by its name from the SkillsRepository.
+     *
+     * @param name the name of the skill
+     * @return the skill if found, null otherwise
+     */
+    public Skill getSkillByName(String name) {
+        return skillsRepository.getSkillByName(name);
+    }
+
+    /**
+     * Adds the team to the TeamRepository.
+     *
+     * @param team the team to add
+     */
+    public void addTeam(Team team) {
+        teamRepository.addTeams(team);
+    }
+
+    /**
      * Filters collaborators based on the required skills and checks if they are already part of a team.
      *
      * @param collaborators  the list of collaborators to filter
@@ -117,6 +136,6 @@ public class GenerateTeamController {
      * @return a list of selected collaborators, up to the maximum team size
      */
     private List<Collaborator> selectCollaborators(List<Collaborator> collaborators, int maxTeamSize) {
-        return collaborators.subList(0, maxTeamSize);
+        return collaborators.subList(0, Math.min(maxTeamSize, collaborators.size()));
     }
 }
