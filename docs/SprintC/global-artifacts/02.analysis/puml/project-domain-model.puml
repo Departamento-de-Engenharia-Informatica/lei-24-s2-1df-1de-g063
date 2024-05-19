@@ -18,7 +18,7 @@ class Portal{
 class Malfunctions{}
 class Flaws{}
 class Comments{}
-class Schedule{
+class Agenda{
     tasks
 }
 class Garden{
@@ -98,7 +98,7 @@ Skill "1..*" -- "1"Collaborators: attributed to >
 Jobs "1" -- "1"Collaborators: given to >
 Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
 Vehicles_Machines_Equipment "*" -- "1" CheckUp: need >
-Schedule "1" -- Managers: is managed by >
+Agenda "1" -- Managers: is managed by >
 Green_Spaces"1" -- "*" Garden: has >
 Green_Spaces "1" -- "*" Medium_Sized: has >
 Green_Spaces "1" -- "*" Large_Sized: has >
@@ -106,7 +106,7 @@ Green_Spaces "1..*" -- "*" Task: originates >
 Collaborators "2..*"-- "1"Team : make >
 Team"1" -- "1..*"Task : attributed <
 Task "1..*"-- "1" Green_Spaces: solved in >
-Task "*" -- "1"Schedule : goes to >
+Task "*" -- "1"Agenda : goes to >
 Portal "1" -- "*"Malfunctions: receives >
 Portal "1" -- "*"Flaws: receives >
 Portal "1" -- "*"Comments: receives >

@@ -12,20 +12,24 @@ hide circle
 hide methods
 
 
-class Vehicles_Machines_Equipment{
- Brand
-  Model
-  Type
-  Tara
-  CurrentKm
-  RegisterDate
+class Green_Spaces{
+
 }
 
-class VFM {
+class GSM {
+
 }
 
-class CheckUp {
-  Date
+class Garden {
+    description
+}
+
+class Medium_Sized{
+    description
+}
+
+class Large_Sized{
+    description
 }
 
 class Managers {
@@ -35,9 +39,11 @@ class Managers {
     phone
 }
 
-Managers "1" -- "1" VFM : have >
-Vehicles_Machines_Equipment "1" -- "1" CheckUp : needs >
-Managers "1" -- "1..*" Vehicles_Machines_Equipment : choose and register >
+Managers "1" -- "1" GSM : have >
+Green_Spaces "1" -- "*" Garden : has >
+Green_Spaces "1" -- "*" Medium_Sized : has >
+Green_Spaces "1" -- "*" Large_Sized : has >
+Managers "1" -- "1..*" Green_Spaces : manages >
 @enduml
 
 

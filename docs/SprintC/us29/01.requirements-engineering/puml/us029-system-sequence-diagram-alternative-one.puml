@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Record Task Completion
+
+autonumber
+
+actor "Collaborator" as Collaborator
+participant ":System" as System
+
+activate Collaborator
+
+    Collaborator -> System : Requests to record the completion of a task
+    activate System
+
+        System --> Collaborator : Retrieves Collaborators list
+    deactivate System
+
+    Collaborator -> System : Chooses a Collaborator
+    activate System
+
+        System --> Collaborator : Retrieves tasks list
+    deactivate System
+
+    Collaborator -> System : Chooses task to record completion
+    activate System
+
+        System --> Collaborator : Confirmation of the operation
+    deactivate System
+
+
+@enduml
