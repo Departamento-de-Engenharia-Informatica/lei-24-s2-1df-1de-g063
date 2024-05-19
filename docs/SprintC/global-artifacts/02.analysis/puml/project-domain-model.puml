@@ -12,14 +12,12 @@ class Outside_User{
     email
     password
 }
-class Portal{
-    task category
-}
+class Portal{}
 class Malfunctions{}
 class Flaws{}
 class Comments{}
 class Agenda{
-    tasks
+    task description
 }
 class Garden{
     description
@@ -60,14 +58,10 @@ class Employees {
     email
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class ToDoList {
+    task description
 }
+
 class Managers {
     name
     email
@@ -89,31 +83,32 @@ Managers "1" -- "1"GSM: has >
 Managers "1" -- "1"HRM: has >
 Managers "1" -- "1"VFM: has >
 Managers "1" -- "1..*"Team: creates >
-Managers "1"-- "1..*"Green_Spaces: manages >
+Managers "1"-- "1..*"Green_Spaces: manage and resgister >
 Managers "1"-- "*"Collaborators: hire and register >
 Managers "1"-- "*"Vehicles_Machines_Equipment: choose and register >
 Managers "1" -- "1..*" Skill: register >
 Managers "1" -- "1..*" Jobs: register >
+Managers "1" -- "1" Agenda: manages >
+Managers "1" -- "1..*" ToDoList: manages
 Skill "1..*" -- "1"Collaborators: attributed to >
 Jobs "1" -- "1"Collaborators: given to >
 Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
 Vehicles_Machines_Equipment "*" -- "1" CheckUp: need >
-Agenda "1" -- Managers: is managed by >
 Green_Spaces"1" -- "*" Garden: has >
 Green_Spaces "1" -- "*" Medium_Sized: has >
 Green_Spaces "1" -- "*" Large_Sized: has >
-Green_Spaces "1..*" -- "*" Task: originates >
+Green_Spaces "1..*" -- "*" ToDoList : originate new entry >
 Collaborators "2..*"-- "1"Team : make >
-Team"1" -- "1..*"Task : attributed <
-Task "1..*"-- "1" Green_Spaces: solved in >
-Task "*" -- "1"Agenda : goes to >
+Team"1" -- "1..*"ToDoList : attributed <
+Agenda "1..*"-- "1" Green_Spaces: solved in >
+ToDoList "*" -- "1"Agenda : goes to >
 Portal "1" -- "*"Malfunctions: receives >
 Portal "1" -- "*"Flaws: receives >
 Portal "1" -- "*"Comments: receives >
 Outside_User "1" -- "1" Portal : reports to >
 Outside_User "*" -- "1..*"Green_Spaces: use >
-Malfunctions "*"-- "*"Task: creates >
-Flaws "*" -- "*" Task : creates >
+Malfunctions "*"-- "*"ToDoList: originate new entry >
+Flaws "*" -- "*" ToDoList : originate new entry >
 Managers "1" -- "1" CheckUp: register >
 CheckUp "1" -- "1" Vehicles_Machines_Equipment: has >
 

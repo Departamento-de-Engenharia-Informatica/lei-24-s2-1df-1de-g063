@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+activate GSM
+    GSM -> System : asks to register a green space
+    activate System
+        System --> GSM : requests data (the name)
+        deactivate System
+    GSM -> System : types requested data (the name)
+    activate System
+        System -> GSM : asks to select a size (garden, medium-sized park or large-sized park)
+        deactivate System
+    GSM -> System : selects the intended size (garden, medium-sized park or large-sized park)
+    activate System
+    System -> GSM : ask to type the area
+       deactivate System
+    GSM -> System : types the area
+    activate System
+           System --> GSM : displays all data and operation success
+           deactivate System
+deactivate GSM
+
+@enduml

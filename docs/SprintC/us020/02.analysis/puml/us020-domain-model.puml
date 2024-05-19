@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+
+class Green_Spaces{
+
+}
+
+class GSM {
+}
+
+class Garden{
+    description
+}
+class Medium_Sized{
+    description
+}
+class Large_Sized{
+    description
+}
+
+class Managers {
+    name
+    email
+    position
+    phone
+}
+
+Managers "1" -- "1" GSM : have >
+Managers "1"-- "1..*"Green_Spaces: manage and resgister >
+Green_Spaces"1" -- "*" Garden: has >
+Green_Spaces "1" -- "*" Medium_Sized: has >
+Green_Spaces "1" -- "*" Large_Sized: has >
+@enduml
+
+
