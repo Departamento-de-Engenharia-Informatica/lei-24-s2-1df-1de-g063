@@ -4,11 +4,13 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 'skinparam linetype ortho
 'left to right direction
-skinparam classAttributeIconSize 0
+skinparam classAttributeIconSize 2
 hide circle
 hide methods
-class Task {
-    date
+
+class Entry {
+    task
+    urgency
     green space
 }
 class Outside_User{
@@ -22,6 +24,7 @@ class Flaws{}
 class Comments{}
 class Agenda{
     task description
+    date
 }
 class Garden{
     description
@@ -64,6 +67,7 @@ class Employees {
 
 class ToDoList {
     task description
+    date
 }
 
 class Managers {
@@ -98,14 +102,16 @@ Skill "1..*" -- "1"Collaborators: attributed to >
 Jobs "1" -- "1"Collaborators: given to >
 Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
 Vehicles_Machines_Equipment "*" -- "1" CheckUp: need >
-Task "1" -left- "*"ToDoList: originate new entry >
-Task "1..*" -- "1" Team : attributed to
+Entry "1" -left- "*"ToDoList: originate new entry >
+Entry "1..*" -- "1" Team : attributed to
 Green_Spaces"1" -- "*" Garden: has >
 Green_Spaces "1" -- "*" Medium_Sized: has >
 Green_Spaces "1" -- "*" Large_Sized: has >
-Green_Spaces "1..*" -left- "*" Task : creates >
+Green_Spaces "1..*" -left- "*" Entry : creates >
 Collaborators "2..*"-- "1"Team : make >
-Team "1" -- "1" Agenda : has
+Team "1" -- "1" Agenda : has >
+ToDoList "1" -- "1" Entry : has >
+Agenda "1" -- "1" Entry : has >
 Agenda "1..*"-- "1" Green_Spaces: solved in >
 ToDoList "*" -- "1"Agenda : goes to >
 Portal "1" -- "*"Malfunctions: receives >
@@ -113,8 +119,8 @@ Portal "1" -- "*"Flaws: receives >
 Portal "1" -- "*"Comments: receives >
 Outside_User "1" -- "1" Portal : reports to >
 Outside_User "*" -- "1..*"Green_Spaces: use >
-Malfunctions "*"-- "*" Task: creates >
-Flaws "*" -- "*" Task : creates >
+Malfunctions "*"-- "*" Entry: creates >
+Flaws "*" -- "*" Entry : creates >
 Managers "1" -- "1" CheckUp: register >
 CheckUp "1" -- "1" Vehicles_Machines_Equipment: has >
 
