@@ -35,6 +35,7 @@ As a Human Resource Manager (HRM), I want to streamline the process of generatin
 * **AC6:** The system should provide clear notification in case of insufficient collaborators to make the team needed.
 ### 1.4. Found out Dependencies
 
+* Dependencies found in US03 - As an HRM, I want to register a collaborator with a job and fundamental characteristics, there must exist collaborators
 * Dependencies found in [US01 - As a Human Resources Manager (HRM), I want to register skills that a collaborator may have](/Sprint%20B/docs/sprintA/us001), there must be skills registered before asking a team with those set of skills
 * Dependencies also found in [US04 - HRM intends to assign one or more competences to an employee](/Sprint%20B/docs/sprintA/us004), there must be skills assigned to an employee, otherwise the system cannot create a team based on the skills provided
 

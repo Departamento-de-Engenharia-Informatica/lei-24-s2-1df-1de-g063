@@ -22,8 +22,12 @@ the appropriate team.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US21 - As a GSM, I want to add a new entry to the To-Do List."
-* There is also a dependency on "US22 - As a GSM, I want to add a new entry in the Agenda."
+* **Dependencies found in US03** - *As an HRM, I want to register a collaborator with a job and fundamental characteristics*, there must exist collaborators.
+* **Dependencies found in US01** - *As a Human Resources Manager (HRM), I want to register skills that a collaborator may have*, there must be skills registered before assigning a team with those set of skills.
+* **Dependencies found in US04** - *HRM intends to assign one or more competences to an employee*, there must be skills assigned to an employee, otherwise, the system cannot create a team based on the skills provided.
+* **Dependencies found in US05** - *As an HRM, I want to generate a team proposal*, as there need to exist teams in order to choose them.
+* **Dependencies found in US21** - *As a GSM, I want to add a new entry to the To-Do List*,because the entries need to be created first.
+* **Dependencies found in US22** - *As a GSM, I want to add a new entry in the Agenda*, as those entries need to be added to the agenda in order to be chosen from.
 
 ### 1.5 Input and Output Data
 
