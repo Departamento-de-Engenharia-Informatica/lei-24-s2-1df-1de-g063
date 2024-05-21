@@ -1,13 +1,14 @@
-# US008 - As an FM, I want to list the vehicles needing the check-up
+# US008 - As a GSM, I want to assign one or more vehicles to an entry in the Agenda.
+
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Vehicle and Equipment Fleet Manager responsible for overseeing the maintenance and condition of
-vehicles within the organization, I need a feature that allows me to quickly list
-vehicles that require check-up.
+As a Green Space Manager (GSM), I want to have the ability to assign one or more vehicles
+to an entry in the agenda so that the necessary transportation resources are allocated and managed 
+effectively for each agenda item.
 
 ### 1.2. Customer Specifications and Clarifications
 

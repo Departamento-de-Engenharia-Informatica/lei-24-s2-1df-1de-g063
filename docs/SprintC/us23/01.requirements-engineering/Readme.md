@@ -38,7 +38,7 @@ the appropriate team.
 
 ### 1.6. System Sequence Diagram (SSD) 
 
-**_Other alternatives might exist._**
+![]
 
 #### Alternative One
 

@@ -19,7 +19,6 @@ public class Bootstrap implements Runnable {
     }
 
     private void addOrganization() {
-        //TODO: add organizations bootstrap here
         //get organization repository
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("This Company");
@@ -30,7 +29,6 @@ public class Bootstrap implements Runnable {
     }
 
     private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
 
         //get task category repository
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
@@ -45,7 +43,6 @@ public class Bootstrap implements Runnable {
 
 
     private void addUsers() {
-        //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
