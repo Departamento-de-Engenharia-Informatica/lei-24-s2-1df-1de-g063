@@ -6,7 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-public class AssignTeamToEntryUI {
+public class AssignTeamToEntryUI implements Runnable {
 
     private final AssignTeamToEntryController controller;
     private final Scanner scanner;
