@@ -1,0 +1,45 @@
+package pt.ipp.isep.dei.esoft.project.ui.console.menu;
+
+import pt.ipp.isep.dei.esoft.project.ui.console.*;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * The HrmUI class provides a user interface for HR management tasks.
+ * It allows HR managers to choose from a menu of options.
+ */
+public class GsmUI implements Runnable {
+
+    /**
+     * Constructs a new HrmUI object.
+     */
+    public GsmUI() {
+    }
+
+    /**
+     * Runs the HR management interface.
+     */
+    public void run() {
+        List<MenuItem> options = new ArrayList<>();
+        //options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI()));
+        //options.add(new MenuItem("Add entry to To-Do List", new AddEntryTodoListUI()));
+        //options.add(new MenuItem("Add entry to Agenda", new AddEntryAgendaUI()));
+        //options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
+
+        int option = 0;
+        do {
+            option = Utils.showAndSelectIndex(options, "\n\n--- GSM MENU -------------------------");
+
+            if ((option >= 0) && (option < options.size())) {
+                options.get(option).run();
+            }
+        } while (option != -1);
+    }
+}
