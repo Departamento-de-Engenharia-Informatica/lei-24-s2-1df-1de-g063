@@ -1,69 +1,263 @@
-# US006 - Create a Task 
+# US006 - Register a Vehicle 
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Ensures that a Vehicle object is instantiated correctly with all its properties set to the expected values.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+    @Test
+    void ensureVehicleIsCreatedSuccessfully() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Ensures that when a Vehicle object is initially created, its maintenance status is null.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test
+    void ensureMaintenanceIsNullInitially() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        assertNull(vehicle.getMaintenance());
+    }
 
-_It is also recommended to organize this content by subsections._ 
+
+**Test 3:** Verifies that when a Vehicle object is first created, its last maintenance kilometer reading is initially set to zero.
+
+    @Test
+    void ensureLastMaintenanceKmIsInitiallyZero() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        assertEquals(0.0, vehicle.getLastMaintenanceKm());
+    }
+
+
+**Test 4:** Confirms that the getBrand() method of a Vehicle object returns the correct brand name, which is "Toyota" in this case.
+
+    @Test
+    void ensureGetBrandReturnsCorrectValue() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        assertEquals("Toyota", vehicle.getBrand());
+    }
+
+
+**Test 5:** Ensures that the getCurrentKm() method of a Vehicle object returns the correct current kilometers.
+
+    @Test
+    void ensureGetCurrentKmReturnsCorrectValue() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        assertEquals(50000.0, vehicle.getCurrentKm());
+    }
+
+
+**Test 6:** Verifies that the getCheckUpFrequency() method of a Vehicle object returns the correct value.
+
+    @Test
+    void ensureGetCheckUpFrequencyReturnsCorrectValue() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        assertEquals(10000.0, vehicle.getCheckUpFrequency());
+    }
+
+**Test 7:** Ensures that when the setMaintenance() method is called on a Vehicle object with the argument "Regular checkup".
+
+    @Test
+    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        vehicle.setMaintenance("Regular checkup");
+        assertEquals("Regular checkup", vehicle.getMaintenance());
+    }
+
+
+**Test 8:** Verifies that when the setLastMaintenanceKm() method is called on a Vehicle object with the argument 55000.0
+
+    @Test
+    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
+        LocalDate registerDate = LocalDate.of(2022, 1, 1);
+        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
+                registerDate, acquisitionDate, 10000.0);
+        vehicle.setMaintenance("Regular checkup");
+        assertEquals("Regular checkup", vehicle.getMaintenance());
+    }
+
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterVehicleController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+public class RegisterVehicleController {
+    private VehicleRepository vehicleRepository;
+    private AuthenticationRepository authenticationRepository;
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+    public RegisterVehicleController() {
+        getVehicleRepository();
+        getAuthenticationRepository();
+    }
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
+    public RegisterVehicleController(AuthenticationRepository authenticationRepository, VehicleRepository vehicleRepository) {
+        this.authenticationRepository = authenticationRepository;
+        this.vehicleRepository = vehicleRepository;
+    }
 
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
+    public VehicleRepository getVehicleRepository() {
+        if (vehicleRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            vehicleRepository = repositories.getVehicleRepository();
+        }
+        return vehicleRepository;
+    }
+
+    public AuthenticationRepository getAuthenticationRepository() {
+        if (authenticationRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            authenticationRepository = repositories.getAuthenticationRepository();
+        }
+        return authenticationRepository;
+    }
     
-	return newTask;
+    public Vehicle createVehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
+                                 LocalDate registerDate, LocalDate acquisitionDate, double checkUpFrequency) {
+        return new Vehicle(brand, model, tareWeight, grossWeight, currentKm, registerDate, acquisitionDate,
+                checkUpFrequency);
+    }
+}
+
+```
+
+### Class VehicleRepository
+
+```java
+public class VehicleRepository {
+    private static VehicleRepository instance;
+    private final List<Vehicle> vehicles;
+
+    public VehicleRepository() {
+        vehicles = new ArrayList<>();
+    }
+
+    public static VehicleRepository getInstance() {
+        if (instance == null) {
+            instance = new VehicleRepository();
+        }
+        return instance;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+    }
+
+    public List<Vehicle> getVehicles() {
+        return List.copyOf(vehicles);
+    }
+
+}
+
+```
+### Class Vehicle
+
+```java
+public class Vehicle {
+    private final String brand;
+    private final String model;
+    private final double tareWeight;
+    private final double grossWeight;
+    private double currentKm;
+    private final LocalDate registerDate;
+    private final LocalDate acquisitionDate;
+    private final double checkUpFrequency;
+    private double lastMaintenanceKm = 0;
+    private String maintenance;
+
+    public Vehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
+                   LocalDate registerDate, LocalDate acquisitionDate, double checkUpFrequency) {
+        this.brand = brand;
+        this.model = model;
+        this.tareWeight = tareWeight;
+        this.grossWeight = grossWeight;
+        this.currentKm = currentKm;
+        this.registerDate = registerDate;
+        this.acquisitionDate = acquisitionDate;
+        this.checkUpFrequency = checkUpFrequency;
+    }
+
+
+    public String getMaintenance() {
+        return maintenance;
+    }
+
+    public void setMaintenance(String maintenance) {
+        this.maintenance = maintenance;
+    }
+
+    public double getLastMaintenanceKm() {
+        return lastMaintenanceKm;
+    }
+
+    public void setLastMaintenanceKm(double lastMaintenanceKm) {
+        this.lastMaintenanceKm = lastMaintenanceKm;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getCurrentKm(){
+        return currentKm;
+    }
+
+    public double getCheckUpFrequency() {
+        return checkUpFrequency;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", tareWeight=" + tareWeight +
+                ", grossWeight=" + grossWeight +
+                ", currentKm=" + currentKm +
+                ", registerDate='" + registerDate + '\'' +
+                ", acquisitionDate='" + acquisitionDate + '\'' +
+                ", checkUpFrequency='" + checkUpFrequency + '\'' +
+                '}';
+    }
 }
 ```
 
-### Class Organization
-
-```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
-}
-```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* Create an instance of RegisterVehicleController.
+* Use the getVehicleRepository method to get the vehicle repository.
+* Define the vehicle data.
+* Use the createVehicle method to create the vehicle.
 
-* For demo purposes some tasks are bootstrapped while system starts.
+
 
 
 ## 7. Observations

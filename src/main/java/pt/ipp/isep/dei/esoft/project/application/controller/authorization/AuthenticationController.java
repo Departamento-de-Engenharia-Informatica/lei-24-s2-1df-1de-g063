@@ -41,6 +41,8 @@ public class AuthenticationController {
     /** The constant representing the Vendor Finance Manager role. */
     public static final String ROLE_VFM = "VFM";
 
+    public static final String ROLE_GSM = "GSM";
+
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 
