@@ -11,6 +11,11 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
+class Entry {
+    task
+    urgency
+    green space
+}
 class GSM {
 }
 
@@ -27,6 +32,8 @@ class Managers {
 
 Managers "1" -- "1" GSM : have >
 Managers "1" -- "1" Agenda: manages >
+Agenda "1" -- "1" Entry : has >
+
 @enduml
 
 

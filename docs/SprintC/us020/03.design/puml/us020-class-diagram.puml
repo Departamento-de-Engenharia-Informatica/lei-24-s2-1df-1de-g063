@@ -9,22 +9,22 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class VehicleNeedingCheckUpUI{
+class RegisterGreenSpaceUI{
 
 }
 
-note left of VehicleNeedingCheckUpUI
+note left of RegisterGreenSpaceUI
     - Responsible for displaying vehicles needing check-up
 end note
 
-class VehicleNeedingCheckUpController{
+class RegisterGreenSpaceController{
     -vehicleRepository: VehicleRepository
     +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
     +getVehicleRepository(): VehicleRepository
     +getVehiclesNeedingCheckUp(): List<Vehicle>
 }
 
-note right of VehicleNeedingCheckUpController
+note right of RegisterGreenSpaceController
     - Handles requests related to vehicles needing check-up
     - getVehiclesNeedingCheckUp(): List<Vehicle>: Retrieves a list of vehicles needing check-up
 end note
@@ -35,12 +35,12 @@ class Repositories{
     + getVehicleRepository()
 }
 
-class VehicleRepository{
+class GreenSpaceRepository{
     -vehicles: List<Vehicle>
     +getVehicles(): List<Vehicle>
 }
 
-class Vehicle{
+class GreenSpace{
     -currentKm: double
     -checkUpFrequency: double
     -lastMaintenanceKm: double
@@ -50,10 +50,10 @@ class Vehicle{
     +getCheckUpFrequency(): double
 }
 
-VehicleNeedingCheckUpUI .> VehicleNeedingCheckUpController
-VehicleNeedingCheckUpController ..> Repositories : repositories
+RegisterGreenSpaceUI .> RegisterGreenSpaceController
+RegisterGreenSpaceController ..> Repositories : repositories
 Repositories -> "1" VehicleRepository
-VehicleNeedingCheckUpController ..> VehicleRepository : vehicleRepository
+RegisterGreenSpaceController ..> VehicleRepository : vehicleRepository
 VehicleRepository "1" --> "1*" Vehicle : vehicle
 
 @enduml

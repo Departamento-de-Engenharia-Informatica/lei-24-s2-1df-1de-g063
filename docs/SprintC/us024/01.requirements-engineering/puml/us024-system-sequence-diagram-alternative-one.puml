@@ -14,17 +14,15 @@ activate GSM
 
     GSM -> System : Asks to postpone an entry from the Agenda
     activate System
-
         System --> GSM : Retrieve list of entries and requests to choose one
-        '' não sei se devo separar em 2 passos a lista e o pedido de escolha
     deactivate System
     GSM -> System : Chooses one of the entries
     activate System
         System --> GSM : Asks the specific date to postpone the entry
     deactivate System
-    GSM -> System : Types the requested data
+    GSM -> System : Types the date
     activate System
-        System --> GSM : Displays operation success
+        System --> GSM : Displays all inserted data and operation success
 
 
 @enduml
