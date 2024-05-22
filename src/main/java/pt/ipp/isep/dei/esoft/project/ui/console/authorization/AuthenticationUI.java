@@ -135,7 +135,7 @@ public class AuthenticationUI implements Runnable {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new GsmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }
