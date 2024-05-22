@@ -11,6 +11,11 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
+class Entry {
+    task
+    urgency
+    green space
+}
 
 class ToDoList {
     task description
@@ -28,6 +33,8 @@ class Managers {
 
 Managers "1" -- "1" GSM : have >
 Managers "1" -- "1..*" ToDoList: manages
+ToDoList "1" -- "1" Entry : has >
+
 @enduml
 
 
