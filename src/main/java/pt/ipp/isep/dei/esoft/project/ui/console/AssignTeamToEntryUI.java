@@ -11,7 +11,9 @@ public class AssignTeamToEntryUI implements Runnable {
     private final AssignTeamToEntryController controller;
     private final Scanner scanner;
 
-    private int choice;
+    private int choiceTeam;
+
+    private int choiceEntry;
 
     public AssignTeamToEntryUI(){
         this.controller = new AssignTeamToEntryController();
@@ -21,30 +23,51 @@ public class AssignTeamToEntryUI implements Runnable {
 
     public void run(){
         System.out.println("\n\n--- Assign Team to an Entry ------------------------");
-        printTeamList();
         requestData();
-        submitData();
     }
 
     public void requestData(){
+        printTeamList();
+        System.out.println("Choose a team:");
+        choiceTeam = scanner.nextInt();
+//        printEntryList();
+//        System.out.println("Choose a entry");
+//        choiceEntry = scanner.nextInt();
+        submitData();
 
     }
 
     public void submitData(){
+        Team selectedTeam = controller.getTeams(choiceTeam);
+        //Entry selectedEntry = controller.getEntries(choiceEntry);
+        //controller.attributeTeamToEntry(selectedTeam,selectedEntry);
 
     }
     private void printTeamList() {
-        choice = 0;
+        choiceTeam = 0;
         List<Team> teams = controller.getTeams();
         System.out.println("\n---  Teams List -------------------------");
         if (teams.isEmpty()) {
             System.out.println("No Teams registered yet.");
         } else {
             for (Team team : teams) {
-                System.out.printf("%d - %s%n", choice, team);
-                choice++;
+                System.out.printf("%d - %s%n", choiceTeam, team);
+                choiceTeam++;
             }
         }
     }
+//    private void printEntryList() {
+//        choiceEntry = 0;
+//        List<Team> teams = controller.getEntries();
+//        System.out.println("\n---  Teams List -------------------------");
+//        if (teams.isEmpty()) {
+//            System.out.println("No Teams registered yet.");
+//        } else {
+//            for (Team team : teams) {
+//                System.out.printf("%d - %s%n", choiceEntry, team);
+//                choiceEntry++;
+//            }
+//        }
+//    }
 
 }
