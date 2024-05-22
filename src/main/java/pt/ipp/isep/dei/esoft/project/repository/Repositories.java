@@ -60,8 +60,11 @@ public class Repositories {
     public VehicleRepository getVehicleRepository(){
         return VehicleRepository.getInstance();
     }
+    public GreenSpaceRepository getGreenSpaceRepository() {return GreenSpaceRepository.getInstance();}
 
     public TeamRepository getTeamRepository() {
         return TeamRepository.getInstance();
     }
+
+
 }
