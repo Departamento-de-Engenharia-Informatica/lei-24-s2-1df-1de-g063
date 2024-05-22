@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
@@ -25,18 +26,39 @@ import java.util.List;
  * }</pre>
  */
 public class GenerateTeamController {
-    private final CollaboratorRepository collaboratorRepository;
-    private final SkillsRepository skillsRepository;
-    private final TeamRepository teamRepository;
+    private  CollaboratorRepository collaboratorRepository;
+    private  SkillsRepository skillsRepository;
+    private  TeamRepository teamRepository;
 
     /**
      * Constructs a GenerateTeamController object.
      * Initializes the CollaboratorRepository, SkillsRepository, and TeamRepository attributes.
      */
     public GenerateTeamController() {
-        this.collaboratorRepository = CollaboratorRepository.getInstance();
-        this.skillsRepository = SkillsRepository.getInstance();
-        this.teamRepository = TeamRepository.getInstance();
+        this.collaboratorRepository = getCollaboratorRepository();
+        this.skillsRepository = getSkillsRepository();
+        this.teamRepository = getTeamRepository();
+    }
+    private CollaboratorRepository getCollaboratorRepository(){
+        if(collaboratorRepository == null){
+            Repositories repositories = Repositories.getInstance();
+            collaboratorRepository = repositories.getCollaboratorRepository();
+        }
+        return collaboratorRepository;
+    }
+    private SkillsRepository getSkillsRepository(){
+        if(skillsRepository == null){
+            Repositories repositories = Repositories.getInstance();
+            skillsRepository = repositories.getSkillsRepository();
+        }
+        return skillsRepository;
+    }
+    private TeamRepository getTeamRepository(){
+        if(teamRepository == null){
+            Repositories repositories = Repositories.getInstance();
+            teamRepository = repositories.getTeamRepository();
+        }
+        return teamRepository;
     }
 
     /**
@@ -84,7 +106,7 @@ public class GenerateTeamController {
      * @param team the team to add
      */
     public void addTeam(Team team) {
-        teamRepository.addTeams(team);
+        TeamRepository.addTeams(team);
     }
 
     /**
