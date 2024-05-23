@@ -7,10 +7,6 @@ public class GreenSpace {
     private final double area;
     private final Size size;
 
-    public enum Size {
-        Garden, Medium_Size, Large_Size
-    }
-
     public GreenSpace(String name, double area, Size size) {
         validateGreenSpaceName(name);
         this.name = name;

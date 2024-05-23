@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.Size;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class RegisterGreenSpaceUI implements Runnable {
     private final GreenSpaceRepository greenSpaceRepository;
     private final Scanner scanner;
     private String name;
-    private GreenSpace.Size size;
+    private Size size;
     private double area;
     private GreenSpace greenSpace;
 
@@ -56,11 +57,11 @@ public class RegisterGreenSpaceUI implements Runnable {
                 if (area > 0) {
                     isValid = true;
                     if (area < 50.0) {
-                        size = GreenSpace.Size.Garden;
+                        size = Size.Garden;
                     } else if (area <= 200.0) {
-                        size = GreenSpace.Size.Medium_Size;
+                        size = Size.Medium_Size;
                     } else {
-                        size = GreenSpace.Size.Large_Size;
+                        size = Size.Large_Size;
                     }
                 } else {
                     System.out.println("Invalid area. Please enter a valid number.");

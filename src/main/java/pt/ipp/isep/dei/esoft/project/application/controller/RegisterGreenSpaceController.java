@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.Size;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class RegisterGreenSpaceController {
@@ -34,7 +35,7 @@ public class RegisterGreenSpaceController {
     }
 
 
-    public GreenSpace registerGreenSpace(String name, double area, GreenSpace.Size size ) {
+    public GreenSpace registerGreenSpace(String name, double area, Size size ) {
         return new GreenSpace(name, area, size);
     }
 }
