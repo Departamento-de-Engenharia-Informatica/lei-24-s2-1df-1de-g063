@@ -31,7 +31,7 @@ public class GsmUI implements Runnable {
         //options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI()));
         //options.add(new MenuItem("Add entry to To-Do List", new AddEntryTodoListUI()));
         options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
-        //options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
+        options.add(new MenuItem("Assign a Vehicle to an Entry in the Agenda", new AssignVehicleToEntryUI()));
 
         int option = 0;
         do {
