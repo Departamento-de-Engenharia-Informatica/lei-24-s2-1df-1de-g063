@@ -11,6 +11,7 @@ public class Repositories {
     private final CollaboratorRepository collaboratorRepository;
     private final VehicleRepository vehicleRepository;
     private final GreenSpaceRepository greenSpaceRepository;
+    private final ToDoList toDoList;
 
     private final TeamRepository teamRepository;
 
@@ -24,6 +25,7 @@ public class Repositories {
         vehicleRepository = new VehicleRepository();
         teamRepository = new TeamRepository();
         greenSpaceRepository = new GreenSpaceRepository();
+        toDoList = new ToDoList();
     }
 
     public static Repositories getInstance() {
@@ -69,6 +71,10 @@ public class Repositories {
 
     public GreenSpaceRepository getGreenSpaceRepository() {
         return GreenSpaceRepository.getInstance();
+    }
+
+    public ToDoList getToDoList(){
+        return ToDoList.getInstance();
     }
 
 }
