@@ -1,11 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.repository.*;
-
-
-import java.time.LocalDate;
 
 public class RegisterGreenSpaceController {
     private GreenSpaceRepository greenSpaceRepository;
@@ -38,8 +34,8 @@ public class RegisterGreenSpaceController {
     }
 
 
-    public GreenSpace registerGreenSpace(String name, double area, GreenSpace.Tamanho tamanho ) {
-        return new GreenSpace(name, area, tamanho);
+    public GreenSpace registerGreenSpace(String name, double area, GreenSpace.Size size ) {
+        return new GreenSpace(name, area, size);
     }
 }
 

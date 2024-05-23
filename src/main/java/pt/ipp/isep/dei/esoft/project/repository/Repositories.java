@@ -10,6 +10,7 @@ public class Repositories {
     private final JobRepository jobRepository;
     private final CollaboratorRepository collaboratorRepository;
     private final VehicleRepository vehicleRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
 
     private final TeamRepository teamRepository;
 
@@ -22,6 +23,7 @@ public class Repositories {
         collaboratorRepository = new CollaboratorRepository();
         vehicleRepository = new VehicleRepository();
         teamRepository = new TeamRepository();
+        greenSpaceRepository = new GreenSpaceRepository();
     }
 
     public static Repositories getInstance() {
@@ -60,11 +62,13 @@ public class Repositories {
     public VehicleRepository getVehicleRepository(){
         return VehicleRepository.getInstance();
     }
-    public GreenSpaceRepository getGreenSpaceRepository() {return GreenSpaceRepository.getInstance();}
 
     public TeamRepository getTeamRepository() {
         return TeamRepository.getInstance();
     }
 
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return GreenSpaceRepository.getInstance();
+    }
 
 }

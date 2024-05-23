@@ -4,16 +4,6 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The CollaboratorRepository class manages the storage and retrieval of collaborator information.
- * It provides methods to add, retrieve, and save collaborator data.
- * <p>
- * Example usage:
- * <pre>{@code
- * CollaboratorRepository collaboratorRepo = CollaboratorRepository.getInstance();
- * collaboratorRepo.addCollaborator(new Collaborator("John Doe", "123 Main St", "john@example.com", "123456789", "ID", "123ABC", LocalDate.of(1990, 5, 15), LocalDate.of(2020, 1, 1), "Developer"));
- * }</pre>
- */
 public class GreenSpaceRepository {
     private final List<GreenSpace> greenSpaces;
     private static GreenSpaceRepository instance;

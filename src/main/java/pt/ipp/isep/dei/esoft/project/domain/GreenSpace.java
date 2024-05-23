@@ -1,20 +1,27 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public class GreenSpace {
     private final String name;
     private final double area;
-    private Tamanho tamanho;
-    public static enum Tamanho {
+    private final Size size;
+
+    public enum Size {
         Garden, Medium_Size, Large_Size
     }
-    public GreenSpace(String name, double area, Tamanho tamanho) {
+
+    public GreenSpace(String name, double area, Size size) {
+        validateGreenSpaceName(name);
         this.name = name;
         this.area = area;
-        this.tamanho = tamanho;
+        this.size = size;
+    }
+
+    private void validateGreenSpaceName(String greenSpaceName) {
+        if (greenSpaceName.isEmpty()) {
+            throw new IllegalArgumentException("The Green Space Name must not be empty");
+        }
     }
 
     public String getName() {
@@ -34,7 +41,7 @@ public class GreenSpace {
         return "GreenSpace{" +
                 "name='" + name + '\'' +
                 ", area=" + area +
-                ", tamanho=" + tamanho +
+                ", size=" + size +
                 '}';
     }
 }
