@@ -39,8 +39,10 @@ public class AssignTeamToEntryController {
 //        }
 //    }
 
-//    public attributeTeamToEntry(Team selectedTeam, Entry selectedEntry){
-//        //attribution logic
+//    public attributeTeamToEntry(choiceTeam, choiceEntry){
+//         Team selectedTeam = teamRepository.getTeams(choiceTeam);
+//        Entry selectedEntry = entryRepository.getEntries(choiceEntry);
+
 //    }
 
 

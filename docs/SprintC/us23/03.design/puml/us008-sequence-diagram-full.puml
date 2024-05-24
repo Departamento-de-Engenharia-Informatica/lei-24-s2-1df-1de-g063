@@ -5,53 +5,77 @@ skinparam shadowing false
 
 autonumber
 
-'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as GSM
+participant ":AssignTeamToEntryUI" as UI
+participant ":AssignTeamToEntryCTRL" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle:\nVehicle" as Vehicle
+participant "teamRepository:\nTeamRepository" as VehicleRepository
+participant "team:\nTeam" as Team
+participant "entry:\nEntry" as Entry
 
-activate VFM
-
-VFM -> UI : Request to list vehicles needing check-up
-
+activate GSM
+    GSM -> UI : Wants to assign team to entry
     activate UI
-
         UI -> CTRL** : create
-
-        UI -> CTRL : getVehiclesNeedingCheckUp()
+        UI -> CTRL : getTeams()
         activate CTRL
 
             CTRL -> Rep : getInstance()
             activate Rep
-
                 Rep --> CTRL : repositories
             deactivate Rep
 
-            CTRL -> Repositories : getVehicleRepository()
+            CTRL -> Repositories : getTeamsRepository()
             activate Repositories
-
-            Repositories --> CTRL : VehicleRepository
+                Repositories --> CTRL : TeamRepository
             deactivate Repositories
 
+            CTRL -> TeamRepository : getTeams()
+            activate TeamRepository
+                TeamRepository --> CTRL : Teams
+            deactivate TeamRepository
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
-
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
-
-
-            CTRL --> UI : VehiclesNeedingCheckUp
+        CTRL --> UI : Teams
         deactivate CTRL
 
-        UI --> VFM : Shows list of vehicles needing check-up
+        UI -> GSM : shows teams
+        GSM -> UI : selects team
+        UI -> CTRL : getEntries()
+        activate CTRL
 
+            CTRL -> Rep : getInstance()
+            activate Rep
+                Rep --> CTRL : repositories
+            deactivate Rep
+
+            CTRL -> Repositories : getEntryRepository()
+            activate Repositories
+                Repositories --> CTRL : EntryRepository
+            deactivate Repositories
+
+            CTRL -> EntryRepository : getEntries()
+            activate EntryRepository
+                EntryRepository --> CTRL : Entries
+
+            deactivate EntryRepository
+            CTRL -> UI : Entries
+            UI -> GSM : shows entries
+            GSM -> UI : selects entry
+            UI -> CTRL : attributeTeamToEntry(choiceTeam,choiceEntry)
+             CTRL -> Team : getTeams(choiceTeam)
+                        activate Team
+                            Team --> CTRL : Team selectedTeam
+                        deactivate Team
+             CTRL -> Entry : getEntries(choiceEntry)
+                                     activate Entry
+                                         Entry --> CTRL : Entry selectedEntry
+                                     deactivate Entry
+                                     CTRL -> CTRL : selectedEntry.setTeam(selectedTeam)
+                                     CTRL -> UI : (In)Success Message
+
+        deactivate CTRL
     deactivate UI
-
-deactivate VFM
+deactivate GSM
 
 @enduml
