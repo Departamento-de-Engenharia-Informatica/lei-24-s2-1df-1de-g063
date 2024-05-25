@@ -10,6 +10,7 @@ import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * The GenerateTeamController class handles the generation of team proposals based on specified criteria.
@@ -29,6 +30,8 @@ public class GenerateTeamController {
     private  CollaboratorRepository collaboratorRepository;
     private  SkillsRepository skillsRepository;
     private  TeamRepository teamRepository;
+
+    private List<Collaborator> lastSelectedCollaborators = null;
 
     /**
      * Constructs a GenerateTeamController object.
@@ -158,6 +161,22 @@ public class GenerateTeamController {
      * @return a list of selected collaborators, up to the maximum team size
      */
     private List<Collaborator> selectCollaborators(List<Collaborator> collaborators, int maxTeamSize) {
-        return collaborators.subList(0, Math.min(maxTeamSize, collaborators.size()));
+        List<Collaborator> selectedCollaborators;
+        do {
+            Collections.shuffle(collaborators);
+
+            selectedCollaborators = collaborators.subList(0, Math.min(maxTeamSize, collaborators.size()));
+        } while (selectedCollaborators.equals(lastSelectedCollaborators));
+        lastSelectedCollaborators = new ArrayList<>(selectedCollaborators);
+        return selectedCollaborators;
+    }
+    public void printTeams() {
+        List<Team> teams = teamRepository.getTeams();
+        for (int i = 0; i < teams.size(); i++) {
+            System.out.println("-----------------");
+            System.out.println("Team number: " + i);
+            System.out.println(teams.get(i));
+            System.out.println("-----------------");
+        }
     }
 }

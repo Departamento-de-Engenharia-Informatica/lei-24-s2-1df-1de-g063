@@ -40,7 +40,7 @@ public class GenerateTeamUI implements Runnable {
             if (!error) {
                 submitData();
                 if (!error) {
-                    printTeam();
+                    controller.printTeams();
                 }
             }
             continueGenerating = askGenerateAnotherTeam();

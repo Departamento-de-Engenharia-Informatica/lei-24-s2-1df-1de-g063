@@ -10,14 +10,14 @@ participant ":AssignTeamToEntryUI" as UI
 participant ":AssignTeamToEntryCTRL" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "teamRepository:\nTeamRepository" as VehicleRepository
+participant "teamRepository:\nTeamRepository" as TeamRepository
 participant "team:\nTeam" as Team
 participant "entry:\nEntry" as Entry
 
 activate GSM
     GSM -> UI : Wants to assign team to entry
     activate UI
-        UI -> CTRL** : create
+        UI -> CTRL : create
         UI -> CTRL : getTeams()
         activate CTRL
 
@@ -57,25 +57,24 @@ activate GSM
             CTRL -> EntryRepository : getEntries()
             activate EntryRepository
                 EntryRepository --> CTRL : Entries
-
             deactivate EntryRepository
+
             CTRL -> UI : Entries
             UI -> GSM : shows entries
             GSM -> UI : selects entry
-            UI -> CTRL : attributeTeamToEntry(choiceTeam,choiceEntry)
-             CTRL -> Team : getTeams(choiceTeam)
-                        activate Team
-                            Team --> CTRL : Team selectedTeam
-                        deactivate Team
-             CTRL -> Entry : getEntries(choiceEntry)
-                                     activate Entry
-                                         Entry --> CTRL : Entry selectedEntry
-                                     deactivate Entry
-                                     CTRL -> CTRL : selectedEntry.setTeam(selectedTeam)
-                                     CTRL -> UI : (In)Success Message
+            UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
+            CTRL -> Team : getTeams(choiceTeam)
+                activate Team
+                    Team --> CTRL : Team selectedTeam
+                deactivate Team
+            CTRL -> Entry : getEntries(choiceEntry)
+                activate Entry
+                    Entry --> CTRL : Entry selectedEntry
+                deactivate Entry
+            CTRL -> CTRL : selectedEntry.setTeam(selectedTeam)
+            CTRL -> UI : (In)Success Message
 
         deactivate CTRL
     deactivate UI
 deactivate GSM
-
 @enduml

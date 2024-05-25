@@ -36,10 +36,7 @@ public class AssignVehicleToEntryUI implements Runnable {
     }
 
     public void submitData(){
-        Vehicle selectedVehicle = controller.getVehicles(choiceVehicle);
-        // Uncomment and adjust when entry logic is available
-        // Entry selectedEntry = controller.getEntries(choiceEntry);
-        // controller.attributeVehicleToEntry(selectedVehicle, selectedEntry);
+        //controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
     }
 
     private void printVehicleList() {
