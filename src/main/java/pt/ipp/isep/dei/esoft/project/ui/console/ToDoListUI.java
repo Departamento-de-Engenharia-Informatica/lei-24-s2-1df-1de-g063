@@ -3,15 +3,14 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+        import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
-
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ToDoListUI implements Runnable{
+public class ToDoListUI implements Runnable {
     private final ToDoListController controller;
     private final ToDoList toDoList;
     private final Scanner scanner;
@@ -23,7 +22,6 @@ public class ToDoListUI implements Runnable{
     private int duration;
     private GreenSpace greenSpace;
     private Status status;
-
 
     public ToDoListUI() {
         this.controller = new ToDoListController();
@@ -40,10 +38,17 @@ public class ToDoListUI implements Runnable{
     }
 
     private void requestData() {
-
+        this.task = requestTask();
+        this.urgency = requestUrgency();
+        this.duration = requestDuration();
     }
 
     private void submitData() {
+        // Here you should add the logic to create a new task with the collected data
+        // For now, we are just printing the task details
+        System.out.println("Task: " + task);
+        System.out.println("Urgency: " + urgency);
+        System.out.println("Duration: " + duration);
         System.out.println(toDoList.getToDoList());
     }
 
@@ -52,21 +57,21 @@ public class ToDoListUI implements Runnable{
         return scanner.nextLine();
     }
 
-    private int requestUrgency() {
-        choice = 0;
+    private Urgency requestUrgency() {
+        int choice = 0;
         System.out.println("\n--- Urgency List -------------------------");
-        System.out.println(urgency);
-        for (Urgency urgency1 : urgency) {
-            System.out.printf("%d - %s%n", choice, urgency1);
+        for (Urgency urgency : Urgency.values()) {
+            System.out.printf("%d - %s%n", choice, urgency);
             choice++;
         }
+        System.out.print("Choose an urgency (0-" + (Urgency.values().length - 1) + "): ");
+        int selectedUrgencyIndex = scanner.nextInt();
+        scanner.nextLine(); // Consume newline left-over
+        return Urgency.values()[selectedUrgencyIndex];
+    }
+
+    private int requestDuration() {
+        System.out.print("Duration of the task: ");
         return scanner.nextInt();
     }
-
-    private String requestDuration() {
-        System.out.print("Duration of the task: ");
-        return scanner.nextLine();
-    }
-
 }
-
