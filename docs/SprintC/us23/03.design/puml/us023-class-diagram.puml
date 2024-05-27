@@ -9,26 +9,19 @@ class AssignTeamToEntryController {
 }
 
 class AssignTeamToEntryUI {
-    -controller: AssignTeamToEntryController
-    -scanner: Scanner
     -choiceTeam: int
     -choiceEntry: int
-    +AssignTeamToEntryUI()
-    +run(): void
-    +requestData(): void
-    +submitData(): void
-    -printTeamList(): void
+    +requestData()
+    +submitData()
 }
 
-class Team {
-}
 
 class TeamRepository {
     -teams: List<Team>
     +TeamRepository()
     +getInstance(): TeamRepository
     +getTeams(): List<Team>
-    +getTeam(index: int): Team
+    +getTeams(index: int): Team
 }
 
 class Repositories {

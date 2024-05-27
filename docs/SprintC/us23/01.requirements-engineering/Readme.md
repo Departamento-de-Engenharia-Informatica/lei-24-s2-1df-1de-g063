@@ -11,8 +11,22 @@ the appropriate team.
 ### 1.2. Customer Specifications and Clarifications
 
 **From the client clarifications:**
+> **Question:** Can an Agenda entry have more than one team assigned to it?
+>
+> **Answer:** No.
+>
+> **Question:** Can a Team be assigned to multiple entrys?
+>
+> **Answer:** yes.
 
-> **Question:** -
+**From the specifications document:**
+
+> The GSM should be able to assign a team to an entry in the Agenda.
+>
+> A message must be sent to all team members informing them about the assignment.
+>
+> Different email services can send the message, and these services must be defined through a configuration file.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** A message must be sent to all team members informing

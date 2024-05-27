@@ -17,7 +17,7 @@ participant "entry:\nEntry" as Entry
 activate GSM
     GSM -> UI : Wants to assign team to entry
     activate UI
-        UI -> CTRL : create
+        UI --> CTRL** : create
         UI -> CTRL : getTeams()
         activate CTRL
 
@@ -59,20 +59,49 @@ activate GSM
                 EntryRepository --> CTRL : Entries
             deactivate EntryRepository
 
-            CTRL -> UI : Entries
-            UI -> GSM : shows entries
+        CTRL --> UI : Entries
+        UI -> GSM : shows entries
+
+        alt Multiple Entries Selection
+            loop
+                GSM -> UI : selects entry
+                UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
+                CTRL -> TeamRepository : getTeams(choiceTeam)
+                    activate TeamRepository
+                        TeamRepository --> CTRL : Team selectedTeam
+                    deactivate TeamRepository
+                CTRL -> EntryRepository : getEntries(choiceEntry)
+                    activate EntryRepository
+                        EntryRepository --> CTRL : Entry selectedEntry
+                    deactivate EntryRepository
+                CTRL -> Entry : selectedEntry.setTeam(selectedTeam)
+                           activate Entry
+                           deactivate Entry
+                CTRL -> UI : (In)Success
+                UI-> GSM : (In)Success message
+                UI -> GSM : Do you want to keep selecting entries?
+                GSM -> UI : Yes
+            end
+        else Single Entry Selection
             GSM -> UI : selects entry
             UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
-            CTRL -> Team : getTeams(choiceTeam)
-                activate Team
-                    Team --> CTRL : Team selectedTeam
-                deactivate Team
-            CTRL -> Entry : getEntries(choiceEntry)
-                activate Entry
-                    Entry --> CTRL : Entry selectedEntry
-                deactivate Entry
-            CTRL -> CTRL : selectedEntry.setTeam(selectedTeam)
-            CTRL -> UI : (In)Success Message
+            CTRL -> TeamRepository : getTeams(choiceTeam)
+                activate TeamRepository
+                    TeamRepository --> CTRL : Team selectedTeam
+                deactivate TeamRepository
+            CTRL -> EntryRepository : getEntries(choiceEntry)
+                activate EntryRepository
+                    EntryRepository --> CTRL : Entry selectedEntry
+                deactivate EntryRepository
+
+            CTRL -> Entry : selectedEntry.setTeam(selectedTeam)
+            activate Entry
+            deactivate Entry
+            CTRL -> UI : (In)Success
+            UI -> GSM : Do you want to keep selecting entries?
+            GSM -> UI : No
+            UI-> GSM : (In)Success message
+        end
 
         deactivate CTRL
     deactivate UI
