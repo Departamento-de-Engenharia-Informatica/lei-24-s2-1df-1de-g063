@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.utils;
 
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -137,26 +139,4 @@ public class Utils {
         return value - 1;
     }
 
-    public int requestUserChoice(String type) {
-        int userChoice = 0;
-        boolean isValid = false;
-
-        while (!isValid) {
-            System.out.printf("Enter your choice for %s: ", type);
-            String input = scanner.nextLine();
-
-            try {
-                userChoice = Integer.parseInt(input);
-                if (userChoice >= 0 && userChoice <= choice - 1) {
-                    isValid = true;
-                } else {
-                    System.out.printf("Invalid choice. Please enter a number between 0 and %d.%n", choice - 1);
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
-            }
-        }
-
-        return userChoice;
-    }
 }

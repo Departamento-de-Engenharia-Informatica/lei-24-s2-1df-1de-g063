@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * User interface for assigning skills to collaborators.
  */
-public class AssignSkillUI extends Utils implements Runnable {
+public class AssignSkillUI implements Runnable {
 
     private final Scanner scanner = new Scanner(System.in);
     private final AssignSkillController controller;
@@ -83,7 +83,28 @@ public class AssignSkillUI extends Utils implements Runnable {
         userChoiceSkill = requestUserChoice("skill");
     }
 
+    private int requestUserChoice(String type) {
+        int userChoice = 0;
+        boolean isValid = false;
 
+        while (!isValid) {
+            System.out.printf("Enter your choice for %s: ", type);
+            String input = scanner.nextLine();
+
+            try {
+                userChoice = Integer.parseInt(input);
+                if (userChoice >= 0 && userChoice <= choice - 1) {
+                    isValid = true;
+                } else {
+                    System.out.printf("Invalid choice. Please enter a number between 0 and %d.%n", choice - 1);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+            }
+        }
+
+        return userChoice;
+    }
 
     private void submitData() {
         Collaborator selectedCollaborator = collaboratorRepository.getCollaborators().get(userChoiceCollaborator);
