@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-        import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
@@ -25,7 +24,7 @@ public class ToDoListUI implements Runnable {
 
     public ToDoListUI() {
         this.controller = new ToDoListController();
-        this.toDoList = Repositories.getInstance().getToDoList();
+        this.toDoList = controller.getToDoList();
         this.scanner = new Scanner(System.in);
         this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
     }
@@ -35,6 +34,7 @@ public class ToDoListUI implements Runnable {
         System.out.println("\n\n--- Add a new Entry to To-Do List ------------------------");
         requestData();
         submitData();
+        printData();
     }
 
     private void requestData() {
@@ -73,5 +73,20 @@ public class ToDoListUI implements Runnable {
     private int requestDuration() {
         System.out.print("Duration of the task: ");
         return scanner.nextInt();
+    }
+
+    private void printData(){
+        int contador = 0;
+        List<Entry> entries = toDoList.getToDoList();
+        System.out.println("\n--- Entry List -------------------------");
+        if (entries.isEmpty()) {
+            System.out.println("No vehicles registered yet.");
+        } else {
+            for (Entry entry : entries) {
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
+
+            }
+        }
     }
 }
