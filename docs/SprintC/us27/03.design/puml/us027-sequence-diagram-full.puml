@@ -59,17 +59,17 @@ VFM -> UI : Request to list all managed green spaces
                             VehicleRepository --> CTRL : manager
                         deactivate VehicleRepository
 
-            CTRL -> Vehicle : getGreenSpaceManaged()
+            CTRL -> Vehicle : getGreenSpaceManaged(manager)
                                     activate Vehicle
 
                                         Vehicle --> CTRL : greenSpaceList
                                     deactivate Vehicle
 
-             CTRL -> "greenSpaceRepository:\nGreenSpaceRepository" : findGreenSpacesByManager()
-                                                activate "greenSpaceRepository:\nGreenSpaceRepository"
+             CTRL -> "greenSpaceRepository" : findGreenSpacesByManager()
+                                                activate "greenSpaceRepository"
 
-                                                    "greenSpaceRepository:\nGreenSpaceRepository" --> CTRL : greenSpaceList
-                                                deactivate "greenSpaceRepository:\nGreenSpaceRepository"
+                                                    "greenSpaceRepository" --> CTRL : greenSpaceList
+                                                deactivate "greenSpaceRepository"
 
 
 
@@ -79,10 +79,28 @@ VFM -> UI : Request to list all managed green spaces
 
         UI --> VFM : Retrieve list of green spaces
 
-    deactivate UI
-VFM -> UI : Chooses green spaces managed by GSM
-UI --> VFM : Confirmation of the operation
 
+
+VFM -> UI : Chooses green spaces managed by GSM
+
+
+ UI -> CTRL : confirmSelection(selectedGreenSpaces)
+        activate CTRL
+
+        CTRL -> "greenSpaceRepository" : updateSelectedGreenSpaces(selectedGreenSpaces)
+                                                        activate "greenSpaceRepository"
+
+                                                            "greenSpaceRepository" --> CTRL : Confirmation of the operation
+                                                        deactivate "greenSpaceRepository"
+
+
+
+         CTRL --> UI : Confirmation of the operation
+                deactivate CTRL
+
+
+UI --> VFM : Confirmation of the operation
+deactivate UI
 deactivate VFM
 
 @enduml
