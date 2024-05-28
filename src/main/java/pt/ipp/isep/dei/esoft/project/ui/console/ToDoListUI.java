@@ -1,16 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-        import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ToDoListUI implements Runnable {
+public class ToDoListUI extends Utils implements Runnable {
     private final ToDoListController controller;
     private final ToDoList toDoList;
     private final Scanner scanner;
@@ -22,6 +22,8 @@ public class ToDoListUI implements Runnable {
     private int duration;
     private GreenSpace greenSpace;
     private Status status;
+    private int userChoiceGreenspace;
+
 
     public ToDoListUI() {
         this.controller = new ToDoListController();
@@ -74,4 +76,26 @@ public class ToDoListUI implements Runnable {
         System.out.print("Duration of the task: ");
         return scanner.nextInt();
     }
+
+    private void printGreenSpacesList() {
+        choice = 0;
+        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();
+        System.out.println("\n--- GreenSpace List -------------------------");
+        if (greenSpaces.isEmpty()) {
+            System.out.println("No Greenspaces registered yet.");
+        } else {
+            for (GreenSpace greenSpace1 : greenSpaces) {
+                System.out.printf("%d - %s%n", choice, greenSpace1);
+                choice++;
+            }
+        }
+    }
+
+    private void requestDataGreenSpace() {
+        userChoiceGreenspace = requestUserChoice("greenspace");
+    }
+
+
+
+
 }
