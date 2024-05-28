@@ -6,23 +6,32 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as VFM
+participant ":GreenSpaceManegementUI" as UI
+participant ":GreenSpaceController" as CTRL
+participant "UserSession" as usersession
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle:\nVehicle" as Vehicle
+participant "managerRepository:\nManagerRepository" as VehicleRepository
+participant "manager:\nManager" as Vehicle
+participant "greenSpaceRepository:\nGreenSpaceRepository" as greenSpaceRepository
 
 activate VFM
 
-VFM -> UI : Request to list vehicles needing check-up
+VFM -> UI : Request to list all managed green spaces
 
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
+        UI -> usersession : getUserEmail()
+               activate usersession
+
+        usersession --> UI : UserEmail
+        deactivate usersession
+
+
+        UI -> CTRL : getlistManagedGreenSpaces(userEmail)
         activate CTRL
 
             CTRL -> Rep : getInstance()
@@ -31,26 +40,48 @@ VFM -> UI : Request to list vehicles needing check-up
                 Rep --> CTRL : repositories
             deactivate Rep
 
-            CTRL -> Repositories : getVehicleRepository()
+            CTRL -> Repositories : getGreenSpaceRepository()
             activate Repositories
 
-            Repositories --> CTRL : VehicleRepository
+            Repositories --> CTRL : greenSpaceRepository
             deactivate Repositories
 
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
+            CTRL -> Repositories : getManagerRepository()
+            activate Repositories
 
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
+                Repositories --> CTRL : managerRepository
+            deactivate Repositories
+
+            CTRL -> VehicleRepository : findByEmail()
+                        activate VehicleRepository
+
+                            VehicleRepository --> CTRL : manager
+                        deactivate VehicleRepository
+
+            CTRL -> Vehicle : getGreenSpaceManaged()
+                                    activate Vehicle
+
+                                        Vehicle --> CTRL : greenSpaceList
+                                    deactivate Vehicle
+
+             CTRL -> "greenSpaceRepository:\nGreenSpaceRepository" : findGreenSpacesByManager()
+                                                activate "greenSpaceRepository:\nGreenSpaceRepository"
+
+                                                    "greenSpaceRepository:\nGreenSpaceRepository" --> CTRL : greenSpaceList
+                                                deactivate "greenSpaceRepository:\nGreenSpaceRepository"
+
+
 
 
             CTRL --> UI : VehiclesNeedingCheckUp
         deactivate CTRL
 
-        UI --> VFM : Shows list of vehicles needing check-up
+        UI --> VFM : Retrieve list of green spaces
 
     deactivate UI
+VFM -> UI : Chooses green spaces managed by GSM
+UI --> VFM : Confirmation of the operation
 
 deactivate VFM
 
