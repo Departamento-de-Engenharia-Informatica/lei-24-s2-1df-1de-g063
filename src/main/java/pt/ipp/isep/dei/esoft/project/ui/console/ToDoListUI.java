@@ -27,7 +27,7 @@ public class ToDoListUI extends Utils implements Runnable {
 
     public ToDoListUI() {
         this.controller = new ToDoListController();
-        this.toDoList = Repositories.getInstance().getToDoList();
+        this.toDoList = controller.getToDoList();
         this.scanner = new Scanner(System.in);
         this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
     }
@@ -98,4 +98,19 @@ public class ToDoListUI extends Utils implements Runnable {
 
 
 
+
+    private void printData(){
+        int contador = 0;
+        List<Entry> entries = toDoList.getToDoList();
+        System.out.println("\n--- Entry List -------------------------");
+        if (entries.isEmpty()) {
+            System.out.println("No vehicles registered yet.");
+        } else {
+            for (Entry entry : entries) {
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
+
+            }
+        }
+    }
 }
