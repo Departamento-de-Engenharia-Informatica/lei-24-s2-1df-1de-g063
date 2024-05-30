@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 import java.util.Scanner;
@@ -46,8 +45,6 @@ public class ToDoListUI implements Runnable {
         this.duration = requestDuration();
         printGreenSpacesList();
         this.greenSpace = greenSpaceRepository.getGreenSpaces().get(userChoiceGreenspace);
-
-
     }
 
     private void submitData() {
@@ -57,29 +54,45 @@ public class ToDoListUI implements Runnable {
         System.out.println("Status: " + status);
         entry = controller.registerEntry(task,urgency,duration,greenSpace,status);
         toDoList.addEntry(entry);
-        System.out.println(toDoList.getToDoList());
+        printData();
+
     }
 
     private String requestTask() {
-        System.out.print("Task: ");
-        return scanner.nextLine();
+        boolean valid = false;
+        do {
+            System.out.print("Task: ");
+            task = scanner.nextLine();
+            valid = validateEntry(task);
+        } while (!valid);
+        return task;
     }
 
     private Urgency requestUrgency() {
-        int choice = 0;
+        int choice;
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n--- Urgency List -------------------------");
-        for (Urgency urgency : Urgency.values()) {
-            System.out.printf("%d - %s%n", choice, urgency);
-            choice++;
+        for (int i = 0; i < Urgency.values().length; i++) {
+            System.out.printf("%d - %s%n", i, Urgency.values()[i]);
         }
-        System.out.print("Choose an urgency (0-" + (Urgency.values().length - 1) + "): ");
-        int selectedUrgencyIndex = scanner.nextInt();
+        do {
+            System.out.print("Choose an urgency (0-" + (Urgency.values().length - 1) + "): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // consume the invalid input
+            }
+            choice = scanner.nextInt();
+            if (choice < 0 || choice >= Urgency.values().length) {
+                System.out.println("Invalid choice. Please choose a number within the range.");
+            }
+        } while (choice < 0 || choice >= Urgency.values().length);
         scanner.nextLine(); // Consume newline left-over
-        return Urgency.values()[selectedUrgencyIndex];
+        return Urgency.values()[choice];
     }
 
+
     private int requestDuration() {
-        System.out.print("Duration of the task (in hours, 1 day=8 hours): ");
+        System.out.print("Duration of the task (in hours, 1 day = 8 hours): ");
         int duration = scanner.nextInt();
         scanner.nextLine();
         boolean valid = true;

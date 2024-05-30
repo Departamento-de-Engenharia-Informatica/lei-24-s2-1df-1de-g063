@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CollaboratorRepository {
     private final List<Collaborator> collaborators;
-    private static AgendaRepository instance;
+    private static CollaboratorRepository instance;
 
     /**
      * Constructs a CollaboratorRepository object.
@@ -33,7 +33,7 @@ public class CollaboratorRepository {
      */
     public static CollaboratorRepository getInstance() {
         if (instance == null) {
-            instance = new AgendaRepository();
+            instance = new CollaboratorRepository();
         }
         return instance;
     }

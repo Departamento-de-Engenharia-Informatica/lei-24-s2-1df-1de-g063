@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
@@ -25,7 +25,7 @@ import java.util.List;
  * }</pre>
  */
 public class GenerateTeamController {
-    private final AgendaRepository collaboratorRepository;
+    private final CollaboratorRepository collaboratorRepository;
     private final SkillsRepository skillsRepository;
     private final TeamRepository teamRepository;
 
@@ -34,7 +34,7 @@ public class GenerateTeamController {
      * Initializes the CollaboratorRepository, SkillsRepository, and TeamRepository attributes.
      */
     public GenerateTeamController() {
-        this.collaboratorRepository = AgendaRepository.getInstance();
+        this.collaboratorRepository = CollaboratorRepository.getInstance();
         this.skillsRepository = SkillsRepository.getInstance();
         this.teamRepository = TeamRepository.getInstance();
     }
