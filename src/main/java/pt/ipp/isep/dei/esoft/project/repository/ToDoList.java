@@ -24,7 +24,7 @@ public class ToDoList{
         toDoList.add(entry);
     }
 
-    public List<Entry> getToDoList() {
+    public List<ToDoList> getToDoList() {
         return List.copyOf(toDoList);
     }
 

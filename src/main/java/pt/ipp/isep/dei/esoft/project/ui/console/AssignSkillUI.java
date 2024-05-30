@@ -3,9 +3,8 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
+import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class AssignSkillUI implements Runnable {
 
     private final Scanner scanner = new Scanner(System.in);
     private final AssignSkillController controller;
-    private final CollaboratorRepository collaboratorRepository;
+    private final AgendaRepository collaboratorRepository;
     private final SkillsRepository skillsRepository;
     private int choice;
     private int userChoiceCollaborator;
@@ -31,7 +30,7 @@ public class AssignSkillUI implements Runnable {
      */
     public AssignSkillUI() {
         controller = new AssignSkillController();
-        collaboratorRepository = CollaboratorRepository.getInstance();
+        collaboratorRepository = AgendaRepository.getInstance();
         skillsRepository = SkillsRepository.getInstance();
     }
 

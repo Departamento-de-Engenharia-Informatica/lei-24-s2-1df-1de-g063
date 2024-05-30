@@ -53,7 +53,7 @@ public class ToDoListUI implements Runnable {
     private void submitData() {
         System.out.println("Task: " + task);
         System.out.println("Urgency: " + urgency);
-        System.out.println("Duration: " + duration);
+        System.out.println("Duration: " + duration + "hours");
         System.out.println("Status: " + status);
         entry = controller.registerEntry(task,urgency,duration,greenSpace,status);
         toDoList.addEntry(entry);

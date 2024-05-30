@@ -61,7 +61,7 @@ RegisterGreenSpaceUI .> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> Repositories : repositories
 Repositories -> "1" GreenSpaceRepository
 RegisterGreenSpaceController ..> GreenSpaceRepository : GreenSpaceRepository
-GreenSpaceRepository "1" --> "1*" GreenSpace : greenSpace
-RegisterGreenSpaceController "1" --> GreenSpace : greenSpace
+GreenSpaceRepository "1" --> "1..*" GreenSpace : greenSpace
+RegisterGreenSpaceController "1" --> "1" GreenSpace : greenSpace
 
 @enduml

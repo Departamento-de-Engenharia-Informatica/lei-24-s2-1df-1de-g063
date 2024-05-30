@@ -17,7 +17,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
  * }</pre>
  */
 public class AssignSkillController {
-    private CollaboratorRepository collaboratorRepository;
+    private AgendaRepository collaboratorRepository;
     private SkillsRepository skillsRepository;
     private AuthenticationRepository authenticationRepository;
 
@@ -39,7 +39,7 @@ public class AssignSkillController {
      */
     public AssignSkillController(AuthenticationRepository authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
-        this.collaboratorRepository = CollaboratorRepository.getInstance();
+        this.collaboratorRepository = AgendaRepository.getInstance();
     }
 
     /**
@@ -48,7 +48,7 @@ public class AssignSkillController {
      *
      * @return the CollaboratorRepository instance
      */
-    public CollaboratorRepository getCollaboratorRepository() {
+    public AgendaRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
