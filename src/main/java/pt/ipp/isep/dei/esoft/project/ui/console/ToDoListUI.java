@@ -90,22 +90,30 @@ public class ToDoListUI implements Runnable {
         return Urgency.values()[choice];
     }
 
-
     private int requestDuration() {
-        System.out.print("Duration of the task (in hours, 1 day = 8 hours): ");
-        int duration = scanner.nextInt();
-        scanner.nextLine();
-        boolean valid = true;
+        boolean valid = false;
+        int duration = 0;
+
         do {
+            System.out.print("Duration of the task (in hours, 1 day = 8 hours): ");
+            if (scanner.hasNextInt()) {
+                duration = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
 
-            if (duration <= 0) {
-                valid = false;
-                System.out.println("Please input a positive number and higher than 0");
+                if (duration > 0) {
+                    valid = true;
+                } else {
+                    System.out.println("Please input a positive number greater than 0.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Consume the invalid input
             }
+        } while (!valid);
 
-        }while (valid==false);
         return duration;
     }
+
     private void printGreenSpacesList() {
         choice = 0;
         List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();

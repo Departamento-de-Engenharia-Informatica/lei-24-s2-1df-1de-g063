@@ -1,13 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,29 +24,31 @@ public class AgendaUI implements Runnable {
     private Entry entry;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Entry selectedEntry;
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public AgendaUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
         this.agendaRepository = Repositories.getInstance().getAgendaRepository();
         this.scanner = new Scanner(System.in);
-        this.status = Status.valueOf("scheduled");
+        this.status = Status.scheduled;
     }
 
     @Override
     public void run() {
-        System.out.println("\n\n--- Add a new Entry to Agenda ------------------------");
         requestData();
         submitData();
     }
 
     private void requestData() {
-        Entry selectedEntry = requestEntry();
+        selectedEntry = requestEntry();
         if (selectedEntry != null) {
             this.duration = selectedEntry.getDuration();
-            addEntryToAgenda(selectedEntry);
             requestStartDate();
             calculateEndDate();
+            addEntryToAgenda(selectedEntry);
         }
     }
 
@@ -81,9 +85,9 @@ public class AgendaUI implements Runnable {
             System.out.print("Enter the start date (YYYY/MM/DD): ");
             try {
                 String input = scanner.nextLine();
-                this.startDate = LocalDate.parse(input);
+                this.startDate = LocalDate.parse(input, DATE_FORMATTER);
                 valid = true;
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format. Please enter the date in YYYY/MM/DD format.");
             }
         } while (!valid);
@@ -99,19 +103,26 @@ public class AgendaUI implements Runnable {
             if (remainingHours > 0) {
                 this.endDate = this.endDate.plusDays(0);
             }
-
-            System.out.printf("The task will end on: %s%n", endDate);
+            System.out.printf("The task will end on: %s%n", endDate.format(DATE_FORMATTER));
         }
     }
 
     private void submitData() {
-        // Here you can add any additional logic needed to submit data
+        if (selectedEntry != null) {
+            selectedEntry.setStartDate(startDate);
+            selectedEntry.setEndDate(endDate);
+            selectedEntry.setStatus(Status.scheduled);
+            System.out.println("Entry has been updated and saved to the agenda.");
+        } else {
+            System.out.println("No entry to submit.");
+        }
+        printData();
     }
 
     private void printData() {
         int contador = 0;
-        List<Entry> entries = toDoList.getToDoList();
-        System.out.println("\n--- Entry List -------------------------");
+        List<Entry> entries = agendaRepository.getAgenda();
+        System.out.println("\n--- Agenda Entries ---------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");
         } else {
@@ -120,6 +131,7 @@ public class AgendaUI implements Runnable {
                 contador++;
             }
         }
+        System.out.println("----------------------------------------");
     }
 
     private int requestUserChoice(String type) {

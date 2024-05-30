@@ -64,12 +64,14 @@ public class Entry {
 
     @Override
     public String toString() {
-        return "{" +
+        return "Entry{" +
                 "task='" + task + '\'' +
-                ", urgency=" + urgency +'\''+
-                ", duration=" + duration +'\''+
-                ", greenSpace=" + greenSpace +'\''+
-                ", status=" + status +'\''+
+                ", urgency=" + urgency +
+                ", duration=" + duration +
+                ", greenSpace=" + greenSpace +
+                ", status=" + status +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 '}';
     }
 }

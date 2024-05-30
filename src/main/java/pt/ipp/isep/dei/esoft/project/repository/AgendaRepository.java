@@ -27,4 +27,13 @@ public class AgendaRepository {
     public List<Entry> getAgenda() {
         return List.copyOf(agenda);
     }
+
+    public void updateEntry(Entry updatedEntry) {
+        for (int i = 0; i < agenda.size(); i++) {
+            if (agenda.get(i).equals(updatedEntry)) {
+                agenda.set(i, updatedEntry);
+                return;
+            }
+        }
+    }
 }
