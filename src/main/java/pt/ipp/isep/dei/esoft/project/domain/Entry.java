@@ -1,11 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Entry {
     private final String task;
     private final Urgency urgency;
     private final int duration;
     private GreenSpace greenSpace;
     private Status status;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public Entry(String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
         this.task = task;
@@ -15,6 +20,21 @@ public class Entry {
         this.status = status;
     }
 
+    public LocalDate getStartDate(){
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate date){
+        this.startDate=date;
+    }
+
+    public LocalDate getEndDate(){
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate date){
+        this.endDate=date;
+    }
 
     public Status getStatus() {
         return status;

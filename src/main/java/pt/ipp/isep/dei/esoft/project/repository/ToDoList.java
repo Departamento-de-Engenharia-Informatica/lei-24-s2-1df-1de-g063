@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList{
-    private final List<Entry> toDoList;
+    private List<Entry> toDoList;
     private static ToDoList instance;
 
     public ToDoList() {

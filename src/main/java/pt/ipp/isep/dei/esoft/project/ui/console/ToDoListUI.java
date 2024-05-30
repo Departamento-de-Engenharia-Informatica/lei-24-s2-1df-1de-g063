@@ -98,11 +98,11 @@ public class ToDoListUI implements Runnable {
         boolean valid = true;
         do {
 
-
             if (duration <= 0) {
                 valid = false;
                 System.out.println("Please input a positive number and higher than 0");
             }
+
         }while (valid==false);
         return duration;
     }
