@@ -39,12 +39,34 @@ class TaskRepository{
     + addTaskOfCollaborator(task)
 }
 
+class CollaboratorRepository{
+    + getCollaboratorThoughEmail(email))
+}
+
+class TeamRepository{
+    + getTeamsThoughCollaborator(collaborator)
+}
+
+class Agenda{
+    +getCollaboratorAgendaEntries(taskList)
+}
+
+class ToDoList{
+    -List<ToDoList> toDoListEntries
+    +getStatusList()
+}
+
+class EntryMapper{
+    +toDTOList(listEntries): List<EntryDto>
+    +toDTOEntry(entry): EntryDto
+}
 
 
 ListTaskSpaceUI .> ListTaskController
 ListTaskController..> Repositories : repositories
 Repositories -> "1" TaskRepository
 ListTaskController ..> TaskRepository : getTaskRepository
-
+ListTaskController..> CollaboratorRepository
+ListTaskController..> TeamRepository
 
 @enduml

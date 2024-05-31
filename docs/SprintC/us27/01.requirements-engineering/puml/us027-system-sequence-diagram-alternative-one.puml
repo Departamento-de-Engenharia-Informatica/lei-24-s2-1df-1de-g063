@@ -24,4 +24,10 @@ activate Employee
         System --> Employee : Confirmation of the operation
     deactivate System
 
+    Employee -> System : Confirms that he want to creat the list
+        activate System
+
+            System --> Employee : Show the list
+        deactivate System
+
 @enduml
