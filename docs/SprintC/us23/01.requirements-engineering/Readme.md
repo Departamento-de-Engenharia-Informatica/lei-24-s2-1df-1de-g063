@@ -1,62 +1,57 @@
-# US023 - As a GSM, I want to assign a Team to an entry in the Agenda.
+# US008 - As an FM, I want to list the vehicles needing the check-up
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
-As a Green Space Manager (GSM), I want to have the ability to assign a specific team to an 
-entry in the agenda so that the responsibilities for that entry are clearly defined and managed by 
-the appropriate team.
+
+As a Vehicle and Equipment Fleet Manager responsible for overseeing the maintenance and condition of
+vehicles within the organization, I need a feature that allows me to quickly list
+vehicles that require check-up.
 
 ### 1.2. Customer Specifications and Clarifications
 
 **From the client clarifications:**
-> **Question:** Can an Agenda entry have more than one team assigned to it?
->
-> **Answer:** No.
->
-> **Question:** Can a Team be assigned to multiple entrys?
->
-> **Answer:** yes.
 
-**From the specifications document:**
-
-> The GSM should be able to assign a team to an entry in the Agenda.
+> **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
 >
-> A message must be sent to all team members informing them about the assignment.
->
-> Different email services can send the message, and these services must be defined through a configuration file.
+> **Answer:** The list of vehicles is automatically created but the creation is triggered by the FM.
 
+> **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
+>
+> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
+
+> **Question:** What are the criteria for the car to appear on the check-up list?
+> 
+> **Answer:** If the vehicle is within 5% of reaching the km limit for a check-up or exceed that limit.
 ### 1.3. Acceptance Criteria
 
-* **AC1:** A message must be sent to all team members informing
-  them about the assignment.
-* **AC2:** Different email services can send the message. These services must be defined through a configuration file to allow the use
-  of different platforms (e.g. Gmail, DEI’s email service, etc.).
+* **AC1:** The system should allow VFM to generate a list of vehicles requiring a check-up.
+* **AC2:** The list should include relevant information for each vehicle, such as its identification number, type, kilometers driven since the last check-up, and frequency of checkup.
+* **AC3:** The system should automatically include vehicles in the list if they are within 5% of reaching the mileage limit or if exceeds it.
 
 ### 1.4. Found out Dependencies
 
-* **Dependencies found in US03** - *As an HRM, I want to register a collaborator with a job and fundamental characteristics*, there must exist collaborators.
-* **Dependencies found in US01** - *As a Human Resources Manager (HRM), I want to register skills that a collaborator may have*, there must be skills registered before assigning a team with those set of skills.
-* **Dependencies found in US04** - *HRM intends to assign one or more competences to an employee*, there must be skills assigned to an employee, otherwise, the system cannot create a team based on the skills provided.
-* **Dependencies found in US05** - *As an HRM, I want to generate a team proposal*, as there need to exist teams in order to choose them.
-* **Dependencies found in US21** - *As a GSM, I want to add a new entry to the To-Do List*,because the entries need to be created first.
-* **Dependencies found in US22** - *As a GSM, I want to add a new entry in the Agenda*, as those entries need to be added to the agenda in order to be chosen from.
+* There is a dependency on "US006 - Vehicle Registration" as there must be all the vehicles details.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
+* Typed data:
+    * Tap a key to generate a list
+
 * Selected data:
-  * Entry
-  * Teams
+  * Vehicle
   
 **Output Data:**
+
+  * List of vehicles needing a check-up
   * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD) 
 
-![]
+**_Other alternatives might exist._**
 
 #### Alternative One
 

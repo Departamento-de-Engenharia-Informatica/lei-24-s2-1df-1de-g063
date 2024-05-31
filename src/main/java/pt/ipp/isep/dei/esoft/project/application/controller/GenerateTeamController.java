@@ -2,15 +2,13 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 /**
  * The GenerateTeamController class handles the generation of team proposals based on specified criteria.
@@ -27,41 +25,18 @@ import java.util.Collections;
  * }</pre>
  */
 public class GenerateTeamController {
-    private  CollaboratorRepository collaboratorRepository;
-    private  SkillsRepository skillsRepository;
-    private  TeamRepository teamRepository;
-
-    private List<Collaborator> lastSelectedCollaborators = null;
+    private final CollaboratorRepository collaboratorRepository;
+    private final SkillsRepository skillsRepository;
+    private final TeamRepository teamRepository;
 
     /**
      * Constructs a GenerateTeamController object.
      * Initializes the CollaboratorRepository, SkillsRepository, and TeamRepository attributes.
      */
     public GenerateTeamController() {
-        this.collaboratorRepository = getCollaboratorRepository();
-        this.skillsRepository = getSkillsRepository();
-        this.teamRepository = getTeamRepository();
-    }
-    private CollaboratorRepository getCollaboratorRepository(){
-        if(collaboratorRepository == null){
-            Repositories repositories = Repositories.getInstance();
-            collaboratorRepository = repositories.getCollaboratorRepository();
-        }
-        return collaboratorRepository;
-    }
-    private SkillsRepository getSkillsRepository(){
-        if(skillsRepository == null){
-            Repositories repositories = Repositories.getInstance();
-            skillsRepository = repositories.getSkillsRepository();
-        }
-        return skillsRepository;
-    }
-    private TeamRepository getTeamRepository(){
-        if(teamRepository == null){
-            Repositories repositories = Repositories.getInstance();
-            teamRepository = repositories.getTeamRepository();
-        }
-        return teamRepository;
+        this.collaboratorRepository = CollaboratorRepository.getInstance();
+        this.skillsRepository = SkillsRepository.getInstance();
+        this.teamRepository = TeamRepository.getInstance();
     }
 
     /**
@@ -91,25 +66,6 @@ public class GenerateTeamController {
             team.setMembers(filteredCollaborators);
             return team;
         }
-    }
-
-    /**
-     * Retrieves a skill by its name from the SkillsRepository.
-     *
-     * @param name the name of the skill
-     * @return the skill if found, null otherwise
-     */
-    public Skill getSkillByName(String name) {
-        return skillsRepository.getSkillByName(name);
-    }
-
-    /**
-     * Adds the team to the TeamRepository.
-     *
-     * @param team the team to add
-     */
-    public void addTeam(Team team) {
-        TeamRepository.addTeams(team);
     }
 
     /**
@@ -161,22 +117,6 @@ public class GenerateTeamController {
      * @return a list of selected collaborators, up to the maximum team size
      */
     private List<Collaborator> selectCollaborators(List<Collaborator> collaborators, int maxTeamSize) {
-        List<Collaborator> selectedCollaborators;
-        do {
-            Collections.shuffle(collaborators);
-
-            selectedCollaborators = collaborators.subList(0, Math.min(maxTeamSize, collaborators.size()));
-        } while (selectedCollaborators.equals(lastSelectedCollaborators));
-        lastSelectedCollaborators = new ArrayList<>(selectedCollaborators);
-        return selectedCollaborators;
-    }
-    public void printTeams() {
-        List<Team> teams = teamRepository.getTeams();
-        for (int i = 0; i < teams.size(); i++) {
-            System.out.println("-----------------");
-            System.out.println("Team number: " + i);
-            System.out.println(teams.get(i));
-            System.out.println("-----------------");
-        }
+        return collaborators.subList(0, maxTeamSize);
     }
 }

@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
-import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class AgendaUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
-    private final AgendaRepository agendaRepository;
+    private final Agenda agenda;
     private final Scanner scanner;
     private int choice;
     private int duration;
@@ -31,7 +31,7 @@ public class AgendaUI implements Runnable {
     public AgendaUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
-        this.agendaRepository = Repositories.getInstance().getAgendaRepository();
+        this.agenda = Repositories.getInstance().getAgendaRepository();
         this.scanner = new Scanner(System.in);
         this.status = Status.scheduled;
     }
@@ -72,7 +72,7 @@ public class AgendaUI implements Runnable {
 
     private void addEntryToAgenda(Entry entry) {
         if (entry != null) {
-            agendaRepository.addEntry(entry);
+            agenda.addEntry(entry);
             System.out.println("Entry added to the agenda.");
         } else {
             System.out.println("No entry was added to the agenda.");
@@ -121,7 +121,7 @@ public class AgendaUI implements Runnable {
 
     private void printData() {
         int contador = 0;
-        List<Entry> entries = agendaRepository.getAgenda();
+        List<Entry> entries = agenda.getAgenda();
         System.out.println("\n--- Agenda Entries ---------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");

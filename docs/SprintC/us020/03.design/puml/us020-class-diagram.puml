@@ -31,6 +31,10 @@ note right of RegisterGreenSpaceController
     - getVehiclesNeedingCheckUp(): List<Vehicle>: Retrieves a list of vehicles needing check-up
 end note
 
+class Organization{
+
+}
+
 class Repositories{
     - Repositories()
     + getInstance() : Repositories

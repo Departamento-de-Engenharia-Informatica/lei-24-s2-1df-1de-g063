@@ -55,6 +55,7 @@ public class Organization {
                                      String technicalDescription, int duration, double cost,
                                      TaskCategory taskCategory, Employee employee) {
 
+        //TODO: we could also check if the employee works for the organization before proceeding
         //checkIfEmployeeWorksForOrganization(employee);
 
         // When a Task is added, it should fail if the Task already exists in the list of Tasks.
