@@ -151,7 +151,7 @@ public class ToDoListUI implements Runnable {
 
         if (task == null || task.trim().isEmpty()) {
             valid = false;
-        } else if( !task.matches("[a-zA-Z0-9.,!?-]+")) {
+        } else if( !task.matches("[a-zA-Z0-9., !?-]+")) {
             System.out.println("Entry has invalid characters");
             valid = false;
         }
