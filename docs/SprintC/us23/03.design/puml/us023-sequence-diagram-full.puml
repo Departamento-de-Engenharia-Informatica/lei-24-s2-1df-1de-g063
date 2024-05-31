@@ -1,0 +1,109 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Green Space Manager" as GSM
+participant ":AssignTeamToEntryUI" as UI
+participant ":AssignTeamToEntryCTRL" as CTRL
+participant "Repositories" as Rep
+participant "repositories:\nRepositories" as Repositories
+participant "teamRepository:\nTeamRepository" as TeamRepository
+participant "team:\nTeam" as Team
+participant "entry:\nEntry" as Entry
+
+activate GSM
+    GSM -> UI : Wants to assign team to entry
+    activate UI
+        UI --> CTRL** : create
+        UI -> CTRL : getTeams()
+        activate CTRL
+
+            CTRL -> Rep : getInstance()
+            activate Rep
+                Rep --> CTRL : repositories
+            deactivate Rep
+
+            CTRL -> Repositories : getTeamsRepository()
+            activate Repositories
+                Repositories --> CTRL : TeamRepository
+            deactivate Repositories
+
+            CTRL -> TeamRepository : getTeams()
+            activate TeamRepository
+                TeamRepository --> CTRL : Teams
+            deactivate TeamRepository
+
+        CTRL --> UI : Teams
+        deactivate CTRL
+
+        UI -> GSM : shows teams
+        GSM -> UI : selects team
+        UI -> CTRL : getEntries()
+        activate CTRL
+
+            CTRL -> Rep : getInstance()
+            activate Rep
+                Rep --> CTRL : repositories
+            deactivate Rep
+
+            CTRL -> Repositories : getEntryRepository()
+            activate Repositories
+                Repositories --> CTRL : EntryRepository
+            deactivate Repositories
+
+            CTRL -> EntryRepository : getEntries()
+            activate EntryRepository
+                EntryRepository --> CTRL : Entries
+            deactivate EntryRepository
+
+        CTRL --> UI : Entries
+        UI -> GSM : shows entries
+
+        alt Multiple Entries Selection
+            loop
+                GSM -> UI : selects entry
+                UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
+                CTRL -> TeamRepository : getTeams(choiceTeam)
+                    activate TeamRepository
+                        TeamRepository --> CTRL : Team selectedTeam
+                    deactivate TeamRepository
+                CTRL -> EntryRepository : getEntries(choiceEntry)
+                    activate EntryRepository
+                        EntryRepository --> CTRL : Entry selectedEntry
+                    deactivate EntryRepository
+                CTRL -> Entry : selectedEntry.setTeam(selectedTeam)
+                           activate Entry
+                           deactivate Entry
+                CTRL -> UI : (In)Success
+                UI-> GSM : (In)Success message
+                UI -> GSM : Do you want to keep selecting entries?
+                GSM -> UI : Yes
+            end
+        else Single Entry Selection
+            GSM -> UI : selects entry
+            UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
+            CTRL -> TeamRepository : getTeams(choiceTeam)
+                activate TeamRepository
+                    TeamRepository --> CTRL : Team selectedTeam
+                deactivate TeamRepository
+            CTRL -> EntryRepository : getEntries(choiceEntry)
+                activate EntryRepository
+                    EntryRepository --> CTRL : Entry selectedEntry
+                deactivate EntryRepository
+
+            CTRL -> Entry : selectedEntry.setTeam(selectedTeam)
+            activate Entry
+            deactivate Entry
+            CTRL -> UI : (In)Success
+            UI -> GSM : Do you want to keep selecting entries?
+            GSM -> UI : No
+            UI-> GSM : (In)Success message
+        end
+
+        deactivate CTRL
+    deactivate UI
+deactivate GSM
+@enduml

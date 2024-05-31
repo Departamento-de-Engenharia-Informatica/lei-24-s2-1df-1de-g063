@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
+import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
@@ -15,7 +16,7 @@ import java.util.Scanner;
 public class CancelEntryUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
-    private final Agenda agenda;
+    private final AgendaRepository agenda;
     private final Scanner scanner;
     private int choice;
     private int duration;
