@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GreenSpaceRepository {
     private final List<GreenSpace> greenSpaces;
@@ -43,6 +44,12 @@ public class GreenSpaceRepository {
      */
     public List<GreenSpace> getGreenSpaces() {
         return greenSpaces;
+    }
+
+    public List<GreenSpace> getGreenSpacesByEmail(String email) {
+        return greenSpaces.stream()
+                .filter(greenSpace -> greenSpace.getEmail().equalsIgnoreCase(email))
+                .collect(Collectors.toList());
     }
 
     /**

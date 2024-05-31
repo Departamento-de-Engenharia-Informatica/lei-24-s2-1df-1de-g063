@@ -2,18 +2,9 @@ package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.HrmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.VfmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.GsmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
+import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,13 +34,18 @@ public class AuthenticationUI implements Runnable {
         boolean success = doLogin();
 
         if (success) {
+            // Call UserEmailUI to ask for personal email
+            UserEmailUI userEmailUI = new UserEmailUI();
+            userEmailUI.run();
+            String email = userEmailUI.getEmail();
+
             List<UserRoleDTO> roles = this.ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
                 System.out.println("No role assigned to user.");
             } else {
                 UserRoleDTO role = selectsRole(roles);
                 if (!Objects.isNull(role)) {
-                    List<MenuItem> rolesUI = getMenuItemForRoles();
+                    List<MenuItem> rolesUI = getMenuItemForRoles(email);
                     this.redirectToRoleUI(rolesUI, role);
                 } else {
                     System.out.println("No role selected.");
@@ -130,12 +126,12 @@ public class AuthenticationUI implements Runnable {
      *
      * @return a list of menu items for user roles
      */
-    private List<MenuItem> getMenuItemForRoles() {
+    private List<MenuItem> getMenuItemForRoles(String email) {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(email))); // Pass email to GsmUI
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }
