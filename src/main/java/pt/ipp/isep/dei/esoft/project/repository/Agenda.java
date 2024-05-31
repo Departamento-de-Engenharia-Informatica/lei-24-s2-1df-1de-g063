@@ -5,17 +5,17 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaRepository {
+public class Agenda {
     private final List<Entry> agenda;
-    private static AgendaRepository instance;
+    private static Agenda instance;
 
-    AgendaRepository() {
+    Agenda() {
         agenda = new ArrayList<>();
     }
 
-    public static AgendaRepository getInstance() {
+    public static Agenda getInstance() {
         if (instance == null) {
-            instance = new AgendaRepository();
+            instance = new Agenda();
         }
         return instance;
     }
