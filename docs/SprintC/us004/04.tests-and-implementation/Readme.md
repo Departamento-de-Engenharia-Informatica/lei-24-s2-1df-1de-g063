@@ -106,7 +106,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class AssignSkillController {
-    private Agenda collaboratorRepository;
+    private AgendaRepository collaboratorRepository;
     private SkillsRepository skillsRepository;
     private AuthenticationRepository authenticationRepository;
 
@@ -118,10 +118,10 @@ public class AssignSkillController {
 
     public AssignSkillController(AuthenticationRepository authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
-        this.collaboratorRepository = Agenda.getInstance();
+        this.collaboratorRepository = AgendaRepository.getInstance();
     }
 
-    public Agenda getCollaboratorRepository() {
+    public AgendaRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();

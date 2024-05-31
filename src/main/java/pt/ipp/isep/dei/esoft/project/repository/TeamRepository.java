@@ -52,13 +52,13 @@ public class TeamRepository {
      */
     public List<Team> getTeams() {
         // This is a defensive copy to prevent modification of the repository's internal list
-        List<Team> defensiveCopy = List.copyOf(teams);
-        for (int i = 0; i < defensiveCopy.size(); i++) {
-            System.out.println("-----------------");
-            System.out.println("Team number: " + i);
-            System.out.println(defensiveCopy.get(i));
-            System.out.println("-----------------");
+        return List.copyOf(teams);
+    }
+    public Team getTeams(int index) {
+        if (index >= 0 && index < teams.size()) {
+            return teams.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
-        return defensiveCopy;
     }
 }

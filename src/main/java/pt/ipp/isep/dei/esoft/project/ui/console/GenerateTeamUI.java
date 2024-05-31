@@ -1,29 +1,21 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
-import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
-import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * User interface for generating a team proposal based on specified criteria.
  */
 public class GenerateTeamUI implements Runnable {
     private final GenerateTeamController controller;
-    private final JobRepository jobRepository;
-    private final SkillsRepository skillsRepository;
-    private final TeamRepository teamRepository;
     private final Scanner scanner;
     private int maxSize;
     private int minSize;
-    private int choice;
     private List<Skill> selectedSkills = new ArrayList<>();
     private boolean error = false;
     private Team teamProposal;
@@ -33,10 +25,7 @@ public class GenerateTeamUI implements Runnable {
      */
     public GenerateTeamUI() {
         this.controller = new GenerateTeamController();
-        this.jobRepository = JobRepository.getInstance();
-        this.skillsRepository = SkillsRepository.getInstance();
         this.scanner = new Scanner(System.in);
-        this.teamRepository = TeamRepository.getInstance();
     }
 
     /**
@@ -44,79 +33,93 @@ public class GenerateTeamUI implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("\n\n--- Generate Team ------------------------");
-        requestData();
-        if (!error) {
-            submitData();
+        boolean continueGenerating = true;
+        while (continueGenerating) {
+            System.out.println("\n\n--- Generate Team ------------------------");
+            requestData();
             if (!error) {
-                printTeam();
+                submitData();
+                if (!error) {
+                    controller.printTeams();
+                }
             }
+            continueGenerating = askGenerateAnotherTeam();
         }
     }
 
     private void requestData() {
-        Scanner sc = new Scanner(System.in);
+        error = false;
+        while (true) {
+            System.out.println("Please enter the input in the format: maxSize; minSize; <skill1; skill2; skill3>");
 
-        System.out.println("Max team size?");
-        maxSize = requestIntegerInput(sc);
+            String input = scanner.nextLine().trim();
+            String[] parts = input.split(";");
 
-        System.out.println("Min team size?");
-        minSize = requestIntegerInput(sc);
-
-        System.out.println("Choose the skills from the following list:");
-        error = printSkillList();
-        if (!error) {
-            boolean continueSelectingSkills = true;
-            selectedSkills.clear();
-            while (continueSelectingSkills) {
-                int choice = requestIntegerInput(sc);
-                if (choice >= 0 && choice < skillsRepository.getSkills().size()) {
-                    Skill selectedSkill = skillsRepository.getSkills().get(choice);
-                    selectedSkills.add(selectedSkill);
-                    System.out.println("Do you want to add another skill? (yes/no)");
-                    String input = sc.nextLine().toLowerCase();
-                    if (!input.equals("yes")) {
-                        continueSelectingSkills = false;
-                    }
-                } else {
-                    System.out.println("Invalid choice. Please select a number within the range.");
-                }
+            if (parts.length != 3) {
+                System.out.println("Invalid input format. Please use: maxSize; minSize; <skill1; skill2; skill3>");
+                continue;
             }
-            System.out.println(selectedSkills);
-        }
-    }
 
-    private int requestIntegerInput(Scanner scanner) {
-        int value;
-        while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid integer value.");
-            scanner.nextLine(); // Consume invalid input
+            try {
+                maxSize = Integer.parseInt(parts[0].trim());
+                minSize = Integer.parseInt(parts[1].trim());
+
+                if (maxSize < 0 || minSize < 0) {
+                    System.out.println("Team sizes cannot be negative.");
+                    continue;
+                }
+
+                if (maxSize < minSize) {
+                    System.out.println("Max team size cannot be smaller than min team size.");
+                    continue;
+                }
+
+                String skillsPart = parts[2].trim();
+                if (!skillsPart.startsWith("<") || !skillsPart.endsWith(">")) {
+                    System.out.println("Skills should be enclosed in < >.");
+                    continue;
+                }
+
+                skillsPart = skillsPart.substring(1, skillsPart.length() - 1).trim();
+                String[] skillsArray = skillsPart.split(";");
+
+                selectedSkills.clear();
+                boolean validSkills = true;
+                for (String skillName : skillsArray) {
+                    skillName = skillName.trim();
+                    if (!skillName.isEmpty()) {
+                        Skill skill = controller.getSkillByName(skillName);
+                        if (skill != null) {
+                            selectedSkills.add(skill);
+                        } else {
+                            System.out.printf("Skill '%s' is not recognized.%n", skillName);
+                            validSkills = false;
+                        }
+                    }
+                }
+
+                if (validSkills) {
+                    break;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Team sizes must be valid integers.");
+            }
         }
-        value = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-        return value;
     }
 
     private void submitData() {
-        boolean generateAnother = true;
-        while (generateAnother) {
-            teamProposal = controller.generateTeamProposal(minSize, maxSize, selectedSkills);
-            if (teamProposal == null) {
-                error = true;
-            } else {
-                System.out.println("Team proposal generated successfully:");
-                printTeam();
-                System.out.println("Do you accept this team proposal? (yes/no)");
-                String input = scanner.nextLine().toLowerCase();
-                if (input.equals("yes")) {
-                    TeamRepository.addTeams(teamProposal);
-                    System.out.println("Team added to repository.");
-                }
-            }
-            System.out.println("Do you want to generate another team? (yes/no)");
+        teamProposal = controller.generateTeamProposal(minSize, maxSize, selectedSkills);
+        if (teamProposal == null) {
+            error = true;
+        } else {
+            System.out.println("Team proposal generated successfully:");
+            printTeam();
+            System.out.println("Do you accept this team proposal? (yes/no)");
             String input = scanner.nextLine().toLowerCase();
-            if (!input.equals("yes")) {
-                generateAnother = false;
+            if (input.equals("yes")) {
+                controller.addTeam(teamProposal);
+                System.out.println("Team added to repository.");
             }
         }
     }
@@ -128,19 +131,9 @@ public class GenerateTeamUI implements Runnable {
         }
     }
 
-    private boolean printSkillList() {
-        choice = 0;
-        List<Skill> skills = skillsRepository.getSkills();
-        System.out.println("\n--- Skills List -------------------------");
-        if (skills.isEmpty()) {
-            System.out.println("No Skills registered yet.");
-            return true;
-        } else {
-            for (Skill skill : skills) {
-                System.out.printf("%d - %s%n", choice, skill);
-                choice++;
-            }
-            return false;
-        }
+    private boolean askGenerateAnotherTeam() {
+        System.out.println("Do you want to generate another team? (yes/no)");
+        String input = scanner.nextLine().toLowerCase();
+        return input.equals("yes");
     }
 }
