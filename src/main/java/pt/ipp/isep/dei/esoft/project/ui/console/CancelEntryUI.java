@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.time.LocalDate;
@@ -31,7 +30,7 @@ public class CancelEntryUI implements Runnable {
     public CancelEntryUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
-        this.agenda = Repositories.getInstance().getAgendaRepository();
+        this.agenda = controller.getAgendaRepository();
         this.scanner = new Scanner(System.in);
         this.status = Status.canceled;
     }

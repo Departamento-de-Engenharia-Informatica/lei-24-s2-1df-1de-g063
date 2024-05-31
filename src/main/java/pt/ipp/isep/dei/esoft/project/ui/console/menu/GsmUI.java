@@ -1,12 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.ui.console.AgendaUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.ToDoListUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-import pt.ipp.isep.dei.esoft.project.ui.console.AssignTeamToEntryUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.AssignVehicleToEntryUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.GreenSpacesListUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +30,7 @@ public class GsmUI implements Runnable {
         options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(email)));
         options.add(new MenuItem("Add entry to To-Do List", new ToDoListUI()));
         options.add(new MenuItem("Add entry to Agenda", new AgendaUI()));
+        options.add(new MenuItem("Cancel Entry", new CancelEntryUI()));
         options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
         options.add(new MenuItem("Assign a Vehicle to an Entry in the Agenda", new AssignVehicleToEntryUI()));
         options.add(new MenuItem("Green Spaces Managed by me", new GreenSpacesListUI(email))); // Added menu item
