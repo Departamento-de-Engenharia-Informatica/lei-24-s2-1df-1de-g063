@@ -29,6 +29,7 @@ public class UserSession {
         this.userSession = userSession;
     }
 
+
     /**
      * Retrieves the email of the user associated with the session.
      *
