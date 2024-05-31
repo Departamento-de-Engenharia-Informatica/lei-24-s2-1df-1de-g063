@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+    GSM -> System : Request to assign Vehicle to Entry
+    activate System
+        System --> GSM : Retrieves list of Entries
+    deactivate System
+    GSM -> System : Selects Entry
+    activate System
+        System --> GSM : Retrieves list of Vehicles
+    deactivate System
+
+    ' Adding annotation for the loop
+    note right of System : Loop for adding vehicles
+
+    loop Adding Vehicles
+        GSM -> System : Selects Vehicle
+        activate System
+            System --> GSM : Displays message of (In)Success
+        deactivate System
+        alt User wants to keep adding vehicles
+            GSM -> System : Request to add another Vehicle
+        else User wants to stop
+            break
+        end
+    end
+deactivate GSM
+
+@enduml
