@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class AgendaController {
     private ToDoList toDoList;
-    private AgendaRepository agendaRepository;
+    private Agenda agenda;
     private AuthenticationRepository authenticationRepository;
 
     public AgendaController() {
@@ -28,12 +28,12 @@ public class AgendaController {
         return toDoList;
     }
 
-    public AgendaRepository getAgendaRepository() {
-        if (agendaRepository == null) {
+    public Agenda getAgendaRepository() {
+        if (agenda == null) {
             Repositories repositories = Repositories.getInstance();
-            agendaRepository = repositories.getAgendaRepository();
+            agenda = repositories.getAgendaRepository();
         }
-        return agendaRepository;
+        return agenda;
     }
 
     private AuthenticationRepository getAuthenticationRepository() {

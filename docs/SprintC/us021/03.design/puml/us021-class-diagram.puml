@@ -1,0 +1,51 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Organization{
+
+}
+
+class ToDoListUI{
+
+}
+
+
+class ToDoListController{
+
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getToDoList()
+}
+
+class ToDoList{
+
+}
+
+class Entry{
+    -Task
+    -Urgency
+    -Status
+    -Duration
+    -Green space
+}
+
+ToDoListUI .right-> ToDoListController
+Organization -down-> Entry
+Entry -> ToDoList: add
+Repositories .down-> "1" ToDoList: Instance
+OrganizationRepository .down-> Organization
+ToDoListController -.down-> Repositories : repositories
+Repositories -left-> "1" OrganizationRepository
+
+@enduml
