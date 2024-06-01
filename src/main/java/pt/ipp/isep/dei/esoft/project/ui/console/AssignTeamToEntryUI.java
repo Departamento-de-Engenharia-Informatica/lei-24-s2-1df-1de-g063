@@ -39,14 +39,49 @@ public class AssignTeamToEntryUI implements Runnable {
      * Requests data from the user.
      */
     public void requestData(){
+    do {
         printTeamList();
         System.out.println("Choose a team:");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number:");
+            scanner.next();
+        }
         choiceTeam = scanner.nextInt();
+        if (choiceTeam == -1) {
+            return;
+        }
+        if (choiceTeam < 0 || choiceTeam >= controller.getTeams().size()) {
+            System.out.println("Invalid choice. Please choose a number from the list:");
+            continue;
+        }
+        break;
+    } while (true);
+
+    do {
         printEntryList();
         System.out.println("Choose an entry:");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number:");
+            scanner.next();
+        }
         choiceEntry = scanner.nextInt();
-        submitData();
-    }
+        if (choiceEntry == -1) {
+            return;
+        }
+        if (choiceEntry < 0 || choiceEntry >= controller.getEntries().size()) {
+            System.out.println("Invalid choice. Please choose a number from the list:");
+            continue;
+        }
+        String selectedEntry = controller.getEntries().get(choiceEntry);
+        if (selectedEntry.contains("(Team assigned)")) {
+            System.out.println("This entry already has a team assigned. Please choose another entry:");
+            continue;
+        }
+        break;
+    } while (true);
+
+    submitData();
+}
 
     /**
      * Submits the data.
@@ -71,17 +106,17 @@ public class AssignTeamToEntryUI implements Runnable {
             }
         }
     }
-    private void printEntryList() {
-        choiceEntry = 0;
-        List<Entry> entries = controller.getEntries();
-        System.out.println("\n--- Entries List -------------------------");
-        if (entries.isEmpty()) {
-            System.out.println("No Entries registered yet.");
-        } else {
-            for (Entry entry : entries) {
-                System.out.printf("%d - %s%n", choiceEntry, entry);
-                choiceEntry++;
-            }
+   private void printEntryList() {
+    choiceEntry = 0;
+    List<String> entries = controller.getEntries();
+    System.out.println("\n--- Entries List -------------------------");
+    if (entries.isEmpty()) {
+        System.out.println("No Entries registered yet.");
+    } else {
+        for (String entry : entries) {
+            System.out.printf("%d - %s%n", choiceEntry, entry);
+            choiceEntry++;
         }
     }
+}
 }

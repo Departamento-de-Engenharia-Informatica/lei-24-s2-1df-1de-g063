@@ -41,9 +41,18 @@ public class AssignTeamToEntryController {
     }
 
     // The following methods are commented out but may be used in the future.
-    public List<Entry> getEntries() {
-        return AgendaRepository.getEntries();
+   public List<String> getEntries() {
+    List<Entry> entries = AgendaRepository.getEntries();
+    List<String> entriesWithFlags = new ArrayList<>();
+    for (Entry entry : entries) {
+        String entryString = entry.toString();
+        if (entry.getTeam() != null) {
+            entryString += " (Team assigned)";
+        }
+        entriesWithFlags.add(entryString);
     }
+    return entriesWithFlags;
+}
 
 
     public void attributeTeamToEntry(int choiceTeam, int choiceEntry){

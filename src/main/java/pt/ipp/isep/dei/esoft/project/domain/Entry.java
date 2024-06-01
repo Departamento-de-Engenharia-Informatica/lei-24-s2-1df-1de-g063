@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Entry {
@@ -21,6 +22,7 @@ public class Entry {
         this.duration = duration;
         this.greenSpace = greenSpace;
         this.status = status;
+        this.vehicles = new ArrayList<>();
     }
 
     public LocalDate getStartDate(){
@@ -85,16 +87,19 @@ public class Entry {
 
     public void setStatus(Status status) {this.status = status;}
 
-    @Override
-    public String toString() {
-        return "Entry{" +
-                "task='" + task + '\'' +
-                ", urgency=" + urgency +
-                ", duration=" + duration +
-                ", greenSpace=" + greenSpace +
-                ", status=" + status +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
+   @Override
+public String toString() {
+    String teamString = (team != null) ? team.toString() : "No team assigned";
+    return "Entry{" +
+            "team=" + teamString +
+            ", vehicles=" + vehicles +
+            ", task='" + task + '\'' +
+            ", urgency=" + urgency +
+            ", duration=" + duration +
+            ", greenSpace=" + greenSpace +
+            ", status=" + status +
+            ", startDate=" + startDate +
+            ", endDate=" + endDate +
+            '}';
+}
 }
