@@ -6,10 +6,13 @@ public class Repositories {
     private final OrganizationRepository organizationRepository;
     private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
+    private final AgendaRepository agendaRepository;
     private final SkillsRepository skillsRepository;
     private final JobRepository jobRepository;
     private final CollaboratorRepository collaboratorRepository;
     private final VehicleRepository vehicleRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
+    private final ToDoList toDoList;
 
     private final TeamRepository teamRepository;
 
@@ -20,8 +23,11 @@ public class Repositories {
         skillsRepository = new SkillsRepository();
         jobRepository = new JobRepository();
         collaboratorRepository = new CollaboratorRepository();
+        agendaRepository = new AgendaRepository();
         vehicleRepository = new VehicleRepository();
         teamRepository = new TeamRepository();
+        greenSpaceRepository = new GreenSpaceRepository();
+        toDoList = new ToDoList();
     }
 
     public static Repositories getInstance() {
@@ -45,6 +51,10 @@ public class Repositories {
         return CollaboratorRepository.getInstance();
     }
 
+    public AgendaRepository getAgendaRepository() {
+        return AgendaRepository.getInstance();
+    }
+
     public SkillsRepository getSkillsRepository() {
         return SkillsRepository.getInstance();
     }
@@ -64,4 +74,17 @@ public class Repositories {
     public TeamRepository getTeamRepository() {
         return TeamRepository.getInstance();
     }
+
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return GreenSpaceRepository.getInstance();
+    }
+
+    public ToDoList getToDoList(){
+        return ToDoList.getInstance();
+    }
+
+    public AgendaRepository getAgenda(){
+        return AgendaRepository.getInstance();
+    }
+
 }

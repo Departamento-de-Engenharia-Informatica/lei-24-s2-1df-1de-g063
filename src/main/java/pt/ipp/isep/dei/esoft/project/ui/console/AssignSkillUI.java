@@ -6,9 +6,11 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 /**
  * User interface for assigning skills to collaborators.

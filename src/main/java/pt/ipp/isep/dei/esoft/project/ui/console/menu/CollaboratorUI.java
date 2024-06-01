@@ -10,7 +10,7 @@ import java.util.List;
  * The GsmUI class provides a user interface for GSM management tasks.
  * It allows GSM managers to choose from a menu of options.
  */
-public class GsmUI implements Runnable {
+public class CollaboratorUI implements Runnable {
     private final String email;
 
     /**
@@ -18,7 +18,7 @@ public class GsmUI implements Runnable {
      *
      * @param email The email address of the user.
      */
-    public GsmUI(String email) {
+    public CollaboratorUI(String email) {
         this.email = email;
     }
 
@@ -27,13 +27,8 @@ public class GsmUI implements Runnable {
      */
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(email)));
-        options.add(new MenuItem("Add entry to To-Do List", new ToDoListUI()));
-        options.add(new MenuItem("Add entry to Agenda", new AgendaUI()));
-        options.add(new MenuItem("Cancel Entry", new CancelEntryUI()));
-        options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
-        options.add(new MenuItem("Assign a Vehicle to an Entry in the Agenda", new AssignVehicleToEntryUI()));
-        options.add(new MenuItem("Green Spaces Managed by me", new GreenSpacesListUI(email))); // Added menu item
+//        options.add(new MenuItem("Tasks assigned to the collaborator", new TaskAssignedToCollaboratorUI(email)));
+        options.add(new MenuItem("Record the completion of a task", new ToDoListUI()));
 
         int option = 0;
         do {

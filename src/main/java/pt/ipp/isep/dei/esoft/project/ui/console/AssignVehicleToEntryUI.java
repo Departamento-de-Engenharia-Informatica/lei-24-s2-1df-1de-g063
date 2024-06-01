@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleToEntryController;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,15 +29,15 @@ public class AssignVehicleToEntryUI implements Runnable {
         printVehicleList();
         System.out.println("Choose a vehicle:");
         choiceVehicle = scanner.nextInt();
-        // Uncomment and adjust when entry logic is available
-        // printEntryList();
-        // System.out.println("Choose an entry:");
-        // choiceEntry = scanner.nextInt();
+
+         printEntryList();
+         System.out.println("Choose an entry:");
+         choiceEntry = scanner.nextInt();
         submitData();
     }
 
     public void submitData(){
-        //controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
+        controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
     }
 
     private void printVehicleList() {
@@ -53,19 +54,18 @@ public class AssignVehicleToEntryUI implements Runnable {
         }
     }
 
-    // Uncomment and adjust when entry logic is available
-    // private void printEntryList() {
-    //     choiceEntry = 0;
-    //     List<Entry> entries = controller.getEntries();
-    //     System.out.println("\n--- Entries List -------------------------");
-    //     if (entries.isEmpty()) {
-    //         System.out.println("No Entries registered yet.");
-    //     } else {
-    //         for (Entry entry : entries) {
-    //             System.out.printf("%d - %s%n", choiceEntry, entry);
-    //             choiceEntry++;
-    //         }
-    //     }
-    // }
+     private void printEntryList() {
+         choiceEntry = 0;
+         List<Entry> entries = controller.getEntries();
+         System.out.println("\n--- Entries List -------------------------");
+         if (entries.isEmpty()) {
+             System.out.println("No Entries registered yet.");
+         } else {
+             for (Entry entry : entries) {
+                 System.out.printf("%d - %s%n", choiceEntry, entry);
+                 choiceEntry++;
+             }
+         }
+     }
 
 }

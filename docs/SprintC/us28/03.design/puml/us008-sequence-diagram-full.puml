@@ -6,49 +6,96 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
-participant "Repositories" as Rep
-participant "repositories:\nRepositories" as Repositories
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle:\nVehicle" as Vehicle
+actor "Collaborator" as VFM
+participant ":ListTaskSpaceUI" as UI
+participant ":ListTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as REP
+participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
+participant "taskRepository\n:TaskRepository" as taskRepository
+participant "statusList\n:List<String>" as LISTSTATUS
+
 
 activate VFM
 
-VFM -> UI : Request to list vehicles needing check-up
+VFM -> UI : Requests to consult tasks between two dates
 
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
+        UI --> VFM : Retrieves Collaborators list
+
+VFM -> UI : Chooses a Collaborator
+
+ UI -> CTRL : getCollaboratorThoughEmail(email)
         activate CTRL
 
-            CTRL -> Rep : getInstance()
-            activate Rep
+        CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
 
-                Rep --> CTRL : repositories
-            deactivate Rep
+            RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
 
-            CTRL -> Repositories : getVehicleRepository()
-            activate Repositories
+        CTRL -> REP : getCollaboratorRepository
+            activate REP
 
-            Repositories --> CTRL : VehicleRepository
-            deactivate Repositories
+            REP --> CTRL : collaboratorRepository
+            deactivate REP
+
+        CTRL -> collaboratorRepository : getCollaboratorThoughEmail(email)
+            activate collaboratorRepository
+
+            collaboratorRepository -> collaboratorRepository : getCollaboratorThoughEmail(email)
+            activate collaboratorRepository
+
+            collaboratorRepository --> CTRL : collaborator
+
+                deactivate collaboratorRepository
+
+            deactivate collaboratorRepository
+        CTRL --> UI : collaborator
+        deactivate CTRL
+UI --> VFM : Asks for date interval
 
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
-
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
+VFM -> UI : Types date interval
 
 
-            CTRL --> UI : VehiclesNeedingCheckUp
+    UI -> CTRL : getStatusList()
+        activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+        CTRL -> REP : getTaskRepository()
+            activate REP
+
+            REP --> CTRL : taskRepository
+            deactivate REP
+
+        CTRL -> taskRepository : getStatusList()
+            activate taskRepository
+
+            taskRepository --> LISTSTATUS** : create()
+                loop for each status in the system
+                    taskRepository -> LISTSTATUS : add(status)
+                        activate LISTSTATUS
+                end
+            LISTSTATUS --> taskRepository : statusList
+            deactivate LISTSTATUS
+
+        taskRepository --> CTRL : statusList
+        deactivate taskRepository
+
+        CTRL --> UI : statusList
         deactivate CTRL
 
-        UI --> VFM : Shows list of vehicles needing check-up
+UI --> VFM : Retrieves tasks list
+
 
     deactivate UI
 

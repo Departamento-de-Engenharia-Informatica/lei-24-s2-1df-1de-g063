@@ -18,10 +18,12 @@ note left of RegisterGreenSpaceUI
 end note
 
 class RegisterGreenSpaceController{
-    -vehicleRepository: VehicleRepository
-    +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
-    +getVehicleRepository(): VehicleRepository
-    +getVehiclesNeedingCheckUp(): List<Vehicle>
+
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
 }
 
 note right of RegisterGreenSpaceController
@@ -32,28 +34,34 @@ end note
 class Repositories{
     - Repositories()
     + getInstance() : Repositories
-    + getVehicleRepository()
+    + getGreenSpaceRepository() : GreenSpaceRepository
 }
 
 class GreenSpaceRepository{
-    -vehicles: List<Vehicle>
-    +getVehicles(): List<Vehicle>
+    +GreenSpaceRepository()
+    +getInstance() : GreenSpaceRepository
+    +addGreenSpace(GreenSpace greenSpace)
+    +List<GreenSpace> getGreenSpaces()
+
 }
 
 class GreenSpace{
-    -currentKm: double
-    -checkUpFrequency: double
-    -lastMaintenanceKm: double
-    +Vehicle(brand: String, model: String, tareWeight: double, \ngrossWeight: double, currentKm: double, registerDate: LocalDate, \nacquisitionDate: LocalDate, checkUpFrequency: double)
-    +getLastMaintenanceKm(): double
-    +getCurrentKm(): double
-    +getCheckUpFrequency(): double
+    -name: String
+    -area: double
+    -size: Size
+
+    +GreenSpace(String name, double area, Size size)
+    +validateGreenSpaceName(String greenSpaceName)
+    +getName(): String
+    +equals(Object o)
+    +toString() : String
 }
 
 RegisterGreenSpaceUI .> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> Repositories : repositories
-Repositories -> "1" VehicleRepository
-RegisterGreenSpaceController ..> VehicleRepository : vehicleRepository
-VehicleRepository "1" --> "1*" Vehicle : vehicle
+Repositories -> "1" GreenSpaceRepository
+RegisterGreenSpaceController ..> GreenSpaceRepository : GreenSpaceRepository
+GreenSpaceRepository "1" --> "1..*" GreenSpace : greenSpace
+RegisterGreenSpaceController "1" --> "1" GreenSpace : greenSpace
 
 @enduml

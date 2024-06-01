@@ -9,51 +9,42 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class VehicleNeedingCheckUpUI{
+class ListTaskSpaceUI{
 
 }
 
-note left of VehicleNeedingCheckUpUI
-    - Responsible for displaying vehicles needing check-up
-end note
 
-class VehicleNeedingCheckUpController{
-    -vehicleRepository: VehicleRepository
-    +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
-    +getVehicleRepository(): VehicleRepository
-    +getVehiclesNeedingCheckUp(): List<Vehicle>
+class ListTaskController{
+   + create()
+       + getCollaboratorThoughEmail(email)
+       + getStatusList()
+       + getTaskList(collaborator, dateI, dateF, typeStatus)
 }
 
-note right of VehicleNeedingCheckUpController
-    - Handles requests related to vehicles needing check-up
-    - getVehiclesNeedingCheckUp(): List<Vehicle>: Retrieves a list of vehicles needing check-up
-end note
 
 class Repositories{
     - Repositories()
-    + getInstance() : Repositories
-    + getVehicleRepository()
+        + getInstance(): Repositories
+        + getCollaboratorRepository(): CollaboratorRepository
+        + getTaskRepository(): TaskRepository
+        + getTeamRepository(): TeamRepository
+        + getAgenda(): Agenda
 }
 
-class VehicleRepository{
-    -vehicles: List<Vehicle>
-    +getVehicles(): List<Vehicle>
+class TaskRepository{
+    - List<Task> taskList
+    - List<String> statusList
+    + getStatusList()
+    + getTaskList(teamList, dateI, dateF, typeStatus)
+    + addTaskOfCollaborator(task)
 }
 
-class Vehicle{
-    -currentKm: double
-    -checkUpFrequency: double
-    -lastMaintenanceKm: double
-    +Vehicle(brand: String, model: String, tareWeight: double, \ngrossWeight: double, currentKm: double, registerDate: LocalDate, \nacquisitionDate: LocalDate, checkUpFrequency: double)
-    +getLastMaintenanceKm(): double
-    +getCurrentKm(): double
-    +getCheckUpFrequency(): double
-}
 
-VehicleNeedingCheckUpUI .> VehicleNeedingCheckUpController
-VehicleNeedingCheckUpController ..> Repositories : repositories
-Repositories -> "1" VehicleRepository
-VehicleNeedingCheckUpController ..> VehicleRepository : vehicleRepository
-VehicleRepository "1" --> "1*" Vehicle : vehicle
+
+ListTaskSpaceUI .> ListTaskController
+ListTaskController..> Repositories : repositories
+Repositories -> "1" TaskRepository
+ListTaskController ..> TaskRepository : getTaskRepository
+
 
 @enduml

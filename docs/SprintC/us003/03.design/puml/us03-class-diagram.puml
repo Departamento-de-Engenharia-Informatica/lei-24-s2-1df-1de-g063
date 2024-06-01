@@ -169,4 +169,5 @@ JobRepository "1" --> "*"Job
 Skill "1..*" --> "1" Collaborator : given to
 Job "1"--> "1" Collaborator : assigned to
 
+
 @enduml

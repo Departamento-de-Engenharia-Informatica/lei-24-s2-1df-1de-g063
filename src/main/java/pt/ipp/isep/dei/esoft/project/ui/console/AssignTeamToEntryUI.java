@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignTeamToEntryController;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.List;
@@ -41,6 +42,9 @@ public class AssignTeamToEntryUI implements Runnable {
         printTeamList();
         System.out.println("Choose a team:");
         choiceTeam = scanner.nextInt();
+        printEntryList();
+        System.out.println("Choose an entry:");
+        choiceEntry = scanner.nextInt();
         submitData();
     }
 
@@ -48,7 +52,7 @@ public class AssignTeamToEntryUI implements Runnable {
      * Submits the data.
      */
     public void submitData(){
-        //controller.attributeTeamToEntry(choiceTeam,choiceEntry);
+        controller.attributeTeamToEntry(choiceTeam,choiceEntry);
     }
 
     /**
@@ -64,6 +68,19 @@ public class AssignTeamToEntryUI implements Runnable {
             for (Team team : teams) {
                 System.out.printf("%d - %s%n", choiceTeam, team);
                 choiceTeam++;
+            }
+        }
+    }
+    private void printEntryList() {
+        choiceEntry = 0;
+        List<Entry> entries = controller.getEntries();
+        System.out.println("\n--- Entries List -------------------------");
+        if (entries.isEmpty()) {
+            System.out.println("No Entries registered yet.");
+        } else {
+            for (Entry entry : entries) {
+                System.out.printf("%d - %s%n", choiceEntry, entry);
+                choiceEntry++;
             }
         }
     }

@@ -6,17 +6,17 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Collaborator" as VFM
-participant ":ViewTaskUI" as UI
-participant ":ViewTaskController" as CTRL
+actor "Vehicle Fleet Manager" as VFM
+participant ":VehiclesNeedingCheckUpUI" as UI
+participant ":VehiclesNeedingCheckUpController" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "taskRepository:\nTaskRepository" as VehicleRepository
-participant "taskmapper:\nTaskmapper" as Vehicle
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicle:\nVehicle" as Vehicle
 
 activate VFM
 
-VFM -> UI : Requests to record the completion of a task
+VFM -> UI : Request to list vehicles needing check-up
 
     activate UI
 
@@ -48,23 +48,10 @@ VFM -> UI : Requests to record the completion of a task
             CTRL --> UI : VehiclesNeedingCheckUp
         deactivate CTRL
 
-        UI --> VFM : Retrieves Collaborators list
+        UI --> VFM : Shows list of vehicles needing check-up
 
+    deactivate UI
 
-
-    VFM -> UI : Chooses a Collaborator
-
-
-UI --> VFM : Retrieves tasks list
-
-
-    VFM -> UI : Chooses task to record completion
-
-
-UI --> VFM : Confirmation of the operation
-
-
-deactivate UI
 deactivate VFM
 
 @enduml

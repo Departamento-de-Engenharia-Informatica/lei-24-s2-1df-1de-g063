@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
@@ -39,25 +41,17 @@ public class AssignTeamToEntryController {
     }
 
     // The following methods are commented out but may be used in the future.
-    /*
     public List<Entry> getEntries() {
-        return entryRepository.getEntries();
+        return AgendaRepository.getEntries();
     }
 
-    public Entry getEntries(int index) {
-        List<Entry> entries = entryRepository.getEntries();
-        if (index >= 0 && index < entries.size()) {
-            return entries.get(index);
-        } else {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        }
-    }
 
-    public attributeTeamToEntry(choiceTeam, choiceEntry){
+    public void attributeTeamToEntry(int choiceTeam, int choiceEntry){
          Team selectedTeam = teamRepository.getTeams(choiceTeam);
-         Entry selectedEntry = entryRepository.getEntries(choiceEntry);
+         Entry selectedEntry = AgendaRepository.getEntries(choiceEntry);
+         selectedEntry.setTeam(selectedTeam);
     }
-    */
+
 
     /**
      * Retrieves the team repository.

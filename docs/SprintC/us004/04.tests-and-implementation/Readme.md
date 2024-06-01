@@ -98,7 +98,7 @@
 
 ## 5. Construction (Implementation)
 
-### Class AssignSkillController 
+### Class AssignSkillController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
@@ -106,37 +106,37 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class AssignSkillController {
-    private CollaboratorRepository collaboratorRepository;
+    private AgendaRepository collaboratorRepository;
     private SkillsRepository skillsRepository;
     private AuthenticationRepository authenticationRepository;
-    
-    public AssignSkillController(){
+
+    public AssignSkillController() {
         getCollaboratorRepository();
         getSkillsRepository();
         getAuthenticationRepository();
     }
-    
+
     public AssignSkillController(AuthenticationRepository authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
-        this.collaboratorRepository = CollaboratorRepository.getInstance();
+        this.collaboratorRepository = AgendaRepository.getInstance();
     }
-    
-    public CollaboratorRepository getCollaboratorRepository() {
+
+    public AgendaRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
         }
         return collaboratorRepository;
     }
-    
+
     public SkillsRepository getSkillsRepository() {
-        if(skillsRepository == null) {
+        if (skillsRepository == null) {
             Repositories repositories = Repositories.getInstance();
             skillsRepository = repositories.getSkillsRepository();
         }
         return skillsRepository;
     }
-    
+
     public AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
             Repositories repositories = Repositories.getInstance();
