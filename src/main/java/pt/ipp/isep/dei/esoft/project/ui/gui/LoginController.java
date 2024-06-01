@@ -28,24 +28,25 @@ public class LoginController {
     protected void handleLogin(ActionEvent event) throws Exception {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login check");
-        alert.setHeaderText(null);
-        alert.setContentText(username + "+" + password);
-        alert.showAndWait();
 
         boolean success = ctrl.doLogin(username, password);
         if (success) {
+            String userType = ctrl.getUsernameFromEmail(username); // Get the user type
+            String uiPath = ctrl.getUIPath(userType); // Get the path to the FXML file
+
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("/SuccessPage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource(uiPath));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setTitle(userType+" UI");
             stage.show();
         } else {
+            Alert alert  = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login Failed");
             alert.setHeaderText(null);
             alert.setContentText("Invalid username or password.");
             alert.showAndWait();
         }
+
     }
 }
