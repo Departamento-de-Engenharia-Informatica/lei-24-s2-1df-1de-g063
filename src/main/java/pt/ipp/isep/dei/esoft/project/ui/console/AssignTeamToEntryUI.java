@@ -48,7 +48,7 @@ public class AssignTeamToEntryUI implements Runnable {
      * Submits the data.
      */
     public void submitData(){
-        //controller.attributeTeamToEntry(choiceTeam,choiceEntry);
+        controller.attributeTeamToEntry(choiceTeam,choiceEntry);
     }
 
     /**

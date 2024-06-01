@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaRepository {
-    private final List<Entry> agenda;
+    private static List<Entry> agenda;
     private static AgendaRepository instance;
 
     AgendaRepository() {
@@ -22,6 +22,18 @@ public class AgendaRepository {
 
     public void addEntry(Entry entry) {
         agenda.add(entry);
+    }
+
+    public static List<Entry> getEntries() {
+        return List.copyOf(agenda);
+    }
+
+    public static Entry getEntries(int index) {
+        if (index >= 0 && index < agenda.size()) {
+            return agenda.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
     }
 
     public List<Entry> getAgenda() {

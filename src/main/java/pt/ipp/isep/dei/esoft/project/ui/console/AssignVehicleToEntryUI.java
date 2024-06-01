@@ -36,7 +36,7 @@ public class AssignVehicleToEntryUI implements Runnable {
     }
 
     public void submitData(){
-        //controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
+        controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
     }
 
     private void printVehicleList() {

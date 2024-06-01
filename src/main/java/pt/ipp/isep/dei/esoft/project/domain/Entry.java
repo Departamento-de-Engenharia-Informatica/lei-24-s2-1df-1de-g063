@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 public class Entry {
     private final String task;
@@ -11,6 +11,9 @@ public class Entry {
     private Status status;
     private LocalDate startDate;
     private LocalDate endDate;
+
+   private List<Vehicle> vehicles;
+    private Team team;
 
     public Entry(String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
         this.task = task;
@@ -28,6 +31,18 @@ public class Entry {
         this.startDate=date;
     }
 
+    public void addVehicle(Vehicle vehicle){
+        vehicles.add(vehicle);
+    }
+
+    public void getVehicle(int index){
+        vehicles.get(index);
+    }
+
+    public List<Vehicle> getVehicles(){
+        return List.copyOf(vehicles);
+    }
+
     public LocalDate getEndDate(){
         return endDate;
     }
@@ -43,6 +58,14 @@ public class Entry {
     public String getTask() {
         return task;
     }
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
 
     public Urgency getUrgency() {
         return urgency;
