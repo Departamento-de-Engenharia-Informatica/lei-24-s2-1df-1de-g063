@@ -25,16 +25,49 @@ public class AssignVehicleToEntryUI implements Runnable {
         requestData();
     }
 
-    public void requestData(){
-        printVehicleList();
-        System.out.println("Choose a vehicle:");
-        choiceVehicle = scanner.nextInt();
+ public void requestData(){
+    System.out.println("How many vehicles do you want to add?");
+    int numVehicles = scanner.nextInt();
+    for (int i = 0; i < numVehicles; i++) {
+        do {
+            printVehicleList();
+            System.out.println("Choose a vehicle:");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number:");
+                scanner.next();
+            }
+            choiceVehicle = scanner.nextInt();
+            if (choiceVehicle == -1) {
+                return;
+            }
+            if (choiceVehicle < 0 || choiceVehicle >= controller.getVehicles().size()) {
+                System.out.println("Invalid choice. Please choose a number from the list:");
+                continue;
+            }
+            break;
+        } while (true);
 
-         printEntryList();
-         System.out.println("Choose an entry:");
-         choiceEntry = scanner.nextInt();
+        do {
+            printEntryList();
+            System.out.println("Choose an entry:");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number:");
+                scanner.next();
+            }
+            choiceEntry = scanner.nextInt();
+            if (choiceEntry == -1) {
+                return;
+            }
+            if (choiceEntry < 0 || choiceEntry >= controller.getEntries().size()) {
+                System.out.println("Invalid choice. Please choose a number from the list:");
+                continue;
+            }
+            break;
+        } while (true);
+
         submitData();
     }
+}
 
     public void submitData(){
         controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
