@@ -35,8 +35,8 @@ public class RegisterGreenSpaceController {
     }
 
 
-    public GreenSpace registerGreenSpace(String name, double area, Size size, String email ) {
-        return new GreenSpace(name, area, size, email);
+    public GreenSpace registerGreenSpace(String name, double area, Size size, String managerName ) {
+        return new GreenSpace(name, area, size, managerName);
     }
 }
 

@@ -46,9 +46,9 @@ public class GreenSpaceRepository {
         return greenSpaces;
     }
 
-    public List<GreenSpace> getGreenSpacesByEmail(String email) {
+    public List<GreenSpace> getGreenSpacesByName(String managerName) {
         return greenSpaces.stream()
-                .filter(greenSpace -> greenSpace.getEmail().equalsIgnoreCase(email))
+                .filter(greenSpace -> greenSpace.getManagerName().equalsIgnoreCase(managerName))
                 .collect(Collectors.toList());
     }
 

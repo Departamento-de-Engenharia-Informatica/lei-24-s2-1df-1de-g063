@@ -11,15 +11,15 @@ import java.util.List;
  * It allows GSM managers to choose from a menu of options.
  */
 public class CollaboratorUI implements Runnable {
-    private final String email;
+    private final String name;
 
     /**
      * Constructs a new GsmUI object with the specified email.
      *
      * @param email The email address of the user.
      */
-    public CollaboratorUI(String email) {
-        this.email = email;
+    public CollaboratorUI(String name) {
+        this.name = name;
     }
 
     /**
@@ -27,7 +27,7 @@ public class CollaboratorUI implements Runnable {
      */
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-//        options.add(new MenuItem("Tasks assigned to the collaborator", new TaskAssignedToCollaboratorUI(email)));
+        options.add(new MenuItem("Tasks assigned to the collaborator", new TaskAssignedToCollaboratorUI(name)));
         options.add(new MenuItem("Record the completion of a task", new ToDoListUI()));
 
         int option = 0;

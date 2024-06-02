@@ -50,7 +50,6 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
@@ -66,6 +65,7 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@this.app","gsm",
                 AuthenticationController.ROLE_GSM);
+
 
 // Create more Collaborator objects
         Collaborator collaborator1 = new Collaborator("John Doe", "123 Street", "johndoe@this.app", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");

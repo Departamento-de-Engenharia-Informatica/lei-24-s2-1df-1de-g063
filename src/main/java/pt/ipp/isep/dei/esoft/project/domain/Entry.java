@@ -12,9 +12,9 @@ public class Entry {
     private Status status;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Team team;
 
    private List<Vehicle> vehicles;
-    private Team team;
 
     public Entry(String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
         this.task = task;
@@ -60,6 +60,7 @@ public class Entry {
     public String getTask() {
         return task;
     }
+
     public Team getTeam() {
         return team;
     }
@@ -67,7 +68,6 @@ public class Entry {
     public void setTeam(Team team) {
         this.team = team;
     }
-
 
     public Urgency getUrgency() {
         return urgency;
