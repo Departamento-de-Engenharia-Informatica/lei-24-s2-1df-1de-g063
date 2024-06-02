@@ -54,4 +54,12 @@ public class VehicleRepository {
         // This is a defensive copy to prevent modification of the repository's internal list
         return List.copyOf(vehicles);
     }
+
+    public Vehicle getVehicles(int index) {
+        if (index >= 0 && index < vehicles.size()) {
+            return vehicles.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+    }
 }
