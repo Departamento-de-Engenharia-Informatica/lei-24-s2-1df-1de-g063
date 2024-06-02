@@ -8,8 +8,14 @@ skinparam linetype polyline
 skinparam classAttributeIconSize 0
 
 'left to right direction
+class ToDoList{
 
-class RegisterGreenSpaceUI{
++ToDoList()
++getInstance() : ToDoList
++addEntry(Entry entry)
++List<Entry> getToDoList()
+}
+class AgendaUI{
 -name: String;
 -size: Size;
 -area: double;
@@ -23,7 +29,7 @@ class RegisterGreenSpaceUI{
 -printGreenSpace()
 }
 
-class RegisterGreenSpaceController{
+class AgendaController{
 
     +RegisterGreenSpaceController()
     +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
@@ -37,34 +43,25 @@ class Repositories{
     + getInstance() : Repositories
     + getGreenSpaceRepository() : GreenSpaceRepository
 }
-
-'class GreenSpaceRepository{
- '   +GreenSpaceRepository()
-  '  +getInstance() : GreenSpaceRepository
-   ' +addGreenSpace(GreenSpace greenSpace)
-    '+List<GreenSpace> getGreenSpaces()
-'}
-class Organization{}
-class GreenSpace{
-    -name: String
-    -area: double
-    -size: Size
-
-    +GreenSpace(String name, double area, Size size)
-    +validateGreenSpaceName(String greenSpaceName)
-    +getName(): String
-    +equals(Object o)
-    +toString() : String
+class ToDoList {}
+class Agenda{
+    +GreenSpaceRepository()
+    +getInstance() : GreenSpaceRepository
+    +addGreenSpace(GreenSpace greenSpace)
+    +List<GreenSpace> getGreenSpaces()
 }
+class Organization{}
 
-RegisterGreenSpaceUI .> RegisterGreenSpaceController : controller
-RegisterGreenSpaceController ..> Repositories : repositories
-'Repositories -down-> "1" GreenSpaceRepository
-Repositories --> Repositories: instance
+
+AgendaUI .> AgendaController : controller
+AgendaController ..> Repositories : repositories
+Repositories -> "1" Agenda : list of entries
+Repositories --> ToDoList : list of entries
+ToDoList <-down- AgendaController
+AgendaController-->Agenda
 Repositories -down-> "1" OrganizationRepositiry
 OrganizationRepositiry "1" --> "1" Organization : has manager
-'GreenSpaceRepository "1" --> "1" Organization
-RegisterGreenSpaceController "1" --> Organization
-Organization "1" --> "1..*" GreenSpace : register Green Space
+Agenda "1..*" <-- "1" Organization : register entry
+AgendaController "1" --> Organization
 
 @enduml
