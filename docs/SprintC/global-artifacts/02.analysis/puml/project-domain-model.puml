@@ -2,53 +2,55 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-'skinparam linetype ortho
-'left to right direction
 skinparam classAttributeIconSize 2
 hide circle
 hide methods
+left to right direction
 
 class Entry {
     task
-    urgency
-    green space
 }
-class Outside_User{
+class Urgency{}
+class Status{}
+class Low{}
+class Medium{}
+class High{}
+class Pending{}
+class Scheduled{}
+
+class Outside_User {
     name
     email
     password
 }
-class Portal{}
-class Malfunctions{}
-class Flaws{}
-class Comments{}
-class Agenda{
+class Portal {}
+class Malfunctions {}
+class Flaws {}
+class Comments {}
+class Agenda {
     task description
     date
 }
-class Garden{
+class Garden {
     description
 }
-class Medium_Sized{
+class Medium_Sized {
     description
 }
-class Large_Sized{
+class Large_Sized {
     description
 }
-class Vehicles_Machines_Equipment{
+class Vehicles_Machines_Equipment {
     description
 }
-class VFM{}
-class HRM{}
-class GSM{}
-class Green_Spaces{
-
-}
-class Team{
+class VFM {}
+class HRM {}
+class GSM {}
+class Green_Spaces {}
+class Team {
     collaborators
 }
-
-class Collaborators{
+class Collaborators {
     name
     birthdate
     admission date
@@ -64,64 +66,69 @@ class Employees {
     phoneNumber
     email
 }
-
 class ToDoList {
     task description
     date
 }
-
 class Managers {
     name
     email
     position
     phone
 }
-class Organization{}
-class CheckUp{
+class Organization {}
+class CheckUp {
     date
 }
-class Skill{}
-class Jobs{}
+class Skill {}
+class Jobs {}
 
-Organization "1" - "1..*" Employees : has >
-Organization "1"- "1..*"Vehicles_Machines_Equipment: has >
-Employees "1" -- "*" Collaborators: are >
-Employees "1" -- "*" Managers : are >
-Managers "1" -right- "1"GSM: has >
-Managers "1" -right- "1"HRM: has >
-Managers "1" -right- "1"VFM: has >
-Managers "1" -- "1..*"Team: creates >
-Managers "1"-- "1..*"Green_Spaces: manage and resgister >
-Managers "1" -- "*"Collaborators: hire and register >
-Managers "1"-- "*"Vehicles_Machines_Equipment: choose and register >
+Organization "1" -down- "1..*" Employees : has >
+Organization "1" -down- "1..*" Vehicles_Machines_Equipment: has >
+Employees "1" -- "1..*" Collaborators: are >
+Employees "1" -- "1..*" Managers : are >
+Managers "1" -right- "1" GSM: has >
+Managers "1" -right- "1" HRM: has >
+Managers "1" -right- "1" VFM: has >
+Managers "1" -down- "1..*" Team: creates >
+Managers "1" -down- "1..*" Green_Spaces: manage and register >
+Managers "1" -- "1..*" Collaborators: hire and register >
+Managers "1" -- "1..*" Vehicles_Machines_Equipment: choose and register >
 Managers "1" -- "1..*" Skill: register >
 Managers "1" -- "1..*" Jobs: register >
-Managers "1" -- "1" Agenda: manages >
-Managers "1" -- "1..*" ToDoList: manages >
-Skill "1..*" -- "1"Collaborators: attributed to >
-Jobs "1" -- "1"Collaborators: given to >
-Vehicles_Machines_Equipment "*" -- "1"Team: are attributed to >
+Managers "1" -down- "1" Agenda: manages >
+Managers "1" -down- "1..*" ToDoList: manages >
+Skill "1..*" -- "1" Collaborators: attributed to >
+Jobs "1" -- "1" Collaborators: given to >
+Vehicles_Machines_Equipment "*" -- "1" Team: are attributed to >
 Vehicles_Machines_Equipment "*" -- "1" CheckUp: need >
-Entry "1" -left- "*"ToDoList: originate new entry >
-Entry "1..*" -- "1" Team : attributed to
-Green_Spaces"1" -- "*" Garden: has >
+Entry "1" -left- "*" ToDoList: originate new entry >
+Entry "1..*" --> "1" Team : attributed to
+Green_Spaces "1" -- "*" Garden: has >
 Green_Spaces "1" -- "*" Medium_Sized: has >
 Green_Spaces "1" -- "*" Large_Sized: has >
 Green_Spaces "1..*" -left- "*" Entry : creates >
-Collaborators "2..*"-- "1"Team : make >
-Team "1" -- "1" Agenda : has >
+Collaborators "2..*"-- "1" Team : make >
 ToDoList "1" -- "1" Entry : has >
 Agenda "1" -- "1" Entry : has >
-Agenda "1..*"-- "1" Green_Spaces: solved in >
-ToDoList "*" -- "1"Agenda : goes to >
-Portal "1" -- "*"Malfunctions: receives >
-Portal "1" -- "*"Flaws: receives >
-Portal "1" -- "*"Comments: receives >
+Agenda "1..*" -- "1" Green_Spaces: solved in >
+ToDoList "*" -- "1" Agenda : goes to >
+Portal "1" -- "*" Malfunctions: receives >
+Portal "1" -- "*" Flaws: receives >
+Portal "1" -- "*" Comments: receives >
 Outside_User "1" -- "1" Portal : reports to >
-Outside_User "*" -- "1..*"Green_Spaces: use >
-Malfunctions "*"-- "*" Entry: creates >
+Outside_User "*" -- "1..*" Green_Spaces: use >
+Malfunctions "*" -- "*" Entry: creates >
 Flaws "*" -- "*" Entry : creates >
 Managers "1" -- "1" CheckUp: register >
 CheckUp "1" -- "1" Vehicles_Machines_Equipment: has >
+Entry "1" --> Urgency
+Urgency "1" --> "1" Low
+Urgency "1" --> "1" Medium
+Urgency "1" --> "1" High
+Entry "1" --> "1" Status
+Status "1" --> "1" Pending
+Status "1" --> "1" Scheduled
+
 
 @enduml
