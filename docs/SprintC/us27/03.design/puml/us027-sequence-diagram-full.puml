@@ -7,14 +7,13 @@ autonumber
 
 'hide footbox
 actor "Green Space Manager" as VFM
-participant ":GreenSpaceManegementUI" as UI
-participant ":GreenSpaceController" as CTRL
-participant "UserSession" as usersession
+participant ":GreenSpaceListUI" as UI
+participant ":GreenSpaceListController" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "managerRepository:\nManagerRepository" as VehicleRepository
-participant "manager:\nManager" as Vehicle
-participant "greenSpaceRepository:\nGreenSpaceRepository" as greenSpaceRepository
+participant "greenSpaceRepository:\nGreenSpaceRepository" as VehicleRepository
+participant "greenSpace:\ngreenSpace" as Vehicle
+
 
 activate VFM
 
