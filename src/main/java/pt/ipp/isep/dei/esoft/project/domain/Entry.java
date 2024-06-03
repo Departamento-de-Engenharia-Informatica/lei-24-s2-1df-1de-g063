@@ -1,7 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Entry {
     private final String task;
@@ -11,6 +12,9 @@ public class Entry {
     private Status status;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Team team;
+
+   private List<Vehicle> vehicles;
 
     public Entry(String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
         this.task = task;
@@ -18,6 +22,7 @@ public class Entry {
         this.duration = duration;
         this.greenSpace = greenSpace;
         this.status = status;
+        this.vehicles = new ArrayList<>();
     }
 
     public LocalDate getStartDate(){
@@ -26,6 +31,18 @@ public class Entry {
 
     public void setStartDate(LocalDate date){
         this.startDate=date;
+    }
+
+    public void addVehicle(Vehicle vehicle){
+        vehicles.add(vehicle);
+    }
+
+    public void getVehicle(int index){
+        vehicles.get(index);
+    }
+
+    public List<Vehicle> getVehicles(){
+        return List.copyOf(vehicles);
     }
 
     public LocalDate getEndDate(){
@@ -42,6 +59,14 @@ public class Entry {
 
     public String getTask() {
         return task;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Urgency getUrgency() {
@@ -62,16 +87,19 @@ public class Entry {
 
     public void setStatus(Status status) {this.status = status;}
 
-    @Override
-    public String toString() {
-        return "Entry{" +
-                "task='" + task + '\'' +
-                ", urgency=" + urgency +
-                ", duration=" + duration +
-                ", greenSpace=" + greenSpace +
-                ", status=" + status +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
+   @Override
+public String toString() {
+    String teamString = (team != null) ? team.toString() : "No team assigned";
+    return "Entry{" +
+            "team=" + teamString +
+            ", vehicles=" + vehicles +
+            ", task='" + task + '\'' +
+            ", urgency=" + urgency +
+            ", duration=" + duration +
+            ", greenSpace=" + greenSpace +
+            ", status=" + status +
+            ", startDate=" + startDate +
+            ", endDate=" + endDate +
+            '}';
+}
 }

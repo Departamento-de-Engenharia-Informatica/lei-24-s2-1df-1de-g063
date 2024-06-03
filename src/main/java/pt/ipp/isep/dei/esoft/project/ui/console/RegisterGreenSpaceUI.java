@@ -16,18 +16,22 @@ public class RegisterGreenSpaceUI implements Runnable {
     private Size size;
     private double area;
     private GreenSpace greenSpace;
+    private final String managerName;
 
     /**
-     * Constructs an instance of RegisterCollaboratorUI.
+     * Constructs an instance of RegisterGreenSpaceUI with the given email.
+     *
+     * @param email the user's email address
      */
-    public RegisterGreenSpaceUI() {
+    public RegisterGreenSpaceUI(String managerName) {
         this.controller = new RegisterGreenSpaceController();
         this.greenSpaceRepository = GreenSpaceRepository.getInstance();
         this.scanner = new Scanner(System.in);
+        this.managerName = managerName;
     }
 
     /**
-     * Runs the registration process for a collaborator.
+     * Runs the registration process for a green space.
      */
     @Override
     public void run() {
@@ -74,7 +78,7 @@ public class RegisterGreenSpaceUI implements Runnable {
     }
 
     private void submitData() {
-        greenSpace = controller.registerGreenSpace(name, area, size);
+        greenSpace = controller.registerGreenSpace(name, area, size, managerName);
         greenSpaceRepository.addGreenSpace(greenSpace);
     }
 
@@ -88,4 +92,3 @@ public class RegisterGreenSpaceUI implements Runnable {
         }
     }
 }
-

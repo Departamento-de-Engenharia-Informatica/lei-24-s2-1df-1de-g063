@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "GSM" as GSM
+participant ":System" as System
+
+activate GSM
+    GSM -> System : Request to assign Entry to a Team
+    activate System
+        System --> GSM : Retrives list of Teams
+    deactivate System
+    GSM -> System : Selects Team
+    activate System
+        System --> GSM: Retrieves Entries
+    deactivate System
+    GSM -> System : Selects Entries
+    activate System
+        System --> GSM: Displays message of (In)Success
+
+
+@enduml

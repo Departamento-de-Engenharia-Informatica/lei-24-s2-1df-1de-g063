@@ -12,13 +12,7 @@ participant ":System" as System
 
 activate Collaborator
 
-    Collaborator -> System : Requests to consult tasks between two dates
-    activate System
-
-        System --> Collaborator : Retrieves Collaborators list
-    deactivate System
-
-    Collaborator -> System : Chooses a Collaborator
+    Collaborator -> System : Requests to consult tasks
     activate System
 
         System --> Collaborator : Asks for date interval

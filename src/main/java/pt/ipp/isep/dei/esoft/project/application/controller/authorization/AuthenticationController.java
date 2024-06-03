@@ -69,6 +69,18 @@ public class AuthenticationController {
         }
     }
 
+    public String getUIPath(String userType) {
+        switch (userType) {
+            case "HRM":
+                return "/HRMUI.fxml";
+            case "GSM":
+                return "/GSMUI.fxml";
+            // Add more cases as needed
+            default:
+                throw new IllegalArgumentException("Invalid user type: " + userType);
+        }
+    }
+
     /**
      * Retrieves the roles associated with the currently logged-in user.
      *
@@ -79,6 +91,13 @@ public class AuthenticationController {
             return authenticationRepository.getCurrentUserSession().getUserRoles();
         }
         return null;
+    }
+    public String getUsernameFromEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email: " + email);
+        }
+        String username = email.split("@")[0];
+        return username.toUpperCase();
     }
 
     /**

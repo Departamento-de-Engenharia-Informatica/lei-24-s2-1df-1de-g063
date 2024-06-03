@@ -79,14 +79,14 @@ public class ToDoListUI implements Runnable {
             System.out.print("Choose an urgency (0-" + (Urgency.values().length - 1) + "): ");
             while (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next(); // consume the invalid input
+                scanner.next();
             }
             choice = scanner.nextInt();
             if (choice < 0 || choice >= Urgency.values().length) {
                 System.out.println("Invalid choice. Please choose a number within the range.");
             }
         } while (choice < 0 || choice >= Urgency.values().length);
-        scanner.nextLine(); // Consume newline left-over
+        scanner.nextLine();
         return Urgency.values()[choice];
     }
 
@@ -98,7 +98,7 @@ public class ToDoListUI implements Runnable {
             System.out.print("Duration of the task (in hours, 1 day = 8 hours): ");
             if (scanner.hasNextInt()) {
                 duration = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
 
                 if (duration > 0) {
                     valid = true;
@@ -107,7 +107,7 @@ public class ToDoListUI implements Runnable {
                 }
             } else {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // Consume the invalid input
+                scanner.nextLine();
             }
         } while (!valid);
 
@@ -151,7 +151,7 @@ public class ToDoListUI implements Runnable {
 
         if (task == null || task.trim().isEmpty()) {
             valid = false;
-        } else if( !task.matches("[a-zA-Z0-9.,!?-]+")) {
+        } else if( !task.matches("[a-zA-Z0-9., !?-]+")) {
             System.out.println("Entry has invalid characters");
             valid = false;
         }

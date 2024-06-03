@@ -29,7 +29,6 @@ public class Task {
     }
 
     private void validateReference(String reference) {
-        //TODO: missing from the diagrams
         if (reference == null || reference.isEmpty()) {
             throw new IllegalArgumentException("Reference cannot be null or empty.");
         }

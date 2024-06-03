@@ -15,13 +15,7 @@ activate Collaborator
     Collaborator -> System : Requests to record the completion of a task
     activate System
 
-        System --> Collaborator : Retrieves Collaborators list
-    deactivate System
-
-    Collaborator -> System : Chooses a Collaborator
-    activate System
-
-        System --> Collaborator : Retrieves tasks list
+        System --> Collaborator : Retrieves task list
     deactivate System
 
     Collaborator -> System : Chooses task to record completion

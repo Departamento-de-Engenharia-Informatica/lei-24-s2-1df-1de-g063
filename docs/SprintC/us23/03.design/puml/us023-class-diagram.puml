@@ -1,0 +1,56 @@
+@startuml
+
+class AssignTeamToEntryController {
+    -teamRepository: TeamRepository
+    +AssignTeamToEntryController()
+    +getTeams(): List<Team>
+    +getTeams(index: int): Team
+    -getTeamRepository(): TeamRepository
+}
+
+class AssignTeamToEntryUI {
+    -choiceTeam: int
+    -choiceEntry: int
+    +requestData()
+    +submitData()
+}
+
+
+class TeamRepository {
+    -teams: List<Team>
+    +TeamRepository()
+    +getInstance(): TeamRepository
+    +getTeams(): List<Team>
+    +getTeams(index: int): Team
+}
+
+class Repositories {
+    +getInstance(): Repositories
+    +getTeamRepository(): TeamRepository
+}
+
+class Agenda {
+    -entries: List<Entry>
+    +getEntries(): List<Entry>
+    +getEntries(index: int): Entry
+}
+
+class Entry {
+    -team: Team
+    +setTeam(team: Team)
+}
+class Organization {
+}
+
+AssignTeamToEntryController "1" .> "1" Repositories : Repositories
+AssignTeamToEntryUI .>  AssignTeamToEntryController
+Repositories "1" --> "1" TeamRepository : TeamRepository
+Repositories "1" -> "1" Agenda : Agenda
+TeamRepository "1" --> "*" Organization
+Agenda "1" --> "*" Organization
+Organization "1" ---> "1" Team
+Team "1" --> "*" Entry
+AssignTeamToEntryController "1" -> "1" Organization
+
+
+@enduml

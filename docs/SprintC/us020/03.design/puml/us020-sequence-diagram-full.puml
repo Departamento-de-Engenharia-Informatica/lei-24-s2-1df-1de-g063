@@ -6,52 +6,68 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as GSM
+participant "RegisterGreenSpaceUI" as UI
+participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as Rep
-participant "repositories:\nRepositories" as Repositories
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle:\nVehicle" as Vehicle
+participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "organization:\n Organization" as Organization
+participant "greenSpace: \n GreenSpace" as GreenSpace
 
-activate VFM
+activate GSM
 
-VFM -> UI : Request to list vehicles needing check-up
+     GSM -> UI : asks to register a new GreenSpace
 
-    activate UI
+     activate UI
 
-        UI -> CTRL** : create
+            UI -> GSM : requests a name
+            GSM -> UI : types name
+            UI -> GSM : request size
+            GSM -> UI : selects size
+            UI -> GSM : requests area
+            GSM -> UI : types area
+            UI -> CTRL : creates
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
-        activate CTRL
+
+     activate CTRL
 
             CTRL -> Rep : getInstance()
-            activate Rep
 
-                Rep --> CTRL : repositories
-            deactivate Rep
+     activate Rep
 
-            CTRL -> Repositories : getVehicleRepository()
-            activate Repositories
+            Rep -> CTRL : repositories
 
-            Repositories --> CTRL : VehicleRepository
-            deactivate Repositories
+     deactivate Rep
+
+            CTRL -> organizationRepository : getOrganizationRepository()
+
+     activate organizationRepository
+
+            organizationRepository -> CTRL : organizationRepository
+
+     deactivate organizationRepository
+
+            CTRL -> Organization : getManager()
+
+     activate Organization
+
+            Organization -> CTRL : Manager
+
+     deactivate Organization
+
+            CTRL -> GreenSpace : GreenSpace(name, area, size, email)
+
+     activate GreenSpace
+
+            GreenSpace -> CTRL : GreenSpace
+
+     deactivate GreenSpace
+
+            CTRL -> UI : GreenSpace
+     deactivate CTRL
 
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
-
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
-
-
-            CTRL --> UI : VehiclesNeedingCheckUp
-        deactivate CTRL
-
-        UI --> VFM : Shows list of vehicles needing check-up
-
-    deactivate UI
-
-deactivate VFM
+     UI --> GSM : displays all data and operation success
+     deactivate UI
 
 @enduml

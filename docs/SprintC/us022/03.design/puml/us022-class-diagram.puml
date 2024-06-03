@@ -1,0 +1,67 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+class ToDoList{
+
++ToDoList()
++getInstance() : ToDoList
++addEntry(Entry entry)
++List<Entry> getToDoList()
+}
+class AgendaUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+class AgendaController{
+
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository() : GreenSpaceRepository
+}
+class ToDoList {}
+class Agenda{
+    +GreenSpaceRepository()
+    +getInstance() : GreenSpaceRepository
+    +addGreenSpace(GreenSpace greenSpace)
+    +List<GreenSpace> getGreenSpaces()
+}
+class Organization{}
+
+
+AgendaUI .> AgendaController : controller
+AgendaController ..> Repositories : repositories
+Repositories -> "1" Agenda : list of entries
+Repositories --> ToDoList : list of entries
+ToDoList <-down- AgendaController
+AgendaController-->Agenda
+Repositories -down-> "1" OrganizationRepositiry
+OrganizationRepositiry "1" --> "1" Organization : has manager
+Agenda "1..*" <-- "1" Organization : register entry
+AgendaController "1" --> Organization
+
+@enduml
