@@ -56,10 +56,7 @@ class ToDoList{
     +getStatusList()
 }
 
-class EntryMapper{
-    +toDTOList(listEntries): List<EntryDto>
-    +toDTOEntry(entry): EntryDto
-}
+
 
 
 ListTaskSpaceUI .> ListTaskController

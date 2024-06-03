@@ -26,6 +26,14 @@ VFM -> UI : Requests to consult tasks between two dates
 
         UI --> VFM : Retrieves Collaborators list
 
+
+        UI -> CTRL :
+        activate CTRL
+
+        CTRL -> UI :
+        deactivate CTRL
+
+
 VFM -> UI : Chooses a Collaborator
 
  UI -> CTRL : getCollaboratorThoughEmail(email)
@@ -46,8 +54,7 @@ VFM -> UI : Chooses a Collaborator
         CTRL -> collaboratorRepository : getCollaboratorThoughEmail(email)
             activate collaboratorRepository
 
-            collaboratorRepository -> collaboratorRepository : getCollaboratorThoughEmail(email)
-            activate collaboratorRepository
+
 
             collaboratorRepository --> CTRL : collaborator
 
@@ -81,11 +88,8 @@ VFM -> UI : Types date interval
             activate taskRepository
 
             taskRepository --> LISTSTATUS** : create()
-                loop for each status in the system
-                    taskRepository -> LISTSTATUS : add(status)
-                        activate LISTSTATUS
-                end
-            LISTSTATUS --> taskRepository : statusList
+
+
             deactivate LISTSTATUS
 
         taskRepository --> CTRL : statusList

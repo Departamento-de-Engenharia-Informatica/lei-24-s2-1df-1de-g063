@@ -100,6 +100,26 @@ VFM -> UI : Chooses green spaces managed by GSM
 
 
 UI --> VFM : Confirmation of the operation
+
+VFM --> UI : Confirms that he want to creat the list
+
+    UI --> CTRL : getGreenSpaceList(greenSpaceManager)
+    activate CTRL
+
+        CTRL --> Rep : getInstance()
+        activate Rep
+
+        Rep --> CTRL : repositories
+        deactivate Rep
+
+
+
+    CTRL --> UI :
+    deactivate CTRL
+
+
+UI --> VFM : Show the list
+
 deactivate UI
 deactivate VFM
 
