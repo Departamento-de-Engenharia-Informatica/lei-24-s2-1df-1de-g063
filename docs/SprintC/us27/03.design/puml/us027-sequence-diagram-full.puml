@@ -13,7 +13,7 @@ participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
 participant "greenSpaceRepository:\nGreenSpaceRepository" as VehicleRepository
 participant "greenSpace:\ngreenSpace" as Vehicle
-
+participant "Organization:\norganization" as org
 
 activate VFM
 
@@ -23,14 +23,10 @@ VFM -> UI : Request to list all managed green spaces
 
         UI -> CTRL** : create
 
-        UI -> usersession : getUserEmail()
-               activate usersession
-
-        usersession --> UI : UserEmail
-        deactivate usersession
 
 
-        UI -> CTRL : getlistManagedGreenSpaces(userEmail)
+
+        UI -> CTRL : getGreenSpacesByName()
         activate CTRL
 
             CTRL -> Rep : getInstance()
@@ -39,85 +35,55 @@ VFM -> UI : Request to list all managed green spaces
                 Rep --> CTRL : repositories
             deactivate Rep
 
-            CTRL -> Repositories : getGreenSpaceRepository()
+
+
+
+            CTRL -> Repositories : getGreenSpacesByNameRepository()
             activate Repositories
 
-            Repositories --> CTRL : greenSpaceRepository
+                Repositories --> CTRL : getGreenSpacesByName
             deactivate Repositories
 
 
-            CTRL -> Repositories : getManagerRepository()
-            activate Repositories
 
-                Repositories --> CTRL : managerRepository
-            deactivate Repositories
+            CTRL -> VehicleRepository : getGreenSpacesByName()
+                                    activate VehicleRepository
 
-            CTRL -> VehicleRepository : findByEmail()
-                        activate VehicleRepository
-
-                            VehicleRepository --> CTRL : manager
-                        deactivate VehicleRepository
-
-            CTRL -> Vehicle : getGreenSpaceManaged(manager)
+                                     VehicleRepository -> Vehicle : getGreenSpacesByName()
                                     activate Vehicle
 
-                                        Vehicle --> CTRL : greenSpaceList
-                                    deactivate Vehicle
-
-             CTRL -> "greenSpaceRepository" : findGreenSpacesByManager()
-                                                activate "greenSpaceRepository"
-
-                                                    "greenSpaceRepository" --> CTRL : greenSpaceList
-                                                deactivate "greenSpaceRepository"
 
 
+                                      Vehicle -> org : getGreenSpacesByName()
+                                                                        activate org
 
 
-            CTRL --> UI : VehiclesNeedingCheckUp
+                                                                        org --> Vehicle : greenSpaceByName
+                                                                                                            deactivate org
+
+
+                                    Vehicle --> VehicleRepository : greenSpaceByName
+                                                                        deactivate Vehicle
+
+
+
+
+                                        VehicleRepository --> CTRL : greenSpacesByName
+                                    deactivate VehicleRepository
+
+
+
+
+
+
+            CTRL --> UI : greenSpacesByName
         deactivate CTRL
 
-        UI --> VFM : Retrieve list of green spaces
+        UI --> VFM : Retrieve list of green spaces manager by the GSM
 
 
 
-VFM -> UI : Chooses green spaces managed by GSM
 
-
- UI -> CTRL : confirmSelection(selectedGreenSpaces)
-        activate CTRL
-
-        CTRL -> "greenSpaceRepository" : updateSelectedGreenSpaces(selectedGreenSpaces)
-                                                        activate "greenSpaceRepository"
-
-                                                            "greenSpaceRepository" --> CTRL : Confirmation of the operation
-                                                        deactivate "greenSpaceRepository"
-
-
-
-         CTRL --> UI : Confirmation of the operation
-                deactivate CTRL
-
-
-UI --> VFM : Confirmation of the operation
-
-VFM --> UI : Confirms that he want to creat the list
-
-    UI --> CTRL : getGreenSpaceList(greenSpaceManager)
-    activate CTRL
-
-        CTRL --> Rep : getInstance()
-        activate Rep
-
-        Rep --> CTRL : repositories
-        deactivate Rep
-
-
-
-    CTRL --> UI :
-    deactivate CTRL
-
-
-UI --> VFM : Show the list
 
 deactivate UI
 deactivate VFM
