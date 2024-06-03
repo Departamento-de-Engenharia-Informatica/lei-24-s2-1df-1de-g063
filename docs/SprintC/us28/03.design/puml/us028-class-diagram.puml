@@ -9,61 +9,41 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class ListTaskSpaceUI{
+class TaskAssignedToCollaboratorUI{
 
 }
 
+class TaskAssignedToCollaboratorController{
 
-class ListTaskController{
-   + create()
-       + getCollaboratorThoughEmail(email)
-       + getStatusList()
-       + getTaskList(collaborator, dateI, dateF, typeStatus)
 }
 
+class Organization{
 
-class Repositories{
-    - Repositories()
-        + getInstance(): Repositories
-        + getCollaboratorRepository(): CollaboratorRepository
-        + getTaskRepository(): TaskRepository
-        + getTeamRepository(): TeamRepository
-        + getAgenda(): Agenda
 }
 
-class TaskRepository{
-    - List<Task> taskList
-    - List<String> statusList
-    + getStatusList()
-    + getTaskList(teamList, dateI, dateF, typeStatus)
-    + addTaskOfCollaborator(task)
-}
+class OrganizationRepository{
 
-class CollaboratorRepository{
-    + getCollaboratorThoughEmail(email))
-}
-
-class TeamRepository{
-    + getTeamsThoughCollaborator(collaborator)
 }
 
 class Agenda{
-    +getCollaboratorAgendaEntries(taskList)
+
 }
 
-class ToDoList{
-    -List<ToDoList> toDoListEntries
-    +getStatusList()
+class Repositories{
+
 }
 
+class Entry{
 
+}
 
-
-ListTaskSpaceUI .> ListTaskController
-ListTaskController..> Repositories : repositories
-Repositories -> "1" TaskRepository
-ListTaskController ..> TaskRepository : getTaskRepository
-ListTaskController..> CollaboratorRepository
-ListTaskController..> TeamRepository
+TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
+TaskAssignedToCollaboratorController ..> Organization
+TaskAssignedToCollaboratorController .> Repositories
+Repositories --> OrganizationRepository
+Repositories --> Agenda
+OrganizationRepository --> Organization
+Agenda --> Organization
+Organization --> Entry
 
 @enduml
