@@ -1,0 +1,140 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Collaborator" as EMP
+participant ":TaskAssignedToCollaboratorUI" as UI
+participant ":TaskAssignedToCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as REP
+participant "organizationRepository\n:OrganizationRepository" as OrganizationRepository
+participant "agendaRepository\n:AgendaRepository" as AgendaRepository
+participant "Organization\n:organization" as Organization
+participant "Entry\n:entry" as Entry
+participant "Status\n:status" as Status
+activate EMP
+
+    EMP -> UI : Requests to consult tasks
+    activate UI
+
+        UI -> EMP : Asks for date interval and status of the task
+    deactivate UI
+
+    EMP -> UI : Types date interval and status of the task
+    activate UI
+
+        UI -> CTRL** : create
+
+            UI -> CTRL : verifyEntries()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> REP : getEntries()
+                activate REP
+
+                    REP -> CTRL: entries
+                deactivate REP
+
+                CTRL -> AgendaRepository : getEntries()
+                activate AgendaRepository
+
+                    AgendaRepository -> Entry : getEntry()
+                    activate Entry
+
+                        Entry --> AgendaRepository : entry
+                        deactivate Entry
+                    AgendaRepository -> CTRL: entries
+                deactivate AgendaRepository
+
+                CTRL -> REP : getCollaboratorName()
+                activate REP
+
+                    REP -> CTRL: collaboratorName
+                deactivate REP
+                CTRL -> OrganizationRepository : getCollaboratorName()
+                activate OrganizationRepository
+
+                    OrganizationRepository -> Organization : getcollaboratorName()
+                    activate Organization
+
+                    Organization -> OrganizationRepository : getCollaboratorName()
+                deactivate Organization
+
+                OrganizationRepository -> CTRL : collaboratorName
+                deactivate OrganizationRepository
+
+                CTRL -> REP : getStartDate()
+                activate REP
+
+                        REP -> CTRL: startDate
+                deactivate REP
+
+                CTRL -> AgendaRepository : getStartDate()
+                activate AgendaRepository
+
+                    AgendaRepository -> Entry : getStartDate()
+                    activate Entry
+
+                        Entry --> AgendaRepository : startDate
+                        deactivate Entry
+                    AgendaRepository -> CTRL: startDate
+                deactivate AgendaRepository
+
+                CTRL -> REP : getEndDate()
+                activate REP
+
+                        REP -> CTRL: endDate
+                deactivate REP
+
+                CTRL -> AgendaRepository : getEndDate()
+                activate AgendaRepository
+
+                    AgendaRepository -> Entry : getEndDate()
+                    activate Entry
+
+                        Entry --> AgendaRepository : endtDate
+                        deactivate Entry
+                    AgendaRepository -> CTRL: endDate
+                deactivate AgendaRepository
+
+                CTRL -> REP : getStatus()
+                activate REP
+
+                        REP -> CTRL: status
+                deactivate REP
+
+                CTRL -> AgendaRepository : getStatus()
+                activate AgendaRepository
+
+                    AgendaRepository -> Entry : getStatus()
+                    activate Entry
+
+                        Entry -> Status : getStatus()
+                            activate Status
+
+                                Status --> Entry : status
+                            deactivate Status
+                        Entry --> AgendaRepository : status
+                    deactivate Entry
+
+                    AgendaRepository -> CTRL: status
+                deactivate AgendaRepository
+
+                CTRL -> UI : entries
+            deactivate CTRL
+
+        UI -> EMP : Retrieves tasks list
+    deactivate UI
+
+
+
+@enduml

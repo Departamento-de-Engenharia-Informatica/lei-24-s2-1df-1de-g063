@@ -15,19 +15,11 @@ activate Collaborator
     Collaborator -> System : Requests to consult tasks
     activate System
 
-        System --> Collaborator : Asks for date interval
+        System --> Collaborator : Asks for date interval and status of the task
     deactivate System
 
 
-Collaborator -> System : Types date interval
-    activate System
-
-        System --> Collaborator : Ask for the status of the task
-    deactivate System
-
-
-
-    Collaborator -> System : Types for the status of the task
+Collaborator -> System : Types date interval and status of the task
     activate System
 
         System --> Collaborator : Retrieves tasks list

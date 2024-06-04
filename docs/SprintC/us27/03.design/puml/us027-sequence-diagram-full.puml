@@ -6,25 +6,23 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Green Space Manager" as VFM
+actor "Green Space Manager" as GSM
 participant ":GreenSpaceListUI" as UI
 participant ":GreenSpaceListController" as CTRL
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
-participant "greenSpaceRepository:\nGreenSpaceRepository" as VehicleRepository
-participant "greenSpace:\ngreenSpace" as Vehicle
+participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
 participant "Organization:\norganization" as org
+participant "greenSpace:\ngreenSpace" as GreenSpace
 
-activate VFM
+activate GSM
 
-VFM -> UI : Request to list all managed green spaces
+GSM -> UI : Request to list all managed green spaces
 
     activate UI
 
         UI -> CTRL** : create
-
-
-
 
         UI -> CTRL : getGreenSpacesByName()
         activate CTRL
@@ -35,57 +33,46 @@ VFM -> UI : Request to list all managed green spaces
                 Rep --> CTRL : repositories
             deactivate Rep
 
-
-
-
-            CTRL -> Repositories : getGreenSpacesByNameRepository()
+            CTRL -> Repositories : getManagerName()
             activate Repositories
 
-                Repositories --> CTRL : getGreenSpacesByName
+                Repositories --> CTRL : ManagerName
             deactivate Repositories
 
+            CTRL -> OrganizationRepository : getManagerName()
+            activate OrganizationRepository
 
+                OrganizationRepository -> org : getManagerName()
+                activate org
 
-            CTRL -> VehicleRepository : getGreenSpacesByName()
-                                    activate VehicleRepository
+                    org --> OrganizationRepository : ManagerName
+                deactivate org
 
-                                     VehicleRepository -> Vehicle : getGreenSpacesByName()
-                                    activate Vehicle
+                OrganizationRepository -> CTRL : ManagerName
+            deactivate OrganizationRepository
 
+            CTRL -> Repositories : getGreenSpaces()
+            activate Repositories
 
+                Repositories --> CTRL : GreenSpaces
+            deactivate Repositories
 
-                                      Vehicle -> org : getGreenSpacesByName()
-                                                                        activate org
+            CTRL -> GreenSpaceRepository : getGreenSpaces()
+            activate GreenSpaceRepository
 
+                GreenSpaceRepository -> GreenSpace : getGreenSpace()
+                activate GreenSpace
 
-                                                                        org --> Vehicle : greenSpaceByName
-                                                                                                            deactivate org
-
-
-                                    Vehicle --> VehicleRepository : greenSpaceByName
-                                                                        deactivate Vehicle
-
-
-
-
-                                        VehicleRepository --> CTRL : greenSpacesByName
-                                    deactivate VehicleRepository
-
-
-
-
-
+                    GreenSpace --> GreenSpaceRepository : greenSpace
+                deactivate GreenSpace
+                GreenSpaceRepository --> CTRL : greenSpaces
+            deactivate GreenSpaceRepository
 
             CTRL --> UI : greenSpacesByName
         deactivate CTRL
 
-        UI --> VFM : Retrieve list of green spaces manager by the GSM
-
-
-
-
-
-deactivate UI
-deactivate VFM
+        UI --> GSM : Retrieve list of green spaces managed by the GSM
+    deactivate UI
+deactivate GSM
 
 @enduml

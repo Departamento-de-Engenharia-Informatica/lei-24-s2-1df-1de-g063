@@ -25,7 +25,7 @@ class OrganizationRepository{
 
 }
 
-class Agenda{
+class AgendaRepository{
 
 }
 
@@ -37,13 +37,20 @@ class Entry{
 
 }
 
+enum Status{
+    pending
+    scheduled
+    canceled
+}
+
 TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
 TaskAssignedToCollaboratorController ..> Organization
 TaskAssignedToCollaboratorController .> Repositories
 Repositories --> OrganizationRepository
-Repositories --> Agenda
+Repositories --> AgendaRepository
 OrganizationRepository --> Organization
-Agenda --> Organization
+AgendaRepository --> Organization
 Organization --> Entry
+Entry --> Status
 
 @enduml
