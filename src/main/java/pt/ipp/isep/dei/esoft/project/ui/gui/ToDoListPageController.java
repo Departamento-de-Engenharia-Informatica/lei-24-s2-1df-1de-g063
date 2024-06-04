@@ -1,9 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
@@ -11,6 +20,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.domain.Urgency;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 
+import java.io.IOException;
+import java.util.Objects;
 
 public class ToDoListPageController {
     @FXML
@@ -26,7 +37,6 @@ public class ToDoListPageController {
     @FXML
     private ChoiceBox<GreenSpace> selectGreenSpace;
     private final GreenSpaceRepository greenSpaceRepository;
-
 
     public ToDoListPageController() {
         this.toDoListController = new ToDoListController();
@@ -74,6 +84,26 @@ public class ToDoListPageController {
         selectUrgency.getItems().setAll(Urgency.values());
 
         // Initialize green space choices from the repository
-        selectGreenSpace.getItems().setAll(greenSpaceRepository.getGreenSpaces());
+        selectGreenSpace.getItems().setAll(GreenSpaceRepository.getInstance().getGreenSpaces());
     }
+
+    @FXML
+    protected void handleGOBACK (ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Create a new scene with the AssignTeamPage
+            Scene scene = new Scene(assignTeamPage);
+
+            // Set the scene of the current stage to the new scene
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

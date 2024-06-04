@@ -52,11 +52,6 @@ public class GreenSpaceRepository {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Saves changes to a collaborator's information in the repository.
-     *
-     * @param greenSpace the collaborator to save
-     */
     public void saveGreenSpace(GreenSpace greenSpace) {
         boolean updated = false;
         for (int i = 0; i < greenSpaces.size() && !updated; i++) {

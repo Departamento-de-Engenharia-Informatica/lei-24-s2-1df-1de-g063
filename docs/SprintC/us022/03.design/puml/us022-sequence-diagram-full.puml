@@ -11,9 +11,8 @@ participant "AgendaUI" as UI
 participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
-participant "organization:\n Organization" as Organization
 participant "ToDoList: \n ToDoList" as TDL
-participant "Agenda: \n Agenda" as Agenda
+participant "agendaRepository: \n AgendaRepository" as Agenda
 
 activate GSM
 
@@ -22,51 +21,51 @@ activate GSM
      activate UI
 
             UI -> GSM : asks to select the To-Do List entry
-            GSM -> UI : selects the To-Do List entry
-            UI -> GSM : asks to type the intended date
-            GSM -> UI : selects the intended date
             UI -> CTRL : creates
 
      activate CTRL
-
-            CTRL -> Rep : getInstance()
-
      activate Rep
 
-            Rep -> CTRL : repositories
+                      Rep -> CTRL : repositories
 
-     deactivate Rep
+               deactivate Rep
 
-            CTRL -> organizationRepository : getOrganizationRepository()
+                      CTRL -> organizationRepository : getOrganizationRepository()
 
-     activate organizationRepository
+               activate organizationRepository
 
-            organizationRepository -> CTRL : organizationRepository
+                      organizationRepository -> CTRL : organizationRepository
 
-     deactivate organizationRepository
+               deactivate organizationRepository
 
-            CTRL -> Organization : getManager()
+                      CTRL -> TDL : getToDoList()
 
-     activate Organization
+               activate TDL
 
-            Organization -> CTRL : Manager
+                      TDL -> CTRL : toDoList
 
+               deactivate TDL
 
+                      CTRL -> UI : toDoList
+                      GSM -> UI : selects the To-Do List entry
+                      UI -> GSM : asks to type the intended date
+                      GSM -> UI : selects the intended date
+                      UI -> CTRL : entry
+                      CTRL -> Agenda : getAgendaRepository()
+               activate Agenda
 
-            Organization -> Rep : getToDoList()
-     deactivate Organization
+                      Agenda -> Agenda: addEntry(Entry entry)
 
-     activate GreenSpace
+                 Agenda -> CTRL : entry
 
-            GreenSpace -> CTRL : GreenSpace
+          deactivate Agenda
 
-     deactivate GreenSpace
+                 CTRL -> UI : entry
 
-            CTRL -> UI : GreenSpace
-     deactivate CTRL
+          deactivate CTRL
 
+          UI --> GSM : displays all data and operation success
 
-     UI --> GSM : displays all data and operation success
-     deactivate UI
+          deactivate UI
 
 @enduml

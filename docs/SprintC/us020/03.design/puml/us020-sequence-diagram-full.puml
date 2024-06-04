@@ -11,8 +11,8 @@ participant "RegisterGreenSpaceUI" as UI
 participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
-participant "organization:\n Organization" as Organization
 participant "greenSpace: \n GreenSpace" as GreenSpace
+participant "greenSpaceRepository: \n GreenSpaceRepository" as GreenSpaceRep
 
 activate GSM
 
@@ -47,28 +47,28 @@ activate GSM
 
      deactivate organizationRepository
 
-            CTRL -> Organization : getManager()
-
-     activate Organization
-
-            Organization -> CTRL : Manager
-
-
-
-            Organization -> GreenSpace : GreenSpace(name, area, size, email)
-     deactivate Organization
+            CTRL -> GreenSpace : registerGreenSpace(name, area, size, managerName)
 
      activate GreenSpace
 
-            GreenSpace -> CTRL : GreenSpace
+            GreenSpace -> GreenSpaceRep : addGreenSpace(GreenSpace greenSpace)
+
+     activate GreenSpaceRep
+
+            GreenSpaceRep -> GreenSpace : greenSpace
+
+     deactivate GreenSpaceRep
+
+            GreenSpace -> CTRL : greenSpace
 
      deactivate GreenSpace
 
-            CTRL -> UI : GreenSpace
+            CTRL -> UI : greenSpace
+
      deactivate CTRL
 
-
      UI --> GSM : displays all data and operation success
+
      deactivate UI
 
 @enduml

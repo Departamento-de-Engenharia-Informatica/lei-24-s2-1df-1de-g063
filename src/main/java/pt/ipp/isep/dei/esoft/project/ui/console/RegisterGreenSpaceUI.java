@@ -18,11 +18,7 @@ public class RegisterGreenSpaceUI implements Runnable {
     private GreenSpace greenSpace;
     private final String managerName;
 
-    /**
-     * Constructs an instance of RegisterGreenSpaceUI with the given email.
-     *
-     * @param email the user's email address
-     */
+
     public RegisterGreenSpaceUI(String managerName) {
         this.controller = new RegisterGreenSpaceController();
         this.greenSpaceRepository = GreenSpaceRepository.getInstance();
