@@ -35,9 +35,9 @@ public class AuthenticationUI implements Runnable {
 
         if (success) {
             // Call UserEmailUI to ask for personal email
-            UserEmailUI userEmailUI = new UserEmailUI();
-            userEmailUI.run();
-            String email = userEmailUI.getEmail();
+            UserNameUI userNameUI = new UserNameUI();
+            userNameUI.run();
+            String email = userNameUI.getName();
 
             List<UserRoleDTO> roles = this.ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
@@ -131,7 +131,8 @@ public class AuthenticationUI implements Runnable {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(email))); // Pass email to GsmUI
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(email)));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_EMPLOYEE, new CollaboratorUI(email)));
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }

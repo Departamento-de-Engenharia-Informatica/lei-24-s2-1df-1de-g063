@@ -9,42 +9,48 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class ListTaskSpaceUI{
+class TaskAssignedToCollaboratorUI{
 
 }
 
+class TaskAssignedToCollaboratorController{
 
-class ListTaskController{
-   + create()
-       + getCollaboratorThoughEmail(email)
-       + getStatusList()
-       + getTaskList(collaborator, dateI, dateF, typeStatus)
 }
 
+class Organization{
+
+}
+
+class OrganizationRepository{
+
+}
+
+class AgendaRepository{
+
+}
 
 class Repositories{
-    - Repositories()
-        + getInstance(): Repositories
-        + getCollaboratorRepository(): CollaboratorRepository
-        + getTaskRepository(): TaskRepository
-        + getTeamRepository(): TeamRepository
-        + getAgenda(): Agenda
+
 }
 
-class TaskRepository{
-    - List<Task> taskList
-    - List<String> statusList
-    + getStatusList()
-    + getTaskList(teamList, dateI, dateF, typeStatus)
-    + addTaskOfCollaborator(task)
+class Entry{
+
 }
 
+enum Status{
+    pending
+    scheduled
+    canceled
+}
 
-
-ListTaskSpaceUI .> ListTaskController
-ListTaskController..> Repositories : repositories
-Repositories -> "1" TaskRepository
-ListTaskController ..> TaskRepository : getTaskRepository
-
+TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
+TaskAssignedToCollaboratorController ..> Organization
+TaskAssignedToCollaboratorController .> Repositories
+Repositories --> OrganizationRepository
+Repositories --> AgendaRepository
+OrganizationRepository --> Organization
+AgendaRepository --> Organization
+Organization --> Entry
+Entry --> Status
 
 @enduml

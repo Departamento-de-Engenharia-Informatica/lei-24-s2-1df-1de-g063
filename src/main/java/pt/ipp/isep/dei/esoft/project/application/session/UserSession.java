@@ -4,8 +4,6 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 import java.util.List;
 
-import java.util.List;
-
 /**
  * The UserSession class represents a user session in the application.
  * It provides methods to access user information and manage the session.

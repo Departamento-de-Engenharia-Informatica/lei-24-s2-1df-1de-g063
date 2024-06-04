@@ -6,13 +6,13 @@ public class GreenSpace {
     private final String name;
     private final double area;
     private final Size size;
-    private String email;
+    private String managerName;
 
-    public GreenSpace(String name, double area, Size size, String email) {
+    public GreenSpace(String name, double area, Size size, String managerName) {
         this.name = name;
         this.area = area;
         this.size = size;
-        this.email = email;
+        this.managerName = managerName;
     }
 
     private void validateGreenSpaceName(String greenSpaceName) {
@@ -25,8 +25,8 @@ public class GreenSpace {
         return name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getManagerName() {
+        return managerName;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class GreenSpace {
                 "name='" + name + '\'' +
                 ", area=" + area +
                 ", size=" + size +
-                ", email='" + email + '\'' +
+                ", manager name='" + managerName + '\'' +
                 '}';
     }
 }

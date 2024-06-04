@@ -6,22 +6,23 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as ADM
-participant ":MaintenanceRegistrationUI" as UI
-participant ":MaintenanceRegistrationController" as CTRL
+actor "GSM" as ADM
+participant ":GreenSpaceListUI" as UI
+participant ":GreenSpaceListController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "Vehicle:\n vehicle" as Vehicle
+participant "greenSpaceRepository:\nGreenSpaceRepository" as GreenSpaceRepository
+participant "GreenSpace:\n greenSpace" as GreenSpace
+participant "Organization:\n organization" as Organization
 activate ADM
 
-    ADM -> UI : Request to register vehicles check-up result
+    ADM -> UI : Request to list all green spaces managed by him
 
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehicleRepository()
+        UI -> CTRL : getGreenSpacesByName()
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -30,46 +31,35 @@ activate ADM
                 RepositorySingleton --> CTRL: repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getVehicleRepository()
+            CTRL -> PLAT : getGreenSpacesByName()
             activate PLAT
 
-                PLAT --> CTRL: VehicleRepository
+                PLAT --> CTRL: GreenSpaceByName
             deactivate PLAT
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
+            CTRL -> GreenSpaceRepository : getGreenSpacesByName()
+            activate GreenSpaceRepository
 
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
+                GreenSpaceRepository -> GreenSpace: getGreenSpaceByName()
+                activate GreenSpace
+
+                    GreenSpace -> Organization: getManagerName()
+                    activate Organization
+
+                        Organization --> GreenSpace: managerName
+                    deactivate Organization
+
+                    GreenSpace --> GreenSpaceRepository : GreenSpaceByName
+                deactivate GreenSpace
+                GreenSpaceRepository --> CTRL : GreenSpacesByName
+            deactivate GreenSpaceRepository
 
 
-            CTRL --> UI : VehicleRepository
+            CTRL --> UI : GreenSpaceByName
         deactivate CTRL
 
-        UI --> ADM : Display vehicle selection interface
+        UI --> ADM : Retrieves list of green spaces managed by the GSM
     deactivate UI
-
-    ADM -> UI : Selects a vehicle
-    activate UI
-
-        UI --> ADM :Confirms the selection
-    deactivate UI
-
-    ADM -> UI : Registers results
-    activate UI
-
-        UI -> Vehicle : setMaintenance()
-        activate Vehicle
-
-        Vehicle --> UI : Maintenance
-
-        UI -> Vehicle : setLastMaintenanceKm()
-
-        Vehicle --> UI : LastMaintenanceKm
-        deactivate Vehicle
-        UI --> ADM : Confirmation of results registration
-    deactivate UI
-
 
 
 deactivate ADM

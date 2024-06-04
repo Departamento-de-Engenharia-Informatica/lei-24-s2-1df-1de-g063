@@ -17,6 +17,7 @@ class Medium{}
 class High{}
 class Pending{}
 class Scheduled{}
+class Canceled{}
 
 class Outside_User {
     name
@@ -129,6 +130,6 @@ Urgency "1" --> "1" High
 Entry "1" --> "1" Status
 Status "1" --> "1" Pending
 Status "1" --> "1" Scheduled
-
+Status "1" --> "1" Canceled
 
 @enduml

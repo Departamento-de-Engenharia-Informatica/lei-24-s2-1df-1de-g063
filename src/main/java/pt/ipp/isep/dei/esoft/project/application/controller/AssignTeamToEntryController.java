@@ -40,8 +40,7 @@ public class AssignTeamToEntryController {
         return teamRepository.getTeams(index);
     }
 
-    // The following methods are commented out but may be used in the future.
-   public List<String> getEntries() {
+    public List<String> getEntries() {
     List<Entry> entries = AgendaRepository.getEntries();
     List<String> entriesWithFlags = new ArrayList<>();
     for (Entry entry : entries) {

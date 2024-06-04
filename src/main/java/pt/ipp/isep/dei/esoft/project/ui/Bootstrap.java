@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Employee;
+import pt.ipp.isep.dei.esoft.project.domain.Organization;
+import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
@@ -31,6 +34,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addTaskCategories() {
+        //TODO: add bootstrap Task Categories here
 
         //get task category repository
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
@@ -66,6 +70,7 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@this.app","gsm",
                 AuthenticationController.ROLE_GSM);
+
 
 // Create more Collaborator objects
         Collaborator collaborator1 = new Collaborator("John Doe", "123 Street", "johndoe@this.app", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");

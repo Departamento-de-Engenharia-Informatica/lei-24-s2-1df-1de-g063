@@ -12,16 +12,10 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : Request to list all managed green spaces
+    Employee -> System : Request to list all green spaces managed by him
     activate System
 
-        System --> Employee : Retrieve list of green spaces
-    deactivate System
-
-    Employee -> System : Chooses green spaces managed by GSM
-    activate System
-
-        System --> Employee : Confirmation of the operation
+        System --> Employee : Retrieves list of green spaces managed by the GSM
     deactivate System
 
 @enduml

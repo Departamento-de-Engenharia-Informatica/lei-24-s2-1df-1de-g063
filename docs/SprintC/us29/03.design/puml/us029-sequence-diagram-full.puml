@@ -6,65 +6,31 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Collaborator" as VFM
-participant ":ViewTaskUI" as UI
-participant ":ViewTaskController" as CTRL
+actor "Collaborator" as EMP
+participant ":CompletionTaskUI" as UI
+participant ":CompletionTaskController" as CTRL
 participant "Repositories" as Rep
-participant "repositories:\nRepositories" as Repositories
-participant "taskRepository:\nTaskRepository" as VehicleRepository
-participant "taskmapper:\nTaskmapper" as Vehicle
+participant "organizationRepository:\nOrganizationRepository" as Repositories
+participant "Agenda:\nAgenda" as Agenda
+participant "entry:\nEntry" as Entry
 
-activate VFM
+activate EMP
 
-VFM -> UI : Requests to record the completion of a task
-
+    EMP -> UI : Requests to record the completion of a task
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
-        activate CTRL
+        UI -> CTRL :
+        UI --> EMP : Retrieves task list
+    deactivate UI
 
-            CTRL -> Rep : getInstance()
-            activate Rep
+    EMP -> UI : Chooses task to record completion
+    activate UI
 
-                Rep --> CTRL : repositories
-            deactivate Rep
-
-            CTRL -> Repositories : getVehicleRepository()
-            activate Repositories
-
-            Repositories --> CTRL : VehicleRepository
-            deactivate Repositories
+        UI --> EMP : Confirmation of the operation
+    deactivate UI
 
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
-
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
-
-
-            CTRL --> UI : VehiclesNeedingCheckUp
-        deactivate CTRL
-
-        UI --> VFM : Retrieves Collaborators list
-
-
-
-    VFM -> UI : Chooses a Collaborator
-
-
-UI --> VFM : Retrieves tasks list
-
-
-    VFM -> UI : Chooses task to record completion
-
-
-UI --> VFM : Confirmation of the operation
-
-
-deactivate UI
-deactivate VFM
 
 @enduml
