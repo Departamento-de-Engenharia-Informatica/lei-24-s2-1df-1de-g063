@@ -42,10 +42,11 @@ class Entry{
 
 ToDoListUI .right-> ToDoListController
 Organization -down-> Entry
-Entry -> ToDoList: add
 Repositories .down-> "1" ToDoList: Instance
+Entry -> ToDoList: add
 OrganizationRepository .down-> Organization
 ToDoListController -.down-> Repositories : repositories
 Repositories -left-> "1" OrganizationRepository
+Repositories -> Repositories: Instance
 
 @enduml
