@@ -7,27 +7,25 @@ autonumber
 
 'hide footbox
 actor "Green Space Manager" as GSM
-participant "RegisterGreenSpaceUI" as UI
-participant "RegisterGreenSpaceController" as CTRL
+participant "AgendaUI" as UI
+participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
 participant "organization:\n Organization" as Organization
-participant "greenSpace: \n GreenSpace" as GreenSpace
+participant "ToDoList: \n ToDoList" as TDL
+participant "Agenda: \n Agenda" as Agenda
 
 activate GSM
 
-     GSM -> UI : asks to register a new GreenSpace
+     GSM -> UI : asks to add a new entry to the Agenda
 
      activate UI
 
-            UI -> GSM : requests a name
-            GSM -> UI : types name
-            UI -> GSM : request size
-            GSM -> UI : selects size
-            UI -> GSM : requests area
-            GSM -> UI : types area
+            UI -> GSM : asks to select the To-Do List entry
+            GSM -> UI : selects the To-Do List entry
+            UI -> GSM : asks to type the intended date
+            GSM -> UI : selects the intended date
             UI -> CTRL : creates
-
 
      activate CTRL
 
@@ -55,7 +53,7 @@ activate GSM
 
 
 
-            Organization -> GreenSpace : GreenSpace(name, area, size, email)
+            Organization -> Rep : getToDoList()
      deactivate Organization
 
      activate GreenSpace

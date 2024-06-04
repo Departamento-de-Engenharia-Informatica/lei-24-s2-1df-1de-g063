@@ -63,5 +63,7 @@ Repositories -down-> "1" OrganizationRepositiry
 OrganizationRepositiry "1" --> "1" Organization : has manager
 Agenda "1..*" <-- "1" Organization : register entry
 AgendaController "1" --> Organization
+Repositories --> Repositories: instance
+
 
 @enduml

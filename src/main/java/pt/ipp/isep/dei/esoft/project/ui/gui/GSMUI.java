@@ -20,10 +20,10 @@ public class GSMUI {
 
     }
     @FXML
-    protected void handleAssignTeamToEntry(ActionEvent event) {
+    protected void handleRegisterGreenSpacePageController(ActionEvent event) {
         try {
             // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/RegisterGreenSpacePage.fxml"));
 
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -39,8 +39,21 @@ public class GSMUI {
     }
 
     @FXML
-    protected void handleAssignVehicleToEntry(ActionEvent event) {
-        // Implement your logic here
-        System.out.println("Assign Vehicle to Entry button clicked");
+    protected void handleToDoListPageController(ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/ToDoListPageController.fxml"));
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Create a new scene with the AssignTeamPage
+            Scene scene = new Scene(assignTeamPage);
+
+            // Set the scene of the current stage to the new scene
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
