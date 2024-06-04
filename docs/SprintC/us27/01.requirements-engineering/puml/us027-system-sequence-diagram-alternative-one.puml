@@ -18,10 +18,4 @@ activate Employee
         System --> Employee : Retrieves list of green spaces managed by the GSM
     deactivate System
 
-    Employee -> System : Confirms that he want to creat the list
-        activate System
-
-            System --> Employee : Show the list
-        deactivate System
-
 @enduml
