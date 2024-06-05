@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+participant "RegisterGreenSpaceController" as CTRL
+
+activate CTRL
+    group register Green Spaces
+        CTRL -> GreenSpace : registerGreenSpace(name, area, size, managerName)
+
+             activate GreenSpace
+
+                    GreenSpace -> GreenSpaceRep : addGreenSpace(GreenSpace greenSpace)
+
+             activate GreenSpaceRep
+
+                    GreenSpaceRep -> GreenSpace : greenSpace
+
+             deactivate GreenSpaceRep
+
+                    GreenSpace -> CTRL : greenSpace
+
+             deactivate GreenSpace
+    end
+    <-- CTRL : greenSpace
+deactivate CTRL
+
+@enduml
