@@ -50,6 +50,7 @@ public class RegisterGreenSpacePageController {
             controller.registerGreenSpace(name, area, size, managerName);
             greenSpaceRepository.addGreenSpace(greenSpace);
             greenSpaceListView.getItems().add(greenSpace);
+            controller.getGreenSpaceRepository().addGreenSpace(greenSpace);
             nameField.clear();
             areaField.clear();
             managerField.clear();

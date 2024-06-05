@@ -19,6 +19,7 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.domain.Urgency;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -85,7 +86,8 @@ public class ToDoListPageController {
 
         // Initialize green space choices from the repository
         selectGreenSpace.getItems().clear();
-        selectGreenSpace.getItems().setAll(GreenSpaceRepository.getInstance().getGreenSpaces());
+        selectGreenSpace.getItems().setAll(Repositories.getInstance().getGreenSpaceRepository().getGreenSpaces());
+        System.out.println("Green spaces: " + GreenSpaceRepository.getInstance().getGreenSpaces());
     }
     @FXML
     protected void handleGOBACK (ActionEvent event) {

@@ -111,8 +111,9 @@ public class Bootstrap implements Runnable {
 
         Entry entry1 = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"abc@this.app"), Status.pending);
         Entry entry2 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"abc@this.app"),Status.pending);
-        ToDoList.addEntry(entry1);
-        ToDoList.addEntry(entry2);
+        ToDoList toDoList = Repositories.getInstance().getToDoList();
+        toDoList.addEntry(entry1);
+        toDoList.addEntry(entry2);
         AgendaRepository agenda = Repositories.getInstance().getAgendaRepository();
         agenda.addEntry(entry1);
         agenda.addEntry(entry2);

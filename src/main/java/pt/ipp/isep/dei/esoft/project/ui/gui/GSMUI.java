@@ -20,7 +20,7 @@ public class GSMUI {
 
     }
     @FXML
-protected void handleAssignTeamToEntry(ActionEvent event) {
+    protected void handleAssignTeamToEntry(ActionEvent event) {
     try {
         // Load the FXML file for the AssignTeamPage
         Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));

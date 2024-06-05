@@ -21,16 +21,20 @@ public class AgendaPageController {
     @FXML
     private ListView<Entry> entryListView;
     @FXML
+    private ListView<Entry> agendaListView;
+    @FXML
     private DatePicker startDatePicker;
     @FXML
     private Button addButton;
 
     private AgendaController controller;
 
+
     public void initialize() {
         System.out.println("Initialize method called");
         controller = new AgendaController();
         loadEntries();
+        System.out.println("startDatePicker: " + startDatePicker);
     }
 
     private void loadEntries() {
@@ -43,6 +47,10 @@ public class AgendaPageController {
         }
     }
 
+    private void updateAgendaListView() {
+        agendaListView.getItems().setAll(controller.getAgendaRepository().getEntries());
+    }
+
     @FXML
     private void handleAddButtonAction() {
         Entry selectedEntry = entryListView.getSelectionModel().getSelectedItem();
@@ -51,6 +59,7 @@ public class AgendaPageController {
             // calculate end date based on duration
             selectedEntry.setEndDate(calculateEndDate(selectedEntry.getDuration(), startDatePicker.getValue()));
             controller.getAgendaRepository().addEntry(selectedEntry);
+            updateAgendaListView();
         }
     }
 
