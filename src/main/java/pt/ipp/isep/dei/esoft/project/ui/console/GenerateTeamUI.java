@@ -48,66 +48,71 @@ public class GenerateTeamUI implements Runnable {
     }
 
     private void requestData() {
-        error = false;
-        while (true) {
-            System.out.println("Please enter the input in the format: maxSize; minSize; <skill1; skill2; skill3>");
+    error = false;
+    while (true) {
+        System.out.println("Please enter the input in the format: maxSize; minSize; <skill1; skill2; skill3>");
+        System.out.println("Type -1 at any time to exit.");
 
-            String input = scanner.nextLine().trim();
-            String[] parts = input.split(";");
+        String input = scanner.nextLine().trim();
+        if (input.equals("-1")) {
+            error = true;
+            return;
+        }
 
-            if (parts.length != 3) {
-                System.out.println("Invalid input format. Please use: maxSize; minSize; <skill1; skill2; skill3>");
+        String[] parts = input.split(";");
+
+        if (parts.length != 3) {
+            System.out.println("Invalid input format. Please use: maxSize; minSize; <skill1; skill2; skill3>");
+            continue;
+        }
+
+        try {
+            maxSize = Integer.parseInt(parts[0].trim());
+            minSize = Integer.parseInt(parts[1].trim());
+
+            if (maxSize < 0 || minSize < 0) {
+                System.out.println("Team sizes cannot be negative.");
                 continue;
             }
 
-            try {
-                maxSize = Integer.parseInt(parts[0].trim());
-                minSize = Integer.parseInt(parts[1].trim());
+            if (maxSize < minSize) {
+                System.out.println("Max team size cannot be smaller than min team size.");
+                continue;
+            }
 
-                if (maxSize < 0 || minSize < 0) {
-                    System.out.println("Team sizes cannot be negative.");
-                    continue;
-                }
+            String skillsPart = parts[2].trim();
+            if (!skillsPart.startsWith("<") || !skillsPart.endsWith(">")) {
+                System.out.println("Skills should be enclosed in < >.");
+                continue;
+            }
 
-                if (maxSize < minSize) {
-                    System.out.println("Max team size cannot be smaller than min team size.");
-                    continue;
-                }
+            skillsPart = skillsPart.substring(1, skillsPart.length() - 1).trim();
+            String[] skillsArray = skillsPart.split(";");
 
-                String skillsPart = parts[2].trim();
-                if (!skillsPart.startsWith("<") || !skillsPart.endsWith(">")) {
-                    System.out.println("Skills should be enclosed in < >.");
-                    continue;
-                }
-
-                skillsPart = skillsPart.substring(1, skillsPart.length() - 1).trim();
-                String[] skillsArray = skillsPart.split(";");
-
-                selectedSkills.clear();
-                boolean validSkills = true;
-                for (String skillName : skillsArray) {
-                    skillName = skillName.trim();
-                    if (!skillName.isEmpty()) {
-                        Skill skill = controller.getSkillByName(skillName);
-                        if (skill != null) {
-                            selectedSkills.add(skill);
-                        } else {
-                            System.out.printf("Skill '%s' is not recognized.%n", skillName);
-                            validSkills = false;
-                        }
+            selectedSkills.clear();
+            boolean validSkills = true;
+            for (String skillName : skillsArray) {
+                skillName = skillName.trim();
+                if (!skillName.isEmpty()) {
+                    Skill skill = controller.getSkillByName(skillName);
+                    if (skill != null) {
+                        selectedSkills.add(skill);
+                    } else {
+                        System.out.printf("Skill '%s' is not recognized.%n", skillName);
+                        validSkills = false;
                     }
                 }
-
-                if (validSkills) {
-                    break;
-                }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Team sizes must be valid integers.");
             }
+
+            if (validSkills) {
+                break;
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Team sizes must be valid integers.");
         }
     }
-
+}
     private void submitData() {
         teamProposal = controller.generateTeamProposal(minSize, maxSize, selectedSkills);
         if (teamProposal == null) {

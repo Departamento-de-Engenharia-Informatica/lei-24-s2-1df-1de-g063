@@ -24,6 +24,9 @@ public class Entry {
         this.status = status;
         this.vehicles = new ArrayList<>();
     }
+    public boolean isVehicleAssigned(Vehicle vehicle){
+        return getVehicles().contains(vehicle);
+    }
 
     public LocalDate getStartDate(){
         return startDate;
