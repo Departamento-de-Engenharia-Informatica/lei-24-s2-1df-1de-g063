@@ -39,6 +39,25 @@ public class GSMUI {
     }
 
     @FXML
+    protected void handleAgendaPageController(ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/Agenda.fxml"));
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Create a new scene with the AssignTeamPage
+            Scene scene = new Scene(assignTeamPage);
+
+            // Set the scene of the current stage to the new scene
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     protected void handleToDoListPageController(ActionEvent event) {
         try {
             // Load the FXML file for the AssignTeamPage
