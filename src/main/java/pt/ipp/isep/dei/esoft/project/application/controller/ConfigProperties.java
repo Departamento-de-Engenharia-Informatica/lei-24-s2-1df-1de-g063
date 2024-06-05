@@ -1,24 +1,21 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigProperties {
-    private Properties properties;
+    private final Properties configProp = new Properties();
 
     public ConfigProperties() {
-        try (InputStream input = new FileInputStream("src/main/resources/config.properties")) {
-            properties = new Properties();
-            // load a properties file
-            properties.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        try (InputStream in = this.getClass().getClassLoader().getResourceAsStream("config.properties")) {
+            configProp.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public String getProperty(String key) {
-        return properties.getProperty(key);
+        return configProp.getProperty(key);
     }
 }

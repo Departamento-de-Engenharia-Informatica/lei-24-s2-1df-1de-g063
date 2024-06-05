@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList{
-    private List<Entry> toDoList;
+    private static List<Entry> toDoList;
     private static ToDoList instance;
 
     public ToDoList() {
@@ -20,7 +20,7 @@ public class ToDoList{
         return instance;
     }
 
-    public void addEntry(Entry entry) {
+    public static void addEntry(Entry entry) {
         toDoList.add(entry);
     }
 

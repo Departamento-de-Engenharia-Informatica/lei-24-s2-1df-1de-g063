@@ -8,12 +8,12 @@ import java.util.List;
 
 public class Mailer {
     // ...
-    static ConfigProperties config = new ConfigProperties();
-    static String host = config.getProperty("host");
-    static String port = config.getProperty("port");
-    static String username = config.getProperty("username");
-    static String password = config.getProperty("password");
-    public static void sendEmailToMultipleRecipients(List<String> recipients, String subject, String text) {
+    ConfigProperties config = new ConfigProperties();
+    String host = config.getProperty("host");
+    String port = config.getProperty("port");
+     String username = config.getProperty("username");
+     String password = config.getProperty("password");
+    public  void sendEmailToMultipleRecipients(List<String> recipients, String subject, String text) {
         // Set up the SMTP server properties.
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);

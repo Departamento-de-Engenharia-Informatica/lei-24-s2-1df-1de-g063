@@ -56,6 +56,8 @@ public class AssignTeamToEntryController {
 }
 
 
+
+
     public void attributeTeamToEntry(int choiceTeam, int choiceEntry){
          Team selectedTeam = teamRepository.getTeams(choiceTeam);
          Entry selectedEntry = AgendaRepository.getEntries(choiceEntry);
@@ -65,7 +67,7 @@ public class AssignTeamToEntryController {
          for (Collaborator collaborator : collaborators) {
              emailAddresses.add(collaborator.getEmail());
          }
-
+         Mailer mailer = new Mailer();
          String subject = "Team assignment";
         String message = "You have been assigned to a team for the entry with the following details:\n" +
                 "Task: " + selectedEntry.getTask() + "\n" +
@@ -76,7 +78,7 @@ public class AssignTeamToEntryController {
                 "Status: " + selectedEntry.getStatus() + "\n" +
                 "Start Date: " + selectedEntry.getStartDate() + "\n" +
                 "End Date: " + selectedEntry.getEndDate();
-            Mailer.sendEmailToMultipleRecipients(emailAddresses, subject, message);
+            mailer.sendEmailToMultipleRecipients(emailAddresses, subject, message);
     }
 
 

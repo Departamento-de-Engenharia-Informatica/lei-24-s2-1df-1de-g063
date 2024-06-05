@@ -20,27 +20,34 @@ public class GSMUI {
 
     }
     @FXML
-    protected void handleAssignTeamToEntry(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));
+protected void handleAssignTeamToEntry(ActionEvent event) {
+    try {
+        // Load the FXML file for the AssignTeamPage
+        Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));
 
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
-            Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Create a new stage for the AssignTeamPage
+        Stage newStage = new Stage();
+        Scene scene = new Scene(assignTeamPage);
+        newStage.setScene(scene);
+        newStage.show(); // Show the new stage
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     @FXML
     protected void handleAssignVehicleToEntry(ActionEvent event) {
-        // Implement your logic here
-        System.out.println("Assign Vehicle to Entry button clicked");
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignVehiclePage.fxml"));
+
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
+            Scene scene = new Scene(assignTeamPage);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

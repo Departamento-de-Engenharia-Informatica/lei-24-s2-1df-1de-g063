@@ -68,7 +68,7 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_GSM);
 
 // Create more Collaborator objects
-        Collaborator collaborator1 = new Collaborator("Gabriel Silva", "123 Street", "gabsilvatex@gmail.com", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");
+        Collaborator collaborator1 = new Collaborator("Gabriel Silvinha", "123 Street", "gabsilvatex@gmail.com", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");
         Collaborator collaborator2 = new Collaborator("Jane Smith", "456 Avenue", "janesmith@this.app", "0987654321", "passaporte", "br123456", LocalDate.of(1985, 2, 2), LocalDate.of(2020, 2, 2), "Tester");
         Collaborator collaborator3 = new Collaborator("Bob Johnson", "789 Boulevard", "bobjohnson@this.app", "1122334455", "passaporte", "br123456", LocalDate.of(1990, 3, 3), LocalDate.of(2020, 3, 3), "Manager");
         Collaborator collaborator4 = new Collaborator("Alice Williams", "1010 Street", "alicewilliams@this.app", "1212121212", "passaporte", "br123456", LocalDate.of(1981, 4, 4), LocalDate.of(2020, 4, 4), "Developer");
@@ -101,5 +101,22 @@ public class Bootstrap implements Runnable {
         teamRepository.addTeams(team1);
         teamRepository.addTeams(team2);
         teamRepository.addTeams(team3);
+
+        //add entry to repository
+
+        Entry entry1 = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"abc@this.app"), Status.pending);
+        Entry entry2 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"abc@this.app"),Status.pending);
+        ToDoList.addEntry(entry1);
+        ToDoList.addEntry(entry2);
+        AgendaRepository agenda = Repositories.getInstance().getAgendaRepository();
+        agenda.addEntry(entry1);
+        agenda.addEntry(entry2);
+        Vehicle vehicle1 = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
+        Vehicle vehicle2 = new Vehicle("Peugeot", "do aço", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
+
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        vehicleRepository.addVehicle(vehicle1);
+        vehicleRepository.addVehicle(vehicle2);
+
     }
 }
