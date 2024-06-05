@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -54,10 +55,29 @@ public class AssignTeamToEntryController {
 }
 
 
+
+
     public void attributeTeamToEntry(int choiceTeam, int choiceEntry){
          Team selectedTeam = teamRepository.getTeams(choiceTeam);
          Entry selectedEntry = AgendaRepository.getEntries(choiceEntry);
          selectedEntry.setTeam(selectedTeam);
+         List<Collaborator> collaborators = selectedTeam.getMembers();
+         List<String> emailAddresses = new ArrayList<>();
+         for (Collaborator collaborator : collaborators) {
+             emailAddresses.add(collaborator.getEmail());
+         }
+         Mailer mailer = new Mailer();
+         String subject = "Team assignment";
+        String message = "You have been assigned to a team for the entry with the following details:\n" +
+                "Task: " + selectedEntry.getTask() + "\n" +
+                "Team Members: " + selectedEntry.getTeam() + "\n" +
+                "Urgency: " + selectedEntry.getUrgency() + "\n" +
+                "Duration: " + selectedEntry.getDuration() + "\n" +
+                "Green Space: " + selectedEntry.getGreenSpace().getName() + "\n" +
+                "Status: " + selectedEntry.getStatus() + "\n" +
+                "Start Date: " + selectedEntry.getStartDate() + "\n" +
+                "End Date: " + selectedEntry.getEndDate();
+            mailer.sendEmailToMultipleRecipients(emailAddresses, subject, message);
     }
 
 

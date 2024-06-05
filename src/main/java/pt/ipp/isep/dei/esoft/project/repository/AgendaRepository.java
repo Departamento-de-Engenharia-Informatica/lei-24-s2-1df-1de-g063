@@ -20,7 +20,7 @@ public class AgendaRepository {
         return instance;
     }
 
-    public void addEntry(Entry entry) {
+    public static void addEntry(Entry entry) {
         agenda.add(entry);
     }
 

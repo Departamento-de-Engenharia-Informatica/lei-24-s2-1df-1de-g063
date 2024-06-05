@@ -86,6 +86,10 @@ public class Collaborator {
         return skills.contains(skill);
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     /**
      * Compares this collaborator to another object for equality.
      * Two collaborators are considered equal if all their attributes match.

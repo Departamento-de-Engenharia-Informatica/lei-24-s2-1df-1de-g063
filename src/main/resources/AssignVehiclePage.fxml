@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignVehiclePageController" stylesheets="@Styles.css">
+   <children>
+      <VBox spacing="20.0" layoutX="14.0" layoutY="14.0">
+         <Label text="Assign Vehicle to Entry" styleClass="title-label"/>
+         <HBox spacing="20.0">
+            <VBox>
+               <Label text="Vehicles" styleClass="list-label"/>
+               <ListView fx:id="vehicleListView" prefHeight="200.0" prefWidth="200.0" styleClass="list-view"/>
+            </VBox>
+            <VBox>
+               <Label text="Entries" styleClass="list-label"/>
+               <ListView fx:id="entryListView" prefHeight="200.0" prefWidth="200.0" styleClass="list-view"/>
+            </VBox>
+         </HBox>
+         <Button fx:id="confirmButton" text="Confirm" onAction="#confirmSelection" styleClass="confirm-button"/>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -20,24 +20,51 @@ public class GSMUI {
 
     }
     @FXML
+protected void handleAssignTeamToEntry(ActionEvent event) {
+    try {
+        // Load the FXML file for the AssignTeamPage
+        Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));
+
+        // Create a new stage for the AssignTeamPage
+        Stage newStage = new Stage();
+        Scene scene = new Scene(assignTeamPage);
+        newStage.setScene(scene);
+        newStage.show(); // Show the new stage
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+    @FXML
+    protected void handleAssignVehicleToEntry(ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignVehiclePage.fxml"));
+
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
+            Scene scene = new Scene(assignTeamPage);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     protected void handleRegisterGreenSpacePageController(ActionEvent event) {
         try {
             // Load the FXML file for the AssignTeamPage
             Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/RegisterGreenSpacePage.fxml"));
 
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
             Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     @FXML
     protected void handleAgendaPageController(ActionEvent event) {
         try {
@@ -63,14 +90,11 @@ public class GSMUI {
             // Load the FXML file for the AssignTeamPage
             Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/ToDoListPageController.fxml"));
 
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
             Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
         } catch (IOException e) {
             e.printStackTrace();
         }
