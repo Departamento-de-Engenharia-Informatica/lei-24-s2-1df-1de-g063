@@ -50,4 +50,34 @@ protected void handleAssignTeamToEntry(ActionEvent event) {
             e.printStackTrace();
         }
     }
+    @FXML
+    protected void handleRegisterGreenSpacePageController(ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/RegisterGreenSpacePage.fxml"));
+
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
+            Scene scene = new Scene(assignTeamPage);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    protected void handleToDoListPageController(ActionEvent event) {
+        try {
+            // Load the FXML file for the AssignTeamPage
+            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/ToDoListPageController.fxml"));
+
+            // Create a new stage for the AssignTeamPage
+            Stage newStage = new Stage();
+            Scene scene = new Scene(assignTeamPage);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

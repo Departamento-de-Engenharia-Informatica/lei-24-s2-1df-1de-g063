@@ -84,9 +84,9 @@ public class ToDoListPageController {
         selectUrgency.getItems().setAll(Urgency.values());
 
         // Initialize green space choices from the repository
+        selectGreenSpace.getItems().clear();
         selectGreenSpace.getItems().setAll(GreenSpaceRepository.getInstance().getGreenSpaces());
     }
-
     @FXML
     protected void handleGOBACK (ActionEvent event) {
         try {
