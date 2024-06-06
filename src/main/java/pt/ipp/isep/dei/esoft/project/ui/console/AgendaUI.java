@@ -13,6 +13,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.domain.Status.valueOf;
+
 public class AgendaUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
@@ -54,16 +56,20 @@ public class AgendaUI implements Runnable {
 
     private Entry requestEntry() {
         int contador = 0;
+        int loc=0;
+        Status testStatus= Status.valueOf("pending");
         choice = 0;
-        List<Entry> entries = toDoList.getToDoList();
+        List<Entry> entries = Repositories.getInstance().getToDoList().getToDoList();
         System.out.println("\n--- Entry List -------------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");
             return null;
         } else {
             for (Entry entry : entries) {
-                System.out.printf("%d - %s%n", contador, entry);
-                contador++;
+                if (entry.getStatus()==testStatus) {
+                    System.out.printf("%d - %s%n", contador, entry);
+                    contador++;
+                }
             }
         }
         choice = requestUserChoice("entry");
@@ -72,7 +78,7 @@ public class AgendaUI implements Runnable {
 
     private void addEntryToAgenda(Entry entry) {
         if (entry != null) {
-            agendaRepository.addEntry(entry);
+            AgendaRepository.addEntry(entry);
             System.out.println("Entry added to the agenda.");
         } else {
             System.out.println("No entry was added to the agenda.");
@@ -121,14 +127,19 @@ public class AgendaUI implements Runnable {
 
     private void printData() {
         int contador = 0;
+        int loc=0;
+        Status testStatus= Status.valueOf("scheduled");
         List<Entry> entries = agendaRepository.getAgenda();
         System.out.println("\n--- Agenda Entries ---------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");
         } else {
             for (Entry entry : entries) {
-                System.out.printf("%d - %s%n", contador, entry);
-                contador++;
+                if (entry.getStatus()==testStatus) {
+                    System.out.printf("%d - %s%n", contador, entry);
+                    contador++;
+                }
+                loc++;
             }
         }
         System.out.println("----------------------------------------");

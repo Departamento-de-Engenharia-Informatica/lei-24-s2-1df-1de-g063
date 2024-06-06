@@ -21,6 +21,7 @@ public class Bootstrap implements Runnable {
         addTaskCategories();
         addOrganization();
         addUsers();
+        addGreenSpaces();
     }
 
     private void addOrganization() {
@@ -47,6 +48,14 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
+    private void addGreenSpaces(){
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        GreenSpace greenSpace1 = new GreenSpace("Park",250, Size.Garden,"Paulo");
+        GreenSpace greenSpace2 = new GreenSpace("Garden",1904,Size.Large_Size, "Carlos");
+
+        greenSpaceRepository.addGreenSpace(greenSpace1);
+        greenSpaceRepository.addGreenSpace(greenSpace2);
+    }
 
     private void addUsers() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
@@ -114,9 +123,11 @@ public class Bootstrap implements Runnable {
         ToDoList toDoList = Repositories.getInstance().getToDoList();
         toDoList.addEntry(entry1);
         toDoList.addEntry(entry2);
+        Entry entry3 = new Entry("Task 3", Urgency.Low, 1, new GreenSpace("Green Space 3",1,Size.Large_Size,"abc@this.app"), Status.scheduled);
+        Entry entry4 = new Entry("Task 4", Urgency.Low, 1, new GreenSpace("Green Space 4",1,Size.Large_Size,"abc@this.app"), Status.scheduled);
         AgendaRepository agenda = Repositories.getInstance().getAgendaRepository();
-        agenda.addEntry(entry1);
-        agenda.addEntry(entry2);
+        agenda.addEntry(entry3);
+        agenda.addEntry(entry4);
         Vehicle vehicle1 = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
         Vehicle vehicle2 = new Vehicle("Peugeot", "do aço", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
 
