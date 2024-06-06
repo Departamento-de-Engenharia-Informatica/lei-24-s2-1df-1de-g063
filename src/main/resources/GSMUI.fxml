@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f0f0f0; -fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GSMUI">
-    <Label fx:id="welcomeLabel" style="-fx-font-size: 18px; -fx-text-fill: #333;" text="Welcome to GSM UI" />
-    <Button onAction="#handleRegisterGreenSpacePageController" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register Green Space" />
-    <Button onAction="#handleToDoListPageController" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register entry to the To-Do List" />
-    <Button onAction="#handleAgendaPageController" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Add entry to Agenda" />
-    <Button onAction="#handleGetManagerGreenSpaceController" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Parks Managed by Me" />
-</VBox>
-
+<AnchorPane prefHeight="397.0" prefWidth="577.0" style="-fx-background-color: #f0f0f0; -fx-padding: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GSMUI">
+    <Label fx:id="welcomeLabel" layoutX="220.0" layoutY="41.0" prefHeight="89.0" prefWidth="202.0" style="-fx-font-size: 18px; -fx-text-fill: #333;" text="Welcome to GSM UI" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="21.0" />
+    <Button layoutX="119.0" layoutY="57.0" onAction="#handleRegisterGreenSpacePageController" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register Green Space" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+    <Button layoutX="35.0" layoutY="150.0" onAction="#handleToDoListPageController" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register entry to the To-Do List" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="200.0" />
+    <Button onAction="#handleAgendaPageController" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register entry to the Agenda" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0" />
+    <Button layoutX="135.0" layoutY="240.0" onAction="#handleAssignTeamToEntry" prefHeight="40.0" prefWidth="279.0" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Assign a Team To an Entry" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="250.0" />
+    <Button onAction="#handleAssignVehicleToEntry" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="List of Green Spaces" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="300.0" />
+    <Button onAction="#handleGetManagerGreenSpaceController" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Parks Managed by Me" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="350.0" />
+    <Button fx:id="handleBack" layoutX="121.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleBack" prefWidth="136.0" text="Back" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="400.0" />
+</AnchorPane>
