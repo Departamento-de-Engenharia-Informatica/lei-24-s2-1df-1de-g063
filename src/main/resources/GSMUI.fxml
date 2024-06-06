@@ -8,4 +8,6 @@
     <Button onAction="#handleRegisterGreenSpacePageController" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register Green Space" />
     <Button onAction="#handleToDoListPageController" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register entry to the To-Do List" />
     <Button onAction="#handleAgendaPageController" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Add entry to Agenda" />
+    <Button onAction="#handleGetManagerGreenSpaceController" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Parks Managed by Me" />
 </VBox>
+

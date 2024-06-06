@@ -16,7 +16,7 @@ public class GsmUI implements Runnable {
     /**
      * Constructs a new GsmUI object with the specified email.
      *
-     * @param email The email address of the user.
+     * @param name The name of the user.
      */
     public GsmUI(String name) {
         this.name = name;

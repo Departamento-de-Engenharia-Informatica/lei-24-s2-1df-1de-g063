@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.TaskAssignedToCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -23,6 +22,10 @@ public class TaskAssignedToCollaboratorUI implements Runnable {
 
     @Override
     public void run() {
+        requestData();
+    }
+
+    public void requestData() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         System.out.println("Enter the start date (YYYY/MM/DD): ");
@@ -44,5 +47,4 @@ public class TaskAssignedToCollaboratorUI implements Runnable {
 
         }
     }
-
 }

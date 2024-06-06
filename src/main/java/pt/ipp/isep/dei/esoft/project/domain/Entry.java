@@ -104,5 +104,5 @@ public String toString() {
             ", startDate=" + startDate +
             ", endDate=" + endDate +
             '}';
-}
+    }
 }

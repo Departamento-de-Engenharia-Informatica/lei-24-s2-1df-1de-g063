@@ -75,7 +75,8 @@ public class AuthenticationController {
                 return "/HRMUI.fxml";
             case "GSM":
                 return "/GSMUI.fxml";
-            // Add more cases as needed
+            case "EMPLOYEE":
+                return "/EmployeeUI.fxml";
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }

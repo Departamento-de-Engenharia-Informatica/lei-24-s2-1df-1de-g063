@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 
+import javax.crypto.spec.PSource;
+
 public class LoginController {
     @FXML
     private TextField usernameField;
@@ -40,6 +42,7 @@ public class LoginController {
             stage.setScene(scene);
             stage.setTitle(userType+" UI");
             stage.show();
+            System.out.println(userType+"UI");
         } else {
             Alert alert  = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login Failed");

@@ -31,8 +31,6 @@ public class AssignVehicleToEntryController {
     }
 
 
-
-
     // The following methods are commented out but may be used in the future.
 
     public List<Entry> getEntries() {

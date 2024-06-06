@@ -9,7 +9,7 @@ public class AgendaRepository {
     private static List<Entry> agenda;
     private static AgendaRepository instance;
 
-    AgendaRepository() {
+    public AgendaRepository() {
         agenda = new ArrayList<>();
     }
 

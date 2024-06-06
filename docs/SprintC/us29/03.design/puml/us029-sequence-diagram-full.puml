@@ -9,10 +9,13 @@ autonumber
 actor "Collaborator" as EMP
 participant ":CompletionTaskUI" as UI
 participant ":CompletionTaskController" as CTRL
-participant "Repositories" as Rep
-participant "organizationRepository:\nOrganizationRepository" as Repositories
-participant "Agenda:\nAgenda" as Agenda
+participant ":Repositories" as Repositories
+participant "repositories\n:Repositories" as REP
+participant "organizationRepository\n:OrganizationRepository" as OrganizationRepository
+participant "agendaRepository\n:AgendaRepository" as Agenda
+participant "Organization\n:organization" as Organization
 participant "entry:\nEntry" as Entry
+participant "Status:\nstatus" as Status
 
 activate EMP
 
@@ -21,12 +24,87 @@ activate EMP
 
         UI -> CTRL** : create
 
-        UI -> CTRL :
+        UI -> CTRL : getEntries()
+        activate CTRL
+
+            CTRL -> Repositories : getInstance()
+            activate Repositories
+
+                Repositories --> CTRL : repositories
+            deactivate Repositories
+
+                CTRL -> REP : getCollaboratorName()
+                activate REP
+
+                    REP --> CTRL: collaboratorName
+                deactivate REP
+                CTRL -> OrganizationRepository : getCollaboratorName()
+                activate OrganizationRepository
+
+                    OrganizationRepository -> Organization : getcollaboratorName()
+                    activate Organization
+
+                    Organization --> OrganizationRepository : CollaboratorName
+                deactivate Organization
+
+                OrganizationRepository --> CTRL : collaboratorName
+            deactivate OrganizationRepository
+
+            CTRL -> REP : getEntries()
+            activate REP
+
+                    REP --> CTRL : entries
+            deactivate REP
+
+            CTRL -> Agenda : getEntries()
+            activate Agenda
+
+                Agenda -> Entry : getEntry()
+                activate Entry
+
+                    Entry --> Agenda : entry
+                deactivate Entry
+                Agenda --> CTRL : entries
+            deactivate Agenda
+
+            CTRL --> UI : entries
+        deactivate CTRL
+
         UI --> EMP : Retrieves task list
     deactivate UI
 
     EMP -> UI : Chooses task to record completion
     activate UI
+
+        UI -> CTRL : setStatus()
+        activate CTRL
+
+            CTRL -> REP: setStatus()
+            activate REP
+
+                REP --> CTRL : status
+            deactivate REP
+
+            CTRL -> Agenda : setStatus()
+            activate Agenda
+
+                Agenda -> Entry : setStatus()
+                activate Entry
+
+                    Entry -> Status : setStatus()
+                    activate Status
+
+                        Status --> Entry : status
+                    deactivate Status
+
+                    Entry --> Agenda : status
+                deactivate Entry
+
+                Agenda --> CTRL : status
+            deactivate Agenda
+
+            CTRL --> UI : status
+        deactivate CTRL
 
         UI --> EMP : Confirmation of the operation
     deactivate UI
