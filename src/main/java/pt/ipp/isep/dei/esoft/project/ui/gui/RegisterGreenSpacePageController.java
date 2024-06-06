@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -42,23 +43,54 @@ public class RegisterGreenSpacePageController {
     @FXML
     protected void registerGreenSpace() {
         try {
-            double area = Double.parseDouble(areaField.getText());
             String name = nameField.getText();
+            if (name == null || name.trim().isEmpty()) {
+                showAlert("Name cannot be empty.");
+                return;
+            }
+
+            if (!name.matches("[a-zA-Z- ]+")) {
+                showAlert("Name can only contain letters and hyphens.");
+                return;
+            }
+
             String managerName = managerField.getText();
+            if (managerName == null || managerName.trim().isEmpty()) {
+                showAlert("Manager name cannot be empty.");
+                return;
+            }
+
+            if (!managerName.matches("[a-zA-Z- ]+")) {
+                showAlert("Manager name can only contain letters and hyphens.");
+                return;
+            }
+
+            double area = Double.parseDouble(areaField.getText());
+            if (area <= 0) {
+                showAlert("Area must be a positive number.");
+                return;
+            }
+
             Size size = getSize(area);
             GreenSpace greenSpace = new GreenSpace(name, area, size, managerName);
             controller.registerGreenSpace(name, area, size, managerName);
-            greenSpaceRepository.addGreenSpace(greenSpace);
             greenSpaceListView.getItems().add(greenSpace);
-            controller.getGreenSpaceRepository().addGreenSpace(greenSpace);
             nameField.clear();
             areaField.clear();
             managerField.clear();
         } catch (NumberFormatException e) {
-            // Handle invalid input for duration
-            System.out.println("Invalid input for duration");
+            showAlert("Invalid input for area. Please enter a positive number.");
         }
     }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     public Size getSize(double area) {
         if (area > 0) {
             if (area < 50.0) {
@@ -74,18 +106,11 @@ public class RegisterGreenSpacePageController {
     }
 
     @FXML
-    protected void handleNEXT (ActionEvent event) {
+    protected void handleGOBACK (ActionEvent event) {
         try {
-            // Load the FXML file for the AssignTeamPage
             Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
-
-            // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
             Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();

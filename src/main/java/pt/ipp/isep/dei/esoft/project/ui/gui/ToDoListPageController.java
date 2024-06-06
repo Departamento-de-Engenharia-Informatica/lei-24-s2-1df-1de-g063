@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -47,44 +48,58 @@ public class ToDoListPageController {
     @FXML
     protected void registerEntry() {
         try {
-            // Get duration
-            int duration = Integer.parseInt(durationField.getText());
-
-            // Get task description
             String task = taskField.getText();
+            if (task == null || task.trim().isEmpty()) {
+                showAlert("Task description cannot be empty.");
+                return;
+            }
 
-            // Get selected urgency
+            if (!task.matches("[a-zA-Z ]+")) {
+                showAlert("Task description can only contain letters.");
+                return;
+            }
+
+            int duration = Integer.parseInt(durationField.getText());
+            if (duration <= 0) {
+                showAlert("Duration must be a positive number.");
+                return;
+            }
+
             Urgency urgency = selectUrgency.getValue();
+            if (urgency == null) {
+                showAlert("Please select an urgency level.");
+                return;
+            }
 
-            // Get selected green space
             GreenSpace greenSpace = selectGreenSpace.getValue();
+            if (greenSpace == null) {
+                showAlert("Please select a green space.");
+                return;
+            }
 
-            // Create a new Entry object
             Entry entry = new Entry(task, urgency, duration, greenSpace, Status.pending);
-
-            // Register the entry using the controller
             toDoListController.registerEntry(task, urgency, duration, greenSpace, Status.pending);
-
-            // Update the ListView
             toDoListListView.getItems().add(entry);
-
-            // Clear input fields
             taskField.clear();
             durationField.clear();
             selectUrgency.setValue(null);
             selectGreenSpace.setValue(null);
         } catch (NumberFormatException e) {
-            // Handle invalid input for duration
-            System.out.println("Invalid input for duration");
+            showAlert("Invalid input for duration. Please enter a positive number.");
         }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
     public void initialize() {
-        // Initialize urgency choices
         selectUrgency.getItems().setAll(Urgency.values());
-
-        // Initialize green space choices from the repository
         selectGreenSpace.getItems().clear();
         selectGreenSpace.getItems().setAll(Repositories.getInstance().getGreenSpaceRepository().getGreenSpaces());
         System.out.println("Green spaces: " + GreenSpaceRepository.getInstance().getGreenSpaces());
@@ -92,16 +107,9 @@ public class ToDoListPageController {
     @FXML
     protected void handleGOBACK (ActionEvent event) {
         try {
-            // Load the FXML file for the AssignTeamPage
             Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
-
-            // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
             Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
