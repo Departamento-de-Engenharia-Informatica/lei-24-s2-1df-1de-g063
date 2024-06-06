@@ -21,7 +21,6 @@ public class EMPLOYEEUI {
     @FXML
     private Button handleBack;
 
-
     @FXML
     public void initialize() {
 
