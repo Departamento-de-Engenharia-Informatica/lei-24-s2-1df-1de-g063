@@ -5,6 +5,8 @@
 
 <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f0f0f0; -fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GSMUI">
     <Label fx:id="welcomeLabel" style="-fx-font-size: 18px; -fx-text-fill: #333;" text="Welcome to GSM UI" />
+    <Button onAction="#handleAssignTeamToEntry" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Assign Team to an entry in the Agenda" />
+    <Button onAction="#handleAssignVehicleToEntry" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Assign Vehicles to an entry in the Agenda" />
     <Button onAction="#handleRegisterGreenSpacePageController" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register Green Space" />
     <Button onAction="#handleToDoListPageController" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Register entry to the To-Do List" />
 </VBox>

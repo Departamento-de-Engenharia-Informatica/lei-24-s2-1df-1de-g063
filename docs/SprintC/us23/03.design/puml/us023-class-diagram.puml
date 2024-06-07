@@ -9,10 +9,7 @@ class AssignTeamToEntryController {
 }
 
 class AssignTeamToEntryUI {
-    -choiceTeam: int
-    -choiceEntry: int
-    +requestData()
-    +submitData()
+
 }
 
 
@@ -29,7 +26,7 @@ class Repositories {
     +getTeamRepository(): TeamRepository
 }
 
-class Agenda {
+class AgendaRepository {
     -entries: List<Entry>
     +getEntries(): List<Entry>
     +getEntries(index: int): Entry
@@ -45,9 +42,9 @@ class Organization {
 AssignTeamToEntryController "1" .> "1" Repositories : Repositories
 AssignTeamToEntryUI .>  AssignTeamToEntryController
 Repositories "1" --> "1" TeamRepository : TeamRepository
-Repositories "1" -> "1" Agenda : Agenda
-TeamRepository "1" --> "*" Organization
-Agenda "1" --> "*" Organization
+Repositories "1" -> "1" AgendaRepository : AgendaRepository
+TeamRepository "1" --> "1" Organization
+AgendaRepository "1" --> "1" Organization
 Organization "1" ---> "1" Team
 Team "1" --> "*" Entry
 AssignTeamToEntryController "1" -> "1" Organization
