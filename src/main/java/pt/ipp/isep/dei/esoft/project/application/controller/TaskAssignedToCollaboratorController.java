@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
 import java.time.LocalDate;
 import java.util.Comparator;

@@ -29,6 +29,10 @@ public class GreenSpace {
         return managerName;
     }
 
+    public double getArea() {
+        return area;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

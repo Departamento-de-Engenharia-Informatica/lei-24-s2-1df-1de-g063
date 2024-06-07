@@ -18,6 +18,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceCo
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -37,7 +38,7 @@ public class RegisterGreenSpacePageController {
 
     public RegisterGreenSpacePageController() {
         this.controller = new RegisterGreenSpaceController();
-        this.greenSpaceRepository = new GreenSpaceRepository();
+        this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
     }
 
     @FXML
@@ -73,7 +74,8 @@ public class RegisterGreenSpacePageController {
 
             Size size = getSize(area);
             GreenSpace greenSpace = new GreenSpace(name, area, size, managerName);
-            controller.registerGreenSpace(name, area, size, managerName);
+            greenSpaceRepository.addGreenSpace(greenSpace);
+            System.out.println(greenSpaceRepository.getGreenSpaces());
             greenSpaceListView.getItems().add(greenSpace);
             nameField.clear();
             areaField.clear();
