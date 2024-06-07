@@ -10,41 +10,64 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class GreenSpaceListUI{
-
+    -managerName: String
+    -greenSpaceRepository: GreenSpaceRepository
+    -greenSpaceListController: GreenSpaceListController;
+    +GreenSpaceListUI()
+    -listGreenSpaces()
+    -sortGreenSpaces()
 }
 
 class GreenSpaceListController{
-
+    -greenSpaceRepository: GreenSpaceRepository
+    -organization: Organization
+    -repositories: Repositories
+    +GreenSpaceListController(managerName: String)
+    -getGreenSpaceRepository()
+    -getSortingAlgorithm()
 }
 
 class Organization{
-
+    - userName: String
+    - GreenSpaces : List<GreenSpace>
 }
 
 class GreenSpace{
-
+    - name: String
+    - area: double
+    - size: Size
+    - managerName: String
+    + GreenSpace(name: String, area: double, size: Size, managerName: String)
+    + getName()
+    + getManagerName()
+    + getArea()
 }
 
 class Repositories{
-
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository()
+    + getOrganizationRepository()
 }
 
 class GreenSpaceRepository{
-
+    - GreenSpaces : List<GreenSpace>
+    + getGreenSpaces() : List<GreenSpace>
 }
 
 class OrganizationRepository{
-
+    + getUserName()
 }
 
 
 GreenSpaceListUI .> GreenSpaceListController
 GreenSpaceListController ..> Organization
-Organization --> GreenSpace
-GreenSpaceListController .> Repositories
-Repositories --> GreenSpaceRepository
-Organization <- GreenSpaceRepository
-Repositories --> OrganizationRepository
-Organization <- OrganizationRepository
+Organization "1" --> "1..*" GreenSpace:greenSpace
+GreenSpaceListController .> Repositories: repositories
+Repositories "1" --> "1" GreenSpaceRepository: greenSpaceRepository
+Organization "1" <- "1" GreenSpaceRepository : greenSpace
+Repositories "1" --> "1" OrganizationRepository: organizationRepository
+Organization "1" <- "1" OrganizationRepository: userName
+Repositories "1" -> "1" Repositories : getInstance()
 
 @enduml

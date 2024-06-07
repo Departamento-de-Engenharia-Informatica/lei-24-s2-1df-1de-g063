@@ -1,4 +1,4 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up
+# US028 - As a Collaborator, I wish to consult the tasks assigned to me between two dates
 
 ## 4. Tests
 

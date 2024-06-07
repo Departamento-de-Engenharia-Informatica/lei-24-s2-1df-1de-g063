@@ -1,4 +1,4 @@
-# US008 - As an FM, I want to list the vehicles needing the check-up
+# US027 - As a GSM, I need to list all green spaces managed by me
 
 ## 3. Design - User Story Realization 
 
@@ -6,24 +6,26 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID                                       | Question: Which class is responsible for...                | Answer                              | Justification (with patterns)               |
-|:-----------------------------------------------------|:-----------------------------------------------------------|:------------------------------------|:--------------------------------------------|
-| Step 1: Request to list vehicles needing check-up    | ... interacting with the actor?                            | VehicleNeedingCheckUpUI             | IE - is responsible for user interactions.  |
-|                                                      | ... coordinating the US?                                   | VehicleNeedingCheckUpController     | Controller                                  |
-| Step 2: Shows list of vehicles needing check-up      | ... generating the list of vehicles in need of a check-up? | VehicleRepository                   | Information Expert                          |
-|                                                      | ... providing Check-Up information of a vehicle?           | Vehicle                             | Information Expert                          |
-|                                                      | ... providing the list to the actor?                       | VehicleNeedingCheckUpUI             | IE - is responsible for user interactions.  |
+| Interaction ID                                           | Question: Which class is responsible for...      | Answer                   | Justification (with patterns)              |
+|:---------------------------------------------------------|:-------------------------------------------------|:-------------------------|:-------------------------------------------|
+| Step 1: Request to list vehicles needing check-up        | ... interacting with the actor?                  | GreenSpaceListUI         | IE - is responsible for user interactions. |
+|                                                          | ... coordinating the US?                         | GreenSpaceListController | Controller                                 |
+| Step 2: Retrieve list of green spaces managed by the GSM | ... generating the list of managed green spaces? | Organization             | Information Expert                         |
+|                                                          | ... providing Green Space information?           | GreenSpace               | Information Expert                         |
+|                                                          | ... providing the list to the actor?             | GreenSpaceListUI         | IE - is responsible for user interactions. |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicles_Machines_Equipment promoted to Vehicle
+* Green_Spaces promoted to GreenSpace
+* Organization promoted to Organization
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* VehicleNeedingCheckUpUI  
-* VehicleNeedingCheckUpController
+* GreenSpaceListUI  
+* GreenSpaceListController
+* GreenSpaceRepository
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -34,7 +36,7 @@ _**Note that SSD - Alternative Two is adopted.**_
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us027-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -42,13 +44,13 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us027-sequence-diagram-split.svg)
 
-**Get Vehicles**
+**Get GreenSpaces by name**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us008-sequence-diagram-partial-get-vehicles.svg)
+![Sequence Diagram - Partial - Get Task Category List](svg/us027-sequence-diagram-partial-Get-GreenSpaces-by-name.svg)
 
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us027-class-diagram.svg)

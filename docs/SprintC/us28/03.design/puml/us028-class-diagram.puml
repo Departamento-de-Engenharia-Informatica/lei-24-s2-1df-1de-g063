@@ -10,47 +10,68 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class TaskAssignedToCollaboratorUI{
-
+    - managerName: String
+    - controller: TaskAssignedToCollaboratorController
+    + requestData()
 }
 
 class TaskAssignedToCollaboratorController{
-
+    - agendaRepository: AgendaRepository
+    - managerName: String
+    + TaskAssignedToCollaboratorController(managerName: String)
+    +getEntriesBetweenDates(startDate: LocalDate, endDate: LocalDate,status: String, name: String)
 }
 
 class Organization{
-
+    - name: String
+    - agenda: List<Entry>
 }
 
 class OrganizationRepository{
-
+    + getUserName()
 }
 
 class AgendaRepository{
-
+    - agenda: List<Entry>;
+    + getEntries()
 }
 
 class Repositories{
-
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgendaRepository()
+    + getOrganizationRepository()
 }
 
 class Entry{
-
-}
-
-enum Status{
-    pending
-    scheduled
-    canceled
+    - task: String
+    - urgency: Urgency
+    - duration: int
+    - greenSpace: GreenSpace
+    - status: Status
+    - startDate: LocalDate
+    - endDate: LocalDate
+    - team: Team
+    + Entry(task: String, urgency: Urgency, duration: int, greenSpace: GreenSpace, status: Status)
+    + getTask()
+    + getUrgency()
+    + getDuration()
+    + getGreenSpace()
+    + getStatus()
+    + getStartDate()
+    + getEndDate()
+    + getTeam()
 }
 
 TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
 TaskAssignedToCollaboratorController ..> Organization
-TaskAssignedToCollaboratorController .> Repositories
-Repositories --> OrganizationRepository
-Repositories --> AgendaRepository
-OrganizationRepository --> Organization
-AgendaRepository --> Organization
-Organization --> Entry
-Entry --> Status
+TaskAssignedToCollaboratorController .> Repositories: repositories
+Repositories "1" --> "1" OrganizationRepository: organizationRepository
+Repositories "1"--> "1" AgendaRepository: agendaRepository
+OrganizationRepository "1" --> "1" Organization: userName
+AgendaRepository "1" --> "1" Organization: agenda
+Organization "1" --> "1..*"Entry: entry
+Repositories --> Repositories : getInstance()
+
 
 @enduml

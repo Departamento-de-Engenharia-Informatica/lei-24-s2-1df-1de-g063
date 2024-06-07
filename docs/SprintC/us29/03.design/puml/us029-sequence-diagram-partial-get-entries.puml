@@ -1,0 +1,70 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":CompletionTaskController" as CTRL
+participant ":Repositories" as Repositories
+participant "repositories\n:Repositories" as REP
+participant "organizationRepository\n:OrganizationRepository" as OrganizationRepository
+participant "agendaRepository\n:AgendaRepository" as Agenda
+participant "Organization\n:organization" as Organization
+participant "entry:\nEntry" as Entry
+participant "Status:\nstatus" as Status
+
+        -> CTRL : getEntries()
+        activate CTRL
+group get Entries
+            CTRL -> Repositories : getInstance()
+            activate Repositories
+
+                Repositories --> CTRL : repositories
+            deactivate Repositories
+
+                CTRL -> REP : getCollaboratorName()
+                activate REP
+
+                    REP --> CTRL: collaboratorName
+                deactivate REP
+                CTRL -> OrganizationRepository : getCollaboratorName()
+                activate OrganizationRepository
+
+                    OrganizationRepository -> Organization : getcollaboratorName()
+                    activate Organization
+
+                    Organization --> OrganizationRepository : CollaboratorName
+                deactivate Organization
+
+                OrganizationRepository --> CTRL : collaboratorName
+            deactivate OrganizationRepository
+
+            CTRL -> REP : getEntries()
+            activate REP
+
+                    REP --> CTRL : entries
+            deactivate REP
+
+            CTRL -> Agenda : getEntries()
+            activate Agenda
+
+                Agenda -> Entry : getEntry()
+                activate Entry
+
+                    Entry --> Agenda : entry
+                deactivate Entry
+                Agenda --> CTRL : entries
+            deactivate Agenda
+end
+           <-- CTRL : entries
+        deactivate CTRL
+
+
+
+
+
+@enduml

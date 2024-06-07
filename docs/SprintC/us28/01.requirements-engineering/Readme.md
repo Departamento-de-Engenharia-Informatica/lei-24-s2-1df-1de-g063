@@ -13,7 +13,7 @@ As a Collaborator, I need the ability to view a list of all tasks assigned to me
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should allow a Collaborator to consult the tasks assigned to him between two dates.
-* **AC2:** The list of "green spaces" must be sorted by date.
+* **AC2:** The list of tasks must be sorted by date.
 * **AC3:** The Collaborator should be able to filter the results by the status of the task.
 
 ### 1.4. Found out Dependencies
@@ -42,6 +42,6 @@ As a Collaborator, I need the ability to view a list of all tasks assigned to me
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us028-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us028-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Consult_Assigned_Tasks_Between_Two_Dates.svg)
 
 ### 1.7 Other Relevant Remarks

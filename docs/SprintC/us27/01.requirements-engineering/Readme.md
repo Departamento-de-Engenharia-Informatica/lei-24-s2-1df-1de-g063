@@ -27,6 +27,7 @@ space (garden, medium-sized park or large-sized park) and its respective area." 
 
 * Typed data:
     * Tap a key to generate a list
+  
 * Selected Data:
   * Green Space
 
@@ -42,6 +43,6 @@ space (garden, medium-sized park or large-sized park) and its respective area." 
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us027-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us027-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____List_All_Managed_Green_Spaces.svg)
 
 ### 1.7 Other Relevant Remarks

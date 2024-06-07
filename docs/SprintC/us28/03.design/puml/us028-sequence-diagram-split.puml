@@ -6,33 +6,36 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Collaborator" as EMP
+participant ":TaskAssignedToCollaboratorUI" as UI
+participant ":TaskAssignedToCollaboratorController" as CTRL
 
-activate VFM
+activate EMP
 
-VFM -> UI : Request to list vehicles needing check-up
+    EMP -> UI : Requests to consult tasks
+    activate UI
 
+        UI --> EMP : Asks for date interval and status of the task
+    deactivate UI
+
+    EMP -> UI : Types date interval and status of the task
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
+            UI -> CTRL : verifyEntries()
+            activate CTRL
 
-        ref over CTRL
-                            Get Vehicles
-                        end
+                ref over CTRL
+                    Get Entries
+                end
 
-        activate CTRL
+                CTRL --> UI : entries
+            deactivate CTRL
 
-            CTRL --> UI : VehiclesNeedingCheckUp
-        deactivate CTRL
-
-        UI --> VFM : Shows list of vehicles needing check-up
-
+        UI --> EMP : Retrieves tasks list
     deactivate UI
 
-deactivate VFM
+
 
 @enduml
