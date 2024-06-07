@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-public class Repositories implements Serializable {
 import pt.ipp.isep.dei.esoft.project.application.controller.ConfigProperties;
 import pt.ipp.isep.dei.esoft.project.component.EmailSender;
 import pt.ipp.isep.dei.esoft.project.component.EmailSenderFile;
 
 import java.lang.reflect.InvocationTargetException;
-
-public class Repositories {
+public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final OrganizationRepository organizationRepository;
