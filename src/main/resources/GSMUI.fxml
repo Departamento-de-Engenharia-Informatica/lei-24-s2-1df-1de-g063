@@ -19,7 +19,7 @@
 
     <Button layoutX="135.0" layoutY="240.0" onAction="#handleAssignTeamToEntry" prefHeight="40.0" prefWidth="279.0" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Assign a Team To an Entry" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="420.0" />
 
-    <Button onAction="#handleAssignVehicleToEntry" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="List of Green Spaces" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="480.0" />
+    <Button onAction="#handleAssignVehicleToEntry" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Assign Vehicle to Entry" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="480.0" />
 
     <Button onAction="#handleGetManagerGreenSpaceController" style="-fx-background-color: #5dbea3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;" text="Parks Managed by Me" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="540.0" />
 
