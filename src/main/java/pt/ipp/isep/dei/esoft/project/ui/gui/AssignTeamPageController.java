@@ -27,6 +27,10 @@ public class AssignTeamPageController {
 
     private int choiceEntry;
 
+    private List<String> entries;
+
+    private List <Team> teams;
+
     private AssignTeamToEntryController assignTeamToEntryController;
 
     public AssignTeamPageController() {
@@ -36,14 +40,14 @@ public class AssignTeamPageController {
 
     @FXML
     public void initialize() {
-        List<Team> teams = assignTeamToEntryController.getTeams();
+        teams = assignTeamToEntryController.getTeams();
         if (teams.isEmpty()) {
             System.out.println("No teams available");
         } else {
             teamListView.getItems().addAll(teams);
         }
 
-        List<String> entries = assignTeamToEntryController.getEntries();
+         entries = assignTeamToEntryController.getEntries();
         if (entries.isEmpty()) {
             System.out.println("No entries available");
         } else {
@@ -84,11 +88,9 @@ public class AssignTeamPageController {
             assignTeamToEntryController.attributeTeamToEntry(choiceTeam, choiceEntry);
         }
         if(agendaRepository.getEntries().get(choiceEntry).getTeam() == selectedTeam){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText("Team assigned successfully");
-            alert.setContentText("The team has been successfully assigned to the entry");
-            alert.showAndWait();
+            entries = assignTeamToEntryController.getEntries();
+            entryListView.getItems().clear();
+            entryListView.getItems().addAll(entries);
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

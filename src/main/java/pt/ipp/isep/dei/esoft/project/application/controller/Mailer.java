@@ -1,19 +1,23 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.component.EmailSender;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.List;
 
-public class Mailer {
+public class Mailer implements EmailSender {
     // ...
     ConfigProperties config = new ConfigProperties();
     String host = config.getProperty("host");
     String port = config.getProperty("port");
-     String username = config.getProperty("username");
-     String password = config.getProperty("password");
-    public  void sendEmailToMultipleRecipients(List<String> recipients, String subject, String text) {
+    String username = config.getProperty("username");
+    String password = config.getProperty("password");
+
+    public void sendEmailToMultipleRecipients(List<String> recipients, String subject, String text) {
         // Set up the SMTP server properties.
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
@@ -50,5 +54,11 @@ public class Mailer {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean sendEmail(String from, String to, String subject, String body) throws IOException {
+        sendEmailToMultipleRecipients(List.of(to), subject, body);
+        return true;
     }
 }

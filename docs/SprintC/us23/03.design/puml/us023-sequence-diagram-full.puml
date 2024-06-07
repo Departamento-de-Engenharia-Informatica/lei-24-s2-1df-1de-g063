@@ -12,9 +12,12 @@ participant "Organization" as Org
 participant "Repositories" as Rep
 participant "repositories:\nRepositories" as Repositories
 participant "teamRepository:\nTeamRepository" as TeamRepository
+participant "AgendaRepository" as AgendaRepository
 participant "team:\nTeam" as Team
 participant "entry:\nEntry" as Entry
-
+participant "Mailer" as Mailer
+participant "EmailSenderFile" as EmailSenderFile
+participant "config.properties" as Config
 
 activate GSM
     GSM -> UI : Wants to assign team to entry
@@ -23,65 +26,87 @@ activate GSM
         UI -> CTRL : printTeams()
         activate CTRL
 
-            CTRL -> Rep : getInstance()
-            activate Rep
-                Rep --> CTRL : repositories
-            deactivate Rep
+                CTRL -> Rep : getInstance()
 
-            CTRL -> Repositories : getTeamsRepository()
-            activate Repositories
-                Repositories --> CTRL : TeamRepository
-            deactivate Repositories
+                activate Rep
+                    Rep --> CTRL : repositories
+                deactivate Rep
+
+            CTRL -> "Repositories" : getTeamsRepository()
+
+                activate Repositories
+                    Repositories --> CTRL : TeamRepository
+                deactivate Repositories
 
             CTRL -> TeamRepository : getTeams()
-            activate TeamRepository
-                TeamRepository --> CTRL : Teams
-            deactivate TeamRepository
+                activate TeamRepository
+                    TeamRepository --> CTRL : Teams
+                deactivate TeamRepository
+
 
         CTRL --> UI : Teams
-
+        deactivate CTRL
 
         UI -> GSM : shows teams
         GSM -> UI : selects team
         UI -> CTRL : printEntries()
+      activate CTRL
 
-            CTRL -> Rep : getInstance()
-            activate Rep
-                Rep --> CTRL : repositories
-            deactivate Rep
+                      CTRL -> Rep : getInstance()
 
-            CTRL -> Repositories : getEntryRepository()
-            activate Repositories
-                Repositories --> CTRL : AgendaRepository
-            deactivate Repositories
+                      activate Rep
+                          Rep --> CTRL : repositories
+                      deactivate Rep
 
-            CTRL -> AgendaRepository : getEntries()
-            activate AgendaRepository
-                AgendaRepository --> CTRL : Entries
-            deactivate AgendaRepository
+                  CTRL -> "Repositories" : getAgendaRepository()
 
-        CTRL --> UI : Entries
+                      activate Repositories
+                          Repositories --> CTRL : AgendaRepository
+                      deactivate Repositories
+
+                  CTRL -> AgendaRepository : getEntries()
+                      activate AgendaRepository
+                          AgendaRepository --> CTRL : Entries
+                      deactivate AgendaRepository
+
+
+              CTRL --> UI : Entries
+              deactivate CTRL
+
         UI -> GSM : shows entries
-
         GSM -> UI : selects entry
         UI -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
-        CTRL -> CTRL : attributeTeamToEntry(choiceTeam, choiceEntry)
-        CTRL -> TeamRepository : getTeams(choiceTeam: int)
+        activate CTRL
+
+            CTRL -> TeamRepository : getTeam(choiceTeam)
             activate TeamRepository
                 TeamRepository --> CTRL : Team selectedTeam
             deactivate TeamRepository
-        CTRL -> AgendaRepository : getEntries(choiceEntry: int)
+
+            CTRL -> AgendaRepository : getEntry(choiceEntry)
             activate AgendaRepository
                 AgendaRepository --> CTRL : Entry selectedEntry
             deactivate AgendaRepository
 
-        CTRL -> Entry : setTeam(selectedTeam: Team)
-        activate Entry
-        deactivate Entry
-        CTRL -> UI : (In)Success
-        UI-> GSM : (In)Success message
+            CTRL -> selectedEntry : setTeam(selectedTeam)
+            activate selectedEntry
+                selectedEntry --> CTRL : Entry updatedEntry
+            deactivate selectedEntry
+
+            CTRL -> Mailer : sendEmail(updatedEntry)
+            activate Mailer
+                Mailer -> Config : read("emailSettings")
+                activate Config
+                    Config --> Mailer : emailSettings
+                deactivate Config
+                Mailer --> CTRL : emailSent
+            deactivate Mailer
+
+        CTRL --> UI : (In)Success and updatedEntry
 
         deactivate CTRL
+
+        UI-> GSM : Displays (In)Success and updatedEntry
     deactivate UI
 deactivate GSM
 @enduml

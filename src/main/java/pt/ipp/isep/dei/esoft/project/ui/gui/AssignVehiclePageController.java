@@ -30,6 +30,8 @@ public class AssignVehiclePageController {
 
     private int choiceEntry;
 
+    private boolean error;
+
     private AssignVehicleToEntryController assignVehicleToEntryController;
 
     public AssignVehiclePageController() {
@@ -57,6 +59,7 @@ public class AssignVehiclePageController {
 
    @FXML
 public void confirmSelection() {
+        error = false;
     ObservableList<Vehicle> selectedVehicles = vehicleListView.getSelectionModel().getSelectedItems();
     Entry selectedEntry = entryListView.getSelectionModel().getSelectedItem();
     boolean allVehiclesAssigned = true;
@@ -67,6 +70,8 @@ public void confirmSelection() {
                 choiceVehicle = vehicleListView.getItems().indexOf(vehicle);
                 choiceEntry = entryListView.getItems().indexOf(selectedEntry);
                 assignVehicleToEntryController.attributeVehicleToEntry(choiceVehicle, choiceEntry);
+
+
             } else {
                 allVehiclesAssigned = false;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -74,17 +79,16 @@ public void confirmSelection() {
                 alert.setHeaderText("Vehicle not assigned");
                 alert.setContentText("Vehicle already assigned to the entry");
                 alert.showAndWait();
+                error = true;
             }
         }
     }
 
     if (allVehiclesAssigned && agendaRepositories.getEntries().get(choiceEntry).getVehicles().containsAll(selectedVehicles)) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("Vehicles assigned successfully");
-        alert.setContentText("The vehicles have been successfully assigned to the entry");
-        alert.showAndWait();
-    } else if (!allVehiclesAssigned) {
+        List<Entry> entries = assignVehicleToEntryController.getEntries();
+        entryListView.getItems().clear();
+        entryListView.getItems().addAll(entries);
+    } else if (!allVehiclesAssigned && !error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("Vehicles not assigned");

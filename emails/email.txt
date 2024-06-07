@@ -1,0 +1,17 @@
+From: info.musgosublime@gmail.com
+To: janesmith@this.app
+Date: 2024-06-07 15:14:36
+
+Subject: Team assignment
+Body: You have been assigned to a team for the entry with the following details:
+Task: Task 4
+Team Members: Members:
+- Alice Williams
+- Jane Smith
+
+Urgency: Low
+Duration: 1
+Green Space: Green Space 4
+Status: scheduled
+Start Date: 2026-01-01
+End Date: 2026-01-04

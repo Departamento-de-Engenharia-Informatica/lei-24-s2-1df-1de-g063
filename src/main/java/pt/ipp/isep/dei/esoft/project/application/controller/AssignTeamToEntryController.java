@@ -6,6 +6,8 @@ import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +81,15 @@ public class AssignTeamToEntryController {
                 "Status: " + selectedEntry.getStatus() + "\n" +
                 "Start Date: " + selectedEntry.getStartDate() + "\n" +
                 "End Date: " + selectedEntry.getEndDate();
-            mailer.sendEmailToMultipleRecipients(emailAddresses, subject, message);
+        for (String emailAddress : emailAddresses) {
+            try {
+                System.out.println("Sending email to " + emailAddress);
+                Repositories.getInstance().getEmailSender().sendEmail(System.getProperty("username"),emailAddress, subject, message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 

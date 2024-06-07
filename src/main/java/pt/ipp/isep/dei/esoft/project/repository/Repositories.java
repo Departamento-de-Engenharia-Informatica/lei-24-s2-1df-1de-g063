@@ -6,6 +6,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Repositories implements Serializable {
+import pt.ipp.isep.dei.esoft.project.application.controller.ConfigProperties;
+import pt.ipp.isep.dei.esoft.project.component.EmailSender;
+import pt.ipp.isep.dei.esoft.project.component.EmailSenderFile;
+
+import java.lang.reflect.InvocationTargetException;
+
+public class Repositories {
 
     private static Repositories instance;
     private final OrganizationRepository organizationRepository;
@@ -20,8 +27,23 @@ public class Repositories implements Serializable {
     private final ToDoList toDoList;
 
     private final TeamRepository teamRepository;
+    private EmailSender emailSender;
 
     private Repositories(){
+        ConfigProperties properties = new ConfigProperties();
+
+        try {
+            String configEmailSender = System.getProperties().getProperty("emailSender", EmailSenderFile.class.getCanonicalName());
+            Class<EmailSender> zClass = (Class<EmailSender>) Class.forName(configEmailSender);
+            emailSender = zClass.getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            System.out.println("Could not instantiate class... Using default instead");
+            emailSender = new EmailSenderFile();
+            e.printStackTrace();
+        }
+
+
         organizationRepository = new OrganizationRepository();
         taskCategoryRepository = new TaskCategoryRepository();
         authenticationRepository = new AuthenticationRepository();
@@ -103,4 +125,7 @@ public class Repositories implements Serializable {
         return agendaRepository;
     }
 
+    public EmailSender getEmailSender() {
+        return emailSender;
+    }
 }

@@ -38,15 +38,19 @@ class Entry {
 }
 class Organization {
 }
+class OrganizationRepository{
+}
 
 AssignTeamToEntryController "1" .> "1" Repositories : Repositories
 AssignTeamToEntryUI .>  AssignTeamToEntryController
 Repositories "1" --> "1" TeamRepository : TeamRepository
 Repositories "1" -> "1" AgendaRepository : AgendaRepository
 TeamRepository "1" --> "1" Organization
+Repositories --> OrganizationRepository
+OrganizationRepository "1" --> "1" Organization
 AgendaRepository "1" --> "1" Organization
-Organization "1" ---> "1" Team
-Team "1" --> "*" Entry
+Repositories -> Repositories : Instance
+Organization "1" --> "*" Entry
 AssignTeamToEntryController "1" -> "1" Organization
 
 

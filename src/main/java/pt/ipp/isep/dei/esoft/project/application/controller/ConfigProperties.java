@@ -5,12 +5,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigProperties {
-    private final Properties configProp = new Properties();
+    private final Properties configProp = System.getProperties();
 
     public ConfigProperties() {
         try (InputStream in = this.getClass().getClassLoader().getResourceAsStream("config.properties")) {
             configProp.load(in);
         } catch (IOException e) {
+            System.out.println("[WARNING] Using default properties!");
             e.printStackTrace();
         }
     }
