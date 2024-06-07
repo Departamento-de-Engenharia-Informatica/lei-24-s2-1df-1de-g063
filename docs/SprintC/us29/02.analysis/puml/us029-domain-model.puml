@@ -16,13 +16,8 @@ class Team{
     collaborators
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class Entry {
+    task
 }
 
 class Collaborators {
@@ -43,14 +38,10 @@ class Agenda{
     task description
 }
 
-Task "1" -- "1" ToDoList : goes to >
-Team "1" -- "1" Task : attributed <
-Collaborators "1" -- "1..*" Team : make >
-ToDoList "1" -- "1" Agenda : goes to >
+Entry "1" -- "*" ToDoList : originate new entry >
+Team "1" -- "1..*" Entry : attributed <
+Collaborators "2..*" -- "1" Team : make >
+ToDoList "*" -- "1" Agenda : goes to >
 @enduml
 
-Task "1" -- "1" Agenda : goes to >
-Team "1" -- "1" Task : attributed <
-Collaborators "1" -- "1..*" Team : make >
-@enduml
 

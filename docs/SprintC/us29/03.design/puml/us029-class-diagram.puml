@@ -10,40 +10,69 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class CompletionTaskUI{
-
+    - agenda: AgendaRepository
+    - completionTaskController: CompletionTaskController
+    + CompletionTaskUI()
+    + requestData()
+    + submitData()
 }
 
 class CompletionTaskController{
-
+    - agenda: AgendaRepository
+    + CompletionTaskController()
+    + markAsCompleted(entry: Entry)
+    + getEntries()
 }
 
 class Organization{
-
+    - name: String
+    - agenda: List<Entry>
 }
 
 class OrganizationRepository{
-
+    + getUserName()
 }
 
-class Agenda{
-
+class AgendaRepository{
+    - agenda: List<Entry>;
+    + getEntriesWithStatus()
 }
 
 class Repositories{
-
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgendaRepository()
+    + getOrganizationRepository()
 }
 
 class Entry{
-
+    - task: String
+    - urgency: Urgency
+    - duration: int
+    - greenSpace: GreenSpace
+    - status: Status
+    - startDate: LocalDate
+    - endDate: LocalDate
+    - team: Team
+    + Entry(task: String, urgency: Urgency, duration: int, greenSpace: GreenSpace, status: Status)
+    + getTask()
+    + getUrgency()
+    + getDuration()
+    + getGreenSpace()
+    + getStatus()
+    + getStartDate()
+    + getEndDate()
+    + setStatus(status: Status)
 }
 
 CompletionTaskUI .> CompletionTaskController
 CompletionTaskController ..> Organization
-CompletionTaskController .> Repositories
-Repositories --> OrganizationRepository
-Repositories --> Agenda
-OrganizationRepository --> Organization
-Agenda --> Organization
-Organization --> Entry
+CompletionTaskController .> Repositories: repositories
+Repositories "1" --> "1"OrganizationRepository: organizationRepository
+Repositories "1"--> "1"AgendaRepository: agendaRepository
+OrganizationRepository"1" --> "1"Organization: userName
+AgendaRepository"1" --> "1"Organization: agenda
+Organization"1" --> "1..*"Entry: entry
+Repositories --> Repositories : getInstance()
 
 @enduml

@@ -6,33 +6,30 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as GSM
+participant ":GreenSpaceListUI" as UI
+participant ":GreenSpaceListController" as CTRL
 
-activate VFM
+activate GSM
 
-VFM -> UI : Request to list vehicles needing check-up
+GSM -> UI : Request to list all managed green spaces
 
     activate UI
 
         UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
-
-        ref over CTRL
-                            Get Vehicles
-                        end
-
+        UI -> CTRL : getGreenSpacesByName()
         activate CTRL
 
-            CTRL --> UI : VehiclesNeedingCheckUp
+            ref over CTRL
+                Get GreenSpaces by name
+            end
+
+            CTRL --> UI : greenSpacesByName
         deactivate CTRL
 
-        UI --> VFM : Shows list of vehicles needing check-up
-
+        UI --> GSM : Retrieve list of green spaces managed by the GSM
     deactivate UI
-
-deactivate VFM
+deactivate GSM
 
 @enduml

@@ -1,0 +1,58 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Collaborator" as EMP
+participant ":CompletionTaskUI" as UI
+participant ":CompletionTaskController" as CTRL
+participant ":Repositories" as Repositories
+participant "repositories\n:Repositories" as REP
+participant "organizationRepository\n:OrganizationRepository" as OrganizationRepository
+participant "agendaRepository\n:AgendaRepository" as Agenda
+participant "Organization\n:organization" as Organization
+participant "entry:\nEntry" as Entry
+participant "Status:\nstatus" as Status
+
+activate EMP
+
+    EMP -> UI : Requests to record the completion of a task
+    activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getEntries()
+        activate CTRL
+
+             ref over CTRL
+                Get Entries
+             end
+
+            CTRL --> UI : entries
+        deactivate CTRL
+
+        UI --> EMP : Retrieves task list
+    deactivate UI
+
+    EMP -> UI : Chooses task to record completion
+    activate UI
+
+        UI -> CTRL : setStatus()
+        activate CTRL
+
+            ref over CTRL
+                Set Status
+            end
+
+            CTRL --> UI : status
+        deactivate CTRL
+
+        UI --> EMP : Confirmation of the operation
+    deactivate UI
+
+
+
+@enduml

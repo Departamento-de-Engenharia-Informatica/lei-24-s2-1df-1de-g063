@@ -1,4 +1,4 @@
-# US008 - Create a Task 
+# US027 - As a GSM, I need to list all green spaces managed by me
 
 ## 2. Analysis
 

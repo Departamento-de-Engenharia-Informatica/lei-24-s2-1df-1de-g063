@@ -14,8 +14,7 @@ As a Collaborator, I need the ability to record when I have completed a task.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The system should allow the Collaborator to record the completion of a task.
-* **AC2:** The system should show a list with all the collaborator tasks.
-* **AC3:** The system should allow the Collaborator choose the task to record the completion.
+* **AC2:** The system should allow the Collaborator choose the task to record the completion.
 
 ### 1.4. Found out Dependencies
 
@@ -30,11 +29,9 @@ As a Collaborator, I need the ability to record when I have completed a task.
 
 * Selected data:
   * Task
-  * Collaborator
   
 **Output Data:**
   
-  * List of collaborators
   * List of Tasks
   * (In)Success of the operation
 

@@ -6,8 +6,6 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Green Space Manager" as GSM
-participant ":GreenSpaceListUI" as UI
 participant ":GreenSpaceListController" as CTRL
 participant "Interface" as Interface
 participant "Repositories" as Rep
@@ -18,16 +16,10 @@ participant "Organization:\norganization" as org
 participant "greenSpace:\ngreenSpace" as GreenSpace
 participant "Config" as Config
 
-activate GSM
 
-GSM -> UI : Request to list all managed green spaces
-
-    activate UI
-
-        UI -> CTRL** : create
-
-        UI -> CTRL : getGreenSpacesByName()
+-> CTRL : getGreenSpacesByName()
         activate CTRL
+         group get GreenSpaces by name
 
             CTRL -> Rep : getInstance()
             activate Rep
@@ -81,12 +73,10 @@ GSM -> UI : Request to list all managed green spaces
 
                 Interface --> CTRL : sortedGreenSpaces
             deactivate Interface
-
-            CTRL --> UI : greenSpacesByName
+         end
+           <-- CTRL : greenSpacesByName
         deactivate CTRL
 
-        UI --> GSM : Retrieve list of green spaces managed by the GSM
-    deactivate UI
-deactivate GSM
+
 
 @enduml
