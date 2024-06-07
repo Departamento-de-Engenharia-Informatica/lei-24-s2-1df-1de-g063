@@ -11,15 +11,15 @@ participant "AgendaUI" as UI
 participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
-participant "ToDoList: \n ToDoList" as TDL
 participant "agendaRepository: \n AgendaRepository" as Agenda
 
 activate GSM
 
-     GSM -> UI : asks to add a new entry to the Agenda
+     GSM -> UI : asks to postpone an entry in the Agenda
 
      activate UI
 
+            UI -> GSM : asks to select the Agenda entry
             UI -> CTRL** : create
 
      activate CTRL
@@ -38,17 +38,17 @@ activate GSM
 
                deactivate organizationRepository
 
-                      CTRL -> TDL : getToDoList()
+                      CTRL -> Agenda : getAgendaRepository()
 
-               activate TDL
+               activate Agenda
 
-                      TDL -> CTRL : toDoList
+                      Agenda -> CTRL : agenda
 
-               deactivate TDL
+               deactivate Agenda
 
-                      CTRL -> UI : toDoList
-                      UI -> GSM : asks to select the To-Do List entry
-                      GSM -> UI : selects the To-Do List entry
+                      CTRL -> UI : agenda
+                      UI -> GSM : asks to select the Agenda entry
+                      GSM -> UI : selects the Agenda entry
                       UI -> GSM : asks to type the intended date
                       GSM -> UI : selects the intended date
                       UI -> CTRL : entry

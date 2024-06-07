@@ -21,6 +21,7 @@ public class Bootstrap implements Runnable {
         addTaskCategories();
         addOrganization();
         addUsers();
+        addGreenSpaces();
     }
 
     private void addOrganization() {
@@ -47,6 +48,14 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
+    private void addGreenSpaces(){
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        GreenSpace greenSpace1 = new GreenSpace("Park",250, Size.Garden,"Paulo");
+        GreenSpace greenSpace2 = new GreenSpace("Garden",1904,Size.Large_Size, "Carlos");
+
+        greenSpaceRepository.addGreenSpace(greenSpace1);
+        greenSpaceRepository.addGreenSpace(greenSpace2);
+    }
 
     private void addUsers() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
@@ -102,20 +111,61 @@ public class Bootstrap implements Runnable {
         // Create a TeamRepository
         TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
 
-// Add the teams to the repository
+        // Add the teams to the repository
         teamRepository.addTeams(team1);
         teamRepository.addTeams(team2);
         teamRepository.addTeams(team3);
 
         //add entry to repository
 
-        Entry entry1 = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"abc@this.app"), Status.pending);
-        Entry entry2 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"abc@this.app"),Status.pending);
-        ToDoList.addEntry(entry1);
-        ToDoList.addEntry(entry2);
+        Entry entry1 = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        Entry entry2 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"Francisco"),Status.pending);
+        Entry entry3 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"Francisco"),Status.pending);
+        Entry entry4 = new Entry("Task 2", Urgency.Medium, 2, new GreenSpace("Green Space 2",2,Size.Medium_Size,"Francisco"),Status.pending);
+        ToDoList toDoList = Repositories.getInstance().getToDoList();
+        toDoList.addEntry(entry1);
+        toDoList.addEntry(entry2);
+        toDoList.addEntry(entry3);
+        toDoList.addEntry(entry4);
+
+        Entry entry5 = new Entry("Task 3", Urgency.Low, 1, new GreenSpace("Green Space 3",1,Size.Large_Size,"Francisco"), Status.scheduled);
+        Entry entry6 = new Entry("Task 4", Urgency.Low, 1, new GreenSpace("Green Space 4",1,Size.Large_Size,"Francisco"), Status.scheduled);
+        Entry entry7 = new Entry("Task 4", Urgency.Low, 1, new GreenSpace("Green Space 4",1,Size.Large_Size,"Francisco"), Status.scheduled);
         AgendaRepository agenda = Repositories.getInstance().getAgendaRepository();
-        agenda.addEntry(entry1);
-        agenda.addEntry(entry2);
+        agenda.addEntry(entry5);
+        agenda.addEntry(entry6);
+        agenda.addEntry(entry7);
+
+        //add team to entry
+
+        entry1.setTeam(team1);
+        entry2.setTeam(team2);
+        entry3.setTeam(team3);
+        entry4.setTeam(team1);
+        entry5.setTeam(team2);
+        entry6.setTeam(team3);
+        entry7.setTeam(team1);
+
+        //add date to entry
+
+        entry1.setStartDate(LocalDate.of(2020, 1, 1));
+        entry1.setEndDate(LocalDate.of(2020, 1, 4));
+        entry2.setStartDate(LocalDate.of(2021, 1, 1));
+        entry2.setEndDate(LocalDate.of(2021, 1, 4));
+        entry3.setStartDate(LocalDate.of(2022, 1, 5));
+        entry3.setEndDate(LocalDate.of(2022, 1, 7));
+        entry4.setStartDate(LocalDate.of(2023, 1, 1));
+        entry4.setEndDate(LocalDate.of(2023, 1, 5));
+        entry5.setStartDate(LocalDate.of(2024, 1, 1));
+        entry5.setEndDate(LocalDate.of(2024, 1, 4));
+        entry6.setStartDate(LocalDate.of(2025, 1, 1));
+        entry6.setEndDate(LocalDate.of(2025, 1, 4));
+        entry7.setStartDate(LocalDate.of(2026, 1, 1));
+        entry7.setEndDate(LocalDate.of(2026, 1, 4));
+
+
+        //add vehicle to repository
+
         Vehicle vehicle1 = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
         Vehicle vehicle2 = new Vehicle("Peugeot", "do aço", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
 

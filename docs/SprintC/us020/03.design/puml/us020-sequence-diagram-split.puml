@@ -6,33 +6,55 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as GSM
+participant "RegisterGreenSpaceUI" as UI
+participant "RegisterGreenSpaceController" as CTRL
+participant "Repositories" as Rep
+participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "greenSpace: \n GreenSpace" as GreenSpace
+participant "greenSpaceRepository: \n GreenSpaceRepository" as GreenSpaceRep
 
-activate VFM
+activate GSM
 
-VFM -> UI : Request to list vehicles needing check-up
+     GSM -> UI : asks to register a new GreenSpace
 
-    activate UI
+     activate UI
 
-        UI -> CTRL** : create
+            UI -> GSM : requests a name
+            GSM -> UI : types name
+            UI -> GSM : request size
+            GSM -> UI : selects size
+            UI -> GSM : requests area
+            GSM -> UI : types area
+            UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
 
-        ref over CTRL
-                            Get Vehicles
-                        end
+     activate CTRL
 
-        activate CTRL
+            CTRL -> Rep : getInstance()
 
-            CTRL --> UI : VehiclesNeedingCheckUp
-        deactivate CTRL
+     activate Rep
 
-        UI --> VFM : Shows list of vehicles needing check-up
+            Rep -> CTRL : repositories
 
-    deactivate UI
+     deactivate Rep
 
-deactivate VFM
+            CTRL -> organizationRepository : getOrganizationRepository()
+
+     activate organizationRepository
+
+            organizationRepository -> CTRL : organizationRepository
+
+     deactivate organizationRepository
+
+            ref over CTRL
+                                        Register GreenSpace
+                                    end
+           CTRL -> UI : greenSpace
+     deactivate CTRL
+
+     UI --> GSM : displays all data and operation success
+
+     deactivate UI
 
 @enduml

@@ -10,6 +10,7 @@ public class GreenSpaceListController {
         getGreenSpaceRepository();
     }
 
+
     public GreenSpaceRepository getGreenSpaceRepository() {
         if (greenSpaceRepository == null) {
             Repositories repositories = Repositories.getInstance();

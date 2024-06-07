@@ -1,0 +1,73 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class AgendaUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+class AgendaController{
+
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository() : GreenSpaceRepository
+}
+
+'class GreenSpaceRepository{
+ '   +GreenSpaceRepository()
+  '  +getInstance() : GreenSpaceRepository
+   ' +addGreenSpace(GreenSpace greenSpace)
+    '+List<GreenSpace> getGreenSpaces()
+'}
+
+class Organization{}
+
+class AgendaRepository{
+    -name: String
+    -area: double
+    -size: Size
+
+    +GreenSpace(String name, double area, Size size)
+    +validateGreenSpaceName(String greenSpaceName)
+    +getName(): String
+    +equals(Object o)
+    +toString() : String
+}
+
+AgendaUI .> AgendaController : controller
+AgendaController ..> Repositories : repositories
+'Repositories -down-> "1" GreenSpaceRepository
+Repositories --> Repositories: instance
+Repositories -down-> "1" OrganizationRepositiry
+OrganizationRepositiry "1" --> "1" Organization : has manager
+'GreenSpaceRepository "1" --> "1" Organization
+AgendaController "1" --> Organization
+Organization "1" --> "1..*" AgendaRepository : postpone entry
+Repositories --> "1" AgendaRepository
+
+@enduml

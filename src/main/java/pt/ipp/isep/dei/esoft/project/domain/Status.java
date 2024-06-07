@@ -4,5 +4,6 @@ public enum Status {
     pending,
     scheduled,
     canceled,
-    completed;
+    completed,
+    postponed;
 }

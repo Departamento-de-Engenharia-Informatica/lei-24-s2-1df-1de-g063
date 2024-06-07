@@ -1,15 +1,19 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.Status;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AgendaRepository {
     private static List<Entry> agenda;
     private static AgendaRepository instance;
 
-    AgendaRepository() {
+    public AgendaRepository() {
         agenda = new ArrayList<>();
     }
 
@@ -48,4 +52,12 @@ public class AgendaRepository {
             }
         }
     }
+
+    public List<Entry> getEntriesWithStatus(Status status) {
+        return AgendaRepository.getEntries().stream()
+                .filter(entry -> entry.getStatus() == Status.valueOf(String.valueOf(status)))
+                .sorted(Comparator.comparing(Entry::getStatus))
+                .collect(Collectors.toList());
+    }
+
 }

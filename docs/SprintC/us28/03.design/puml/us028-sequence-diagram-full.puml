@@ -21,7 +21,7 @@ activate EMP
     EMP -> UI : Requests to consult tasks
     activate UI
 
-        UI -> EMP : Asks for date interval and status of the task
+        UI --> EMP : Asks for date interval and status of the task
     deactivate UI
 
     EMP -> UI : Types date interval and status of the task
@@ -41,7 +41,7 @@ activate EMP
                 CTRL -> REP : getEntries()
                 activate REP
 
-                    REP -> CTRL: entries
+                    REP --> CTRL: entries
                 deactivate REP
 
                 CTRL -> AgendaRepository : getEntries()
@@ -52,13 +52,13 @@ activate EMP
 
                         Entry --> AgendaRepository : entry
                         deactivate Entry
-                    AgendaRepository -> CTRL: entries
+                    AgendaRepository --> CTRL: entries
                 deactivate AgendaRepository
 
                 CTRL -> REP : getCollaboratorName()
                 activate REP
 
-                    REP -> CTRL: collaboratorName
+                    REP --> CTRL: collaboratorName
                 deactivate REP
                 CTRL -> OrganizationRepository : getCollaboratorName()
                 activate OrganizationRepository
@@ -66,16 +66,16 @@ activate EMP
                     OrganizationRepository -> Organization : getcollaboratorName()
                     activate Organization
 
-                    Organization -> OrganizationRepository : getCollaboratorName()
+                    Organization --> OrganizationRepository : CollaboratorName
                 deactivate Organization
 
-                OrganizationRepository -> CTRL : collaboratorName
+                OrganizationRepository --> CTRL : collaboratorName
                 deactivate OrganizationRepository
 
                 CTRL -> REP : getStartDate()
                 activate REP
 
-                        REP -> CTRL: startDate
+                        REP --> CTRL: startDate
                 deactivate REP
 
                 CTRL -> AgendaRepository : getStartDate()
@@ -86,13 +86,13 @@ activate EMP
 
                         Entry --> AgendaRepository : startDate
                         deactivate Entry
-                    AgendaRepository -> CTRL: startDate
+                    AgendaRepository --> CTRL: startDate
                 deactivate AgendaRepository
 
                 CTRL -> REP : getEndDate()
                 activate REP
 
-                        REP -> CTRL: endDate
+                        REP --> CTRL: endDate
                 deactivate REP
 
                 CTRL -> AgendaRepository : getEndDate()
@@ -103,13 +103,13 @@ activate EMP
 
                         Entry --> AgendaRepository : endtDate
                         deactivate Entry
-                    AgendaRepository -> CTRL: endDate
+                    AgendaRepository --> CTRL: endDate
                 deactivate AgendaRepository
 
                 CTRL -> REP : getStatus()
                 activate REP
 
-                        REP -> CTRL: status
+                        REP --> CTRL: status
                 deactivate REP
 
                 CTRL -> AgendaRepository : getStatus()
@@ -126,13 +126,13 @@ activate EMP
                         Entry --> AgendaRepository : status
                     deactivate Entry
 
-                    AgendaRepository -> CTRL: status
+                    AgendaRepository --> CTRL: status
                 deactivate AgendaRepository
 
-                CTRL -> UI : entries
+                CTRL --> UI : entries
             deactivate CTRL
 
-        UI -> EMP : Retrieves tasks list
+        UI --> EMP : Retrieves tasks list
     deactivate UI
 
 
