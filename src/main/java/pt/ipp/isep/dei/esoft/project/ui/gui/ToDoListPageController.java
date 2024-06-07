@@ -106,7 +106,7 @@ public class ToDoListPageController {
     }
     @FXML
     protected void handleGOBACK (ActionEvent event) {
-        try {
+        try{
             Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(assignTeamPage);

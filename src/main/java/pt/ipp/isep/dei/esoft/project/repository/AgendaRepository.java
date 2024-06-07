@@ -3,14 +3,15 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AgendaRepository {
-    private static List<Entry> agenda;
+public class AgendaRepository implements Serializable {
+    private List<Entry> agenda;
     private static AgendaRepository instance;
 
     public AgendaRepository() {
@@ -24,15 +25,15 @@ public class AgendaRepository {
         return instance;
     }
 
-    public static void addEntry(Entry entry) {
+    public void addEntry(Entry entry) {
         agenda.add(entry);
     }
 
-    public static List<Entry> getEntries() {
+    public List<Entry> getEntries() {
         return List.copyOf(agenda);
     }
 
-    public static Entry getEntries(int index) {
+    public Entry getEntries(int index) {
         if (index >= 0 && index < agenda.size()) {
             return agenda.get(index);
         } else {
@@ -54,7 +55,7 @@ public class AgendaRepository {
     }
 
     public List<Entry> getEntriesWithStatus(Status status) {
-        return AgendaRepository.getEntries().stream()
+        return  getEntries().stream()
                 .filter(entry -> entry.getStatus() == Status.valueOf(String.valueOf(status)))
                 .sorted(Comparator.comparing(Entry::getStatus))
                 .collect(Collectors.toList());

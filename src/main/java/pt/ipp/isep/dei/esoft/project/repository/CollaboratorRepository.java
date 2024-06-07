@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * collaboratorRepo.addCollaborator(new Collaborator("John Doe", "123 Main St", "john@example.com", "123456789", "ID", "123ABC", LocalDate.of(1990, 5, 15), LocalDate.of(2020, 1, 1), "Developer"));
  * }</pre>
  */
-public class CollaboratorRepository {
+public class CollaboratorRepository implements Serializable {
     private final List<Collaborator> collaborators;
     private static CollaboratorRepository instance;
 

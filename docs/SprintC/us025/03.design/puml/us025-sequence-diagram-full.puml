@@ -7,7 +7,7 @@ autonumber
 
 'hide footbox
 actor "Green Space Manager" as GSM
-participant "AgendaUI" as UI
+participant "PostponeEntryUI" as UI
 participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository

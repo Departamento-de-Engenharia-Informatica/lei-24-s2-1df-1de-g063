@@ -1,8 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -10,10 +12,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.SerializationUtil;
 
 import javax.crypto.spec.PSource;
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     @FXML
     private TextField usernameField;
 
@@ -52,4 +59,30 @@ public class LoginController {
         }
 
     }
+
+    String filename = "MYINFO.BIN";
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //----------------<Deserialize info>
+        File file = new File(filename);
+        if (file.exists() && !file.isDirectory()) {
+            Repositories rin = SerializationUtil.deserializeInfo(filename);
+            Repositories.setInstance(rin);
+        }
+        //----------------</Deserialize info>
+    }
+
+
+    @FXML
+    protected void onExitButtonClick (ActionEvent event) {
+
+        //------------------<Serialize info>
+        SerializationUtil.serializeInfo(filename);
+        //------------------</Serialize info>
+
+        Platform.exit();
+    }
+
+
 }

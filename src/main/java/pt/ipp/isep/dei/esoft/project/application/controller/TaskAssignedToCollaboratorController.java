@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -15,13 +16,13 @@ public class TaskAssignedToCollaboratorController {
 
 
     public TaskAssignedToCollaboratorController(String managerName) {
-        this.agendaRepository = AgendaRepository.getInstance(); // Assuming ToDoList is a singleton
+        this.agendaRepository = Repositories.getInstance().getAgendaRepository(); // Assuming ToDoList is a singleton
         this.managerName = managerName;
     }
 
 
     public List<Entry> getEntriesBetweenDates(LocalDate startDate, LocalDate endDate, String status, String name) {
-        return AgendaRepository.getEntries().stream()
+        return  agendaRepository.getEntries().stream()
                 .filter(entry -> entry.getStatus() == Status.valueOf(status))
                 .filter(entry -> entry.getTeam().getMembers().stream()
                         .anyMatch(member -> member.getName().equals(name)))

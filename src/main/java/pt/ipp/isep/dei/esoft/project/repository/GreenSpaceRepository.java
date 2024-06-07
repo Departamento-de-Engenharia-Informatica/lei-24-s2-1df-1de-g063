@@ -1,11 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GreenSpaceRepository {
+public class GreenSpaceRepository implements Serializable {
     private final List<GreenSpace> greenSpaces;
     private static GreenSpaceRepository instance;
 

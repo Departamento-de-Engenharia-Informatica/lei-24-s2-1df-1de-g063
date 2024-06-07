@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BubbleSort {
+public class BubbleSort implements Serializable {
     public void bubbleSortArray(double[] arr) {
         int n = arr.length;
         boolean swapped;

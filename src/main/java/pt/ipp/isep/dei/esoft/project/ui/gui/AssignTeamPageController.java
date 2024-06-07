@@ -8,10 +8,12 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AssignTeamToEntryCon
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 
 public class AssignTeamPageController {
+    private final AgendaRepository agendaRepository;
     @FXML
     private ListView<Team> teamListView;
 
@@ -29,6 +31,7 @@ public class AssignTeamPageController {
 
     public AssignTeamPageController() {
         this.assignTeamToEntryController = new AssignTeamToEntryController();
+        this.agendaRepository= Repositories.getInstance().getAgendaRepository();
     }
 
     @FXML
@@ -80,7 +83,7 @@ public class AssignTeamPageController {
         if(selectedTeam != null && selectedEntry != null && !selectedEntry.contains("(Team assigned)")){
             assignTeamToEntryController.attributeTeamToEntry(choiceTeam, choiceEntry);
         }
-        if(AgendaRepository.getEntries().get(choiceEntry).getTeam() == selectedTeam){
+        if(agendaRepository.getEntries().get(choiceEntry).getTeam() == selectedTeam){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText("Team assigned successfully");

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * jobRepo.addJob(new Job("Software Developer"));
  * }</pre>
  */
-public class JobRepository {
+public class JobRepository implements Serializable {
     private List<Job> jobs;
     private static JobRepository instance;
 

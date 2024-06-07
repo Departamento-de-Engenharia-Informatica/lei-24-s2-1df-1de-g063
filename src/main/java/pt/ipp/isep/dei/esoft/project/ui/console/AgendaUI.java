@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -76,7 +77,7 @@ public class AgendaUI implements Runnable {
 
     private void addEntryToAgenda(Entry entry) {
         if (entry != null) {
-            AgendaRepository.addEntry(entry);
+            agendaRepository.addEntry(entry);
             System.out.println("Entry added to the agenda.");
         } else {
             System.out.println("No entry was added to the agenda.");

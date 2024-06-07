@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * System.out.println(team);
  * }</pre>
  */
-public class Team {
+public class Team implements Serializable {
 
     private List<Collaborator> members;
 

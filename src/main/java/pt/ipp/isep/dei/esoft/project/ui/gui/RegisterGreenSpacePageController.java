@@ -74,7 +74,8 @@ public class RegisterGreenSpacePageController {
 
             Size size = getSize(area);
             GreenSpace greenSpace = new GreenSpace(name, area, size, managerName);
-            greenSpaceRepository.addGreenSpace(greenSpace);
+//            greenSpaceRepository.addGreenSpace(greenSpace);
+            controller.getGreenSpaceRepository().addGreenSpace(greenSpace);
             System.out.println(greenSpaceRepository.getGreenSpaces());
             greenSpaceListView.getItems().add(greenSpace);
             nameField.clear();

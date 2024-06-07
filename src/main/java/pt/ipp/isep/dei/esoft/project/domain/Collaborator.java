@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
  * as well as identification details including type and number, birth date, admission date,
  * and job position. Additionally, a Collaborator may possess a list of skills relevant to their work.
  */
-public class Collaborator {
+public class Collaborator implements Serializable {
     private final String name;
     private final String address;
     private final String email;

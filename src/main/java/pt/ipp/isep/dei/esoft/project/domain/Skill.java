@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The Skill class represents a skill within the system.
  * It encapsulates the skill name.
@@ -10,7 +12,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
  * String skillName = skill.getName();
  * }</pre>
  */
-public class Skill {
+public class Skill implements Serializable {
 
     private final String skill_name;
 

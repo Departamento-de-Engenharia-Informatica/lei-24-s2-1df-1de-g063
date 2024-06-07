@@ -1,13 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
  * The SkillsRepository class manages the storage and retrieval of skills.
  * It provides methods to add, retrieve, and get all skills.
  */
-public class SkillsRepository {
+public class SkillsRepository implements Serializable {
 
     private static SkillsRepository instance;
     private List<Skill> skills;

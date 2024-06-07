@@ -12,6 +12,7 @@ import javafx.util.StringConverter;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskAssignedToCollaboratorController {
+
+    private final AgendaRepository agenda;
 
     @FXML
     private ListView<Entry> entryListView;
@@ -41,6 +44,7 @@ public class TaskAssignedToCollaboratorController {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public TaskAssignedToCollaboratorController() {
+        this.agenda= Repositories.getInstance().getAgendaRepository();
     }
 
     @FXML
@@ -72,7 +76,7 @@ public class TaskAssignedToCollaboratorController {
             List<Entry> entries = controller.getEntriesBetweenDates(startDate, endDate, status, name);
 
             System.out.println("Entries fetched: " + entries.size());
-            System.out.println("Existing Entries: " + AgendaRepository.getEntries());
+            System.out.println("Existing Entries: " + agenda.getEntries());
             for (Entry entry : entries) {
                 System.out.println(entry);
             }

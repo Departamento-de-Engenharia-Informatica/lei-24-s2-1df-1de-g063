@@ -5,11 +5,15 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.SerializationUtil;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 public class ToDoListUI implements Runnable {
+    private static final long serialVersionUID = 1L;
     private final ToDoListController controller;
     private final ToDoList toDoList;
     private final Scanner scanner;
@@ -23,20 +27,23 @@ public class ToDoListUI implements Runnable {
     private int userChoiceGreenspace;
     private Entry entry;
 
-
     public ToDoListUI() {
         this.controller = new ToDoListController();
         this.toDoList = controller.getToDoList();
         this.scanner = new Scanner(System.in);
         this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        this.status= Status.valueOf("pending");
+        this.status = Status.valueOf("pending");
     }
 
     @Override
     public void run() {
         System.out.println("\n\n--- Add a new Entry to To-Do List ------------------------");
         requestData();
-        submitData();
+        try {
+            submitData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void requestData() {
@@ -47,19 +54,20 @@ public class ToDoListUI implements Runnable {
         this.greenSpace = greenSpaceRepository.getGreenSpaces().get(userChoiceGreenspace);
     }
 
-    private void submitData() {
+    private void submitData() throws IOException {
         System.out.println("Task: " + task);
         System.out.println("Urgency: " + urgency);
         System.out.println("Duration: " + duration + "hours");
         System.out.println("Status: " + status);
-        entry = controller.registerEntry(task,urgency,duration,greenSpace,status);
+        entry = controller.registerEntry(task, urgency, duration, greenSpace, status);
         toDoList.addEntry(entry);
         printData();
-
     }
 
+
+
     private String requestTask() {
-        boolean valid = false;
+        boolean valid;
         do {
             System.out.print("Task: ");
             task = scanner.nextLine();
@@ -129,8 +137,7 @@ public class ToDoListUI implements Runnable {
         userChoiceGreenspace = requestUserChoice("greenspace");
     }
 
-
-    private void printData(){
+    private void printData() {
         int contador = 0;
         List<Entry> entries = toDoList.getToDoList();
         System.out.println("\n--- Entry List -------------------------");
@@ -140,7 +147,6 @@ public class ToDoListUI implements Runnable {
             for (Entry entry : entries) {
                 System.out.printf("%d - %s%n", contador, entry);
                 contador++;
-
             }
         }
     }
@@ -151,14 +157,14 @@ public class ToDoListUI implements Runnable {
 
         if (task == null || task.trim().isEmpty()) {
             valid = false;
-        } else if( !task.matches("[a-zA-Z0-9., !?-]+")) {
+        } else if (!task.matches("[a-zA-Z0-9., !?-]+")) {
             System.out.println("Entry has invalid characters");
             valid = false;
         }
         for (Entry e : entryList) {
-            if (e.toString().equals(toDoList.toString())){
+            if (e.toString().equals(toDoList.toString())) {
                 System.out.println("Entry already exists");
-                valid=false;
+                valid = false;
             }
         }
 
@@ -183,7 +189,7 @@ public class ToDoListUI implements Runnable {
                 e.printStackTrace();
                 System.out.println("Invalid input. Please enter a valid integer.");
             }
-        } while(!isValid);
+        } while (!isValid);
 
         return userChoice;
     }

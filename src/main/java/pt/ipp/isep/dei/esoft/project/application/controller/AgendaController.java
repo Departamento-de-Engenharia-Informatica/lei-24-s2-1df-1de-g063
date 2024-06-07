@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.io.Serializable;
+
 public class AgendaController {
     private ToDoList toDoList;
     private AgendaRepository agendaRepository;

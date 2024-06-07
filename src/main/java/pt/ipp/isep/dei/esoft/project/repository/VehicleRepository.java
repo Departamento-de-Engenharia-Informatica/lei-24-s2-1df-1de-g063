@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * The VehicleRepository class manages the storage and retrieval of vehicles.
  * It provides methods to add vehicles and retrieve a list of all vehicles.
  */
-public class VehicleRepository {
+public class VehicleRepository implements Serializable {
 
     private static VehicleRepository instance;
     private final List<Vehicle> vehicles;

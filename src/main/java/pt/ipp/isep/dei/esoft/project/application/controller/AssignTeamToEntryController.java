@@ -15,12 +15,14 @@ import java.util.List;
 public class AssignTeamToEntryController {
     private TeamRepository teamRepository;
 
+    private AgendaRepository agendaRepository;
     /**
      * Constructor for AssignTeamToEntryController.
      * Initializes the team repository.
      */
     public AssignTeamToEntryController(){
         this.teamRepository =  getTeamRepository();
+        this.agendaRepository=Repositories.getInstance().getAgendaRepository();
     }
 
     /**
@@ -42,7 +44,7 @@ public class AssignTeamToEntryController {
     }
 
     public List<String> getEntries() {
-    List<Entry> entries = AgendaRepository.getEntries();
+    List<Entry> entries = agendaRepository.getEntries();
     List<String> entriesWithFlags = new ArrayList<>();
     for (Entry entry : entries) {
         String entryString = entry.toString();
@@ -59,7 +61,7 @@ public class AssignTeamToEntryController {
 
     public void attributeTeamToEntry(int choiceTeam, int choiceEntry){
          Team selectedTeam = teamRepository.getTeams(choiceTeam);
-         Entry selectedEntry = AgendaRepository.getEntries(choiceEntry);
+         Entry selectedEntry = agendaRepository.getEntries(choiceEntry);
          selectedEntry.setTeam(selectedTeam);
          List<Collaborator> collaborators = selectedTeam.getMembers();
          List<String> emailAddresses = new ArrayList<>();

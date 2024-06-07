@@ -109,7 +109,7 @@ public class GenerateTeamController {
      * @param team the team to add
      */
     public void addTeam(Team team) {
-        TeamRepository.addTeams(team);
+        teamRepository.addTeams(team);
     }
 
     /**

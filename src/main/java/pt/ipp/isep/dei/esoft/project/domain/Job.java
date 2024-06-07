@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The Job class represents a job within the system.
  * It encapsulates the job name.
@@ -10,7 +12,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
  * String jobName = job.getName();
  * }</pre>
  */
-public class Job {
+public class Job implements Serializable {
 
     private final String job_name;
 

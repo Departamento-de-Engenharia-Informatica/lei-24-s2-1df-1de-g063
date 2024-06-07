@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MergeSort {
+public class MergeSort implements Serializable {
 
     public void mergeSortArray(double[] arr) {
         mergeSortArr(arr, 0, arr.length - 1);

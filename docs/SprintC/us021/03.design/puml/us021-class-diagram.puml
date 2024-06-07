@@ -41,6 +41,7 @@ class Entry{
 }
 
 ToDoListUI .right-> ToDoListController
+ToDoListController .right-> Organization
 Organization -down-> Entry
 Repositories .down-> "1" ToDoList: Instance
 Entry -> ToDoList: add

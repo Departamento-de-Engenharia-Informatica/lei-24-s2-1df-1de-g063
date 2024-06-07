@@ -9,7 +9,7 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class AgendaUI{
+class PostponeEntryUI{
 -name: String;
 -size: Size;
 -area: double;
@@ -59,7 +59,7 @@ class AgendaRepository{
     +toString() : String
 }
 
-AgendaUI .> AgendaController : controller
+PostponeEntryUI .> AgendaController : controller
 AgendaController ..> Repositories : repositories
 'Repositories -down-> "1" GreenSpaceRepository
 Repositories --> Repositories: instance

@@ -6,52 +6,69 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Vehicle Fleet Manager" as VFM
-participant ":VehiclesNeedingCheckUpUI" as UI
-participant ":VehiclesNeedingCheckUpController" as CTRL
+actor "Green Space Manager" as GSM
+participant "ToDoListUI" as UI
+participant "ToDoListController" as CTRL
 participant "Repositories" as Rep
-participant "repositories:\nRepositories" as Repositories
-participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
-participant "vehicle:\nVehicle" as Vehicle
+participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "Entry: \n entry" as entry
+participant "ToDoList: \n ToDoList" as toDoList
 
-activate VFM
+activate GSM
 
-VFM -> UI : Request to list vehicles needing check-up
+     GSM -> UI : asks to register a new entry
 
-    activate UI
+     activate UI
 
-        UI -> CTRL** : create
+            UI -> GSM : requests a name
+            GSM -> UI : types name
+            UI -> GSM : request urgency
+            GSM -> UI : selects urgency
+            UI -> GSM : requests duration
+            GSM -> UI : types duration
+            UI -> CTRL** : create
 
-        UI -> CTRL : getVehiclesNeedingCheckUp()
-        activate CTRL
+
+     activate CTRL
 
             CTRL -> Rep : getInstance()
-            activate Rep
 
-                Rep --> CTRL : repositories
-            deactivate Rep
+     activate Rep
 
-            CTRL -> Repositories : getVehicleRepository()
-            activate Repositories
+            Rep -> CTRL : repositories
 
-            Repositories --> CTRL : VehicleRepository
-            deactivate Repositories
+     deactivate Rep
 
+            CTRL -> organizationRepository : getOrganizationRepository()
 
-            CTRL -> VehicleRepository : getVehicles()
-            activate VehicleRepository
+     activate organizationRepository
 
-                VehicleRepository --> CTRL : Vehicles
-            deactivate VehicleRepository
+            organizationRepository -> CTRL : organizationRepository
 
+     deactivate organizationRepository
 
-            CTRL --> UI : VehiclesNeedingCheckUp
-        deactivate CTRL
+            CTRL -> entry : registerEntry (String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status)
 
-        UI --> VFM : Shows list of vehicles needing check-up
+     activate entry
 
-    deactivate UI
+            entry -> toDoList : addEntry(Entry entry)
 
-deactivate VFM
+     activate toDoList
+
+            toDoList -> entry : entry
+
+     deactivate toDoList
+
+            entry -> CTRL : entry
+
+     deactivate entry
+
+            CTRL -> UI : entry
+
+     deactivate CTRL
+
+     UI --> GSM : displays all data and operation success
+
+     deactivate UI
 
 @enduml

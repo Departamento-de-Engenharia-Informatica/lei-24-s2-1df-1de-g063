@@ -1,10 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entry {
+public class Entry implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final String task;
     private final Urgency urgency;
     private final int duration;

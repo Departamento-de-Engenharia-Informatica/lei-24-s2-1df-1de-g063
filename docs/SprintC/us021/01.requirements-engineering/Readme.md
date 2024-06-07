@@ -11,14 +11,16 @@ As a Green Space Manager I have the need to keep track of the things that need t
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** "What time unit should be used for the duration of the task?"
+
+> **Answer:** "Hour and/or days."
 >
-> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The new entry must be associated with a green space managed by the GSM.
 * **AC2:** The green space for the new entry should be chosen from a list presented to the GSM.
+* **AC3:** The new entry duration must be typed in hours only (number of days is not assumed 1 day is equal to 8h).
 
 ### 1.4. Found out Dependencies
 

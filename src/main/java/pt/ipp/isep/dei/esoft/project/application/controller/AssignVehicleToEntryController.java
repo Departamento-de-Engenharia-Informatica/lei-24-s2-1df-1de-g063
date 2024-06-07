@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class AssignVehicleToEntryController {
     private VehicleRepository vehicleRepository;
+    private final AgendaRepository agendaRepositories;
 
     /**
      * Constructor for AssignVehicleToEntryController.
@@ -20,6 +21,7 @@ public class AssignVehicleToEntryController {
      */
     public AssignVehicleToEntryController() {
         this.vehicleRepository = getVehicleRepository();
+        this.agendaRepositories = Repositories.getInstance().getAgendaRepository();
     }
 
     /**
@@ -34,14 +36,14 @@ public class AssignVehicleToEntryController {
     // The following methods are commented out but may be used in the future.
 
     public List<Entry> getEntries() {
-        return AgendaRepository.getEntries();
+        return agendaRepositories.getEntries();
     }
 
 
 
    public void attributeVehicleToEntry(int choiceVehicle, int choiceEntry){
         Vehicle selectedVehicle = vehicleRepository.getVehicles(choiceVehicle);
-        Entry selectedEntry = AgendaRepository.getEntries(choiceEntry);
+        Entry selectedEntry = agendaRepositories.getEntries(choiceEntry);
         selectedEntry.addVehicle(selectedVehicle);
 
     }

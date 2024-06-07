@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,9 @@ import java.util.List;
  * The TeamRepository class manages the storage and retrieval of teams.
  * It provides methods to add teams and retrieve a list of all teams.
  */
-public class TeamRepository {
+public class TeamRepository implements Serializable {
 
-    private static List<Team> teams;
+    private List<Team> teams;
     private static TeamRepository instance;
 
     /**
@@ -41,7 +42,7 @@ public class TeamRepository {
      *
      * @param team the team to add
      */
-    public static void addTeams(Team team) {
+    public void addTeams(Team team) {
         teams.add(team);
     }
 

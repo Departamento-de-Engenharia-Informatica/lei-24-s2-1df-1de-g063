@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -13,7 +14,7 @@ import java.time.LocalDate;
  * System.out.println(vehicle);
  * }</pre>
  */
-public class Vehicle {
+public class Vehicle implements Serializable {
     private final String brand;
     private final String model;
     private final double tareWeight;

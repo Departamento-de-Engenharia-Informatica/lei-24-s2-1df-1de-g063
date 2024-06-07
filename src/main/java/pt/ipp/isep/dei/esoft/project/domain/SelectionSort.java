@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SelectionSort {
+public class SelectionSort implements Serializable {
     public void selectionSortArray(double[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             int maxIndex = i;

@@ -1,11 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-public class Repositories {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final OrganizationRepository organizationRepository;
     private final TaskCategoryRepository taskCategoryRepository;
-    private final AuthenticationRepository authenticationRepository;
+    private transient AuthenticationRepository authenticationRepository;
     private final AgendaRepository agendaRepository;
     private final SkillsRepository skillsRepository;
     private final JobRepository jobRepository;
@@ -16,7 +21,7 @@ public class Repositories {
 
     private final TeamRepository teamRepository;
 
-    private Repositories() {
+    private Repositories(){
         organizationRepository = new OrganizationRepository();
         taskCategoryRepository = new TaskCategoryRepository();
         authenticationRepository = new AuthenticationRepository();
@@ -30,11 +35,22 @@ public class Repositories {
         toDoList = new ToDoList();
     }
 
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        this.authenticationRepository = new AuthenticationRepository();
+    }
+
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+    }
+
+    public static void setInstance(Repositories instance) {
+        Repositories.instance = instance;
+    }
+
     public static Repositories getInstance() {
         if (instance == null) {
-
-            instance = new Repositories();
-
+                instance = new Repositories();
         }
         return instance;
     }
@@ -48,19 +64,19 @@ public class Repositories {
     }
 
     public CollaboratorRepository getCollaboratorRepository(){
-        return CollaboratorRepository.getInstance();
+        return collaboratorRepository;
     }
 
     public AgendaRepository getAgendaRepository() {
-        return AgendaRepository.getInstance();
+        return agendaRepository;
     }
 
     public SkillsRepository getSkillsRepository() {
-        return SkillsRepository.getInstance();
+        return skillsRepository;
     }
 
     public JobRepository getJobRepository() {
-        return JobRepository.getInstance();
+        return jobRepository;
     }
 
     public AuthenticationRepository getAuthenticationRepository() {
@@ -68,23 +84,23 @@ public class Repositories {
     }
 
     public VehicleRepository getVehicleRepository(){
-        return VehicleRepository.getInstance();
+        return vehicleRepository;
     }
 
     public TeamRepository getTeamRepository() {
-        return TeamRepository.getInstance();
+        return teamRepository;
     }
 
     public GreenSpaceRepository getGreenSpaceRepository() {
-        return GreenSpaceRepository.getInstance();
+        return greenSpaceRepository;
     }
 
     public ToDoList getToDoList(){
-        return ToDoList.getInstance();
+        return toDoList;
     }
 
     public AgendaRepository getAgenda(){
-        return AgendaRepository.getInstance();
+        return agendaRepository;
     }
 
 }

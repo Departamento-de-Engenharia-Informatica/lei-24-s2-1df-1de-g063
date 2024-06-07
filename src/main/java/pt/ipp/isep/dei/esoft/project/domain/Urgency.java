@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public enum Urgency {
+import java.io.Serializable;
+
+public enum Urgency implements Serializable {
     Low,Medium,High;
 }

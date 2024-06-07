@@ -9,51 +9,58 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class VehicleNeedingCheckUpUI{
+class CancelEntryUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
 
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
 }
 
-note left of VehicleNeedingCheckUpUI
-    - Responsible for displaying vehicles needing check-up
-end note
+class AgendaController{
 
-class VehicleNeedingCheckUpController{
-    -vehicleRepository: VehicleRepository
-    +VehicleNeedingCheckUpController(vehicleRepository: VehicleRepository, \nauthenticationRepository: AuthenticationRepository)
-    +getVehicleRepository(): VehicleRepository
-    +getVehiclesNeedingCheckUp(): List<Vehicle>
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
 }
-
-note right of VehicleNeedingCheckUpController
-    - Handles requests related to vehicles needing check-up
-    - getVehiclesNeedingCheckUp(): List<Vehicle>: Retrieves a list of vehicles needing check-up
-end note
 
 class Repositories{
     - Repositories()
     + getInstance() : Repositories
-    + getVehicleRepository()
+    + getGreenSpaceRepository() : GreenSpaceRepository
 }
 
-class VehicleRepository{
-    -vehicles: List<Vehicle>
-    +getVehicles(): List<Vehicle>
+class Organization{}
+
+class AgendaRepository{
+    -name: String
+    -area: double
+    -size: Size
+
+    +GreenSpace(String name, double area, Size size)
+    +validateGreenSpaceName(String greenSpaceName)
+    +getName(): String
+    +equals(Object o)
+    +toString() : String
 }
 
-class Vehicle{
-    -currentKm: double
-    -checkUpFrequency: double
-    -lastMaintenanceKm: double
-    +Vehicle(brand: String, model: String, tareWeight: double, \ngrossWeight: double, currentKm: double, registerDate: LocalDate, \nacquisitionDate: LocalDate, checkUpFrequency: double)
-    +getLastMaintenanceKm(): double
-    +getCurrentKm(): double
-    +getCheckUpFrequency(): double
-}
-
-VehicleNeedingCheckUpUI .> VehicleNeedingCheckUpController
-VehicleNeedingCheckUpController ..> Repositories : repositories
-Repositories -> "1" VehicleRepository
-VehicleNeedingCheckUpController ..> VehicleRepository : vehicleRepository
-VehicleRepository "1" --> "1*" Vehicle : vehicle
+CancelEntryUI .> AgendaController : controller
+AgendaController ..> Repositories : repositories
+'Repositories -down-> "1" GreenSpaceRepository
+Repositories --> Repositories: instance
+Repositories -down-> "1" OrganizationRepositiry
+OrganizationRepositiry "1" --> "1" Organization : has manager
+'GreenSpaceRepository "1" --> "1" Organization
+AgendaController "1" --> Organization
+Organization "1" --> "1..*" AgendaRepository : change entry status to cancel
+Repositories --> "1" AgendaRepository
 
 @enduml

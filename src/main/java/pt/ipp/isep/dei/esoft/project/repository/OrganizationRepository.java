@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ import java.util.Optional;
  * The OrganizationRepository class manages the storage and retrieval of organization information.
  * It provides methods to add, retrieve, and validate organizations.
  */
-public class OrganizationRepository {
+public class OrganizationRepository implements Serializable {
 
     private final List<Organization> organizations;
 

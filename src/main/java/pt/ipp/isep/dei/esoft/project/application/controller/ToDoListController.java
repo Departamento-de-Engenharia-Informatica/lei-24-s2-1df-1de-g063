@@ -5,10 +5,13 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.SerializationUtil;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ToDoListController {
+public class ToDoListController{
     private ToDoList toDoList;
     private AuthenticationRepository authenticationRepository;
 
@@ -41,5 +44,6 @@ public class ToDoListController {
     public Entry registerEntry (String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
         return new Entry(task, urgency, duration,greenSpace,status);
     }
+
 
 }

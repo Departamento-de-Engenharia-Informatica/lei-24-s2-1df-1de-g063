@@ -10,10 +10,13 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleToEntry
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 
 public class AssignVehiclePageController {
+    private final AgendaRepository agendaRepositories;
+
     @FXML
     private ListView<Vehicle> vehicleListView;
 
@@ -31,6 +34,7 @@ public class AssignVehiclePageController {
 
     public AssignVehiclePageController() {
         this.assignVehicleToEntryController = new AssignVehicleToEntryController();
+        this.agendaRepositories = Repositories.getInstance().getAgendaRepository();
     }
 
     @FXML
@@ -74,7 +78,7 @@ public void confirmSelection() {
         }
     }
 
-    if (allVehiclesAssigned && AgendaRepository.getEntries().get(choiceEntry).getVehicles().containsAll(selectedVehicles)) {
+    if (allVehiclesAssigned && agendaRepositories.getEntries().get(choiceEntry).getVehicles().containsAll(selectedVehicles)) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText("Vehicles assigned successfully");
