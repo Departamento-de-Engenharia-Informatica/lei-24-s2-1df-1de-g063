@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.domain.Status.valueOf;
 
-public class AgendaUI implements Runnable {
+public class PostponeEntryUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
     private final AgendaRepository agendaRepository;
@@ -31,12 +31,12 @@ public class AgendaUI implements Runnable {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
-    public AgendaUI() {
+    public PostponeEntryUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
         this.agendaRepository = Repositories.getInstance().getAgendaRepository();
         this.scanner = new Scanner(System.in);
-        this.status = Status.scheduled;
+        this.status = Status.postponed;
     }
 
     @Override
@@ -51,36 +51,26 @@ public class AgendaUI implements Runnable {
             this.duration = selectedEntry.getDuration();
             requestStartDate();
             calculateEndDate();
-            addEntryToAgenda(selectedEntry);
         }
     }
 
     private Entry requestEntry() {
         int contador = 0;
-        Status testStatus= Status.valueOf("pending");
+        Status testStatus= Status.valueOf("scheduled");
         choice = 0;
-        List<Entry> entries = toDoList.getEntriesWithStatus(testStatus);
-        System.out.println("\n--- Entry List -------------------------");
+        List<Entry> entries = agendaRepository.getEntriesWithStatus(testStatus);
+        System.out.println("\n--- Agenda List -------------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");
             return null;
         } else {
             for (Entry entry : entries) {
-                    System.out.printf("%d - %s%n", contador, entry);
-                    contador++;
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
             }
         }
         choice = requestUserChoice("entry");
         return entries.get(choice);
-    }
-
-    private void addEntryToAgenda(Entry entry) {
-        if (entry != null) {
-            AgendaRepository.addEntry(entry);
-            System.out.println("Entry added to the agenda.");
-        } else {
-            System.out.println("No entry was added to the agenda.");
-        }
     }
 
     private void requestStartDate() {
@@ -115,7 +105,7 @@ public class AgendaUI implements Runnable {
         if (selectedEntry != null) {
             selectedEntry.setStartDate(startDate);
             selectedEntry.setEndDate(endDate);
-            selectedEntry.setStatus(Status.scheduled);
+            selectedEntry.setStatus(Status.postponed);
             System.out.println("Entry has been updated and saved to the agenda.");
         } else {
             System.out.println("No entry to submit.");
@@ -125,15 +115,15 @@ public class AgendaUI implements Runnable {
 
     private void printData() {
         int contador = 0;
-        Status testStatus= Status.valueOf("scheduled");
+        Status testStatus= Status.valueOf("postponed");
         List<Entry> entries = agendaRepository.getEntriesWithStatus(testStatus);
-        System.out.println("\n--- Agenda Entries ---------------------");
+        System.out.println("\n--- Agenda (postponed) Entries ---------------------");
         if (entries.isEmpty()) {
             System.out.println("No entries registered yet.");
         } else {
             for (Entry entry : entries) {
-                    System.out.printf("%d - %s%n", contador, entry);
-                    contador++;
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
             }
         }
         System.out.println("----------------------------------------");
