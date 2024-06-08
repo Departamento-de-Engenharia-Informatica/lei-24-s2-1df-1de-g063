@@ -1,4 +1,4 @@
-# US008 - As an FM, I want to list the vehicles needing the check-up
+# US022 - As a GSM, I want to add a new entry in the Agenda.
 
 ## 3. Design - User Story Realization 
 
@@ -23,37 +23,26 @@ _**Note that SSD - Alternative One is adopted.**_
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Vehicles_Machines_Equipment promoted to Vehicle
+* Entry promoted to Entry
+* ToDoList promoted to ToDoList
+* Agenda promoted to AgendaRepository
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* VehicleNeedingCheckUpUI  
-* VehicleNeedingCheckUpController
+* AgendaUI  
+* AgendaController
 
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
+_**Note that SSD - Alternative One is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
-
-### Split Diagrams
-
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
-
-It uses Interaction Occurrence (a.k.a. Interaction Use).
-
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
-
-**Get Vehicles**
-
-![Sequence Diagram - Partial - Get Task Category List](svg/us008-sequence-diagram-partial-get-vehicles.svg)
-
+![us022-sequence-diagram-full.png](svg/us022-sequence-diagram-full.png)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![us022-class-diagram.svg](svg/us022-class-diagram.svg)

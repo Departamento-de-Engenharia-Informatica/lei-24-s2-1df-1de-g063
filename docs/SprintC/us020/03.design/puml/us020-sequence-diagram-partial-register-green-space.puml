@@ -4,20 +4,23 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 autonumber
-
 participant "RegisterGreenSpaceController" as CTRL
+participant "Organization" as Organization
+participant "greenSpace: \n GreenSpace" as GreenSpace
 
-activate CTRL
-    group register Green Spaces
-        CTRL -> GreenSpace : registerGreenSpace(name, area, size, managerName)
+ CTRL -> Organization : registerGreenSpace(name, area, size, managerName)
+            activate Organization
+            Organization -> GreenSpace : registerGreenSpace(name, area, size, managerName)
+            deactivate Organization
 
-             activate GreenSpace
+     activate GreenSpace
 
-                    GreenSpace -> CTRL : greenSpace
+            GreenSpace -> CTRL : greenSpace
 
-             deactivate GreenSpace
-    end
-    <-- CTRL : greenSpace
-deactivate CTRL
+     deactivate GreenSpace
+
+
+
+     deactivate CTRL
 
 @enduml
