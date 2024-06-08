@@ -12,7 +12,7 @@ participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
 participant "ToDoList: \n ToDoList" as TDL
-participant "agendaRepository: \n AgendaRepository" as Agenda
+participant "Entry" as Entry
 
 activate GSM
 
@@ -52,14 +52,12 @@ activate GSM
                       UI -> GSM : asks to type the intended date
                       GSM -> UI : selects the intended date
                       UI -> CTRL : entry
-                      CTRL -> Agenda : getAgendaRepository()
-               activate Agenda
+                      CTRL -> Entry : setStartDate(LocalDate date)
+                      activate Entry
+                      Entry -> CTRL : entry
 
-                      Agenda -> Agenda: addEntry(Entry entry)
 
-                 Agenda -> CTRL : entry
-
-          deactivate Agenda
+          deactivate Entry
 
                  CTRL -> UI : entry
 

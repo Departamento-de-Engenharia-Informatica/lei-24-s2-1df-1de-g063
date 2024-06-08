@@ -42,7 +42,7 @@ public class ToDoListPageController {
 
     public ToDoListPageController() {
         this.toDoListController = new ToDoListController();
-        this.greenSpaceRepository = new GreenSpaceRepository();
+        this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository(); // Use the singleton instance
     }
 
     @FXML
@@ -101,8 +101,8 @@ public class ToDoListPageController {
     public void initialize() {
         selectUrgency.getItems().setAll(Urgency.values());
         selectGreenSpace.getItems().clear();
-        selectGreenSpace.getItems().setAll(Repositories.getInstance().getGreenSpaceRepository().getGreenSpaces());
-        System.out.println("Green spaces: " + GreenSpaceRepository.getInstance().getGreenSpaces());
+        selectGreenSpace.getItems().setAll(greenSpaceRepository.getGreenSpaces()); // Use the singleton instance
+        System.out.println("Green spaces: " + greenSpaceRepository.getGreenSpaces());
     }
     @FXML
     protected void handleGOBACK (ActionEvent event) {

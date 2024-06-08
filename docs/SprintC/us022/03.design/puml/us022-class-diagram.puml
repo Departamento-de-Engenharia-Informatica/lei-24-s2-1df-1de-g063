@@ -43,27 +43,19 @@ class Repositories{
     + getInstance() : Repositories
     + getGreenSpaceRepository() : GreenSpaceRepository
 }
-class ToDoList {}
-class Agenda{
-    +GreenSpaceRepository()
-    +getInstance() : GreenSpaceRepository
-    +addGreenSpace(GreenSpace greenSpace)
-    +List<GreenSpace> getGreenSpaces()
-}
-class Organization{}
 
+class Organization{}
+class Entry{}
 
 AgendaUI .> AgendaController : controller
 AgendaController ..> Repositories : repositories
-Repositories -> "1" Agenda : list of entries
 Repositories --> ToDoList : list of entries
 ToDoList <-down- AgendaController
-AgendaController-->Agenda
 Repositories -down-> "1" OrganizationRepositiry
 OrganizationRepositiry "1" --> "1" Organization : has manager
-Agenda "1..*" <-- "1" Organization : register entry
 AgendaController "1" --> Organization
 Repositories --> Repositories: instance
-
+Organization "1" --> "1" Entry : date
+Organization "1" --> "1" ToDoList: has information
 
 @enduml
