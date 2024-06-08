@@ -54,6 +54,6 @@ AgendaRepository  -->  Organization : gets entry
 Organization "1" --> "*" Entry : sets team to entry
 AssignTeamToEntryController  .>  Organization : organization
 AssignTeamToEntryController  ..>  EmailSenderInterface : emailSender
-EmailSenderInterface <|-- Mailer
+EmailSenderInterface <|.. Mailer
 
 @enduml

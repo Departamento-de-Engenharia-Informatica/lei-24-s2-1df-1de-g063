@@ -1,286 +1,304 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up
+# US023 - As a GSM, I want to assign a Team to an entry in the Agenda.
 
 ## 4. Tests
 
-**Test 1:** Ensures that a Vehicle object is instantiated correctly with all its properties set to the expected values.
+**Test 1:** Ensures that a Team object is instantiated correctly with all its properties set to the expected values.
 
-    @Test
-    void ensureVehicleIsCreatedSuccessfully() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
+      @Test
+    void testSetTeam() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        Team team = new Team();
+
+        // Execute
+        entry.setTeam(team);
+
+        // Assert
+        assertEquals(team, entry.getTeam(), "Team should be set to the entry");
     }
 
 
-**Test 2:** Ensures that when a Vehicle object is initially created, its maintenance status is null.
+**Test 2:** Ensures that an email is sent successfully.
 
     @Test
-    void ensureMaintenanceIsNullInitially() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertNull(vehicle.getMaintenance());
+    void sendEmail() throws IOException {
+        // Setup
+        Mailer mailer = new Mailer();
+
+        // Execute
+        boolean result = mailer.sendEmail("from@example.com", "to@example.com", "Test Subject", "Test Body");
+
+        // Assert
+        assertTrue(result, "Email should be sent successfully");
     }
 
-
-**Test 3:** Verifies that when a Vehicle object is first created, its last maintenance kilometer reading is initially set to zero.
+**Test 3:** Verifies that the property is not null.
 
     @Test
-    void ensureLastMaintenanceKmIsInitiallyZero() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(0.0, vehicle.getLastMaintenanceKm());
-    }
+    void testGetProperty() {
+    // Setup
+    ConfigProperties config = new ConfigProperties();
+    
+            // Execute
+            String host = config.getProperty("host");
+    
+            // Assert
+            assertNotNull(host, "Host property should not be null");
+        }
 
-
-**Test 4:** Confirms that the getBrand() method of a Vehicle object returns the correct brand name, which is "Toyota" in this case.
-
-    @Test
-    void ensureGetBrandReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals("Toyota", vehicle.getBrand());
-    }
-
-
-**Test 5:** Ensures that the getCurrentKm() method of a Vehicle object returns the correct current kilometers.
+**Test 4:** Ensures that an invalid property is null.
 
     @Test
-    void ensureGetCurrentKmReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(50000.0, vehicle.getCurrentKm());
-    }
-
-
-**Test 6:** Verifies that the getCheckUpFrequency() method of a Vehicle object returns the correct value.
-
-    @Test
-    void ensureGetCheckUpFrequencyReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(10000.0, vehicle.getCheckUpFrequency());
-    }
-
-**Test 7:** Ensures that when the setMaintenance() method is called on a Vehicle object with the argument "Regular checkup".
-
-    @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
-    }
-
-
-**Test 8:** Verifies that when the setLastMaintenanceKm() method is called on a Vehicle object with the argument 55000.0
-
-    @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
-    }
-
+    void testGetPropertyWithInvalidKey() {
+    // Setup
+    ConfigProperties config = new ConfigProperties();
+    
+            // Execute
+            String invalid = config.getProperty("invalid");
+    
+            // Assert
+            assertNull(invalid, "Invalid property should be null");
+        }
 
 ## 5. Construction (Implementation)
 
-### Class VehicleNeedingCheckUpController
+### Class AssignTeamToEntryController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleNeedingCheckUpController {
-    private VehicleRepository vehicleRepository;
-    private AuthenticationRepository authenticationRepository;
+/**
+ * Controller class for assigning teams to entries.
+ */
+public class AssignTeamToEntryController {
+    private TeamRepository teamRepository;
 
-    public VehicleNeedingCheckUpController(){
-        this.vehicleRepository = VehicleRepository.getInstance();
-        getAuthenticationRepository();
+    private AgendaRepository agendaRepository;
+    /**
+     * Constructor for AssignTeamToEntryController.
+     * Initializes the team repository.
+     */
+    public AssignTeamToEntryController(){
+        this.teamRepository =  getTeamRepository();
+        this.agendaRepository=Repositories.getInstance().getAgendaRepository();
     }
 
-    public VehicleNeedingCheckUpController(VehicleRepository vehicleRepository,
-                                           AuthenticationRepository authenticationRepository) {
-        this.vehicleRepository = vehicleRepository;
-        this.authenticationRepository = authenticationRepository;
+    /**
+     * Retrieves all teams from the team repository.
+     * @return a list of all teams.
+     */
+    public List<Team> getTeams() {
+        return teamRepository.getTeams();
     }
 
-    public VehicleRepository getVehicleRepository() {
-        if (vehicleRepository == null) {
-            Repositories repositories = Repositories.getInstance();
+    /**
+     * Retrieves a specific team from the team repository by index.
+     * @param index the index of the team in the list.
+     * @return the team at the specified index.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    public Team getTeams(int index) {
+        return teamRepository.getTeams(index);
+    }
 
-            //Get the TaskCategoryRepository
-            vehicleRepository = repositories.getVehicleRepository();
+    public List<String> getEntries() {
+        List<Entry> entries = agendaRepository.getEntries();
+        List<String> entriesWithFlags = new ArrayList<>();
+        for (Entry entry : entries) {
+            String entryString = entry.toString();
+            if (entry.getTeam() != null) {
+                entryString += " (Team assigned)";
+            }
+            entriesWithFlags.add(entryString);
         }
-        return vehicleRepository;
+        return entriesWithFlags;
     }
 
-    public List<Vehicle> getVehiclesNeedingCheckUp() {
-        List<Vehicle> vehicles = vehicleRepository.getVehicles();
-        List<Vehicle> vehiclesNeedingCheckUp = new ArrayList<>();
 
-        for (Vehicle vehicle : vehicles) {
-            double currentKm = vehicle.getCurrentKm();
-            double checkUpFrequency = vehicle.getCheckUpFrequency();
-            double lastMaintenanceKm = vehicle.getLastMaintenanceKm();
 
-            if (currentKm - lastMaintenanceKm >= checkUpFrequency) {
-                vehiclesNeedingCheckUp.add(vehicle);
+
+    public void attributeTeamToEntry(int choiceTeam, int choiceEntry){
+        Team selectedTeam = teamRepository.getTeams(choiceTeam);
+        Entry selectedEntry = agendaRepository.getEntries(choiceEntry);
+        selectedEntry.setTeam(selectedTeam);
+        List<Collaborator> collaborators = selectedTeam.getMembers();
+        List<String> emailAddresses = new ArrayList<>();
+        for (Collaborator collaborator : collaborators) {
+            emailAddresses.add(collaborator.getEmail());
+        }
+        Mailer mailer = new Mailer();
+        String subject = "Team assignment";
+        String message = "You have been assigned to a team for the entry with the following details:\n" +
+                "Task: " + selectedEntry.getTask() + "\n" +
+                "Team Members: " + selectedEntry.getTeam() + "\n" +
+                "Urgency: " + selectedEntry.getUrgency() + "\n" +
+                "Duration: " + selectedEntry.getDuration() + "\n" +
+                "Green Space: " + selectedEntry.getGreenSpace().getName() + "\n" +
+                "Status: " + selectedEntry.getStatus() + "\n" +
+                "Start Date: " + selectedEntry.getStartDate() + "\n" +
+                "End Date: " + selectedEntry.getEndDate();
+        for (String emailAddress : emailAddresses) {
+            try {
+                System.out.println("Sending email to " + emailAddress);
+                Repositories.getInstance().getEmailSender().sendEmail(System.getProperty("username"),emailAddress, subject, message);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
-        return vehiclesNeedingCheckUp;
     }
 
-    public AuthenticationRepository getAuthenticationRepository() {
-        if (authenticationRepository == null) {
+
+    /**
+     * Retrieves the team repository.
+     * If the team repository is null, it initializes it.
+     * @return the team repository.
+     */
+    private TeamRepository getTeamRepository(){
+        if(teamRepository == null){
             Repositories repositories = Repositories.getInstance();
-
-            //Get the AuthenticationRepository
-            authenticationRepository = repositories.getAuthenticationRepository();
+            teamRepository = repositories.getTeamRepository();
         }
-        return authenticationRepository;
+        return teamRepository;
     }
-
 }
 ```
 
-### Class VehicleRepository
+### Class Mailer
 
 ```java
-public class VehicleRepository {
-    private static VehicleRepository instance;
-    private final List<Vehicle> vehicles;
+package pt.ipp.isep.dei.esoft.project.application.controller;
 
-    public VehicleRepository() {
-        vehicles = new ArrayList<>();
-    }
+import pt.ipp.isep.dei.esoft.project.component.EmailSender;
 
-    public static VehicleRepository getInstance() {
-        if (instance == null) {
-            instance = new VehicleRepository();
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.List;
+
+public class Mailer implements EmailSender {
+    // ...
+    ConfigProperties config = new ConfigProperties();
+    String host = config.getProperty("host");
+    String port = config.getProperty("port");
+    String username = config.getProperty("username");
+    String password = config.getProperty("password");
+
+    public void sendEmailToMultipleRecipients(List<String> recipients, String subject, String text) {
+        // Set up the SMTP server properties.
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        // Create the Session object.
+        Session session = Session.getInstance(properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            // Create a default MimeMessage object.
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("from@example.com"));
+
+            // Add each recipient to the message.
+            for (String recipient : recipients) {
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            }
+
+            message.setSubject(subject);
+            message.setText(text);
+
+            // Send the message.
+            Transport.send(message);
+
+            System.out.println("Mail Sent Successfully!");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
-        return instance;
-    }
-
-    public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
-    }
-
-    public List<Vehicle> getVehicles() {
-        return List.copyOf(vehicles);
-    }
-
-}
-
-```
-### Class Vehicle
-
-```java
-public class Vehicle {
-    private final String brand;
-    private final String model;
-    private final double tareWeight;
-    private final double grossWeight;
-    private double currentKm;
-    private final LocalDate registerDate;
-    private final LocalDate acquisitionDate;
-    private final double checkUpFrequency;
-    private double lastMaintenanceKm = 0;
-    private String maintenance;
-
-    public Vehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
-                   LocalDate registerDate, LocalDate acquisitionDate, double checkUpFrequency) {
-        this.brand = brand;
-        this.model = model;
-        this.tareWeight = tareWeight;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.checkUpFrequency = checkUpFrequency;
-    }
-
-
-    public String getMaintenance() {
-        return maintenance;
-    }
-
-    public void setMaintenance(String maintenance) {
-        this.maintenance = maintenance;
-    }
-
-    public double getLastMaintenanceKm() {
-        return lastMaintenanceKm;
-    }
-
-    public void setLastMaintenanceKm(double lastMaintenanceKm) {
-        this.lastMaintenanceKm = lastMaintenanceKm;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public double getCurrentKm(){
-        return currentKm;
-    }
-
-    public double getCheckUpFrequency() {
-        return checkUpFrequency;
     }
 
     @Override
-    public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", tareWeight=" + tareWeight +
-                ", grossWeight=" + grossWeight +
-                ", currentKm=" + currentKm +
-                ", registerDate='" + registerDate + '\'' +
-                ", acquisitionDate='" + acquisitionDate + '\'' +
-                ", checkUpFrequency='" + checkUpFrequency + '\'' +
-                '}';
+    public boolean sendEmail(String from, String to, String subject, String body) throws IOException {
+        sendEmailToMultipleRecipients(List.of(to), subject, body);
+        return true;
+    }
+}
+
+```
+### Class ConfigProperties
+
+```java
+package pt.ipp.isep.dei.esoft.project.application.controller;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigProperties {
+    private final Properties configProp = System.getProperties();
+
+    public ConfigProperties() {
+        try (InputStream in = this.getClass().getClassLoader().getResourceAsStream("config.properties")) {
+            configProp.load(in);
+        } catch (IOException e) {
+            System.out.println("[WARNING] Using default properties!");
+            e.printStackTrace();
+        }
+    }
+
+    public String getProperty(String key) {
+        return configProp.getProperty(key);
     }
 }
 ```
 
-## 6. Integration and Demo
-Simulate how the VehicleNeedingCheckUpController interacts with the VehicleRepository to retrieve vehicles that need check-up:
+### Interface EmailSender
 
-* We instantiate the VehicleRepository.
-* We create a VehicleNeedingCheckUpController with the repositories.
-* We add a vehicle to the repository and set its last maintenance kilometer reading.
-* We call the getVehiclesNeedingCheckUp() method of the controller to retrieve vehicles needing check-up.
-* We print the vehicles needing check-up.
+```java
+package pt.ipp.isep.dei.esoft.project.component;
+
+import java.io.IOException;
+
+public interface EmailSender {
+
+    boolean sendEmail(String from, String to, String subject, String body) throws IOException;
+
+
+}
+
+```
+
+## 6. Integration and Demo
+
+In this section, we simulate how the `AssignTeamToEntryController` interacts with the `TeamRepository` and `AgendaRepository` to assign a team to an entry:
+
+* First, we instantiate the `TeamRepository` and `AgendaRepository`.
+* Next, we create an `AssignTeamToEntryController` with the repositories.
+* We then add a team and an entry to the repositories.
+* We call the `attributeTeamToEntry` method of the controller to assign the team to the entry.
+* The controller then gathers the email addresses of all team members and sends them an email notification about the assignment.
+* Finally, we verify that the team has been assigned to the entry.
+
+This completes the integration and demo of how the `AssignTeamToEntryController` interacts with the `TeamRepository` and `AgendaRepository` to assign a team to an entry, and how the `Mailer` is used to send email notifications to the team members.
 
 ## 7. Observations
 
