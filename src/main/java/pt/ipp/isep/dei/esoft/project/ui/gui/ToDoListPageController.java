@@ -15,10 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.domain.Entry;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.Status;
-import pt.ipp.isep.dei.esoft.project.domain.Urgency;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -38,6 +35,7 @@ public class ToDoListPageController {
     private ChoiceBox<Urgency> selectUrgency;
     @FXML
     private ChoiceBox<GreenSpace> selectGreenSpace;
+
     private final GreenSpaceRepository greenSpaceRepository;
 
     public ToDoListPageController() {

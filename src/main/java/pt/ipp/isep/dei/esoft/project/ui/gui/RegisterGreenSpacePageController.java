@@ -34,6 +34,9 @@ public class RegisterGreenSpacePageController {
     private TextField managerField;
     @FXML
     private TextField areaField;
+    @FXML
+    private ChoiceBox<Size> selectSize;
+
     private GreenSpaceRepository greenSpaceRepository;
 
     public RegisterGreenSpacePageController() {
@@ -72,9 +75,14 @@ public class RegisterGreenSpacePageController {
                 return;
             }
 
-            Size size = getSize(area);
+            Size size = selectSize.getValue();
+            if (size == null) {
+                showAlert("Please select a size.");
+                return;
+            }
+
+//            Size size = getSize(area);
             GreenSpace greenSpace = new GreenSpace(name, area, size, managerName);
-//            greenSpaceRepository.addGreenSpace(greenSpace);
             controller.getGreenSpaceRepository().addGreenSpace(greenSpace);
             System.out.println(greenSpaceRepository.getGreenSpaces());
             greenSpaceListView.getItems().add(greenSpace);
@@ -93,19 +101,10 @@ public class RegisterGreenSpacePageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    public Size getSize(double area) {
-        if (area > 0) {
-            if (area < 50.0) {
-                return Size.Garden;
-            } else if (area <= 200.0) {
-                return Size.Medium_Size;
-            } else {
-                return Size.Large_Size;
-            }
-        } else {
-            throw new NumberFormatException("Area must be a positive integer");
-        }
+    @FXML
+    public void initialize() {
+        selectSize.getItems().setAll(Size.values());
+        System.out.println("Green spaces: " + GreenSpaceRepository.getInstance().getGreenSpaces());
     }
 
     @FXML

@@ -55,7 +55,7 @@ public class GSMUI {
         }
     }
     @FXML
-    protected void handleRegisterGreenSpacePageController(ActionEvent event) {
+    protected void handleRegisterGreenSpacePageController (ActionEvent event) {
         try {
             // Load the FXML file for the AssignTeamPage
             Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/RegisterGreenSpacePage.fxml"));

@@ -31,6 +31,7 @@ public class Bootstrap implements Runnable {
         organization.addEmployee(new Employee("admin@this.app"));
         organization.addEmployee(new Employee("employee@this.app"));
         organization.addEmployee(new Employee("hrm@this.app"));
+        organization.addEmployee(new Employee("gsm@this.app"));
         organizationRepository.add(organization);
     }
 
