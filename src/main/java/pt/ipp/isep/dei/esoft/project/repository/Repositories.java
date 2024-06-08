@@ -22,9 +22,8 @@ public class Repositories implements Serializable {
     private final VehicleRepository vehicleRepository;
     private final GreenSpaceRepository greenSpaceRepository;
     private final ToDoList toDoList;
-
     private final TeamRepository teamRepository;
-    private EmailSender emailSender;
+    private transient EmailSender emailSender;
 
     private Repositories(){
         ConfigProperties properties = new ConfigProperties();
