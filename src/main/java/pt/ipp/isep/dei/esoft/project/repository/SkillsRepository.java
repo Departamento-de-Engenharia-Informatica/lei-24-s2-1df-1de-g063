@@ -47,15 +47,16 @@ public class SkillsRepository implements Serializable {
      * @param skillName the name of the skill to retrieve
      * @return the skill with the specified name, or null if not found
      */
-    public Skill getSkillByName(String skillName) {
-        for (Skill skill : skills) {
-            if (skill.getName().equalsIgnoreCase(skillName)) {
-                return skill;
-            }
+   public Skill getSkillByName(String skillName) {
+    List<Skill> skills = getSkills();
+    for (Skill skill : skills) {
+        if (skill.getName().trim().equalsIgnoreCase(skillName.trim())) {
+            return skill;
         }
-        // Return null if no skill with the given name is found
-        return null;
     }
+    // Return null if no skill with the given name is found
+    return null;
+}
 
     /**
      * Retrieves a copy of all skills stored in the repository.

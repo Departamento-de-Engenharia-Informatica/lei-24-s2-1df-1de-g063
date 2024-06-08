@@ -75,7 +75,7 @@ public class GenerateTeamController {
      * @return a Team object representing the proposed team, or null if no suitable team can be formed
      */
     public Team generateTeamProposal(int minTeamSize, int maxTeamSize, List<Skill> requiredSkills) {
-        List<Collaborator> allCollaborators = collaboratorRepository.getCollaborators();
+        List<Collaborator> allCollaborators = CollaboratorRepository.getInstance().getCollaborators();
         List<Collaborator> filteredCollaborators = filterCollaboratorsBySkills(allCollaborators, requiredSkills);
 
         if (filteredCollaborators.size() < minTeamSize) {
@@ -99,10 +99,16 @@ public class GenerateTeamController {
      * @param name the name of the skill
      * @return the skill if found, null otherwise
      */
-    public Skill getSkillByName(String name) {
-        return skillsRepository.getSkillByName(name);
+    public Skill getSkillByName(String skillName) {
+    List<Skill> skills = SkillsRepository.getInstance().getSkills();
+    for (Skill skill : skills) {
+        if (skill.getName().trim().equalsIgnoreCase(skillName.trim())) {
+            return skill;
+        }
     }
-
+    // Return null if no skill with the given name is found
+    return null;
+}
     /**
      * Adds the team to the TeamRepository.
      *
