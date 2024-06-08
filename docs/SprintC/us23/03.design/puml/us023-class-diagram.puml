@@ -12,18 +12,10 @@ class AssignTeamToEntryUI {
 
 }
 
-
 class TeamRepository {
     -teams: List<Team>
-    +TeamRepository()
-    +getInstance(): TeamRepository
     +getTeams(): List<Team>
     +getTeams(index: int): Team
-}
-
-class Repositories {
-    +getInstance(): Repositories
-    +getTeamRepository(): TeamRepository
 }
 
 class AgendaRepository {
@@ -36,22 +28,32 @@ class Entry {
     -team: Team
     +setTeam(team: Team)
 }
+
 class Organization {
 }
+
 class OrganizationRepository{
+    +getOrganization(): Organization
 }
 
-AssignTeamToEntryController "1" .> "1" Repositories : Repositories
-AssignTeamToEntryUI .>  AssignTeamToEntryController
-Repositories "1" --> "1" TeamRepository : TeamRepository
-Repositories "1" -> "1" AgendaRepository : AgendaRepository
-TeamRepository "1" --> "1" Organization
-Repositories --> OrganizationRepository
-OrganizationRepository "1" --> "1" Organization
-AgendaRepository "1" --> "1" Organization
-Repositories -> Repositories : Instance
-Organization "1" --> "*" Entry
-AssignTeamToEntryController "1" -> "1" Organization
+interface EmailSenderInterface {
+    +sendEmail(entry: Entry)
+}
 
+class Mailer {
+    +sendEmail(entry: Entry)
+}
+
+AssignTeamToEntryUI .>  AssignTeamToEntryController
+AssignTeamToEntryController  ..>  TeamRepository : TeamRepository
+AssignTeamToEntryController  .> AgendaRepository : AgendaRepository
+TeamRepository  -->  Organization : gets team
+AssignTeamToEntryController  ..>  OrganizationRepository
+OrganizationRepository  -->  Organization : has manager
+AgendaRepository  -->  Organization : gets entry
+Organization "1" --> "*" Entry : sets team to entry
+AssignTeamToEntryController  .>  Organization : organization
+AssignTeamToEntryController  ..>  EmailSenderInterface : emailSender
+EmailSenderInterface <|-- Mailer
 
 @enduml

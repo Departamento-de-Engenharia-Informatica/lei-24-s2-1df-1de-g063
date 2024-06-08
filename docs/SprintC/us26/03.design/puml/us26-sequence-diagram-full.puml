@@ -6,35 +6,32 @@ skinparam shadowing false
 autonumber
 
 actor "Green Space Manager" as GSM
-participant ":AssignTeamToEntryUI" as UI
-participant ":AssignTeamToEntryCTRL" as CTRL
-participant "teamRepository:\nTeamRepository" as TeamRepository
+participant ":AssignVehicleToEntryUI" as UI
+participant ":AssignVehicleToEntryCTRL" as CTRL
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "agendaRepository:\nAgendaRepository" as AgendaRepository
 participant "organization:\nOrganization" as Org
 participant "organizationRepository:\nOrganizationRepository" as OrgRepository
-participant "team:\nTeam" as Team
+participant "vehicle:\nVehicle" as Vehicle
 participant "entry:\nEntry" as Entry
-participant "EmailSenderInterface" as EmailSender
-participant "mailer:\nMailer" as Mailer
-participant "config.properties" as Config
 
 activate GSM
-    GSM -> UI : Wants to assign team to entry
+    GSM -> UI : Wants to assign vehicles to entry
     activate UI
         UI --> CTRL** : create
-        UI -> CTRL : getTeams()
+        UI -> CTRL : getVehicles()
         activate CTRL
-            CTRL -> TeamRepository : getTeams()
-                activate TeamRepository
-                    TeamRepository --> CTRL : Teams
-                deactivate TeamRepository
-        CTRL --> UI : Teams
+            CTRL -> VehicleRepository : getVehicles()
+                activate VehicleRepository
+                    VehicleRepository --> CTRL : Vehicles
+                deactivate VehicleRepository
+        CTRL --> UI : Vehicles
         deactivate CTRL
-        UI -> GSM : shows teams
+        UI -> GSM : shows vehicles
         deactivate UI
-        GSM -> UI : selects team
+        GSM -> UI : selects vehicles
         activate UI
-        UI --> UI : keepTeam(selectedTeam)
+        UI --> UI : keepVehicles(selectedVehicles)
         UI -> CTRL : getEntries()
 
       activate CTRL
@@ -52,7 +49,7 @@ activate GSM
         GSM -> UI : selects entry
         activate UI
         UI --> UI : keepEntry(selectedEntry)
-        UI -> CTRL : attributeTeamToEntry(selectedTeam, selectedEntry)
+        UI -> CTRL : attributeVehiclesToEntry(selectedVehicles, selectedEntry)
         activate CTRL
             CTRL -> OrgRepository : getOrganization()
                 activate OrgRepository
@@ -60,25 +57,13 @@ activate GSM
                 deactivate OrgRepository
 
 
-            CTRL -> Org : setTeam(selectedTeam)
+            CTRL -> Org : setVehicles(selectedVehicles)
             activate Org
-            Org --> Entry : setTeam(selectedTeam)
+            Org --> Entry : setVehicles(selectedVehicles)
             deactivate Org
             activate Entry
             Entry --> CTRL : Entry updatedEntry
             deactivate Entry
-
-            CTRL -> EmailSender : sendEmail(updatedEntry)
-            activate EmailSender
-            EmailSender -> Mailer : sendEmail(updatedEntry)
-            deactivate EmailSender
-            activate Mailer
-                Mailer -> Config : getProperties()
-                activate Config
-                    Config --> Mailer : properties
-                deactivate Config
-                Mailer --> CTRL : (In)Success of email
-            deactivate Mailer
 
         CTRL --> UI : (In)Success and updatedEntry
 

@@ -1,0 +1,50 @@
+@startuml
+
+class AssignVehicleToEntryController {
+    -vehicleRepository: VehicleRepository
+    +AssignVehicleToEntryController()
+    +getVehicles(): List<Vehicle>
+    +getVehicles(index: int): Vehicle
+    -getVehicleRepository(): VehicleRepository
+}
+
+class AssignVehicleToEntryUI {
+
+}
+
+class VehicleRepository {
+    -vehicles: List<Vehicle>
+    +getVehicles(): List<Vehicle>
+    +getVehicles(index: int): Vehicle
+}
+
+class AgendaRepository {
+    -entries: List<Entry>
+    +getEntries(): List<Entry>
+    +getEntries(index: int): Entry
+}
+
+class Entry {
+    -vehicles: List<Vehicle>
+    +setVehicles(vehicles: List<Vehicle>)
+}
+
+
+class Organization {
+}
+
+class OrganizationRepository{
+    +getOrganization(): Organization
+}
+
+AssignVehicleToEntryUI .>  AssignVehicleToEntryController
+AssignVehicleToEntryController  ..>  VehicleRepository : VehicleRepository
+AssignVehicleToEntryController  .> AgendaRepository : AgendaRepository
+VehicleRepository  -->  Organization : gets vehicle
+AssignVehicleToEntryController  ..>  OrganizationRepository
+OrganizationRepository  -->  Organization : has manager
+AgendaRepository  -->  Organization : gets entry
+Organization "1" --> "*" Entry : sets vehicle to entry
+AssignVehicleToEntryController  .>  Organization : organization
+
+@enduml
