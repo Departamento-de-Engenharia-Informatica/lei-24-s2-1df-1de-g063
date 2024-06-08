@@ -1,27 +1,260 @@
 @startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
 skinparam classAttributeIconSize 0
 
-class ApplicationSession
-{
-  +static getInstance()
-  +getCurrentSession()
+'left to right direction
+
+class GreenSpaceListUI{
+    -managerName: String
+    -greenSpaceRepository: GreenSpaceRepository
+    -greenSpaceListController: GreenSpaceListController;
+    +GreenSpaceListUI()
+    -listGreenSpaces()
+    -sortGreenSpaces()
 }
 
-class UserSession
-{
-  +isLoggedInWithRole(USER_ROLE)
+class GreenSpaceListController{
+    -greenSpaceRepository: GreenSpaceRepository
+    -organization: Organization
+    -repositories: Repositories
+    +GreenSpaceListController(managerName: String)
+    -getGreenSpaceRepository()
+    -getSortingAlgorithm()
 }
 
-class "{NameOfUC}Controller" {
-    + {NameOfUC}Controller()
-    + methodX(...)
+class Organization{
+    - userName: String
+    - GreenSpaces : List<GreenSpace>
 }
 
-class "{NameOfUC}UI" {
+class GreenSpace{
+    - name: String
+    - area: double
+    - size: Size
+    - managerName: String
+    + GreenSpace(name: String, area: double, size: Size, managerName: String)
+    + getName()
+    + getManagerName()
+    + getArea()
 }
 
-"{NameOfUC}UI" ..> "{NameOfUC}Controller"
-"{NameOfUC}Controller" ..> ApplicationSession
-"{NameOfUC}Controller" ..> UserSession
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository()
+    + getOrganizationRepository()
+}
+
+class GreenSpaceRepository{
+    - GreenSpaces : List<GreenSpace>
+    + getGreenSpaces() : List<GreenSpace>
+}
+
+class OrganizationRepository{
+    + getUserName()
+}
+
+class RegisterGreenSpaceUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+class RegisterGreenSpaceController{
+
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository() : GreenSpaceRepository
+}
+
+'class GreenSpaceRepository{
+ '   +GreenSpaceRepository()
+  '  +getInstance() : GreenSpaceRepository
+   ' +addGreenSpace(GreenSpace greenSpace)
+    '+List<GreenSpace> getGreenSpaces()
+'}
+class Organization{}
+class GreenSpace{
+    -name: String
+    -area: double
+    -size: Size
+
+    +GreenSpace(String name, double area, Size size)
+    +validateGreenSpaceName(String greenSpaceName)
+    +getName(): String
+    +equals(Object o)
+    +toString() : String
+}
+
+RegisterGreenSpaceUI .> RegisterGreenSpaceController : controller
+RegisterGreenSpaceController ..> Repositories : repositories
+'Repositories -down-> "1" GreenSpaceRepository
+Repositories --> Repositories: instance
+Repositories -down-> "1" OrganizationRepositiry
+OrganizationRepositiry "1" --> "1" Organization : has manager
+'GreenSpaceRepository "1" --> "1" Organization
+RegisterGreenSpaceController "1" --> Organization
+Organization "1" --> "1..*" GreenSpace : register Green Space
+
+
+GreenSpaceListUI .> GreenSpaceListController
+GreenSpaceListController ..> Organization
+Organization "1" --> "1..*" GreenSpace:greenSpace
+GreenSpaceListController .> Repositories: repositories
+Repositories "1" --> "1" GreenSpaceRepository: greenSpaceRepository
+Organization "1" <- "1" GreenSpaceRepository : greenSpace
+Repositories "1" --> "1" OrganizationRepository: organizationRepository
+Organization "1" <- "1" OrganizationRepository: userName
+Repositories "1" -> "1" Repositories : getInstance()
+class TaskAssignedToCollaboratorUI{
+    - managerName: String
+    - controller: TaskAssignedToCollaboratorController
+    + requestData()
+}
+
+class TaskAssignedToCollaboratorController{
+    - agendaRepository: AgendaRepository
+    - managerName: String
+    + TaskAssignedToCollaboratorController(managerName: String)
+    +getEntriesBetweenDates(startDate: LocalDate, endDate: LocalDate,status: String, name: String)
+}
+
+class Organization{
+    - name: String
+    - agenda: List<Entry>
+}
+
+class OrganizationRepository{
+    + getUserName()
+}
+
+class AgendaRepository{
+    - agenda: List<Entry>;
+    + getEntries()
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgendaRepository()
+    + getOrganizationRepository()
+}
+
+class Entry{
+    - task: String
+    - urgency: Urgency
+    - duration: int
+    - greenSpace: GreenSpace
+    - status: Status
+    - startDate: LocalDate
+    - endDate: LocalDate
+    - team: Team
+    + Entry(task: String, urgency: Urgency, duration: int, greenSpace: GreenSpace, status: Status)
+    + getTask()
+    + getUrgency()
+    + getDuration()
+    + getGreenSpace()
+    + getStatus()
+    + getStartDate()
+    + getEndDate()
+    + getTeam()
+}
+
+TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
+TaskAssignedToCollaboratorController ..> Organization
+TaskAssignedToCollaboratorController .> Repositories: repositories
+Repositories "1" --> "1" OrganizationRepository: organizationRepository
+Repositories "1"--> "1" AgendaRepository: agendaRepository
+OrganizationRepository "1" --> "1" Organization: userName
+AgendaRepository "1" --> "1" Organization: agenda
+Organization "1" --> "1..*"Entry: entry
+Repositories --> Repositories : getInstance()
+class CompletionTaskUI{
+    - agenda: AgendaRepository
+    - completionTaskController: CompletionTaskController
+    + CompletionTaskUI()
+    + requestData()
+    + submitData()
+}
+
+class CompletionTaskController{
+    - agenda: AgendaRepository
+    + CompletionTaskController()
+    + markAsCompleted(entry: Entry)
+    + getEntries()
+}
+
+class Organization{
+    - name: String
+    - agenda: List<Entry>
+}
+
+class OrganizationRepository{
+    + getUserName()
+}
+
+class AgendaRepository{
+    - agenda: List<Entry>;
+    + getEntriesWithStatus()
+}
+
+class Repositories{
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgendaRepository()
+    + getOrganizationRepository()
+}
+
+class Entry{
+    - task: String
+    - urgency: Urgency
+    - duration: int
+    - greenSpace: GreenSpace
+    - status: Status
+    - startDate: LocalDate
+    - endDate: LocalDate
+    - team: Team
+    + Entry(task: String, urgency: Urgency, duration: int, greenSpace: GreenSpace, status: Status)
+    + getTask()
+    + getUrgency()
+    + getDuration()
+    + getGreenSpace()
+    + getStatus()
+    + getStartDate()
+    + getEndDate()
+    + setStatus(status: Status)
+}
+
+CompletionTaskUI .> CompletionTaskController
+CompletionTaskController ..> Organization
+CompletionTaskController .> Repositories: repositories
+Repositories "1" --> "1"OrganizationRepository: organizationRepository
+Repositories "1"--> "1"AgendaRepository: agendaRepository
+OrganizationRepository"1" --> "1"Organization: userName
+AgendaRepository"1" --> "1"Organization: agenda
+Organization"1" --> "1..*"Entry: entry
+Repositories --> Repositories : getInstance()
+
 
 @enduml
