@@ -13,14 +13,6 @@ activate CTRL
 
              activate GreenSpace
 
-                    GreenSpace -> GreenSpaceRep : addGreenSpace(GreenSpace greenSpace)
-
-             activate GreenSpaceRep
-
-                    GreenSpaceRep -> GreenSpace : greenSpace
-
-             deactivate GreenSpaceRep
-
                     GreenSpace -> CTRL : greenSpace
 
              deactivate GreenSpace

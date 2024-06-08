@@ -12,7 +12,7 @@ participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
 participant "greenSpace: \n GreenSpace" as GreenSpace
-participant "greenSpaceRepository: \n GreenSpaceRepository" as GreenSpaceRep
+participant "Size" as Size
 
 activate GSM
 
@@ -20,16 +20,23 @@ activate GSM
 
      activate UI
 
-            UI -> GSM : requests a name
-            GSM -> UI : types name
+            UI -> GSM : requests data (manager's name)
+            GSM -> UI : types requested data (manager's name)
+            UI -> GSM : requests data (Green Space name)
+            GSM -> UI : types requested data (Green Space name)
+            UI -> CTRL** : create
+            activate CTRL
+            CTRL -> Size : getSize()
+            activate Size
+            Size -> CTRL : size
+            deactivate Size
+            CTRL -> UI : size
+
             UI -> GSM : request size
             GSM -> UI : selects size
             UI -> GSM : requests area
             GSM -> UI : types area
-            UI -> CTRL** : create
 
-
-     activate CTRL
 
             CTRL -> Rep : getInstance()
 
@@ -50,14 +57,6 @@ activate GSM
             CTRL -> GreenSpace : registerGreenSpace(name, area, size, managerName)
 
      activate GreenSpace
-
-            GreenSpace -> GreenSpaceRep : addGreenSpace(GreenSpace greenSpace)
-
-     activate GreenSpaceRep
-
-            GreenSpaceRep -> GreenSpace : greenSpace
-
-     deactivate GreenSpaceRep
 
             GreenSpace -> CTRL : greenSpace
 

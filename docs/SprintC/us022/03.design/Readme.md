@@ -6,13 +6,18 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID                                       | Question: Which class is responsible for...                | Answer                              | Justification (with patterns)               |
-|:-----------------------------------------------------|:-----------------------------------------------------------|:------------------------------------|:--------------------------------------------|
-| Step 1: Request to list vehicles needing check-up    | ... interacting with the actor?                            | VehicleNeedingCheckUpUI             | IE - is responsible for user interactions.  |
-|                                                      | ... coordinating the US?                                   | VehicleNeedingCheckUpController     | Controller                                  |
-| Step 2: Shows list of vehicles needing check-up      | ... generating the list of vehicles in need of a check-up? | VehicleRepository                   | Information Expert                          |
-|                                                      | ... providing Check-Up information of a vehicle?           | Vehicle                             | Information Expert                          |
-|                                                      | ... providing the list to the actor?                       | VehicleNeedingCheckUpUI             | IE - is responsible for user interactions.  |
+| Interaction ID                                  | Question: Which class is responsible for...                | Answer                  | Justification (with patterns)               |
+|:------------------------------------------------|:-----------------------------------------------------------|:------------------------|:--------------------------------------------|
+| Step 1: asks to add a new entry to the Agenda   | ... interacting with the actor?                            | AgendaUI                | Information Expert: The UI is responsible for user interactions.  |
+|                                                 | ... coordinating the US?                                   | AgendaController        | Controller: The controller is responsible for handling the user story. |
+| Step 2: asks to select the To-Do List entry     | ... generating the list of vehicles in need of a check-up? | AgendaUI                | Information Expert: The UI is responsible for user interactions. |
+|                                                 | ... getting the list of entries?                           | AgendaController        | Information Expert: The controller is responsible for retrieving the list of entries. |
+| Step 3: selects the To-Do List entry            | ... interacting with the actor?                            | AgendaUI                | Information Expert: The UI is responsible for user interactions.  |
+| Step 4: asks to type the intended date          | ... interacting with the actor?                            | AgendaUI                | Information Expert: The UI is responsible for user interactions.  |
+| Step 5: selects the intended date               | ... interacting with the actor?                            | AgendaUI                | Information Expert: The UI is responsible for user interactions.  |
+|                                                 | ... changing the date from null to a day?                  | Entry                   | Information Expert: The Entry class is responsible for managing its own data. |
+|                                                 | ... changing the status of the entry?                      | Entry                   | Information Expert: The Entry class is responsible for managing its own data. |
+| Step 6: displays all data and operation success | ... interacting with the actor?                            | AgendaUI | Information Expert: The UI is responsible for user interactions.  |
 
 ### Systematization ##
 

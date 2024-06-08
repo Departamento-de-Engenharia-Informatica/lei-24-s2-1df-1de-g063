@@ -12,15 +12,19 @@ participant ":System" as System
 activate GSM
     GSM -> System : asks to register a green space
     activate System
-        System --> GSM : requests data (the name)
-        deactivate System
-    GSM -> System : types requested data (the name)
+            System --> GSM : requests data (manager's name)
+            deactivate System
+        GSM -> System : types requested data (manager's name)
     activate System
-        System -> GSM : asks to select a size (garden, medium-sized park or large-sized park)
+        System --> GSM : requests data (Green Space name)
+        deactivate System
+    GSM -> System : types requested data (Green Space name)
+    activate System
+        System --> GSM : asks to select a size (garden, medium-sized park or large-sized park)
         deactivate System
     GSM -> System : selects the intended size (garden, medium-sized park or large-sized park)
     activate System
-    System -> GSM : ask to type the area
+    System --> GSM : ask to type the area
        deactivate System
     GSM -> System : types the area
     activate System

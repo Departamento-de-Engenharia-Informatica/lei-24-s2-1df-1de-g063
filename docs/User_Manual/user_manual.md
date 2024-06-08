@@ -122,14 +122,31 @@
 
 
 
-# Troubleshooting
-   ### Common Issues and Solutions:
+## Troubleshooting
+
+### Common Issues and Solutions:
+
 - **Issue**: System not starting.
-**Solution**: Ensure Java Runtime Environment is installed and updated. Check system requirements and compatibility.
+  **Solution**: Ensure Java Runtime Environment is installed and updated. Check system requirements and compatibility.
 - **Issue**: Unable to register a collaborator.
-**Solution**: Verify that all required fields are filled correctly and meet the specified constraints (e.g., valid taxpayer number and ID).
+  **Solution**: Verify that all required fields are filled correctly and meet the specified constraints (e.g., valid taxpayer number and ID).
 - **Issue**: Maintenance report not generating.
-**Solution**: Check vehicle data for completeness and ensure maintenance records are up-to-date. 
+  **Solution**: Check vehicle data for completeness and ensure maintenance records are up-to-date.
+- **Issue**: Unable to generate a team proposal.
+  **Solution**: Ensure that there are enough collaborators with the required skills registered in the system. If the problem persists, check for any system errors in the logs.
+- **Issue**: Water consumption analysis not working.
+  **Solution**: Verify that all green spaces have accurate and up-to-date water consumption data. If the data is correct and the problem persists, there might be an issue with the statistical analysis feature. Check the system logs for any errors.
+- **Issue**: Unable to log vehicle maintenance.
+  **Solution**: Make sure that the vehicle you are trying to log maintenance for is registered in the system. Also, ensure that all the required fields in the maintenance log form are filled out correctly.
+- **Issue**: User feedback not showing up in the User Portal section.
+  **Solution**: Check the connection to the database where the feedback is stored. If the connection is fine, there might be an issue with the User Portal feature. Check the system logs for any errors.
+- **Issue**: Unable to assign a team to a task.
+  **Solution**: Ensure that the task and the team are both registered in the system. If they are and the problem persists, there might be an issue with the Team Management feature. Check the system logs for any errors.
+- **Issue**: Unable to postpone or cancel an entry in the Agenda.
+  **Solution**: Make sure that the entry you are trying to postpone or cancel is registered in the system and has not already been completed or cancelled. If the entry is valid and the problem persists, there might be an issue with the Agenda feature. Check the system logs for any errors.
+- **Issue**: Unable to assign a vehicle to an entry in the Agenda.
+  **Solution**: Ensure that the vehicle and the entry are both registered in the system. If they are and the problem persists, there might be an issue with the Vehicle Management or Agenda feature. Check the system logs for any errors.
+
 
 # Frequently Asked Questions (FAQs)
 
@@ -169,6 +186,17 @@
 **Q12**: How do I record the completion of a task?
 **A**: Navigate to the Tasks section, select the completed task, and choose "Record Completion." Confirm the completion of the task.
 
+## References
+
+1. Oracle. (2023). Java SE Development Kit 8 Documentation. Retrieved from `https://docs.oracle.com/javase/8/docs/`
+
+2. Mozilla. (2023). JavaScript Guide. Retrieved from `https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide`
+
+3. Apache Maven Project. (2023). Maven – Introduction. Retrieved from `https://maven.apache.org/what-is-maven.html`
+
+4. Microsoft. (2023). Windows 10 Documentation. Retrieved from `https://docs.microsoft.com/en-us/windows/windows-10/`
+
+5. JetBrains. (2023). IntelliJ IDEA Documentation. Retrieved from `https://www.jetbrains.com/idea/documentation/`
 
 
 

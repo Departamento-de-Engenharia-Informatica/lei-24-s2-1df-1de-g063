@@ -11,8 +11,6 @@ participant "RegisterGreenSpaceUI" as UI
 participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
-participant "greenSpace: \n GreenSpace" as GreenSpace
-participant "greenSpaceRepository: \n GreenSpaceRepository" as GreenSpaceRep
 
 activate GSM
 
