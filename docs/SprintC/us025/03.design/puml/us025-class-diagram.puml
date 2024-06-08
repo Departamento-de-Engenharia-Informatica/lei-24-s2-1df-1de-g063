@@ -67,7 +67,9 @@ Repositories -down-> "1" OrganizationRepositiry
 OrganizationRepositiry "1" --> "1" Organization : has manager
 'GreenSpaceRepository "1" --> "1" Organization
 AgendaController "1" --> Organization
-Organization "1" --> "1..*" AgendaRepository : postpone entry
+Organization "1" --> "1..*" Entry : postpone entry
 Repositories --> "1" AgendaRepository
+AgendaRepository "1" --> "1" Entry
+Organization "1" --> "1" AgendaRepository
 
 @enduml

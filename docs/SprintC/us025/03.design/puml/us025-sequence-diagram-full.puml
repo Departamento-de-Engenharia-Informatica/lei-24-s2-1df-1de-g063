@@ -7,23 +7,27 @@ autonumber
 
 'hide footbox
 actor "Green Space Manager" as GSM
-participant "PostponeEntryUI" as UI
+participant "CancelEntryUI" as UI
 participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "Organization" as or
 participant "agendaRepository: \n AgendaRepository" as Agenda
+participant "Entry" as Entry
+participant "Status" as Status
 
 activate GSM
 
-     GSM -> UI : asks to postpone an entry in the Agenda
+         GSM -> UI : asks to cancel an entry in the Agenda
 
      activate UI
 
-            UI -> GSM : asks to select the Agenda entry
-            UI -> CTRL** : create
+        UI -> CTRL** : create
 
      activate CTRL
+
             CTRL -> Rep : getInstance()
+
      activate Rep
 
                       Rep -> CTRL : repositories
@@ -49,17 +53,36 @@ activate GSM
                       CTRL -> UI : agenda
                       UI -> GSM : asks to select the Agenda entry
                       GSM -> UI : selects the Agenda entry
-                      UI -> GSM : asks to type the intended date
-                      GSM -> UI : selects the intended date
                       UI -> CTRL : entry
-                      CTRL -> Agenda : getAgendaRepository()
-               activate Agenda
+                      CTRL -> Entry : entry
+               activate "Entry"
 
-                      Agenda -> Agenda: addEntry(Entry entry)
+                      Entry -> "Status"  :  Entry.setStatus(Status.canceled)
 
-                 Agenda -> CTRL : entry
+                activate "Status"
 
-          deactivate Agenda
+                         "Status" -> Entry : entry
+
+                 deactivate "Status"
+
+                 Entry -> CTRL : entry
+
+          deactivate "Entry"
+
+
+                         CTRL -> or : entry
+          activate or
+
+                          or -> Agenda : add(entry)
+          activate Agenda
+
+                          Agenda -> or : entry
+
+            deactivate Agenda
+
+                          or -> CTRL : entry
+
+            deactivate or
 
                  CTRL -> UI : entry
 

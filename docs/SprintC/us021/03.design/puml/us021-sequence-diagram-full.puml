@@ -11,6 +11,7 @@ participant "ToDoListUI" as UI
 participant "ToDoListController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "Organization" as org
 participant "Entry: \n entry" as entry
 participant "ToDoList: \n ToDoList" as toDoList
 
@@ -47,19 +48,28 @@ activate GSM
 
      deactivate organizationRepository
 
-            CTRL -> entry : registerEntry (String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status)
+            CTRL -> org : entry
 
-     activate entry
+            activate org
+            org-> entry : registerEntry (String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status)
+            activate entry
 
-            entry -> toDoList : addEntry(Entry entry)
+            entry -> org : entry
+
+            deactivate entry
+
+            org -> toDoList : addEntry(Entry entry)
 
      activate toDoList
 
             toDoList -> entry : entry
+            deactivate toDoList
+            activate entry
 
-     deactivate toDoList
-
-            entry -> CTRL : entry
+            entry -> org : entry
+            deactivate entry
+            org -> CTRL : entry
+            deactivate org
 
      deactivate entry
 

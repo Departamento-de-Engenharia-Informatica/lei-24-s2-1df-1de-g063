@@ -7,26 +7,27 @@ autonumber
 
 'hide footbox
 actor "Green Space Manager" as GSM
-participant "CancelEntryUI" as UI
+participant "PostponeEntryUI" as UI
 participant "AgendaController" as CTRL
 participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
 participant "agendaRepository: \n AgendaRepository" as Agenda
 participant "Entry" as Entry
 participant "Status" as Status
-participant "Organization" as Organization
+participant "Organization" as or
 
 activate GSM
 
-     GSM -> UI : asks to cancel an entry in the Agenda
+         GSM -> UI : asks to postpone an entry in the Agenda
 
      activate UI
 
-            UI -> GSM : asks to select the Agenda entry
-            UI -> CTRL : ??
+        UI -> CTRL** : create
 
      activate CTRL
+
             CTRL -> Rep : getInstance()
+
      activate Rep
 
                       Rep -> CTRL : repositories
@@ -54,15 +55,36 @@ activate GSM
                       GSM -> UI : selects the Agenda entry
                       UI -> GSM : asks to type the intended date
                       GSM -> UI : selects the intended date
-                      UI -> CTRL : "Entry"
-
+                      UI -> CTRL : entry
+     CTRL -> Entry : entry
                activate "Entry"
 
-                      CTRL -> "Entry"  :  Entry.setStatus(Status.canceled)
+                      Entry -> "Status"  :  Entry.setStatus(Status.postponed)
+
+                activate "Status"
+
+                         "Status" -> Entry : entry
+
+                 deactivate "Status"
 
                  Entry -> CTRL : entry
 
           deactivate "Entry"
+
+
+                         CTRL -> or : entry
+          activate or
+
+                          or -> Agenda : add(entry)
+          activate Agenda
+
+                          Agenda -> or : entry
+
+            deactivate Agenda
+
+                          or -> CTRL : entry
+
+            deactivate or
 
                  CTRL -> UI : entry
 

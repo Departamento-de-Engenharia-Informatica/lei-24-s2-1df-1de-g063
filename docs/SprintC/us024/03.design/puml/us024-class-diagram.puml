@@ -52,15 +52,24 @@ class AgendaRepository{
     +toString() : String
 }
 
+class Entry{
+    -task: String
+    -greenSpace: GreenSpace
+    -status: Status
+    -duration: int
+}
+
 CancelEntryUI .> AgendaController : controller
 AgendaController ..> Repositories : repositories
 'Repositories -down-> "1" GreenSpaceRepository
 Repositories --> Repositories: instance
-Repositories -down-> "1" OrganizationRepositiry
-OrganizationRepositiry "1" --> "1" Organization : has manager
-'GreenSpaceRepository "1" --> "1" Organization
+Repositories -down-> "1" OrganizationRepository
+OrganizationRepository "1" --> "1" Organization : has manager
+'GreenSpaceReposotory "1" --> "1" Organization
 AgendaController "1" --> Organization
-Organization "1" --> "1..*" AgendaRepository : change entry status to cancel
+Organization "1" --> "1..*" Entry : change entry status to cancel
 Repositories --> "1" AgendaRepository
+AgendaRepository "1" --> "1" Entry
+Organization "1" --> "1" AgendaRepository
 
 @enduml

@@ -77,6 +77,7 @@ public class ToDoListPageController {
             Entry entry = new Entry(task, urgency, duration, greenSpace, Status.pending);
             toDoListController.registerEntry(task, urgency, duration, greenSpace, Status.pending);
             toDoListListView.getItems().add(entry);
+            toDoListController.getToDoList().addEntry(entry);
             taskField.clear();
             durationField.clear();
             selectUrgency.setValue(null);

@@ -28,10 +28,6 @@ class Repositories{
     + getToDoList()
 }
 
-class ToDoList{
-
-}
-
 class Entry{
     -Task
     -Urgency
@@ -41,13 +37,9 @@ class Entry{
 }
 
 ToDoListUI .right-> ToDoListController
-ToDoListController .right-> Organization
-Organization -down-> Entry
-Repositories .down-> "1" ToDoList: Instance
-Entry -> ToDoList: add
-OrganizationRepository .down-> Organization
+ToDoListController -right-> Organization
+Organization -down-> Entry: Register entry
+OrganizationRepository -down-> Organization
 ToDoListController -.down-> Repositories : repositories
-Repositories -left-> "1" OrganizationRepository
-Repositories -> Repositories: Instance
-
+Repositories -down-> "1" OrganizationRepository
 @enduml

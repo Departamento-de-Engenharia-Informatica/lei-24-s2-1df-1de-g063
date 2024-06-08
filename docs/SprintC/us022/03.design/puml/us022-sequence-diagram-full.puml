@@ -13,6 +13,8 @@ participant "Repositories" as Rep
 participant "organizationRepository:\nOrganizationRepository" as organizationRepository
 participant "ToDoList: \n ToDoList" as TDL
 participant "Entry" as Entry
+participant "Organization" as or
+participant "AgendaRepository" as AR
 
 activate GSM
 
@@ -23,7 +25,9 @@ activate GSM
             UI -> CTRL** : create
 
      activate CTRL
+
             CTRL -> Rep : getInstance()
+
      activate Rep
 
                       Rep -> CTRL : repositories
@@ -53,13 +57,35 @@ activate GSM
                       GSM -> UI : selects the intended date
                       UI -> CTRL : entry
                       CTRL -> Entry : setStartDate(LocalDate date)
-                      activate Entry
+               activate Entry
+
                       Entry -> CTRL : entry
+
+               deactivate Entry
+
+                      CTRL -> Entry : setStatus(scheduled)
+
+               activate Entry
+
+
+                      Entry -> or : entry
 
 
           deactivate Entry
 
+          activate or
+
                  CTRL -> UI : entry
+
+                 or -> AR : add(entry)
+          deactivate or
+          activate AR
+
+                 AR -> CTRL : entry
+
+          deactivate AR
+
+                    CTRL -> UI : entry
 
           deactivate CTRL
 
