@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -36,6 +33,8 @@ public class RegisterGreenSpacePageController {
     private TextField areaField;
     @FXML
     private ChoiceBox<Size> selectSize;
+    @FXML
+    private Button backButton;
 
     private GreenSpaceRepository greenSpaceRepository;
 
@@ -109,14 +108,8 @@ public class RegisterGreenSpacePageController {
 
     @FXML
     protected void handleGOBACK (ActionEvent event) {
-        try {
-            Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(assignTeamPage);
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
 
 }

@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -35,6 +32,8 @@ public class ToDoListPageController {
     private ChoiceBox<Urgency> selectUrgency;
     @FXML
     private ChoiceBox<GreenSpace> selectGreenSpace;
+    @FXML
+    private Button backButton;
 
     private final GreenSpaceRepository greenSpaceRepository;
 
@@ -104,14 +103,8 @@ public class ToDoListPageController {
     }
     @FXML
     protected void handleGOBACK (ActionEvent event) {
-        try{
-            Parent assignTeamPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/GSMUI.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(assignTeamPage);
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
 
 }

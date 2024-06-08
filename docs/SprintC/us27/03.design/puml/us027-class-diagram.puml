@@ -68,6 +68,6 @@ Repositories "1" --> "1" GreenSpaceRepository: greenSpaceRepository
 Organization "1" <- "1" GreenSpaceRepository : greenSpace
 Repositories "1" --> "1" OrganizationRepository: organizationRepository
 Organization "1" <- "1" OrganizationRepository: userName
-Repositories "1" -> "1" Repositories : getInstance()
+Repositories ->  Repositories : getInstance()
 
 @enduml
