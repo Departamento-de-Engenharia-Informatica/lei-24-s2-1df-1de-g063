@@ -10,9 +10,11 @@ actor "Green Space Manager" as GSM
 participant "RegisterGreenSpaceUI" as UI
 participant "RegisterGreenSpaceController" as CTRL
 participant "Repositories" as Rep
-participant "organizationRepository:\nOrganizationRepository" as organizationRepository
-participant "greenSpace: \n GreenSpace" as GreenSpace
 participant "Size" as Size
+participant "organizationRepository:\nOrganizationRepository" as organizationRepository
+participant "Organization" as Organization
+participant "greenSpace: \n GreenSpace" as GreenSpace
+
 
 activate GSM
 
@@ -54,7 +56,10 @@ activate GSM
 
      deactivate organizationRepository
 
-            CTRL -> GreenSpace : registerGreenSpace(name, area, size, managerName)
+            CTRL -> Organization : registerGreenSpace(name, area, size, managerName)
+            activate Organization
+            Organization -> GreenSpace : registerGreenSpace(name, area, size, managerName)
+            deactivate Organization
 
      activate GreenSpace
 
