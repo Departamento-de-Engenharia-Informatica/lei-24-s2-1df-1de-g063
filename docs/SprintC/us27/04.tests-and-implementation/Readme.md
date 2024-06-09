@@ -2,285 +2,268 @@
 
 ## 4. Tests
 
-**Test 1:** Ensures that a Vehicle object is instantiated correctly with all its properties set to the expected values.
+**Test 1:** Ensures that the singleton instance of  'GreenSpaceRepository' is correctly retrieved.
 
     @Test
-    void ensureVehicleIsCreatedSuccessfully() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
+    void testGetInstance() {
+        GreenSpaceRepository firstInstance = GreenSpaceRepository.getInstance();
+        GreenSpaceRepository secondInstance = GreenSpaceRepository.getInstance();
+        assertSame(firstInstance, secondInstance, "getInstance should return the same instance");
     }
 
 
-**Test 2:** Ensures that when a Vehicle object is initially created, its maintenance status is null.
+**Test 2:** Verifies that a green space is correctly added to the repository..
 
     @Test
-    void ensureMaintenanceIsNullInitially() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertNull(vehicle.getMaintenance());
+    void testAddGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Central Park", 100, Size.Garden,"Francisco");
+        repository.addGreenSpace(greenSpace);
+        List<GreenSpace> greenSpaces = repository.getGreenSpaces();
+        assertEquals(1, greenSpaces.size(), "Should be one green space in the repository");
+        assertTrue(greenSpaces.contains(greenSpace), "Repository should contain the added green space");
     }
 
 
-**Test 3:** Verifies that when a Vehicle object is first created, its last maintenance kilometer reading is initially set to zero.
+**Test 3:** Checks that all green spaces in the repository are correctly retrieved.
 
     @Test
-    void ensureLastMaintenanceKmIsInitiallyZero() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(0.0, vehicle.getLastMaintenanceKm());
+        void testGetGreenSpaces() {
+        GreenSpace greenSpace1 = new GreenSpace("Central Park", 100, Size.Garden,"Francisco");
+        GreenSpace greenSpace2 = new GreenSpace("Riverside Park", 100, Size.Garden,"Tiago");
+        repository.addGreenSpace(greenSpace1);
+        repository.addGreenSpace(greenSpace2);
+        List<GreenSpace> greenSpaces = repository.getGreenSpaces();
+        assertEquals(2, greenSpaces.size(), "Should be two green spaces in the repository");
+        assertTrue(greenSpaces.contains(greenSpace1), "Repository should contain the first added green space");
+        assertTrue(greenSpaces.contains(greenSpace2), "Repository should contain the second added green space");
     }
 
 
-**Test 4:** Confirms that the getBrand() method of a Vehicle object returns the correct brand name, which is "Toyota" in this case.
+**Test 4:** Verifies that green spaces managed by a specific manager are correctly retrieved from the repository.
 
     @Test
-    void ensureGetBrandReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals("Toyota", vehicle.getBrand());
+    void testGetGreenSpacesByName() {
+        GreenSpace greenSpace1 = new GreenSpace("Central Park", 100, Size.Garden,"Francisco");
+        GreenSpace greenSpace2 = new GreenSpace("Riverside Park", 100, Size.Garden,"Tiago");
+        repository.addGreenSpace(greenSpace1);
+        repository.addGreenSpace(greenSpace2);
+        List<GreenSpace> franciscoGreenSpaces = repository.getGreenSpacesByName("Francisco");
+        assertEquals(1, franciscoGreenSpaces.size(), "Should be one green space managed by Francisco");
+        assertTrue(franciscoGreenSpaces.contains(greenSpace1), "Repository should contain Francisco's green space");
+    
+        List<GreenSpace> tiagoGreenSpaces = repository.getGreenSpacesByName("Tiago");
+        assertEquals(1, tiagoGreenSpaces.size(), "Should be one green space managed by Tiago");
+        assertTrue(tiagoGreenSpaces.contains(greenSpace2), "Repository should contain Tiago's green space");
     }
 
 
-**Test 5:** Ensures that the getCurrentKm() method of a Vehicle object returns the correct current kilometers.
+**Test 5:** Ensures that a green space is correctly updated in the repository.
 
     @Test
-    void ensureGetCurrentKmReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(50000.0, vehicle.getCurrentKm());
+    void testSaveGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Central Park", 100, Size.Garden,"Francisco");
+        repository.addGreenSpace(greenSpace);
+    
+        GreenSpace updatedGreenSpace = new GreenSpace("Central Park", 100, Size.Garden,"Tiago");
+        repository.saveGreenSpace(updatedGreenSpace);
+    
+        List<GreenSpace> greenSpaces = repository.getGreenSpaces();
+        assertEquals(1, greenSpaces.size(), "Should be one green space in the repository after update");
+        assertEquals("Tiago", greenSpaces.get(0).getManagerName(), "The manager name should be updated to Tiago");
     }
-
-
-**Test 6:** Verifies that the getCheckUpFrequency() method of a Vehicle object returns the correct value.
-
-    @Test
-    void ensureGetCheckUpFrequencyReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(10000.0, vehicle.getCheckUpFrequency());
-    }
-
-**Test 7:** Ensures that when the setMaintenance() method is called on a Vehicle object with the argument "Regular checkup".
-
-    @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
-    }
-
-
-**Test 8:** Verifies that when the setLastMaintenanceKm() method is called on a Vehicle object with the argument 55000.0
-
-    @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
-    }
-
 
 ## 5. Construction (Implementation)
 
-### Class VehicleNeedingCheckUpController
+### Class TaskAssignedToCollaboratorController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.Status;
+import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class VehicleNeedingCheckUpController {
-    private VehicleRepository vehicleRepository;
-    private AuthenticationRepository authenticationRepository;
+/**
+ * Controller class responsible for managing tasks assigned to a collaborator.
+ */
+public class TaskAssignedToCollaboratorController {
+    private AgendaRepository agendaRepository;
+    private String managerName;
 
-    public VehicleNeedingCheckUpController(){
-        this.vehicleRepository = VehicleRepository.getInstance();
-        getAuthenticationRepository();
+    /**
+     * Constructs a TaskAssignedToCollaboratorController with the specified manager name.
+     *
+     * @param managerName the name of the manager
+     */
+    public TaskAssignedToCollaboratorController(String managerName) {
+        this.agendaRepository = Repositories.getInstance().getAgendaRepository(); // Assuming AgendaRepository is a singleton
+        this.managerName = managerName;
     }
 
-    public VehicleNeedingCheckUpController(VehicleRepository vehicleRepository,
-                                           AuthenticationRepository authenticationRepository) {
-        this.vehicleRepository = vehicleRepository;
-        this.authenticationRepository = authenticationRepository;
+    /**
+     * Retrieves a list of entries between the specified start and end dates,
+     * filtered by status and assigned team member's name.
+     *
+     * @param startDate the start date
+     * @param endDate   the end date
+     * @param status    the status of the entries to filter by
+     * @param name      the name of the team member
+     * @return a list of entries matching the criteria
+     */
+    public List<Entry> getEntriesBetweenDates(LocalDate startDate, LocalDate endDate, String status, String name) {
+        return agendaRepository.getEntries().stream()
+                .filter(entry -> entry.getStatus() == Status.valueOf(status))
+                .filter(entry -> entry.getTeam().getMembers().stream()
+                        .anyMatch(member -> member.getName().equals(name)))
+                .filter(entry -> !entry.getStartDate().isBefore(startDate) && !entry.getEndDate().isAfter(endDate))
+                .sorted(Comparator.comparing(Entry::getStartDate))
+                .collect(Collectors.toList());
     }
-
-    public VehicleRepository getVehicleRepository() {
-        if (vehicleRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-
-            //Get the TaskCategoryRepository
-            vehicleRepository = repositories.getVehicleRepository();
-        }
-        return vehicleRepository;
-    }
-
-    public List<Vehicle> getVehiclesNeedingCheckUp() {
-        List<Vehicle> vehicles = vehicleRepository.getVehicles();
-        List<Vehicle> vehiclesNeedingCheckUp = new ArrayList<>();
-
-        for (Vehicle vehicle : vehicles) {
-            double currentKm = vehicle.getCurrentKm();
-            double checkUpFrequency = vehicle.getCheckUpFrequency();
-            double lastMaintenanceKm = vehicle.getLastMaintenanceKm();
-
-            if (currentKm - lastMaintenanceKm >= checkUpFrequency) {
-                vehiclesNeedingCheckUp.add(vehicle);
-            }
-        }
-
-        return vehiclesNeedingCheckUp;
-    }
-
-    public AuthenticationRepository getAuthenticationRepository() {
-        if (authenticationRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-
-            //Get the AuthenticationRepository
-            authenticationRepository = repositories.getAuthenticationRepository();
-        }
-        return authenticationRepository;
-    }
-
 }
+
 ```
 
-### Class VehicleRepository
+### Class GreenSpaceRepository
 
 ```java
-public class VehicleRepository {
-    private static VehicleRepository instance;
-    private final List<Vehicle> vehicles;
+package pt.ipp.isep.dei.esoft.project.repository;
 
-    public VehicleRepository() {
-        vehicles = new ArrayList<>();
+import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class GreenSpaceRepository implements Serializable {
+    private final List<GreenSpace> greenSpaces;
+    private static GreenSpaceRepository instance;
+
+    /**
+     * Constructs a CollaboratorRepository object.
+     */
+    public GreenSpaceRepository() {
+        greenSpaces = new ArrayList<>();
     }
 
-    public static VehicleRepository getInstance() {
+    /**
+     * Retrieves the singleton instance of CollaboratorRepository.
+     *
+     * @return the singleton instance of CollaboratorRepository
+     */
+    public static GreenSpaceRepository getInstance() {
         if (instance == null) {
-            instance = new VehicleRepository();
+            instance = new GreenSpaceRepository();
         }
         return instance;
     }
 
-    public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
+    /**
+     * Adds a collaborator to the repository.
+     *
+     * @param greenSpace the collaborator to add
+     */
+    public void addGreenSpace(GreenSpace greenSpace) {
+        greenSpaces.add(greenSpace);
     }
 
-    public List<Vehicle> getVehicles() {
-        return List.copyOf(vehicles);
+    /**
+     * Retrieves all collaborators stored in the repository.
+     *
+     * @return a list of all collaborators
+     */
+    public List<GreenSpace> getGreenSpaces() {
+        return greenSpaces;
     }
 
+    public List<GreenSpace> getGreenSpacesByName(String managerName) {
+        return greenSpaces.stream()
+                .filter(greenSpace -> greenSpace.getManagerName().equalsIgnoreCase(managerName))
+                .collect(Collectors.toList());
+    }
+
+    public void saveGreenSpace(GreenSpace greenSpace) {
+        boolean updated = false;
+        for (int i = 0; i < greenSpaces.size() && !updated; i++) {
+            if (greenSpaces.get(i).equals(greenSpace)) {
+                greenSpaces.set(i, greenSpace);
+                updated = true;
+            }
+        }
+    }
 }
 
+
 ```
-### Class Vehicle
+### Class GreenSpace
 
 ```java
-public class Vehicle {
-    private final String brand;
-    private final String model;
-    private final double tareWeight;
-    private final double grossWeight;
-    private double currentKm;
-    private final LocalDate registerDate;
-    private final LocalDate acquisitionDate;
-    private final double checkUpFrequency;
-    private double lastMaintenanceKm = 0;
-    private String maintenance;
+package pt.ipp.isep.dei.esoft.project.domain;
 
-    public Vehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
-                   LocalDate registerDate, LocalDate acquisitionDate, double checkUpFrequency) {
-        this.brand = brand;
-        this.model = model;
-        this.tareWeight = tareWeight;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.checkUpFrequency = checkUpFrequency;
+import java.io.Serializable;
+import java.util.Objects;
+
+public class GreenSpace implements Serializable {
+    private final String name;
+    private final double area;
+    private final Size size;
+    private String managerName;
+
+    public GreenSpace(String name, double area, Size size, String managerName) {
+        this.name = name;
+        this.area = area;
+        this.size = size;
+        this.managerName = managerName;
     }
 
-
-    public String getMaintenance() {
-        return maintenance;
+    private void validateGreenSpaceName(String greenSpaceName) {
+        if (greenSpaceName.isEmpty()) {
+            throw new IllegalArgumentException("The Green Space Name must not be empty");
+        }
     }
 
-    public void setMaintenance(String maintenance) {
-        this.maintenance = maintenance;
+    public String getName() {
+        return name;
     }
 
-    public double getLastMaintenanceKm() {
-        return lastMaintenanceKm;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setLastMaintenanceKm(double lastMaintenanceKm) {
-        this.lastMaintenanceKm = lastMaintenanceKm;
+    public double getArea() {
+        return area;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public double getCurrentKm(){
-        return currentKm;
-    }
-
-    public double getCheckUpFrequency() {
-        return checkUpFrequency;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GreenSpace that = (GreenSpace) o;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", tareWeight=" + tareWeight +
-                ", grossWeight=" + grossWeight +
-                ", currentKm=" + currentKm +
-                ", registerDate='" + registerDate + '\'' +
-                ", acquisitionDate='" + acquisitionDate + '\'' +
-                ", checkUpFrequency='" + checkUpFrequency + '\'' +
+        return "GreenSpace{" +
+                "name='" + name + '\'' +
+                ", area=" + area +
+                ", size=" + size +
+                ", manager name='" + managerName + '\'' +
                 '}';
     }
 }
+
 ```
 
-## 6. Integration and Demo
-Simulate how the VehicleNeedingCheckUpController interacts with the VehicleRepository to retrieve vehicles that need check-up:
 
-* We instantiate the VehicleRepository.
-* We create a VehicleNeedingCheckUpController with the repositories.
-* We add a vehicle to the repository and set its last maintenance kilometer reading.
-* We call the getVehiclesNeedingCheckUp() method of the controller to retrieve vehicles needing check-up.
-* We print the vehicles needing check-up.
+## 6. Integration and Demo
+Searches for the green spaces managed by a specific manager.
 
 ## 7. Observations
 
