@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.CompletionTaskController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class CompletionTaskUI implements Runnable {
      * Constructs a new CompletionTaskUI.
      */
     public CompletionTaskUI() {
-        this.agenda = AgendaRepository.getInstance();
+        this.agenda = Repositories.getInstance().getAgendaRepository();
         this.completionTaskController = new CompletionTaskController();
         this.scanner = new Scanner(System.in);
     }
