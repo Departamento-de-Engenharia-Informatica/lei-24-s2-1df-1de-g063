@@ -11,7 +11,8 @@ import java.util.List;
  * It allows GSM managers to choose from a menu of options.
  */
 public class GsmUI implements Runnable {
-    private final String name;
+
+        private final String managerName;
 
     /**
      * Constructs a new GsmUI object with the specified email.
@@ -19,7 +20,7 @@ public class GsmUI implements Runnable {
      * @param name The name of the user.
      */
     public GsmUI(String name) {
-        this.name = name;
+        this.managerName = name;
     }
 
     /**
@@ -27,13 +28,13 @@ public class GsmUI implements Runnable {
      */
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI(name)));
+        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI()));
         options.add(new MenuItem("Add entry to To-Do List", new ToDoListUI()));
         options.add(new MenuItem("Add entry to Agenda", new AgendaUI()));
         options.add(new MenuItem("Cancel Entry", new CancelEntryUI()));
         options.add(new MenuItem("Assign a Team to an Entry in the Agenda", new AssignTeamToEntryUI()));
         options.add(new MenuItem("Assign a Vehicle to an Entry in the Agenda", new AssignVehicleToEntryUI()));
-        options.add(new MenuItem("Green Spaces Managed by me", new GreenSpacesListUI(name))); // Added menu item
+        options.add(new MenuItem("Green Spaces Managed by me", new GreenSpacesListUI(managerName))); // Added menu item
         options.add(new MenuItem("Completion Task", new CompletionTaskUI()));
         options.add(new MenuItem("Postpone Entry", new PostponeEntryUI()));
 

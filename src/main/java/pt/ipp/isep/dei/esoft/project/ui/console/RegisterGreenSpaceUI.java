@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Size;
+import pt.ipp.isep.dei.esoft.project.domain.Urgency;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 
 import java.util.List;
@@ -27,18 +28,17 @@ public class RegisterGreenSpaceUI implements Runnable {
     private Size size;
     private double area;
     private GreenSpace greenSpace;
-    private final String managerName;
+    private  String managerName;
 
     /**
      * Constructs a new RegisterGreenSpaceUI.
-     *
-     * @param managerName The name of the manager for whom the green space is to be registered.
+     * Initializes the controller, green space repository, and scanner.
      */
-    public RegisterGreenSpaceUI(String managerName) {
+    public RegisterGreenSpaceUI() {
         this.controller = new RegisterGreenSpaceController();
         this.greenSpaceRepository = GreenSpaceRepository.getInstance();
         this.scanner = new Scanner(System.in);
-        this.managerName = managerName;
+
     }
 
     /**
@@ -59,6 +59,9 @@ public class RegisterGreenSpaceUI implements Runnable {
      */
     private void requestData() {
         name = requestName();
+        managerName = requestManagerName();
+        area = requestArea();
+        size = requestSize();
         requestArea();
     }
 
@@ -71,35 +74,46 @@ public class RegisterGreenSpaceUI implements Runnable {
         System.out.print("Green Space name: ");
         return scanner.nextLine();
     }
-
+    /**
+     * Requests the name of the manager responsible for the green space from the user.
+     *
+     * @return The name of the manager.
+     */
+    private String requestManagerName() {
+        System.out.print("Manager name: ");
+        return scanner.nextLine();
+    }
     /**
      * Requests the area of the green space from the user.
-     * It also automatically determines the size of the green space based on the area.
+     *
+     * @return The area of the green space.
      */
-    private void requestArea() {
-        boolean isValid = false;
+    private double requestArea() {
+        System.out.print("Area: ");
+        return scanner.nextDouble();
+    }
+
+
+    private Size requestSize() {
+        int choice;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n--- Size List -------------------------");
+        for (int i = 0; i < Size.values().length; i++) {
+            System.out.printf("%d - %s%n", i, Size.values()[i]);
+        }
         do {
-            System.out.print("Green Space area (squared meter): ");
-            if (scanner.hasNextDouble()) {
-                area = scanner.nextDouble();
-                scanner.nextLine();
-                if (area > 0) {
-                    isValid = true;
-                    if (area < 50.0) {
-                        size = Size.Garden;
-                    } else if (area <= 200.0) {
-                        size = Size.Medium_Size;
-                    } else {
-                        size = Size.Large_Size;
-                    }
-                } else {
-                    System.out.println("Invalid area. Please enter a valid number.");
-                }
-            } else {
+            System.out.print("Choose a Size (0-" + (Size.values().length - 1) + "): ");
+            while (!scanner.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.next();
             }
-        } while (!isValid);
+            choice = scanner.nextInt();
+            if (choice < 0 || choice >= Size.values().length) {
+                System.out.println("Invalid choice. Please choose a number within the range.");
+            }
+        } while (choice < 0 || choice >= Size.values().length);
+        scanner.nextLine();
+        return Size.values()[choice];
     }
 
     /**
