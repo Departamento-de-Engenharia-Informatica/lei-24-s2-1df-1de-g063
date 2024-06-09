@@ -62,7 +62,7 @@ public class RegisterGreenSpaceUI implements Runnable {
         managerName = requestManagerName();
         area = requestArea();
         size = requestSize();
-        requestArea();
+
     }
 
     /**
