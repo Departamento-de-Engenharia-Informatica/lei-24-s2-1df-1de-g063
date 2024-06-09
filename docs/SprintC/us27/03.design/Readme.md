@@ -8,7 +8,7 @@ _**Note that SSD - Alternative One is adopted.**_
 
 | Interaction ID                                           | Question: Which class is responsible for...      | Answer                   | Justification (with patterns)              |
 |:---------------------------------------------------------|:-------------------------------------------------|:-------------------------|:-------------------------------------------|
-| Step 1: Request to list vehicles needing check-up        | ... interacting with the actor?                  | GreenSpaceListUI         | IE - is responsible for user interactions. |
+| Step 1: Request to list of green spaces                  | ... interacting with the actor?                  | GreenSpaceListUI         | IE - is responsible for user interactions. |
 |                                                          | ... coordinating the US?                         | GreenSpaceListController | Controller                                 |
 | Step 2: Retrieve list of green spaces managed by the GSM | ... generating the list of managed green spaces? | Organization             | Information Expert                         |
 |                                                          | ... providing Green Space information?           | GreenSpace               | Information Expert                         |
