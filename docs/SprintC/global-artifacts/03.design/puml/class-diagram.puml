@@ -9,56 +9,6 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class GreenSpaceListUI{
-    -managerName: String
-    -greenSpaceRepository: GreenSpaceRepository
-    -greenSpaceListController: GreenSpaceListController;
-    +GreenSpaceListUI()
-    -listGreenSpaces()
-    -sortGreenSpaces()
-}
-
-class GreenSpaceListController{
-    -greenSpaceRepository: GreenSpaceRepository
-    -organization: Organization
-    -repositories: Repositories
-    +GreenSpaceListController(managerName: String)
-    -getGreenSpaceRepository()
-    -getSortingAlgorithm()
-}
-
-class Organization{
-    - userName: String
-    - GreenSpaces : List<GreenSpace>
-}
-
-class GreenSpace{
-    - name: String
-    - area: double
-    - size: Size
-    - managerName: String
-    + GreenSpace(name: String, area: double, size: Size, managerName: String)
-    + getName()
-    + getManagerName()
-    + getArea()
-}
-
-class Repositories{
-    - Repositories()
-    + getInstance() : Repositories
-    + getGreenSpaceRepository()
-    + getOrganizationRepository()
-}
-
-class GreenSpaceRepository{
-    - GreenSpaces : List<GreenSpace>
-    + getGreenSpaces() : List<GreenSpace>
-}
-
-class OrganizationRepository{
-    + getUserName()
-}
-
 class RegisterGreenSpaceUI{
 -name: String;
 -size: Size;
@@ -88,13 +38,6 @@ class Repositories{
     + getGreenSpaceRepository() : GreenSpaceRepository
 }
 
-'class GreenSpaceRepository{
- '   +GreenSpaceRepository()
-  '  +getInstance() : GreenSpaceRepository
-   ' +addGreenSpace(GreenSpace greenSpace)
-    '+List<GreenSpace> getGreenSpaces()
-'}
-class Organization{}
 class GreenSpace{
     -name: String
     -area: double
@@ -107,25 +50,191 @@ class GreenSpace{
     +toString() : String
 }
 
-RegisterGreenSpaceUI .> RegisterGreenSpaceController : controller
-RegisterGreenSpaceController ..> Repositories : repositories
-'Repositories -down-> "1" GreenSpaceRepository
-Repositories -down-> "1" OrganizationRepositiry
-OrganizationRepositiry "1" --> "1" Organization : has manager
-'GreenSpaceRepository "1" --> "1" Organization
-RegisterGreenSpaceController "1" --> Organization
-Organization "1" --> "1..*" GreenSpace : register Green Space
+class ToDoListUI{
+
+}
 
 
-GreenSpaceListUI .> GreenSpaceListController
-GreenSpaceListController ..> Organization
-Organization "1" --> "1..*" GreenSpace:greenSpace
-GreenSpaceListController .> Repositories: repositories
-Repositories "1" --> "1" GreenSpaceRepository: greenSpaceRepository
-Organization "1" <- "1" GreenSpaceRepository : greenSpace
-Repositories "1" --> "1" OrganizationRepository: organizationRepository
-Organization "1" <- "1" OrganizationRepository: userName
-Repositories "1" -> "1" Repositories : getInstance()
+class ToDoListController{
+
+}
+
+class ToDoList{
+
++ToDoList()
++getInstance() : ToDoList
++addEntry(Entry entry)
++List<Entry> getToDoList()
+}
+class AgendaUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+class AgendaController{
+
+    +RegisterGreenSpaceController()
+    +RegisterGreenSpaceController(AuthenticationRepository authenticationRepository)
+    +getGreenSpaceRepository() : GreenSpaceRepository
+    -getAuthenticationRepository() : AuthenticationRepository
+    +registerGreenSpace(String name, double area, GreenSpace.Size size ) : GreenSpace
+}
+
+class AssignTeamToEntryController {
+    -teamRepository: TeamRepository
+    +AssignTeamToEntryController()
+    +getTeams(): List<Team>
+    +getTeams(index: int): Team
+    -getTeamRepository(): TeamRepository
+}
+
+class AssignTeamToEntryUI {
+
+}
+
+class TeamRepository {
+    -teams: List<Team>
+    +getTeams(): List<Team>
+    +getTeams(index: int): Team
+}
+
+
+class OrganizationRepository{
+    +getOrganization(): Organization
+}
+
+interface EmailSenderInterface {
+    +sendEmail(entry: Entry)
+}
+
+class Mailer {
+    +sendEmail(entry: Entry)
+}
+
+
+class CancelEntryUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+
+class AgendaRepository{
+    -name: String
+    -area: double
+    -size: Size
+    -entries: List<Entry>
+
+    +getEntries(): List<Entry>
+    +getEntries(index: int): Entry
+    +GreenSpace(String name, double area, Size size)
+    +validateGreenSpaceName(String greenSpaceName)
+    +getName(): String
+    +equals(Object o)
+    +toString() : String
+}
+
+class PostponeEntryUI{
+-name: String;
+-size: Size;
+-area: double;
+-greenSpace: GreenSpace
+
++RegisterGreenSpaceUI()
+-requestData()
+-requestName()
+-requestArea()
+-submitData()
+-printGreenSpace()
+}
+
+
+class AssignVehicleToEntryController {
+    -vehicleRepository: VehicleRepository
+    +AssignVehicleToEntryController()
+    +getVehicles(): List<Vehicle>
+    +getVehicles(index: int): Vehicle
+    -getVehicleRepository(): VehicleRepository
+}
+
+class AssignVehicleToEntryUI {
+
+}
+
+class VehicleRepository {
+    -vehicles: List<Vehicle>
+    +getVehicles(): List<Vehicle>
+    +getVehicles(index: int): Vehicle
+}
+
+
+class OrganizationRepository{
+    +getOrganization(): Organization
+}
+
+class GreenSpaceListUI{
+    -managerName: String
+    -greenSpaceRepository: GreenSpaceRepository
+    -greenSpaceListController: GreenSpaceListController;
+    +GreenSpaceListUI()
+    -listGreenSpaces()
+    -sortGreenSpaces()
+}
+
+class GreenSpaceListController{
+    -greenSpaceRepository: GreenSpaceRepository
+    -organization: Organization
+    -repositories: Repositories
+    +GreenSpaceListController(managerName: String)
+    -getGreenSpaceRepository()
+    -getSortingAlgorithm()
+}
+
+class Organization{
+    - userName: String
+    - GreenSpaces : List<GreenSpace>
+    - name: String
+    - agenda: List<Entry>
+}
+
+class GreenSpace{
+    - name: String
+    - area: double
+    - size: Size
+    - managerName: String
+    + GreenSpace(name: String, area: double, size: Size, managerName: String)
+    + getName()
+    + getManagerName()
+    + getArea()
+}
+
+class GreenSpaceRepository{
+    - GreenSpaces : List<GreenSpace>
+    + getGreenSpaces() : List<GreenSpace>
+}
+
+class OrganizationRepository{
+    + getUserName()
+}
+
+
 class TaskAssignedToCollaboratorUI{
     - managerName: String
     - controller: TaskAssignedToCollaboratorController
@@ -139,25 +248,8 @@ class TaskAssignedToCollaboratorController{
     +getEntriesBetweenDates(startDate: LocalDate, endDate: LocalDate,status: String, name: String)
 }
 
-class Organization{
-    - name: String
-    - agenda: List<Entry>
-}
-
 class OrganizationRepository{
     + getUserName()
-}
-
-class AgendaRepository{
-    - agenda: List<Entry>;
-    + getEntries()
-}
-
-class Repositories{
-    - Repositories()
-    + getInstance() : Repositories
-    + getAgendaRepository()
-    + getOrganizationRepository()
 }
 
 class Entry{
@@ -180,14 +272,7 @@ class Entry{
     + getTeam()
 }
 
-TaskAssignedToCollaboratorUI .> TaskAssignedToCollaboratorController
-TaskAssignedToCollaboratorController ..> Organization
-TaskAssignedToCollaboratorController .> Repositories: repositories
-Repositories "1" --> "1" OrganizationRepository: organizationRepository
-Repositories "1"--> "1" AgendaRepository: agendaRepository
-OrganizationRepository "1" --> "1" Organization: userName
-AgendaRepository "1" --> "1" Organization: agenda
-Organization "1" --> "1..*"Entry: entry
+
 class CompletionTaskUI{
     - agenda: AgendaRepository
     - completionTaskController: CompletionTaskController
@@ -203,55 +288,55 @@ class CompletionTaskController{
     + getEntries()
 }
 
-class Organization{
-    - name: String
-    - agenda: List<Entry>
-}
 
 class OrganizationRepository{
     + getUserName()
 }
 
-class AgendaRepository{
-    - agenda: List<Entry>;
-    + getEntriesWithStatus()
-}
-
-class Repositories{
-    - Repositories()
-    + getInstance() : Repositories
-    + getAgendaRepository()
-    + getOrganizationRepository()
-}
-
-class Entry{
-    - task: String
-    - urgency: Urgency
-    - duration: int
-    - greenSpace: GreenSpace
-    - status: Status
-    - startDate: LocalDate
-    - endDate: LocalDate
-    - team: Team
-    + Entry(task: String, urgency: Urgency, duration: int, greenSpace: GreenSpace, status: Status)
-    + getTask()
-    + getUrgency()
-    + getDuration()
-    + getGreenSpace()
-    + getStatus()
-    + getStartDate()
-    + getEndDate()
-    + setStatus(status: Status)
-}
-
-CompletionTaskUI .> CompletionTaskController
+AgendaController ..> Repositories : repositories
+AgendaController "1" --> Organization
+AgendaUI ..> AgendaController : controller
+AssignTeamToEntryController  ..>  OrganizationRepository
+AssignTeamToEntryController  ..>  TeamRepository : TeamRepository
+AssignTeamToEntryController  ..>  Organization : organization
+AssignTeamToEntryController  ..> AgendaRepository : AgendaRepository
+AssignTeamToEntryUI ..>  AssignTeamToEntryController
+AssignVehicleToEntryController  ..>  OrganizationRepository
+AssignVehicleToEntryController  ..>  VehicleRepository : VehicleRepository
+AssignVehicleToEntryController  ..>  Organization : organization
+AssignVehicleToEntryController  ..> AgendaRepository : AgendaRepository
+AssignVehicleToEntryUI ..>  AssignVehicleToEntryController
+CancelEntryUI ..> AgendaController : controller
 CompletionTaskController ..> Organization
-CompletionTaskController .> Repositories: repositories
-Repositories "1" --> "1"OrganizationRepository: organizationRepository
-Repositories "1"--> "1"AgendaRepository: agendaRepository
-OrganizationRepository"1" --> "1"Organization: userName
-AgendaRepository"1" --> "1"Organization: agenda
-Organization"1" --> "1..*"Entry: entry
+CompletionTaskController ..> Repositories: repositories
+CompletionTaskUI ..> CompletionTaskController
+EmailSenderInterface <|-- Mailer
+GreenSpaceListController ..> Organization
+GreenSpaceListController ..> Repositories: repositories
+GreenSpaceListUI ..> GreenSpaceListController
+Organization --> AgendaRepository : has entry
+Organization "1" --> "1" ToDoList: has information
+Organization "1" --> "1..*" GreenSpace:greenSpace
+Organization "1" --> "1..*"Entry: entry
+GreenSpaceRepository "1" --> "1" Organization : greenSpace
+OrganizationRepository "1" --> "1" Organization : has manager
+PostponeEntryUI ..> AgendaController : controller
+Repositories "1" --> "1" AgendaRepository: agendaRepository
+Repositories "1" --> "1" GreenSpaceRepository: greenSpaceRepository
+Repositories "1" --> "1" OrganizationRepository: organizationRepository
+Repositories --> Repositories : getInstance()
+Repositories --> ToDoList : list of entries
+RegisterGreenSpaceController ..> Repositories : repositories
+RegisterGreenSpaceController "1" --> Organization
+RegisterGreenSpaceUI ..> RegisterGreenSpaceController : controller
+TaskAssignedToCollaboratorController ..> Organization
+TaskAssignedToCollaboratorController ..> Repositories: repositories
+TaskAssignedToCollaboratorUI ..> TaskAssignedToCollaboratorController
+TeamRepository  -->  Organization : gets team
+ToDoListController ..> Repositories : repositories
+ToDoListController --> Organization
+ToDoListUI ..> ToDoListController
+VehicleRepository  -->  Organization : gets vehicle
 
 
 @enduml
