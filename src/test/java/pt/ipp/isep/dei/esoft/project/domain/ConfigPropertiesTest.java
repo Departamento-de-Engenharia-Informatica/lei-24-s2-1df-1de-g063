@@ -31,5 +31,4 @@ class ConfigPropertiesTest {
         assertNull(invalid, "Invalid property should be null");
     }
 
-    // Add more tests as needed
 }

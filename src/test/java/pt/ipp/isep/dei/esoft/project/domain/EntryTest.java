@@ -73,5 +73,4 @@ class EntryTest {
         assertEquals(endDate, entry.getEndDate(), "End date should be set to the entry");
     }
 
-    // Add more tests as needed
 }
