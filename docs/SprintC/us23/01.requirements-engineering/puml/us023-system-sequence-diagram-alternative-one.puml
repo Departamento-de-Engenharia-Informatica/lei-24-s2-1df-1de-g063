@@ -3,25 +3,25 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US023
 
 autonumber
 
-actor "GSM" as GSM
+actor "Green Space Manager" as GSM
 participant ":System" as System
 
 activate GSM
-    GSM -> System : Request to assign Entry to a Team
+    GSM -> System : Request to assign team to entry
     activate System
-        System --> GSM : Retrives list of Teams
+        System --> GSM : Retrieves list of teams
     deactivate System
-    GSM -> System : Selects Team
+    GSM -> System : Selects team
     activate System
-        System --> GSM: Retrieves Entries
+        System --> GSM: Retrieves list of entries
     deactivate System
-    GSM -> System : Selects Entries
+    GSM -> System : Selects entry
     activate System
-        System --> GSM: Displays message of (In)Success
-
-
+        System --> GSM: Displays success or failure message
+    deactivate System
+deactivate GSM
 @enduml

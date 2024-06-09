@@ -54,14 +54,10 @@ the appropriate team.
 **Output Data:**
   * (In)Success of the operation
 
-### 1.6. System Sequence Diagram (SSD) 
+### 1.6. System Sequence Diagram (SSD)
 
-![]
-
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us023-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____US023.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* On the assignment the check-up list isn't mentioned, so I skipped the "from the specification document" point.
+n/a
