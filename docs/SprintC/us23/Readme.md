@@ -1,4 +1,4 @@
-# US008 - As an FM, I want to list the vehicles needing the check-up
+# US023 - As a Green Space Manager, I want to assign a team to an entry
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 

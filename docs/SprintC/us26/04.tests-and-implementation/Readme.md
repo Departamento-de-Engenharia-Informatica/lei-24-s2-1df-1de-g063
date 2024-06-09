@@ -1,4 +1,4 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up
+# US26 - As a GSM, I want to assign one or more vehicles to an entry in the Agenda.
 
 ## 4. Tests
 

@@ -1,4 +1,4 @@
-# US008 - As a GSM, I want to assign one or more vehicles to an entry in the Agenda.
+# US26 - As a GSM, I want to assign one or more vehicles to an entry in the Agenda.
 
 ## 1. Requirements Engineering
 
@@ -40,8 +40,9 @@ effectively for each agenda item.
 
 ### 1.6. System Sequence Diagram (SSD) 
 
-**_Other alternatives might exist._**
-
+![System Sequence Diagram - Alternative One](svg/us26-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
+
+n/a
 

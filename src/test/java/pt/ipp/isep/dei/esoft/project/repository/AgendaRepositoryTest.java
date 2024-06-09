@@ -75,5 +75,50 @@ void testUpdateEntry() {
         assertFalse(entries.contains(entry1), "Entries with a different status should not be retrieved from the repository");
     }
 
-    // Add more tests as needed
+    @Test
+    void testGetInstance() {
+        // Execute
+        AgendaRepository instance1 = AgendaRepository.getInstance();
+        AgendaRepository instance2 = AgendaRepository.getInstance();
+
+        // Assert
+        assertSame(instance1, instance2, "Instances should be the same");
+    }
+
+    @Test
+    void testGetEntriesByIndex() {
+        // Setup
+        AgendaRepository repository = new AgendaRepository();
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        repository.addEntry(entry);
+
+        // Execute
+        Entry result = repository.getEntries(0);
+
+        // Assert
+        assertEquals(entry, result, "Entry should be retrieved from the repository by index");
+    }
+
+    @Test
+    void testGetEntriesByIndexOutOfBounds() {
+        // Setup
+        AgendaRepository repository = new AgendaRepository();
+
+        // Assert
+        assertThrows(IndexOutOfBoundsException.class, () -> repository.getEntries(0), "Should throw IndexOutOfBoundsException for invalid index");
+    }
+
+    @Test
+    void testGetAgenda() {
+        // Setup
+        AgendaRepository repository = new AgendaRepository();
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        repository.addEntry(entry);
+
+        // Execute
+        List<Entry> entries = repository.getAgenda();
+
+        // Assert
+        assertTrue(entries.contains(entry), "Agenda should be retrieved from the repository");
+    }
 }
