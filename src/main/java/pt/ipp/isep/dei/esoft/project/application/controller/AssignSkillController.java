@@ -17,6 +17,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
  * }</pre>
  */
 public class AssignSkillController {
+
     private CollaboratorRepository collaboratorRepository;
     private SkillsRepository skillsRepository;
     private AuthenticationRepository authenticationRepository;

@@ -108,10 +108,6 @@ class TeamRepository {
 }
 
 
-class OrganizationRepository{
-    +getOrganization(): Organization
-}
-
 interface EmailSenderInterface {
     +sendEmail(entry: Entry)
 }
@@ -185,9 +181,6 @@ class VehicleRepository {
 }
 
 
-class OrganizationRepository{
-    +getOrganization(): Organization
-}
 
 class GreenSpaceListUI{
     -managerName: String
@@ -230,10 +223,6 @@ class GreenSpaceRepository{
     + getGreenSpaces() : List<GreenSpace>
 }
 
-class OrganizationRepository{
-    + getUserName()
-}
-
 
 class TaskAssignedToCollaboratorUI{
     - managerName: String
@@ -250,6 +239,10 @@ class TaskAssignedToCollaboratorController{
 
 class OrganizationRepository{
     + getUserName()
+    + getUserName()
+    +getOrganization(): Organization
+
+
 }
 
 class Entry{
@@ -288,11 +281,6 @@ class CompletionTaskController{
     + getEntries()
 }
 
-
-class OrganizationRepository{
-    + getUserName()
-}
-
 AgendaController ..> Repositories : repositories
 AgendaController "1" --> Organization
 AgendaUI ..> AgendaController : controller
@@ -306,6 +294,8 @@ AssignVehicleToEntryController  ..>  VehicleRepository : VehicleRepository
 AssignVehicleToEntryController  ..>  Organization : organization
 AssignVehicleToEntryController  ..> AgendaRepository : AgendaRepository
 AssignVehicleToEntryUI ..>  AssignVehicleToEntryController
+AssignTeamToEntryController  ..>  EmailSenderInterface : emailSender
+
 CancelEntryUI ..> AgendaController : controller
 CompletionTaskController ..> Organization
 CompletionTaskController ..> Repositories: repositories
