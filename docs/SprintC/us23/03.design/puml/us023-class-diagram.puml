@@ -1,15 +1,25 @@
 @startuml
 
-class AssignTeamToEntryController {
-    -teamRepository: TeamRepository
-    +AssignTeamToEntryController()
+class AssignTeamToEntryController{
+   +CreateAssignTeamToEntryController()
     +getTeams(): List<Team>
     +getTeams(index: int): Team
-    -getTeamRepository(): TeamRepository
+    +getEntries(): List<Entry>
+    +getEntries(index: int): Entry
+    +assignTeamToEntry(team: Team, entry: Entry)
 }
 
 class AssignTeamToEntryUI {
 
+}
+
+class Repositories {
+    -instance: Repositories
+    +getInstance(): Repositories
+    +getTeamRepository(): TeamRepository
+    +getAgendaRepository(): AgendaRepository
+    +getVehicleRepository(): VehicleRepository
+    +getOrganizationRepository(): OrganizationRepository
 }
 
 class TeamRepository {
@@ -45,10 +55,12 @@ class Mailer {
 }
 
 AssignTeamToEntryUI .>  AssignTeamToEntryController
-AssignTeamToEntryController  ..>  TeamRepository : TeamRepository
-AssignTeamToEntryController  .> AgendaRepository : AgendaRepository
-TeamRepository  -->  Organization : gets team
-AssignTeamToEntryController  ..>  OrganizationRepository
+AssignTeamToEntryController  ..>  Repositories : repositories
+Repositories ..> TeamRepository : teamRepository
+Repositories ..> AgendaRepository : agendaRepository
+Repositories ..> OrganizationRepository : organizationRepository
+Repositories -> Repositories : getInstance()
+TeamRepository --> Organization : gets team
 OrganizationRepository  -->  Organization : has manager
 AgendaRepository  -->  Organization : gets entry
 Organization "1" --> "*" Entry : sets team to entry

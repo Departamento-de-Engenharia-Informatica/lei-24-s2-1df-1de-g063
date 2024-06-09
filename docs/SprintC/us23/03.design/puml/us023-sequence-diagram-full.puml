@@ -8,6 +8,8 @@ autonumber
 actor "Green Space Manager" as GSM
 participant ":AssignTeamToEntryUI" as UI
 participant ":AssignTeamToEntryCTRL" as CTRL
+participant "repositories:\nRepositories" as Repositories
+participant "repositories"
 participant "teamRepository:\nTeamRepository" as TeamRepository
 participant "agendaRepository:\nAgendaRepository" as AgendaRepository
 participant "organization:\nOrganization" as Org
@@ -24,6 +26,14 @@ activate GSM
         UI --> CTRL** : create
         UI -> CTRL : getTeams()
         activate CTRL
+            CTRL -> Repositories : getInstance()
+            activate Repositories
+            Repositories -> CTRL : repositories
+            deactivate Repositories
+            CTRL -> repositories : getTeamRepository()
+            activate repositories
+            repositories --> CTRL : TeamRepository
+            deactivate repositories
             CTRL -> TeamRepository : getTeams()
                 activate TeamRepository
                     TeamRepository --> CTRL : Teams
@@ -35,9 +45,14 @@ activate GSM
         GSM -> UI : selects team
         activate UI
         UI --> UI : keepTeam(selectedTeam)
+
         UI -> CTRL : getEntries()
 
       activate CTRL
+                  CTRL -> repositories : getAgendaRepository()
+                  activate repositories
+                  repositories --> CTRL : AgendaRepository
+                  deactivate repositories
                   CTRL -> AgendaRepository : getEntries()
                       activate AgendaRepository
                           AgendaRepository --> CTRL : Entries
@@ -54,6 +69,10 @@ activate GSM
         UI --> UI : keepEntry(selectedEntry)
         UI -> CTRL : attributeTeamToEntry(selectedTeam, selectedEntry)
         activate CTRL
+            CTRL -> repositories : getOrganizationRepository()
+                activate repositories
+                repositories --> CTRL : OrganizationRepository
+                deactivate repositories
             CTRL -> OrgRepository : getOrganization()
                 activate OrgRepository
                     OrgRepository --> CTRL : Organization

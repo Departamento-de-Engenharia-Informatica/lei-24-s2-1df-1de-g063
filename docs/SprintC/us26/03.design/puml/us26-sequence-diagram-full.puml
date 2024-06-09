@@ -8,19 +8,28 @@ autonumber
 actor "Green Space Manager" as GSM
 participant ":AssignVehicleToEntryUI" as UI
 participant ":AssignVehicleToEntryCTRL" as CTRL
+participant "repositories:\nRepositories" as Repositories
+participant "repositories"
 participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
 participant "agendaRepository:\nAgendaRepository" as AgendaRepository
 participant "organization:\nOrganization" as Org
 participant "organizationRepository:\nOrganizationRepository" as OrgRepository
 participant "vehicle:\nVehicle" as Vehicle
 participant "entry:\nEntry" as Entry
-
 activate GSM
     GSM -> UI : Wants to assign vehicles to entry
     activate UI
         UI --> CTRL** : create
         UI -> CTRL : getVehicles()
         activate CTRL
+            CTRL -> Repositories : getInstance()
+            activate Repositories
+            Repositories -> CTRL : repositories
+            deactivate Repositories
+            CTRL -> repositories : getVehicleRepository()
+            activate repositories
+            repositories --> CTRL : VehicleRepository
+            deactivate repositories
             CTRL -> VehicleRepository : getVehicles()
                 activate VehicleRepository
                     VehicleRepository --> CTRL : Vehicles
@@ -35,6 +44,10 @@ activate GSM
         UI -> CTRL : getEntries()
 
       activate CTRL
+                  CTRL -> repositories : getAgendaRepository()
+                  activate repositories
+                  repositories --> CTRL : AgendaRepository
+                  deactivate repositories
                   CTRL -> AgendaRepository : getEntries()
                       activate AgendaRepository
                           AgendaRepository --> CTRL : Entries
@@ -51,6 +64,10 @@ activate GSM
         UI --> UI : keepEntry(selectedEntry)
         UI -> CTRL : attributeVehiclesToEntry(selectedVehicles, selectedEntry)
         activate CTRL
+            CTRL -> repositories : getOrganizationRepository()
+                activate repositories
+                repositories --> CTRL : OrganizationRepository
+                deactivate repositories
             CTRL -> OrgRepository : getOrganization()
                 activate OrgRepository
                     OrgRepository --> CTRL : Organization
