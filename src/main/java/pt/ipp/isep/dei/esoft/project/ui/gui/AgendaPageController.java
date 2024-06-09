@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.Status;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -58,6 +59,7 @@ public class AgendaPageController {
             selectedEntry.setStartDate(startDatePicker.getValue());
             // calculate end date based on duration
             selectedEntry.setEndDate(calculateEndDate(selectedEntry.getDuration(), startDatePicker.getValue()));
+            selectedEntry.setStatus(Status.scheduled);
             controller.getAgendaRepository().addEntry(selectedEntry);
             updateAgendaListView();
         }
