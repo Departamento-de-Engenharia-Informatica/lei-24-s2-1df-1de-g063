@@ -17,6 +17,7 @@ public class TeamRepositoryTest {
     @BeforeEach
     public void setUp() {
         teamRepository = TeamRepository.getInstance();
+        teamRepository.clear();
         team1 = new Team();
         team2 = new Team();
     }
