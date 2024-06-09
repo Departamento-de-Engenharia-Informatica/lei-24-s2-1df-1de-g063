@@ -179,7 +179,7 @@ public class ToDoListUI implements Runnable, Serializable {
      */
     private void printGreenSpacesList() {
         choice = 0;
-        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();
+        List<GreenSpace> greenSpaces = GreenSpaceRepository.getInstance().getGreenSpaces();
         System.out.println("\n--- GreenSpace List -------------------------");
         if (greenSpaces.isEmpty()) {
             System.out.println("No Greenspaces registered yet.");
