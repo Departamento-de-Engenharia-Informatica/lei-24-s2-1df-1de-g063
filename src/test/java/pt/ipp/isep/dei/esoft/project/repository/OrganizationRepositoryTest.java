@@ -92,4 +92,16 @@ class OrganizationRepositoryTest {
 
         assertTrue(result.isEmpty());
     }
+
+//    @Test
+//    void getOrganizationByEmployee() {
+//    }
+//
+//    @Test
+//    void getOrganizationByEmployeeEmail() {
+//    }
+//
+//    @Test
+//    void add() {
+//    }
 }

@@ -39,4 +39,22 @@ public class TeamRepositoryTest {
         assertEquals(team1, teams.get(0));
         assertEquals(team2, teams.get(1));
     }
+
+    @Test
+    void getInstance() {
+    }
+
+    @Test
+    void addTeams() {
+    }
+
+    @Test
+    void clear() {
+    }
+
+    @Test
+    void getTeams() {
+    }
+
+
 }

@@ -25,7 +25,7 @@ public class Repositories implements Serializable {
     private final TeamRepository teamRepository;
     private transient EmailSender emailSender;
 
-    private Repositories(){
+    protected Repositories(){
         ConfigProperties properties = new ConfigProperties();
 
         try {
