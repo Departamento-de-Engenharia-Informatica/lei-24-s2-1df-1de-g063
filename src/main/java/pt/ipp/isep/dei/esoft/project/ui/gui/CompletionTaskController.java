@@ -7,22 +7,24 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 public class CompletionTaskController {
 
     @FXML
     private ListView<Entry> entryListView;
 
-    private AgendaRepository agendaRepository;
+    private final AgendaRepository agenda;
+
     private pt.ipp.isep.dei.esoft.project.application.controller.CompletionTaskController controller;
 
     public CompletionTaskController() {
+        this.agenda =  Repositories.getInstance().getAgendaRepository();;
+        this.controller = new pt.ipp.isep.dei.esoft.project.application.controller.CompletionTaskController();
     }
 
     @FXML
     public void initialize() {
-        this.agendaRepository = AgendaRepository.getInstance();
-        this.controller = new pt.ipp.isep.dei.esoft.project.application.controller.CompletionTaskController();
         loadEntries();
         setupEntryClickHandler();
     }
@@ -30,7 +32,8 @@ public class CompletionTaskController {
     @FXML
     public void loadEntries() {
         try {
-            entryListView.getItems().setAll(agendaRepository.getEntries());
+            System.out.println("Existing Entries: " + agenda.getEntries());
+            entryListView.getItems().setAll(agenda.getEntries());
         } catch (IllegalArgumentException e) {
             showAlert("Error", e.getMessage());
         }

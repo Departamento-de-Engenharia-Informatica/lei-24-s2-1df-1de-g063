@@ -91,6 +91,22 @@ public class HRMUI {
         }
     }
 
+    @FXML
+    protected void handleGenerateTeamPageController(ActionEvent event) {
+        try {
+            // Load the FXML file for the RegisterSkillPage
+            Parent registerSkillPage = FXMLLoader.load(getClass().getResource("/AssignSkillPage.fxml"));
+
+            // Create a new stage for the RegisterSkillPage
+            Stage newStage = new Stage();
+            Scene scene = new Scene(registerSkillPage);
+            newStage.setScene(scene);
+            newStage.show(); // Show the new stage
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void handleBack() {
