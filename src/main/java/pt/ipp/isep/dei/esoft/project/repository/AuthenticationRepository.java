@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
+import java.io.Serializable;
+
 /**
  * The AuthenticationRepository class provides methods to interact with user authentication and session management.
  * It communicates with the authentication facade to perform login, logout, and user management operations.
@@ -13,7 +15,7 @@ import pt.isep.lei.esoft.auth.UserSession;
  * boolean isLoggedIn = authRepo.doLogin("example@email.com", "password");
  * }</pre>
  */
-public class AuthenticationRepository {
+public class AuthenticationRepository implements Serializable {
     private final AuthFacade authenticationFacade;
 
     /**

@@ -56,7 +56,7 @@ public class Repositories implements Serializable {
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         this.authenticationRepository = new AuthenticationRepository();
-        this.emailSender = initializeEmailSender(); // Initialize EmailSender after deserialization
+        this.emailSender = initializeEmailSender();
     }
 
     private EmailSender initializeEmailSender() {
