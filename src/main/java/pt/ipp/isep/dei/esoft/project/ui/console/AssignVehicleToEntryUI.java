@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The AssignVehicleToEntryUI class represents the console-based user interface for assigning vehicles to entries.
- * It interacts with the AssignVehicleToEntryController to manage the assignment process.
+ * The AssignVehicleToEntryUI class is responsible for the user interface that allows
+ * the user to assign a vehicle to an entry.
  */
 public class AssignVehicleToEntryUI implements Runnable {
 
@@ -20,46 +20,68 @@ public class AssignVehicleToEntryUI implements Runnable {
     private int choiceEntry;
 
     /**
-     * Constructs an AssignVehicleToEntryUI object.
+     * Constructor for AssignVehicleToEntryUI.
+     * Initializes the controller and the scanner.
      */
-    public AssignVehicleToEntryUI() {
+    public AssignVehicleToEntryUI(){
         this.controller = new AssignVehicleToEntryController();
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Executes the UI functionality.
+     * Starts the user interface.
      */
-    public void run() {
+    public void run(){
         System.out.println("\n\n--- Assign Vehicle to an Entry ------------------------");
         requestData();
     }
 
     /**
-     * Requests data from the user to assign vehicles to entries.
+     * Requests data from the user.
      */
-    public void requestData() {
+    public void requestData(){
         System.out.println("How many vehicles do you want to add?");
         int numVehicles = scanner.nextInt();
         for (int i = 0; i < numVehicles; i++) {
             do {
                 printVehicleList();
                 System.out.println("Choose a vehicle:");
-                // Input validation
-                // ...
-                // Choice validation
-                // ...
-                // Vehicle assignment
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter a number:");
+                    scanner.next();
+                }
+                choiceVehicle = scanner.nextInt();
+                if (choiceVehicle == -1) {
+                    return;
+                }
+                if (choiceVehicle < 0 || choiceVehicle >= controller.getVehicles().size()) {
+                    System.out.println("Invalid choice. Please choose a number from the list:");
+                    continue;
+                }
+                Vehicle selectedVehicle = controller.getVehicles().get(choiceVehicle);
+                Entry selectedEntry = controller.getEntries().get(choiceEntry);
+                if (selectedEntry.isVehicleAssigned(selectedVehicle)) {
+                    System.out.println("This vehicle is already assigned. Please choose another vehicle.");
+                    continue;
+                }
                 break;
             } while (true);
 
             do {
                 printEntryList();
                 System.out.println("Choose an entry:");
-                // Input validation
-                // ...
-                // Choice validation
-                // ...
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter a number:");
+                    scanner.next();
+                }
+                choiceEntry = scanner.nextInt();
+                if (choiceEntry == -1) {
+                    return;
+                }
+                if (choiceEntry < 0 || choiceEntry >= controller.getEntries().size()) {
+                    System.out.println("Invalid choice. Please choose a number from the list:");
+                    continue;
+                }
                 break;
             } while (true);
 
@@ -68,25 +90,43 @@ public class AssignVehicleToEntryUI implements Runnable {
     }
 
     /**
-     * Submits the user input data to assign the selected vehicle to the selected entry.
+     * Submits the data to the controller.
      */
-    public void submitData() {
+    public void submitData(){
         controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
     }
 
     /**
-     * Prints the list of vehicles for selection.
+     * Prints the list of vehicles.
      */
     private void printVehicleList() {
-        // Printing vehicle list
-        // ...
+        choiceVehicle = 0;
+        List<Vehicle> vehicles = controller.getVehicles();
+        System.out.println("\n--- Vehicles List -------------------------");
+        if (vehicles.isEmpty()) {
+            System.out.println("No Vehicles registered yet.");
+        } else {
+            for (Vehicle vehicle : vehicles) {
+                System.out.printf("%d - %s%n", choiceVehicle, vehicle);
+                choiceVehicle++;
+            }
+        }
     }
 
     /**
-     * Prints the list of entries for selection.
+     * Prints the list of entries.
      */
     private void printEntryList() {
-        // Printing entry list
-        // ...
+        choiceEntry = 0;
+        List<Entry> entries = controller.getEntries();
+        System.out.println("\n--- Entries List -------------------------");
+        if (entries.isEmpty()) {
+            System.out.println("No Entries registered yet.");
+        } else {
+            for (Entry entry : entries) {
+                System.out.printf("%d - %s%n", choiceEntry, entry);
+                choiceEntry++;
+            }
+        }
     }
 }
