@@ -72,5 +72,66 @@ class EntryTest {
         // Assert
         assertEquals(endDate, entry.getEndDate(), "End date should be set to the entry");
     }
+    @Test
+    void testGetTask() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals("Task 1", entry.getTask());
+    }
 
+    @Test
+    void testGetUrgency() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(Urgency.Low, entry.getUrgency());
+    }
+
+    @Test
+    void testGetDuration() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(1, entry.getDuration());
+    }
+
+    @Test
+    void testGetGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco");
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, greenSpace, Status.pending);
+        assertEquals(greenSpace, entry.getGreenSpace());
+    }
+
+    @Test
+    void testSetGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco");
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, null, Status.pending);
+        entry.setGreenSpace(greenSpace);
+        assertEquals(greenSpace, entry.getGreenSpace());
+    }
+
+    @Test
+    void testGetStatus() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(Status.pending, entry.getStatus());
+    }
+
+    @Test
+    void testSetStatus() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        entry.setStatus(Status.completed);
+        assertEquals(Status.completed, entry.getStatus());
+    }
+
+    @Test
+    void testToString() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        String expectedString = "Entry{" +
+                "team=No team assigned" +
+                ", vehicles=[]" +
+                ", task='Task 1'" +
+                ", urgency=Low" +
+                ", duration=1" +
+                ", greenSpace=GreenSpace{name='Green Space 1', area=1.0, size=Large_Size, manager name='Francisco'}" +
+                ", status=pending" +
+                ", startDate=null" +
+                ", endDate=null" +
+                '}';
+        assertEquals(expectedString, entry.toString());
+    }
 }

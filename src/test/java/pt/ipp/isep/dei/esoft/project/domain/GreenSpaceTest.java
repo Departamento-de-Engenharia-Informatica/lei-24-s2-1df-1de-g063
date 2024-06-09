@@ -45,4 +45,5 @@ class GreenSpaceTest {
         String expectedString = "GreenSpace{name='Park1', area=100.0, size=Large_Size, manager name='Francisco'}";
         assertEquals(expectedString, greenSpace.toString());
     }
+    
 }
