@@ -39,20 +39,24 @@ class AgendaRepositoryTest {
     }
 
     @Test
-    void testUpdateEntry() {
-        // Setup
-        AgendaRepository repository = new AgendaRepository();
-        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
-        repository.addEntry(entry);
-        Entry updatedEntry = new Entry("Updated Task", Urgency.Low, 3, new GreenSpace("Green Space 2",2, Size.Medium_Size,"Francisco"), Status.completed);
+    
+void testUpdateEntry() {
+    // Setup
+    AgendaRepository repository = new AgendaRepository();
+    Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+    repository.addEntry(entry);
 
-        // Execute
-        repository.updateEntry(updatedEntry);
+    // Update the properties of the existing entry
+    entry.setGreenSpace(new GreenSpace("Green Space 2",2, Size.Medium_Size,"Francisco"));
+    entry.setStatus(Status.completed);
 
-        // Assert
-        List<Entry> entries = repository.getEntries();
-        assertTrue(entries.contains(updatedEntry), "Entry should be updated in the repository");
-    }
+    // Execute
+    repository.updateEntry(entry);
+
+    // Assert
+    List<Entry> entries = repository.getEntries();
+    assertTrue(entries.contains(entry), "Entry should be updated in the repository");
+}
 
     @Test
     void testGetEntriesWithStatus() {

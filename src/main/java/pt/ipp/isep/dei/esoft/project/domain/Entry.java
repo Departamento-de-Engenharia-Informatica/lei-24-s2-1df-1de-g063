@@ -66,6 +66,8 @@ public class Entry implements Serializable {
         return task;
     }
 
+
+
     public Team getTeam() {
         return team;
     }

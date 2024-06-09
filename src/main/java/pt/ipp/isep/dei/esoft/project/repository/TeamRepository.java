@@ -46,6 +46,10 @@ public class TeamRepository implements Serializable {
         teams.add(team);
     }
 
+    public void clear() {
+        teams.clear();
+    }
+
     /**
      * Retrieves a list of all teams stored in the repository.
      *
