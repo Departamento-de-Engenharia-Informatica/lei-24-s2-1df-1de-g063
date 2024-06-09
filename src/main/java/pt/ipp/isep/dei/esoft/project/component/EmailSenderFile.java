@@ -31,6 +31,7 @@ public class EmailSenderFile implements EmailSender {
         File dir = new File("./emails");
         dir.mkdirs();
 
+
         // Read existing email content, if any
         List<String> content = new ArrayList<>();
         try {
