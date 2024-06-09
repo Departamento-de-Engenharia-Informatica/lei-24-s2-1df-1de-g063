@@ -587,7 +587,7 @@ public class Entry implements Serializable {
 Simulate how the AgendaController interacts with the AgendaRepository to store and retrieve entries.
 
 
-* We instantiate the Agenda.
+* We instantiate the AgendaRepository.
 * We create a AgendaController with the repositories.
 * We add an entry to the repository and set its status to scheduled.
 
