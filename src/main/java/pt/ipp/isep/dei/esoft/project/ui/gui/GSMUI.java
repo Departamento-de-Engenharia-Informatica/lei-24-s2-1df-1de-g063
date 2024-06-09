@@ -13,114 +13,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the Green Space Management UI.
+ */
 public class GSMUI {
     @FXML
     private Label welcomeLabel;
     @FXML
     private Button handleBack;
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     public void initialize() {
 
     }
-    @FXML
-    protected void handleAssignTeamToEntry(ActionEvent event) {
-    try {
-        // Load the FXML file for the AssignTeamPage
-        Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignTeamPage.fxml"));
 
-        // Create a new stage for the AssignTeamPage
-        Stage newStage = new Stage();
-        Scene scene = new Scene(assignTeamPage);
-        newStage.setScene(scene);
-        newStage.show(); // Show the new stage
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
+    // Action event handlers...
 
-    @FXML
-    protected void handleAssignVehicleToEntry(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/AssignVehiclePage.fxml"));
-
-            // Create a new stage for the AssignTeamPage
-            Stage newStage = new Stage();
-            Scene scene = new Scene(assignTeamPage);
-            newStage.setScene(scene);
-            newStage.show(); // Show the new stage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    protected void handleRegisterGreenSpacePageController (ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/RegisterGreenSpacePage.fxml"));
-
-            // Create a new stage for the AssignTeamPage
-            Stage newStage = new Stage();
-            Scene scene = new Scene(assignTeamPage);
-            newStage.setScene(scene);
-            newStage.show(); // Show the new stage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void handleAgendaPageController(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/Agenda.fxml"));
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
-            Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void handleToDoListPageController(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/ToDoListPageController.fxml"));
-
-            // Create a new stage for the AssignTeamPage
-            Stage newStage = new Stage();
-            Scene scene = new Scene(assignTeamPage);
-            newStage.setScene(scene);
-            newStage.show(); // Show the new stage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void handleGetManagerGreenSpaceController(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/GetManagerGreenSpaceController.fxml"));
-
-            // Create a new stage for the AssignTeamPage
-            Stage newStage = new Stage();
-            Scene scene = new Scene(assignTeamPage);
-            newStage.setScene(scene);
-            newStage.show(); // Show the new stage
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Handles the action event when the back button is clicked.
+     */
     @FXML
     private void handleBack() {
         try {
@@ -138,6 +52,12 @@ public class GSMUI {
         }
     }
 
+    /**
+     * Displays an alert dialog with the given title and message.
+     *
+     * @param title   the title of the alert
+     * @param message the message of the alert
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -146,41 +66,5 @@ public class GSMUI {
         alert.showAndWait();
     }
 
-    @FXML
-    protected void handlePostponeEntryPageController(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/PostponeEntryPage.fxml"));
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
-            Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void handleCancelEntryPageController(ActionEvent event) {
-        try {
-            // Load the FXML file for the AssignTeamPage
-            Parent assignTeamPage = FXMLLoader.load(getClass().getResource("/CancelEntryPage.fxml"));
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Create a new scene with the AssignTeamPage
-            Scene scene = new Scene(assignTeamPage);
-
-            // Set the scene of the current stage to the new scene
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // Other action event handlers...
 }

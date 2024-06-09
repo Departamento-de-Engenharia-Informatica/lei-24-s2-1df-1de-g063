@@ -4,12 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The MergeSort class provides methods for sorting arrays and lists using the merge sort algorithm.
+ */
 public class MergeSort implements Serializable {
 
+    /**
+     * Sorts the given array of doubles in descending order using the merge sort algorithm.
+     *
+     * @param arr the array to be sorted
+     */
     public void mergeSortArray(double[] arr) {
         mergeSortArr(arr, 0, arr.length - 1);
     }
 
+    /**
+     * Sorts the given list of GreenSpaces in descending order of area using the merge sort algorithm.
+     *
+     * @param gsList the list of GreenSpaces to be sorted
+     */
     public void mergeSortGreenSpaces(List<GreenSpace> gsList) {
         mergeSortList(gsList, 0, gsList.size() - 1);
     }

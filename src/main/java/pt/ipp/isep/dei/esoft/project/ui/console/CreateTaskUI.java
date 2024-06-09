@@ -9,7 +9,8 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
- * Create Task UI (console). This option is only available for administrators for demonstration purposes.
+ * The CreateTaskUI class represents the user interface for creating tasks in the console.
+ * This option is only available for administrators for demonstration purposes.
  */
 public class CreateTaskUI implements Runnable {
 
@@ -23,6 +24,9 @@ public class CreateTaskUI implements Runnable {
     private String taskCategoryDescription;
     private String empployeeEmail;
 
+    /**
+     * Constructs a CreateTaskUI object.
+     */
     public CreateTaskUI() {
         controller = new CreateTaskController();
     }
@@ -31,6 +35,7 @@ public class CreateTaskUI implements Runnable {
         return controller;
     }
 
+    @Override
     public void run() {
         System.out.println("\n\n--- Create Task ------------------------");
 

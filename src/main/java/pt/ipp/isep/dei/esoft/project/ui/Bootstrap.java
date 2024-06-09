@@ -13,16 +13,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * The Bootstrap class is responsible for initializing the application with some default data.
+ * It implements the Runnable interface, which means it can be used to create a thread.
+ * The class includes a main method, run(), which is called when the class is instantiated.
+ * This method adds some default task categories, organizations, users, green spaces, teams, entries, and vehicles to the respective repositories.
+ * The class includes several private methods for adding task categories, organizations, users, green spaces, teams, entries, and vehicles.
+ */
 public class Bootstrap implements Runnable {
 
     //Add some task categories to the repository as bootstrap
+
+    /**
+     * Adds some default task categories, organizations, users, green spaces, teams, entries, and vehicles to the respective repositories.
+     */
     public void run() {
         addTaskCategories();
         addOrganization();
         addUsers();
         addGreenSpaces();
     }
+
+    /**
+     * Adds some default task categories to the TaskCategoryRepository.
+     */
 
     private void addOrganization() {
         //get organization repository
@@ -34,6 +48,10 @@ public class Bootstrap implements Runnable {
         organization.addEmployee(new Employee("gsm@this.app"));
         organizationRepository.add(organization);
     }
+
+    /**
+     * Adds a default organization to the OrganizationRepository.
+     */
 
     private void addTaskCategories() {
         //TODO: add bootstrap Task Categories here
@@ -49,6 +67,10 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
+    /**
+     * Adds some default green spaces to the GreenSpaceRepository.
+     */
+
     private void addGreenSpaces(){
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         GreenSpace greenSpace1 = new GreenSpace("Park",250, Size.Garden,"Paulo");
@@ -57,6 +79,10 @@ public class Bootstrap implements Runnable {
         greenSpaceRepository.addGreenSpace(greenSpace1);
         greenSpaceRepository.addGreenSpace(greenSpace2);
     }
+
+    /**
+     * Adds some default users to the AuthenticationRepository.
+     */
 
     private void addUsers() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
@@ -83,7 +109,7 @@ public class Bootstrap implements Runnable {
 
 
 // Create more Collaborator objects
-        Collaborator collaborator1 = new Collaborator("Gabriel Silvinha", "123 Street", "ze.rafa.oliveira@gmail.com", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");
+        Collaborator collaborator1 = new Collaborator("John Doe", "123 Street", "ze.rafa.oliveira@gmail.com", "1234567890", "passaporte", "br123456", LocalDate.of(1980, 1, 1), LocalDate.of(2020, 1, 1), "Developer");
         Collaborator collaborator2 = new Collaborator("Jane Smith", "456 Avenue", "janesmith@this.app", "0987654321", "passaporte", "br123456", LocalDate.of(1985, 2, 2), LocalDate.of(2020, 2, 2), "Tester");
         Collaborator collaborator3 = new Collaborator("Bob Johnson", "789 Boulevard", "bobjohnson@this.app", "1122334455", "passaporte", "br123456", LocalDate.of(1990, 3, 3), LocalDate.of(2020, 3, 3), "Manager");
         Collaborator collaborator4 = new Collaborator("Alice Williams", "1010 Street", "alicewilliams@this.app", "1212121212", "passaporte", "br123456", LocalDate.of(1981, 4, 4), LocalDate.of(2020, 4, 4), "Developer");
@@ -168,7 +194,7 @@ public class Bootstrap implements Runnable {
         //add vehicle to repository
 
         Vehicle vehicle1 = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
-        Vehicle vehicle2 = new Vehicle("Peugeot", "do aço", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
+        Vehicle vehicle2 = new Vehicle("Peugeot", "3008", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
 
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
         vehicleRepository.addVehicle(vehicle1);

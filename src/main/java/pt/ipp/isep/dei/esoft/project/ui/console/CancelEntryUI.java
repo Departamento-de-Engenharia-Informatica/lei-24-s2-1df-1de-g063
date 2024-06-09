@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Provides a console-based user interface for canceling an entry in the project agenda.
+ */
 public class CancelEntryUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
@@ -26,6 +29,10 @@ public class CancelEntryUI implements Runnable {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
+    /**
+     * Constructs a CancelEntryUI object.
+     * Initializes the controller, to-do list, agenda repository, and scanner.
+     */
     public CancelEntryUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
@@ -34,12 +41,18 @@ public class CancelEntryUI implements Runnable {
         this.status = Status.canceled;
     }
 
+    /**
+     * Runs the CancelEntryUI, prompting the user for input and canceling the selected entry.
+     */
     @Override
     public void run() {
         requestData();
         submitData();
     }
 
+    /**
+     * Requests data from the user, including selecting the entry to cancel.
+     */
     private void requestData() {
         selectedEntry = requestEntry();
         if (selectedEntry != null) {
@@ -47,6 +60,11 @@ public class CancelEntryUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the user to select an entry from the agenda.
+     *
+     * @return The selected entry.
+     */
     private Entry requestEntry() {
         int contador = 0;
         choice = 0;
@@ -65,6 +83,9 @@ public class CancelEntryUI implements Runnable {
         return entries.get(choice);
     }
 
+    /**
+     * Submits the selected entry for cancellation.
+     */
     private void submitData() {
         if (selectedEntry != null) {
             selectedEntry.setStartDate(startDate);
@@ -77,6 +98,9 @@ public class CancelEntryUI implements Runnable {
         printData();
     }
 
+    /**
+     * Prints the updated agenda with canceled entry.
+     */
     private void printData() {
         int contador = 0;
         List<Entry> entries = agenda.getAgenda();
@@ -92,6 +116,12 @@ public class CancelEntryUI implements Runnable {
         System.out.println("----------------------------------------");
     }
 
+    /**
+     * Requests the user to input a choice.
+     *
+     * @param type The type of choice being requested.
+     * @return The user's choice.
+     */
     private int requestUserChoice(String type) {
         int userChoice = 0;
         boolean isValid = false;

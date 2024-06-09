@@ -87,6 +87,11 @@ public class Collaborator implements Serializable {
         return skills.contains(skill);
     }
 
+    /**
+     * Retrieves the email address of the collaborator.
+     *
+     * @return the email address
+     */
     public String getEmail() {
         return email;
     }

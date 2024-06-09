@@ -12,6 +12,17 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 
+/**
+ * This class provides a graphical user interface for assigning a team to an entry.
+ * It allows the user to view the list of teams and entries, select a team and an entry, and assign the selected team to the selected entry.
+ * The class uses an AssignTeamToEntryController to handle the business logic of assigning the team to the entry.
+ * It also uses an AgendaRepository to manage the entries in the agenda.
+ * The class includes several private instance variables to store the data entered by the user, including the choice of team and entry.
+ * It also includes several FXML-annotated instance variables for interacting with the user interface, including two ListViews for displaying the teams and entries, a Button for confirming the selection, and an AgendaRepository for managing the entries.
+ * The class includes a main method, initialize(), which is called when the class is instantiated.
+ * This method initializes the controller, loads the teams and entries into the ListViews, and sets up the confirm button.
+ * The class includes several private methods for handling user actions, including confirming the selection of a team and an entry, and displaying an error message if no team or entry is selected or if the team could not be assigned to the entry.
+ */
 public class AssignTeamPageController {
     private final AgendaRepository agendaRepository;
     @FXML
@@ -33,11 +44,17 @@ public class AssignTeamPageController {
 
     private AssignTeamToEntryController assignTeamToEntryController;
 
+    /**
+     * Constructs a new AssignTeamPageController.
+     */
     public AssignTeamPageController() {
         this.assignTeamToEntryController = new AssignTeamToEntryController();
         this.agendaRepository= Repositories.getInstance().getAgendaRepository();
     }
 
+    /**
+     * Initializes the controller, loads the teams and entries into the ListViews, and sets up the confirm button.
+     */
     @FXML
     public void initialize() {
         teams = assignTeamToEntryController.getTeams();
@@ -47,7 +64,7 @@ public class AssignTeamPageController {
             teamListView.getItems().addAll(teams);
         }
 
-         entries = assignTeamToEntryController.getEntries();
+        entries = assignTeamToEntryController.getEntries();
         if (entries.isEmpty()) {
             System.out.println("No entries available");
         } else {
@@ -55,7 +72,11 @@ public class AssignTeamPageController {
         }
     }
 
-
+    /**
+     * Handles the action of the confirm button.
+     * This includes getting the selected team and entry, assigning the team to the entry, and updating the ListView.
+     * If no team or entry is selected, or if the team could not be assigned to the entry, an error message is displayed.
+     */
     @FXML
     public void confirmSelection() {
         Team selectedTeam = teamListView.getSelectionModel().getSelectedItem();
@@ -100,5 +121,4 @@ public class AssignTeamPageController {
             alert.showAndWait();
         }
     }
-
 }

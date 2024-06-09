@@ -18,6 +18,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class provides a graphical user interface for managing an agenda.
+ * It allows the user to view entries in the agenda, add entries to the agenda, and navigate back to the main page.
+ * The class uses an AgendaController to handle the business logic of managing the agenda.
+ * The class includes several private instance variables to store the data entered by the user, including the start date of an entry and a reference to the selected entry.
+ * It also includes several FXML-annotated instance variables for interacting with the user interface, including a ListView for displaying entries, a DatePicker for selecting the start date of an entry, and a Button for adding an entry to the agenda.
+ * The class includes a main method, initialize(), which is called when the class is instantiated.
+ * This method initializes the controller and loads the entries into the ListView.
+ * The class includes several private methods for handling user actions, including adding an entry to the agenda, navigating back to the main page, and calculating the end date of an entry based on its duration and start date.
+ */
 public class AgendaPageController {
     @FXML
     private ListView<Entry> entryListView;
@@ -30,7 +40,9 @@ public class AgendaPageController {
 
     private AgendaController controller;
 
-
+    /**
+     * Initializes the controller and loads the entries into the ListView.
+     */
     public void initialize() {
         System.out.println("Initialize method called");
         controller = new AgendaController();
@@ -38,6 +50,9 @@ public class AgendaPageController {
         System.out.println("startDatePicker: " + startDatePicker);
     }
 
+    /**
+     * Loads the entries into the ListView.
+     */
     private void loadEntries() {
         System.out.println("Loading entries");
         if (entryListView == null) {
@@ -48,10 +63,17 @@ public class AgendaPageController {
         }
     }
 
+    /**
+     * Updates the ListView with the entries in the agenda.
+     */
     private void updateAgendaListView() {
         agendaListView.getItems().setAll(controller.getAgendaRepository().getEntries());
     }
 
+    /**
+     * Handles the action of the Add button.
+     * This includes getting the selected entry, setting its start date, calculating its end date, setting its status to scheduled, adding it to the agenda, and updating the ListView.
+     */
     @FXML
     private void handleAddButtonAction() {
         Entry selectedEntry = entryListView.getSelectionModel().getSelectedItem();
@@ -65,6 +87,10 @@ public class AgendaPageController {
         }
     }
 
+    /**
+     * Handles the action of the Go Back button.
+     * This includes loading the main page and setting the scene of the current stage to the main page.
+     */
     @FXML
     protected void handleGOBACK(ActionEvent event) {
         try {
@@ -84,6 +110,13 @@ public class AgendaPageController {
         }
     }
 
+    /**
+     * Calculates the end date of an entry based on its duration and start date.
+     *
+     * @param duration The duration of the entry.
+     * @param startDate The start date of the entry.
+     * @return The end date of the entry.
+     */
     private LocalDate calculateEndDate(int duration, LocalDate startDate) {
         int fullDays = duration / 8;
         int remainingHours = duration % 8;

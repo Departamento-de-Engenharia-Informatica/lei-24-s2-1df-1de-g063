@@ -16,6 +16,10 @@ import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.domain.Status.valueOf;
 
+/**
+ * The AgendaUI class represents the user interface for managing agenda entries.
+ * It allows users to select entries, specify start dates, calculate end dates, and submit entries to the agenda.
+ */
 public class AgendaUI implements Runnable {
     private final AgendaController controller;
     private final ToDoList toDoList;
@@ -32,6 +36,9 @@ public class AgendaUI implements Runnable {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
+    /**
+     * Constructs an AgendaUI object.
+     */
     public AgendaUI() {
         this.controller = new AgendaController();
         this.toDoList = controller.getToDoList();
@@ -46,6 +53,9 @@ public class AgendaUI implements Runnable {
         submitData();
     }
 
+    /**
+     * Requests data from the user, including selecting an entry and specifying start date.
+     */
     private void requestData() {
         selectedEntry = requestEntry();
         if (selectedEntry != null) {
@@ -56,6 +66,11 @@ public class AgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the user to select an entry from the to-do list.
+     *
+     * @return the selected entry
+     */
     private Entry requestEntry() {
         int contador = 0;
         Status testStatus= Status.valueOf("pending");
@@ -67,14 +82,19 @@ public class AgendaUI implements Runnable {
             return null;
         } else {
             for (Entry entry : entries) {
-                    System.out.printf("%d - %s%n", contador, entry);
-                    contador++;
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
             }
         }
         choice = requestUserChoice("entry");
         return entries.get(choice);
     }
 
+    /**
+     * Adds the selected entry to the agenda.
+     *
+     * @param entry the entry to add
+     */
     private void addEntryToAgenda(Entry entry) {
         if (entry != null) {
             agendaRepository.addEntry(entry);
@@ -84,6 +104,9 @@ public class AgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the user to input the start date of the task.
+     */
     private void requestStartDate() {
         boolean valid = false;
         do {
@@ -98,6 +121,9 @@ public class AgendaUI implements Runnable {
         } while (!valid);
     }
 
+    /**
+     * Calculates and prints the end date of the task based on start date and duration.
+     */
     private void calculateEndDate() {
         if (startDate != null && duration > 0) {
             int fullDays = duration / 8;
@@ -112,6 +138,9 @@ public class AgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Submits the selected entry to the agenda after updating its start and end dates.
+     */
     private void submitData() {
         if (selectedEntry != null) {
             selectedEntry.setStartDate(startDate);
@@ -124,6 +153,9 @@ public class AgendaUI implements Runnable {
         printData();
     }
 
+    /**
+     * Prints the entries in the agenda.
+     */
     private void printData() {
         int contador = 0;
         Status testStatus= Status.valueOf("scheduled");
@@ -133,13 +165,19 @@ public class AgendaUI implements Runnable {
             System.out.println("No entries registered yet.");
         } else {
             for (Entry entry : entries) {
-                    System.out.printf("%d - %s%n", contador, entry);
-                    contador++;
+                System.out.printf("%d - %s%n", contador, entry);
+                contador++;
             }
         }
         System.out.println("----------------------------------------");
     }
 
+    /**
+     * Requests the user to input a choice.
+     *
+     * @param type the type of choice
+     * @return the user's choice
+     */
     private int requestUserChoice(String type) {
         int userChoice = 0;
         boolean isValid = false;

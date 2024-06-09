@@ -20,6 +20,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controller for postponing an entry in the project agenda.
+ */
 public class PostponeEntryPageController {
     @FXML
     private ListView<Entry> entryListView;
@@ -34,22 +37,34 @@ public class PostponeEntryPageController {
 
     private AgendaController controller;
 
+    /**
+     * Initializes the controller.
+     */
     public void initialize() {
         controller = new AgendaController();
         loadScheduledEntries();
         updateAgendaListView();
     }
 
+    /**
+     * Loads scheduled entries into the entry list view.
+     */
     private void loadScheduledEntries() {
         List<Entry> scheduledEntries = controller.getAgendaRepository().getEntriesWithStatus(Status.scheduled);
         entryListView.getItems().setAll(scheduledEntries);
     }
 
+    /**
+     * Updates the agenda list view with all entries.
+     */
     private void updateAgendaListView() {
         List<Entry> allEntries = controller.getAgendaRepository().getEntries();
         agendaListView.getItems().setAll(allEntries);
     }
 
+    /**
+     * Handles the action when the postpone button is clicked.
+     */
     @FXML
     private void handlePostponeButtonAction() {
         Entry selectedEntry = entryListView.getSelectionModel().getSelectedItem();
@@ -67,6 +82,11 @@ public class PostponeEntryPageController {
         }
     }
 
+    /**
+     * Handles the action when the go back button is clicked.
+     *
+     * @param event The action event.
+     */
     @FXML
     protected void handleGoBack(ActionEvent event) {
         try {
@@ -79,6 +99,13 @@ public class PostponeEntryPageController {
         }
     }
 
+    /**
+     * Calculates the end date based on the duration and start date.
+     *
+     * @param duration   The duration of the entry in hours.
+     * @param startDate  The start date of the entry.
+     * @return The calculated end date.
+     */
     private LocalDate calculateEndDate(int duration, LocalDate startDate) {
         int fullDays = duration / 8;
         int remainingHours = duration % 8;

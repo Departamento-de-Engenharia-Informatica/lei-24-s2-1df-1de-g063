@@ -18,6 +18,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Controller for retrieving and displaying green spaces assigned to a manager.
+ */
 public class GetManagerGreenSpaceController {
 
     @FXML
@@ -35,12 +38,18 @@ public class GetManagerGreenSpaceController {
     private GreenSpaceListController controller;
     private RegisterGreenSpaceController registerController;
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     public void initialize() {
         controller = new GreenSpaceListController();
         registerController = new RegisterGreenSpaceController();
     }
 
+    /**
+     * Loads green spaces assigned to the manager.
+     */
     @FXML
     public void loadGreenSpaces() {
         try {
@@ -67,6 +76,12 @@ public class GetManagerGreenSpaceController {
         }
     }
 
+    /**
+     * Sorts the list of green spaces.
+     *
+     * @param greenSpaces The list of green spaces to sort.
+     * @return The sorted list of green spaces.
+     */
     @FXML
     private List<GreenSpace> sortGreenSpaces(List<GreenSpace> greenSpaces) {
         String algorithm = getSortingAlgorithm();
@@ -86,6 +101,11 @@ public class GetManagerGreenSpaceController {
         return greenSpaces;
     }
 
+    /**
+     * Retrieves the sorting algorithm specified in the configuration file.
+     *
+     * @return The sorting algorithm.
+     */
     @FXML
     private String getSortingAlgorithm() {
         Properties properties = new Properties();
@@ -100,12 +120,21 @@ public class GetManagerGreenSpaceController {
         return properties.getProperty("sorting.algorithm", "MergeSort");
     }
 
+    /**
+     * Closes the current window.
+     */
     @FXML
     public void goBack() {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Displays an alert dialog with the given title and message.
+     *
+     * @param title   The title of the alert.
+     * @param message The message of the alert.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
