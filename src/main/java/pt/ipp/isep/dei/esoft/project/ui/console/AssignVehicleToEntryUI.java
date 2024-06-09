@@ -7,6 +7,10 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The AssignVehicleToEntryUI class is responsible for the user interface that allows
+ * the user to assign a vehicle to an entry.
+ */
 public class AssignVehicleToEntryUI implements Runnable {
 
     private final AssignVehicleToEntryController controller;
@@ -15,16 +19,26 @@ public class AssignVehicleToEntryUI implements Runnable {
     private int choiceVehicle;
     private int choiceEntry;
 
+    /**
+     * Constructor for AssignVehicleToEntryUI.
+     * Initializes the controller and the scanner.
+     */
     public AssignVehicleToEntryUI(){
         this.controller = new AssignVehicleToEntryController();
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Starts the user interface.
+     */
     public void run(){
         System.out.println("\n\n--- Assign Vehicle to an Entry ------------------------");
         requestData();
     }
 
+    /**
+     * Requests data from the user.
+     */
     public void requestData(){
         System.out.println("How many vehicles do you want to add?");
         int numVehicles = scanner.nextInt();
@@ -75,10 +89,16 @@ public class AssignVehicleToEntryUI implements Runnable {
         }
     }
 
+    /**
+     * Submits the data to the controller.
+     */
     public void submitData(){
         controller.attributeVehicleToEntry(choiceVehicle, choiceEntry);
     }
 
+    /**
+     * Prints the list of vehicles.
+     */
     private void printVehicleList() {
         choiceVehicle = 0;
         List<Vehicle> vehicles = controller.getVehicles();
@@ -93,18 +113,20 @@ public class AssignVehicleToEntryUI implements Runnable {
         }
     }
 
-     private void printEntryList() {
-         choiceEntry = 0;
-         List<Entry> entries = controller.getEntries();
-         System.out.println("\n--- Entries List -------------------------");
-         if (entries.isEmpty()) {
-             System.out.println("No Entries registered yet.");
-         } else {
-             for (Entry entry : entries) {
-                 System.out.printf("%d - %s%n", choiceEntry, entry);
-                 choiceEntry++;
-             }
-         }
-     }
-
+    /**
+     * Prints the list of entries.
+     */
+    private void printEntryList() {
+        choiceEntry = 0;
+        List<Entry> entries = controller.getEntries();
+        System.out.println("\n--- Entries List -------------------------");
+        if (entries.isEmpty()) {
+            System.out.println("No Entries registered yet.");
+        } else {
+            for (Entry entry : entries) {
+                System.out.printf("%d - %s%n", choiceEntry, entry);
+                choiceEntry++;
+            }
+        }
+    }
 }

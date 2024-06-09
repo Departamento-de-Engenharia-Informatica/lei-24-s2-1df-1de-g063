@@ -12,7 +12,30 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class ToDoListUI implements Runnable {
+/**
+ * This class provides a console-based user interface for managing a to-do list.
+ * It allows the user to add new entries to the to-do list, each with a task, urgency, duration, associated green space, and status.
+ * The class implements the Runnable interface, meaning it can be used in a thread.
+ * It also implements Serializable, allowing instances of the class to be saved to a file for later use.
+ *
+ * The class uses a ToDoListController to handle the business logic of managing the to-do list.
+ * It also uses a GreenSpaceRepository to manage the green spaces associated with tasks.
+ *
+ * The class provides methods for requesting data from the user, submitting data, and printing the list of entries and green spaces.
+ * It also includes methods for validating the task entered by the user and requesting the user's choice of green space.
+ *
+ * The class includes several private instance variables to store the data entered by the user, including the task, urgency, duration, green space, and status.
+ * It also includes a Scanner object for reading user input.
+ *
+ * The class includes a main method, run(), which is called when the class is run as a thread.
+ * This method displays a menu to the user, requests data from the user, and submits the data.
+ *
+ * The class includes a constructor that initializes the controller, to-do list, scanner, and green space repository.
+ * It also sets the status to "pending".
+ *
+ * The class includes a serialVersionUID for serialization.
+ */
+public class ToDoListUI implements Runnable, Serializable {
     private static final long serialVersionUID = 1L;
     private final ToDoListController controller;
     private final ToDoList toDoList;
@@ -27,6 +50,9 @@ public class ToDoListUI implements Runnable {
     private int userChoiceGreenspace;
     private Entry entry;
 
+    /**
+     * Constructs a new ToDoListUI.
+     */
     public ToDoListUI() {
         this.controller = new ToDoListController();
         this.toDoList = controller.getToDoList();
@@ -35,6 +61,9 @@ public class ToDoListUI implements Runnable {
         this.status = Status.valueOf("pending");
     }
 
+    /**
+     * Executes the ToDoListUI.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Add a new Entry to To-Do List ------------------------");
@@ -46,6 +75,9 @@ public class ToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Requests data from the user.
+     */
     private void requestData() {
         this.task = requestTask();
         this.urgency = requestUrgency();
@@ -54,6 +86,9 @@ public class ToDoListUI implements Runnable {
         this.greenSpace = greenSpaceRepository.getGreenSpaces().get(userChoiceGreenspace);
     }
 
+    /**
+     * Submits data entered by the user.
+     */
     private void submitData() throws IOException {
         System.out.println("Task: " + task);
         System.out.println("Urgency: " + urgency);
@@ -64,8 +99,12 @@ public class ToDoListUI implements Runnable {
         printData();
     }
 
-
-
+    /**
+     * Requests the task from the user.
+     * Validates the task input.
+     *
+     * @return The task entered by the user.
+     */
     private String requestTask() {
         boolean valid;
         do {
@@ -76,6 +115,12 @@ public class ToDoListUI implements Runnable {
         return task;
     }
 
+    /**
+     * Requests the urgency of the task from the user.
+     * Validates the urgency input.
+     *
+     * @return The urgency of the task.
+     */
     private Urgency requestUrgency() {
         int choice;
         Scanner scanner = new Scanner(System.in);
@@ -98,6 +143,12 @@ public class ToDoListUI implements Runnable {
         return Urgency.values()[choice];
     }
 
+    /**
+     * Requests the duration of the task from the user.
+     * Validates the duration input.
+     *
+     * @return The duration of the task.
+     */
     private int requestDuration() {
         boolean valid = false;
         int duration = 0;
@@ -122,6 +173,10 @@ public class ToDoListUI implements Runnable {
         return duration;
     }
 
+    /**
+     * Prints the list of green spaces.
+     * Requests the user's choice of green space.
+     */
     private void printGreenSpacesList() {
         choice = 0;
         List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpaces();
@@ -137,6 +192,9 @@ public class ToDoListUI implements Runnable {
         userChoiceGreenspace = requestUserChoice("greenspace");
     }
 
+    /**
+     * Prints the data of the to-do list.
+     */
     private void printData() {
         int contador = 0;
         List<Entry> entries = toDoList.getToDoList();
@@ -151,6 +209,12 @@ public class ToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Validates the task entered by the user.
+     *
+     * @param Task The task to validate.
+     * @return true if the task is valid, false otherwise.
+     */
     private boolean validateEntry(String Task) {
         List<Entry> entryList = toDoList.getToDoList();
         boolean valid = true;
@@ -171,6 +235,12 @@ public class ToDoListUI implements Runnable {
         return valid;
     }
 
+    /**
+     * Requests the user's choice for a specific type.
+     *
+     * @param type The type of choice to request.
+     * @return The user's choice.
+     */
     private int requestUserChoice(String type) {
         int userChoice = 0;
         boolean isValid = false;

@@ -7,23 +7,46 @@ import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for marking an entry as completed.
+ */
 public class CompletionTaskUI implements Runnable {
+    /**
+     * The repository for agenda entries.
+     */
     private final AgendaRepository agenda;
+
+    /**
+     * The controller for managing completion tasks.
+     */
     private final CompletionTaskController completionTaskController;
+
+    /**
+     * Scanner object for user input.
+     */
     private final Scanner scanner;
 
+    /**
+     * Constructs a new CompletionTaskUI.
+     */
     public CompletionTaskUI() {
         this.agenda = AgendaRepository.getInstance();
         this.completionTaskController = new CompletionTaskController();
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Executes the CompletionTaskUI.
+     */
     @Override
     public void run() {
         requestData();
         submitData();
     }
 
+    /**
+     * Requests data from the user.
+     */
     private void requestData() {
         System.out.println("Select an entry to mark as completed:");
         List<Entry> entries = agenda.getEntries();
@@ -32,6 +55,9 @@ public class CompletionTaskUI implements Runnable {
         }
     }
 
+    /**
+     * Submits data entered by the user.
+     */
     private void submitData() {
         System.out.println("Enter the number of the entry you want to mark as completed:");
         int choice = scanner.nextInt();

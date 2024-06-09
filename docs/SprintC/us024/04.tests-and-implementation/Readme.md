@@ -1,286 +1,595 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up
+# US024 - As a GSM, I want to Postpone an entry in the Agenda to a specific future date.
 
 ## 4. Tests
 
-**Test 1:** Ensures that a Vehicle object is instantiated correctly with all its properties set to the expected values.
+**Test 1:** Ensures that when a Vehicle object is initially created, its maintenance status is null.
+
 
     @Test
-    void ensureVehicleIsCreatedSuccessfully() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
+    void testAddVehicle() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
+
+        // Execute
+        entry.addVehicle(vehicle);
+
+        // Assert
+        List<Vehicle> vehicles = entry.getVehicles();
+        assertTrue(vehicles.contains(vehicle), "Vehicle should be added to the entry");
     }
 
 
-**Test 2:** Ensures that when a Vehicle object is initially created, its maintenance status is null.
+**Test 2:** This test checks if a Vehicle object is correctly assigned to an Entry object. It asserts that the vehicle is assigned to the entry.
 
     @Test
-    void ensureMaintenanceIsNullInitially() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertNull(vehicle.getMaintenance());
+    void testIsVehicleAssigned() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1000, 2000, 10000, LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 1), 10000);
+        entry.addVehicle(vehicle);
+
+        // Execute & Assert
+        assertTrue(entry.isVehicleAssigned(vehicle), "Vehicle should be assigned to the entry");
     }
 
-
-**Test 3:** Verifies that when a Vehicle object is first created, its last maintenance kilometer reading is initially set to zero.
+**Test 3:** This test checks if a Team object is correctly set to an Entry object. It asserts that the team is set to the entry.
 
     @Test
-    void ensureLastMaintenanceKmIsInitiallyZero() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(0.0, vehicle.getLastMaintenanceKm());
+    void testSetTeam() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        Team team = new Team();
+
+        // Execute
+        entry.setTeam(team);
+
+        // Assert
+        assertEquals(team, entry.getTeam(), "Team should be set to the entry");
     }
 
-
-**Test 4:** Confirms that the getBrand() method of a Vehicle object returns the correct brand name, which is "Toyota" in this case.
+**Test 4:** This test checks if a start date is correctly set to an Entry object. It asserts that the start date is set to the entry.
 
     @Test
-    void ensureGetBrandReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals("Toyota", vehicle.getBrand());
+    void testSetStartDate() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        LocalDate startDate = LocalDate.now();
+
+        // Execute
+        entry.setStartDate(startDate);
+
+        // Assert
+        assertEquals(startDate, entry.getStartDate(), "Start date should be set to the entry");
     }
 
-
-**Test 5:** Ensures that the getCurrentKm() method of a Vehicle object returns the correct current kilometers.
+**Test 5:**  This test checks if an end date is correctly set to an Entry object. It asserts that the end date is set to the entry.
 
     @Test
-    void ensureGetCurrentKmReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(50000.0, vehicle.getCurrentKm());
+    void testSetEndDate() {
+        // Setup
+        Entry entry =  new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1,Size.Large_Size,"Francisco"), Status.pending);
+        LocalDate endDate = LocalDate.now();
+
+        // Execute
+        entry.setEndDate(endDate);
+
+        // Assert
+        assertEquals(endDate, entry.getEndDate(), "End date should be set to the entry");
+    }
+**Test 6:** This test checks if the task of an Entry object is correctly retrieved. It asserts that the retrieved task matches the expected task.
+
+    @Test
+    void testGetTask() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals("Task 1", entry.getTask());
     }
 
-
-**Test 6:** Verifies that the getCheckUpFrequency() method of a Vehicle object returns the correct value.
+**Test 7:** This test checks if the urgency of an Entry object is correctly retrieved. It asserts that the retrieved urgency matches the expected urgency.
 
     @Test
-    void ensureGetCheckUpFrequencyReturnsCorrectValue() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        assertEquals(10000.0, vehicle.getCheckUpFrequency());
+    void testGetUrgency() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(Urgency.Low, entry.getUrgency());
     }
 
-**Test 7:** Ensures that when the setMaintenance() method is called on a Vehicle object with the argument "Regular checkup".
+**Test 8:** This test checks if the duration of an Entry object is correctly retrieved. It asserts that the retrieved duration matches the expected duration.
 
     @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
+    void testGetDuration() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(1, entry.getDuration());
     }
 
-
-**Test 8:** Verifies that when the setLastMaintenanceKm() method is called on a Vehicle object with the argument 55000.0
+**Test 9:** This test checks if the green space of an Entry object is correctly retrieved. It asserts that the retrieved green space matches the expected green space.
 
     @Test
-    void ensureSetMaintenanceUpdatesMaintenanceCorrectly() {
-        LocalDate registerDate = LocalDate.of(2022, 1, 1);
-        LocalDate acquisitionDate = LocalDate.of(2022, 1, 1);
-        Vehicle vehicle = new Vehicle("Toyota", "Corolla", 1200.0, 1500.0, 50000.0,
-                registerDate, acquisitionDate, 10000.0);
-        vehicle.setMaintenance("Regular checkup");
-        assertEquals("Regular checkup", vehicle.getMaintenance());
+    void testGetGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco");
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, greenSpace, Status.pending);
+        assertEquals(greenSpace, entry.getGreenSpace());
+    }
+
+**Test 10:** This test checks if a green space is correctly set to an Entry object. It asserts that the green space is set to the entry.
+
+    @Test
+    void testSetGreenSpace() {
+        GreenSpace greenSpace = new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco");
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, null, Status.pending);
+        entry.setGreenSpace(greenSpace);
+        assertEquals(greenSpace, entry.getGreenSpace());
+    }
+
+**Test 11:** This test checks if the status of an Entry object is correctly retrieved. It asserts that the retrieved status matches the expected status.
+
+    @Test
+    void testGetStatus() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        assertEquals(Status.pending, entry.getStatus());
+    }
+
+**Test 12:** This test checks if a status is correctly set to an Entry object. It asserts that the status is set to the entry.
+
+    @Test
+    void testSetStatus() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        entry.setStatus(Status.completed);
+        assertEquals(Status.completed, entry.getStatus());
+    }
+
+**Test 13:** This test checks if the toString method of an Entry object returns the expected string representation. It asserts that the returned string matches the expected string.
+
+    @Test
+    void testToString() {
+        Entry entry = new Entry("Task 1", Urgency.Low, 1, new GreenSpace("Green Space 1",1, Size.Large_Size,"Francisco"), Status.pending);
+        String expectedString = "Entry{" +
+                "team=No team assigned" +
+                ", vehicles=[]" +
+                ", task='Task 1'" +
+                ", urgency=Low" +
+                ", duration=1" +
+                ", greenSpace=GreenSpace{name='Green Space 1', area=1.0, size=Large_Size, manager name='Francisco'}" +
+                ", status=pending" +
+                ", startDate=null" +
+                ", endDate=null" +
+                '}';
+        assertEquals(expectedString, entry.toString());
     }
 
 
 ## 5. Construction (Implementation)
 
-### Class VehicleNeedingCheckUpController
+### Class AgendaController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-public class VehicleNeedingCheckUpController {
-    private VehicleRepository vehicleRepository;
+/**
+ * Controller class for managing the agenda and related tasks.
+ * This class provides methods to access the ToDoList, AgendaRepository,
+ * and AuthenticationRepository.
+ */
+public class AgendaController {
+
+    private ToDoList toDoList;
+    private AgendaRepository agendaRepository;
     private AuthenticationRepository authenticationRepository;
 
-    public VehicleNeedingCheckUpController(){
-        this.vehicleRepository = VehicleRepository.getInstance();
+    /**
+     * Default constructor.
+     * Initializes the controller and ensures all repositories are available.
+     */
+    public AgendaController() {
+        getToDoList();
+        getAgendaRepository();
         getAuthenticationRepository();
     }
 
-    public VehicleNeedingCheckUpController(VehicleRepository vehicleRepository,
-                                           AuthenticationRepository authenticationRepository) {
-        this.vehicleRepository = vehicleRepository;
+    /**
+     * Constructor with an AuthenticationRepository parameter.
+     * Initializes the ToDoList and sets the provided AuthenticationRepository.
+     *
+     * @param authenticationRepository The authentication repository to use.
+     */
+    public AgendaController(AuthenticationRepository authenticationRepository) {
+        this.toDoList = ToDoList.getInstance();
         this.authenticationRepository = authenticationRepository;
     }
 
-    public VehicleRepository getVehicleRepository() {
-        if (vehicleRepository == null) {
+    /**
+     * Gets the ToDoList instance.
+     * If the ToDoList is not already initialized, it retrieves it from the repositories.
+     *
+     * @return The ToDoList instance.
+     */
+    public ToDoList getToDoList() {
+        if (toDoList == null) {
             Repositories repositories = Repositories.getInstance();
-
-            //Get the TaskCategoryRepository
-            vehicleRepository = repositories.getVehicleRepository();
+            toDoList = repositories.getToDoList();
         }
-        return vehicleRepository;
+        return toDoList;
     }
 
-    public List<Vehicle> getVehiclesNeedingCheckUp() {
-        List<Vehicle> vehicles = vehicleRepository.getVehicles();
-        List<Vehicle> vehiclesNeedingCheckUp = new ArrayList<>();
-
-        for (Vehicle vehicle : vehicles) {
-            double currentKm = vehicle.getCurrentKm();
-            double checkUpFrequency = vehicle.getCheckUpFrequency();
-            double lastMaintenanceKm = vehicle.getLastMaintenanceKm();
-
-            if (currentKm - lastMaintenanceKm >= checkUpFrequency) {
-                vehiclesNeedingCheckUp.add(vehicle);
-            }
+    /**
+     * Gets the AgendaRepository instance.
+     * If the AgendaRepository is not already initialized, it retrieves it from the repositories.
+     *
+     * @return The AgendaRepository instance.
+     */
+    public AgendaRepository getAgendaRepository() {
+        if (agendaRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            agendaRepository = repositories.getAgendaRepository();
         }
-
-        return vehiclesNeedingCheckUp;
+        return agendaRepository;
     }
 
-    public AuthenticationRepository getAuthenticationRepository() {
+    /**
+     * Gets the AuthenticationRepository instance.
+     * If the AuthenticationRepository is not already initialized, it retrieves it from the repositories.
+     *
+     * @return The AuthenticationRepository instance.
+     */
+    private AuthenticationRepository getAuthenticationRepository() {
         if (authenticationRepository == null) {
             Repositories repositories = Repositories.getInstance();
-
-            //Get the AuthenticationRepository
             authenticationRepository = repositories.getAuthenticationRepository();
         }
         return authenticationRepository;
     }
-
 }
+
 ```
 
-### Class VehicleRepository
+### Class AgendaRepository
 
 ```java
-public class VehicleRepository {
-    private static VehicleRepository instance;
-    private final List<Vehicle> vehicles;
+package pt.ipp.isep.dei.esoft.project.repository;
 
-    public VehicleRepository() {
-        vehicles = new ArrayList<>();
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.Status;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Repository class for managing entries in an agenda.
+ */
+public class AgendaRepository implements Serializable {
+    private List<Entry> agenda;
+    private static AgendaRepository instance;
+
+    /**
+     * Constructs a new AgendaRepository.
+     */
+    public AgendaRepository() {
+        agenda = new ArrayList<>();
     }
 
-    public static VehicleRepository getInstance() {
+    /**
+     * Retrieves the singleton instance of AgendaRepository.
+     *
+     * @return the instance of AgendaRepository
+     */
+    public static AgendaRepository getInstance() {
         if (instance == null) {
-            instance = new VehicleRepository();
+            instance = new AgendaRepository();
         }
         return instance;
     }
 
+    /**
+     * Adds an entry to the agenda.
+     *
+     * @param entry the entry to add
+     */
+    public void addEntry(Entry entry) {
+        agenda.add(entry);
+    }
+
+    /**
+     * Retrieves a copy of all entries in the agenda.
+     *
+     * @return a list of all entries in the agenda
+     */
+    public List<Entry> getEntries() {
+        return List.copyOf(agenda);
+    }
+
+    /**
+     * Retrieves the entry at the specified index in the agenda.
+     *
+     * @param index the index of the entry to retrieve
+     * @return the entry at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of bounds
+     */
+    public Entry getEntries(int index) {
+        if (index >= 0 && index < agenda.size()) {
+            return agenda.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+    }
+
+    /**
+     * Retrieves a copy of all entries in the agenda.
+     *
+     * @return a list of all entries in the agenda
+     */
+    public List<Entry> getAgenda() {
+        return List.copyOf(agenda);
+    }
+
+    /**
+     * Updates an existing entry in the agenda.
+     *
+     * @param updatedEntry the updated entry
+     */
+    public void updateEntry(Entry updatedEntry) {
+        for (int i = 0; i < agenda.size(); i++) {
+            if (agenda.get(i).equals(updatedEntry)) {
+                agenda.set(i, updatedEntry);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Retrieves a list of entries with the specified status.
+     *
+     * @param status the status of the entries to retrieve
+     * @return a list of entries with the specified status
+     */
+    public List<Entry> getEntriesWithStatus(Status status) {
+        return getEntries().stream()
+                .filter(entry -> entry.getStatus() == status)
+                .sorted(Comparator.comparing(Entry::getStatus))
+                .collect(Collectors.toList());
+    }
+}
+
+
+```
+### Class Entry
+
+```java
+package pt.ipp.isep.dei.esoft.project.domain;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Represents an entry in a project schedule.
+ * An entry consists of a task, urgency, duration, associated green space, status, start and end dates,
+ * team assigned, and vehicles assigned.
+ */
+public class Entry implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private final String task;
+    private final Urgency urgency;
+    private final int duration;
+    private GreenSpace greenSpace;
+    private Status status;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Team team;
+
+    private List<Vehicle> vehicles;
+
+    /**
+     * Constructs an Entry object with the specified task, urgency, duration, green space, and status.
+     *
+     * @param task     The task description.
+     * @param urgency  The urgency level of the task.
+     * @param duration The duration of the task.
+     * @param greenSpace The green space associated with the task.
+     * @param status   The status of the task.
+     */
+    public Entry(String task, Urgency urgency, int duration, GreenSpace greenSpace, Status status) {
+        this.task = task;
+        this.urgency = urgency;
+        this.duration = duration;
+        this.greenSpace = greenSpace;
+        this.status = status;
+        this.vehicles = new ArrayList<>();
+    }
+
+    /**
+     * Checks if a vehicle is assigned to this entry.
+     *
+     * @param vehicle The vehicle to check.
+     * @return True if the vehicle is assigned, false otherwise.
+     */
+    public boolean isVehicleAssigned(Vehicle vehicle) {
+        return getVehicles().contains(vehicle);
+    }
+
+    /**
+     * Gets the start date of the entry.
+     *
+     * @return The start date.
+     */
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * Sets the start date of the entry.
+     *
+     * @param date The start date to set.
+     */
+    public void setStartDate(LocalDate date) {
+        this.startDate = date;
+    }
+
+    /**
+     * Adds a vehicle to the list of vehicles assigned to this entry.
+     *
+     * @param vehicle The vehicle to add.
+     */
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
     }
 
+    /**
+     * Retrieves a vehicle at the specified index from the list of vehicles assigned to this entry.
+     *
+     * @param index The index of the vehicle to retrieve.
+     * @return The vehicle at the specified index.
+     */
+    public Vehicle getVehicle(int index) {
+        return vehicles.get(index);
+    }
+
+    /**
+     * Gets an unmodifiable list of vehicles assigned to this entry.
+     *
+     * @return The list of vehicles.
+     */
     public List<Vehicle> getVehicles() {
         return List.copyOf(vehicles);
     }
 
-}
-
-```
-### Class Vehicle
-
-```java
-public class Vehicle {
-    private final String brand;
-    private final String model;
-    private final double tareWeight;
-    private final double grossWeight;
-    private double currentKm;
-    private final LocalDate registerDate;
-    private final LocalDate acquisitionDate;
-    private final double checkUpFrequency;
-    private double lastMaintenanceKm = 0;
-    private String maintenance;
-
-    public Vehicle(String brand, String model, double tareWeight, double grossWeight, double currentKm,
-                   LocalDate registerDate, LocalDate acquisitionDate, double checkUpFrequency) {
-        this.brand = brand;
-        this.model = model;
-        this.tareWeight = tareWeight;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.checkUpFrequency = checkUpFrequency;
+    /**
+     * Gets the end date of the entry.
+     *
+     * @return The end date.
+     */
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-
-    public String getMaintenance() {
-        return maintenance;
+    /**
+     * Sets the end date of the entry.
+     *
+     * @param date The end date to set.
+     */
+    public void setEndDate(LocalDate date) {
+        this.endDate = date;
     }
 
-    public void setMaintenance(String maintenance) {
-        this.maintenance = maintenance;
+    /**
+     * Gets the status of the entry.
+     *
+     * @return The status of the entry.
+     */
+    public Status getStatus() {
+        return status;
     }
 
-    public double getLastMaintenanceKm() {
-        return lastMaintenanceKm;
+    /**
+     * Gets the task description.
+     *
+     * @return The task description.
+     */
+    public String getTask() {
+        return task;
     }
 
-    public void setLastMaintenanceKm(double lastMaintenanceKm) {
-        this.lastMaintenanceKm = lastMaintenanceKm;
+    /**
+     * Gets the team assigned to this entry.
+     *
+     * @return The team assigned to this entry, or null if no team is assigned.
+     */
+    public Team getTeam() {
+        return team;
     }
 
-    public String getBrand() {
-        return brand;
+    /**
+     * Sets the team assigned to this entry.
+     *
+     * @param team The team to assign to this entry.
+     */
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public String getModel() {
-        return model;
+    /**
+     * Gets the urgency level of the task.
+     *
+     * @return The urgency level.
+     */
+    public Urgency getUrgency() {
+        return urgency;
     }
 
-    public double getCurrentKm(){
-        return currentKm;
+    /**
+     * Gets the duration of the task.
+     *
+     * @return The duration of the task.
+     */
+    public int getDuration() {
+        return duration;
     }
 
-    public double getCheckUpFrequency() {
-        return checkUpFrequency;
+    /**
+     * Gets the green space associated with this entry.
+     *
+     * @return The green space associated with this entry.
+     */
+    public GreenSpace getGreenSpace() {
+        return greenSpace;
     }
 
+    /**
+     * Sets the green space associated with this entry.
+     *
+     * @param greenSpace The green space to associate with this entry.
+     */
+    public void setGreenSpace(GreenSpace greenSpace) {
+        this.greenSpace = greenSpace;
+    }
+
+    /**
+     * Sets the status of the entry.
+     *
+     * @param status The status to set.
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    /**
+     * Returns a string representation of the entry.
+     *
+     * @return A string representation of the entry.
+     */
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", tareWeight=" + tareWeight +
-                ", grossWeight=" + grossWeight +
-                ", currentKm=" + currentKm +
-                ", registerDate='" + registerDate + '\'' +
-                ", acquisitionDate='" + acquisitionDate + '\'' +
-                ", checkUpFrequency='" + checkUpFrequency + '\'' +
+        String teamString = (team != null) ? team.toString() : "No team assigned";
+        return "Entry{" +
+                "team=" + teamString +
+                ", vehicles=" + vehicles +
+                ", task='" + task + '\'' +
+                ", urgency=" + urgency +
+                ", duration=" + duration +
+                ", greenSpace=" + greenSpace +
+                ", status=" + status +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
                 '}';
     }
 }
+
 ```
 
 ## 6. Integration and Demo
-Simulate how the VehicleNeedingCheckUpController interacts with the VehicleRepository to retrieve vehicles that need check-up:
+Simulate how the AgendaController interacts with the AgendaRepository to store and retrieve entries.
 
-* We instantiate the VehicleRepository.
-* We create a VehicleNeedingCheckUpController with the repositories.
-* We add a vehicle to the repository and set its last maintenance kilometer reading.
-* We call the getVehiclesNeedingCheckUp() method of the controller to retrieve vehicles needing check-up.
-* We print the vehicles needing check-up.
+
+* We instantiate the Agenda.
+* We create a AgendaController with the repositories.
+* We add an entry to the repository and set its status to postponed.
 
 ## 7. Observations
 

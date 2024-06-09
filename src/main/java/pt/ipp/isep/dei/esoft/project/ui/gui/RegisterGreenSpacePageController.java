@@ -20,6 +20,10 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Controller class for handling the registration of green spaces in the UI.
+ * It manages user interactions and communicates with the domain and repository layers.
+ */
 public class RegisterGreenSpacePageController {
     @FXML
     private ListView<GreenSpace> greenSpaceListView;
@@ -38,11 +42,18 @@ public class RegisterGreenSpacePageController {
 
     private GreenSpaceRepository greenSpaceRepository;
 
+    /**
+     * Constructor that initializes the controller and the green space repository.
+     */
     public RegisterGreenSpacePageController() {
         this.controller = new RegisterGreenSpaceController();
         this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
     }
 
+    /**
+     * Handles the registration of a green space. Validates input fields and
+     * displays an alert in case of invalid input.
+     */
     @FXML
     protected void registerGreenSpace() {
         try {
@@ -80,7 +91,6 @@ public class RegisterGreenSpacePageController {
                 return;
             }
 
-//            Size size = getSize(area);
             GreenSpace greenSpace = new GreenSpace(name, area, size, managerName);
             controller.getGreenSpaceRepository().addGreenSpace(greenSpace);
             System.out.println(greenSpaceRepository.getGreenSpaces());
@@ -93,6 +103,11 @@ public class RegisterGreenSpacePageController {
         }
     }
 
+    /**
+     * Displays an alert dialog with a specified message.
+     *
+     * @param message The message to be displayed in the alert dialog.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Input Error");
@@ -100,16 +115,25 @@ public class RegisterGreenSpacePageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Initializes the controller. Populates the size choice box with available sizes
+     * and prints the existing green spaces to the console.
+     */
     @FXML
     public void initialize() {
         selectSize.getItems().setAll(Size.values());
         System.out.println("Green spaces: " + GreenSpaceRepository.getInstance().getGreenSpaces());
     }
 
+    /**
+     * Handles the action of going back to the previous scene.
+     *
+     * @param event The action event triggered by the user.
+     */
     @FXML
-    protected void handleGOBACK (ActionEvent event) {
+    protected void handleGOBACK(ActionEvent event) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();
     }
-
 }

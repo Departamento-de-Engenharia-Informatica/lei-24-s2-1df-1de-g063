@@ -20,6 +20,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller class for the TaskAssignedToCollaborator user interface.
+ * Handles loading and displaying assigned tasks for a collaborator.
+ */
 public class TaskAssignedToCollaboratorController {
 
     private final AgendaRepository agenda;
@@ -43,16 +47,25 @@ public class TaskAssignedToCollaboratorController {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
+    /**
+     * Constructs a new TaskAssignedToCollaboratorController object.
+     */
     public TaskAssignedToCollaboratorController() {
         this.agenda= Repositories.getInstance().getAgendaRepository();
     }
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     public void initialize() {
         startDatePicker.setConverter(createStringConverter());
         endDatePicker.setConverter(createStringConverter());
     }
 
+    /**
+     * Loads the assigned tasks based on the provided criteria.
+     */
     @FXML
     public void loadEntries() {
         try {
@@ -66,20 +79,8 @@ public class TaskAssignedToCollaboratorController {
                 return;
             }
 
-            System.out.println("Fetching entries for:");
-            System.out.println("Collaborator: " + name);
-            System.out.println("Start Date: " + startDate.format(DATE_FORMATTER));
-            System.out.println("End Date: " + endDate.format(DATE_FORMATTER));
-            System.out.println("Status: " + status);
-
             controller = new pt.ipp.isep.dei.esoft.project.application.controller.TaskAssignedToCollaboratorController(name);
             List<Entry> entries = controller.getEntriesBetweenDates(startDate, endDate, status, name);
-
-            System.out.println("Entries fetched: " + entries.size());
-            System.out.println("Existing Entries: " + agenda.getEntries());
-            for (Entry entry : entries) {
-                System.out.println(entry);
-            }
 
             entryListView.getItems().setAll(entries);
         } catch (Exception e) {
@@ -88,20 +89,20 @@ public class TaskAssignedToCollaboratorController {
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    /**
+     * Closes the current window.
+     */
     @FXML
     public void goBack() {
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Creates a StringConverter for formatting LocalDate objects.
+     *
+     * @return A StringConverter for LocalDate objects.
+     */
     private StringConverter<LocalDate> createStringConverter() {
         return new StringConverter<LocalDate>() {
             @Override
@@ -122,5 +123,19 @@ public class TaskAssignedToCollaboratorController {
                 }
             }
         };
+    }
+
+    /**
+     * Displays an alert dialog with the given title and message.
+     *
+     * @param title   The title of the alert.
+     * @param message The message to display in the alert.
+     */
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

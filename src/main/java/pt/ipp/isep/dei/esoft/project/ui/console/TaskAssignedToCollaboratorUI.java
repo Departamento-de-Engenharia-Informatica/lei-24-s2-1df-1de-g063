@@ -9,22 +9,36 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Provides a console-based user interface for viewing tasks assigned to a collaborator within a specified date range.
+ */
 public class TaskAssignedToCollaboratorUI implements Runnable {
     private final String managerName;
     private TaskAssignedToCollaboratorController controller;
     private Scanner scanner;
 
+    /**
+     * Constructs a TaskAssignedToCollaboratorUI object with the specified manager's name.
+     *
+     * @param managerName The name of the manager for whom tasks are to be viewed.
+     */
     public TaskAssignedToCollaboratorUI(String managerName) {
         this.controller = new TaskAssignedToCollaboratorController(managerName);
         this.managerName = managerName;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Runs the TaskAssignedToCollaboratorUI, prompting the user for input and displaying the tasks assigned to the collaborator.
+     */
     @Override
     public void run() {
         requestData();
     }
 
+    /**
+     * Requests data from the user, including the start date, end date, and status of tasks to view.
+     */
     public void requestData() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
@@ -44,7 +58,6 @@ public class TaskAssignedToCollaboratorUI implements Runnable {
         } else {
             AtomicInteger counter = new AtomicInteger(1);
             entries.forEach(entry -> System.out.println(counter.getAndIncrement() + " - " + entry.toString()));
-
         }
     }
 }

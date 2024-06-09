@@ -15,11 +15,14 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.SerializationUtil;
 
-import javax.crypto.spec.PSource;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the login user interface.
+ * Handles user authentication and navigation between screens.
+ */
 public class LoginController implements Initializable {
     @FXML
     private TextField usernameField;
@@ -29,10 +32,20 @@ public class LoginController implements Initializable {
 
     private final AuthenticationController ctrl;
 
+    /**
+     * Constructs a new LoginController object.
+     */
     public LoginController() {
         this.ctrl = new AuthenticationController();
     }
 
+    /**
+     * Handles the login action when the login button is clicked.
+     * Authenticates the user and navigates to the appropriate user interface.
+     *
+     * @param event The action event triggered by the login button click.
+     * @throws Exception If an error occurs during login processing.
+     */
     @FXML
     protected void handleLogin(ActionEvent event) throws Exception {
         String username = usernameField.getText();
@@ -57,11 +70,17 @@ public class LoginController implements Initializable {
             alert.setContentText("Invalid username or password.");
             alert.showAndWait();
         }
-
     }
 
     String filename = "MYINFO.BIN";
 
+    /**
+     * Initializes the controller.
+     * Deserializes repository information from file on startup.
+     *
+     * @param url            The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //----------------<Deserialize info>
@@ -73,16 +92,18 @@ public class LoginController implements Initializable {
         //----------------</Deserialize info>
     }
 
-
+    /**
+     * Handles the action when the exit button is clicked.
+     * Serializes repository information to file and exits the application.
+     *
+     * @param event The action event triggered by the exit button click.
+     */
     @FXML
-    protected void onExitButtonClick (ActionEvent event) {
-
+    protected void onExitButtonClick(ActionEvent event) {
         //------------------<Serialize info>
         SerializationUtil.serializeInfo(filename);
         //------------------</Serialize info>
 
         Platform.exit();
     }
-
-
 }

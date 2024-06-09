@@ -5,12 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
@@ -19,6 +14,10 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Controller class for handling the to-do list entries in the UI.
+ * It manages user interactions and communicates with the domain and repository layers.
+ */
 public class ToDoListPageController {
     @FXML
     private ListView<Entry> toDoListListView;
@@ -37,11 +36,18 @@ public class ToDoListPageController {
 
     private final GreenSpaceRepository greenSpaceRepository;
 
+    /**
+     * Constructor that initializes the controller and the green space repository.
+     */
     public ToDoListPageController() {
         this.toDoListController = new ToDoListController();
         this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository(); // Use the singleton instance
     }
 
+    /**
+     * Handles the registration of a to-do list entry. Validates input fields and
+     * displays an alert in case of invalid input.
+     */
     @FXML
     protected void registerEntry() {
         try {
@@ -87,6 +93,11 @@ public class ToDoListPageController {
         }
     }
 
+    /**
+     * Displays an alert dialog with a specified message.
+     *
+     * @param message The message to be displayed in the alert dialog.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Input Error");
@@ -95,6 +106,10 @@ public class ToDoListPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Initializes the controller. Populates the urgency and green space choice boxes
+     * with available values and prints the existing green spaces to the console.
+     */
     @FXML
     public void initialize() {
         selectUrgency.getItems().setAll(Urgency.values());
@@ -102,10 +117,15 @@ public class ToDoListPageController {
         selectGreenSpace.getItems().setAll(greenSpaceRepository.getGreenSpaces()); // Use the singleton instance
         System.out.println("Green spaces: " + greenSpaceRepository.getGreenSpaces());
     }
+
+    /**
+     * Handles the action of going back to the previous scene.
+     *
+     * @param event The action event triggered by the user.
+     */
     @FXML
-    protected void handleGOBACK (ActionEvent event) {
+    protected void handleGOBACK(ActionEvent event) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.close();
     }
-
 }

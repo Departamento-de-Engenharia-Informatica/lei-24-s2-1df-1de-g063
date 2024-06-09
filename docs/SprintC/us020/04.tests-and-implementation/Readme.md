@@ -1,4 +1,4 @@
-# US007 - As an FM, I wish to register a vehicle’s check-up
+# US020 - As a Green Space Manager (GSM), I want to register a green space.
 
 ## 4. Tests
 
