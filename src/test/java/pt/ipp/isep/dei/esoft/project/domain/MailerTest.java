@@ -20,6 +20,4 @@ class MailerTest {
         // Assert
         assertTrue(result, "Email should be sent successfully");
     }
-
-    // Add more tests as needed
 }

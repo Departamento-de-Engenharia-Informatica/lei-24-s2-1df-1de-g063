@@ -92,4 +92,45 @@ class OrganizationRepositoryTest {
 
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    void getOrganizationByEmployee() {
+        OrganizationRepository organizationRepository = new OrganizationRepository();
+        Organization organization = new Organization("123456789");
+        Employee employee = new Employee("john.doe@this.company.com");
+        organization.addEmployee(employee);
+        organizationRepository.add(organization);
+
+        Optional<Organization> result = organizationRepository.getOrganizationByEmployee(employee);
+
+        assertTrue(result.isPresent());
+        assertEquals(organization, result.get());
+    }
+
+    @Test
+    void getOrganizationByEmployeeEmail() {
+        OrganizationRepository organizationRepository = new OrganizationRepository();
+        Organization organization = new Organization("123456789");
+        Employee employee = new Employee("john.doe@this.company.com");
+        organization.addEmployee(employee);
+        organizationRepository.add(organization);
+
+        Optional<Organization> result = organizationRepository.getOrganizationByEmployeeEmail("john.doe@this.company.com");
+
+        assertTrue(result.isPresent());
+        assertEquals(organization, result.get());
+    }
+
+    @Test
+    void add() {
+        OrganizationRepository organizationRepository = new OrganizationRepository();
+        Organization organization = new Organization("123456789");
+        Employee employee = new Employee("john.doe@this.company.com");
+        organization.addEmployee(employee);
+
+        Optional<Organization> result = organizationRepository.add(organization);
+
+        assertTrue(result.isPresent());
+        assertEquals(organization, result.get());
+    }
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,6 +54,25 @@ public class TeamTest {
                 "- John Doe\n" +
                 "- Jane Smith\n";
         assertEquals(expected, team.toString());
+    }
+
+    @Test
+    public void testGetMembers() {
+        List<Collaborator> expectedMembers = new ArrayList<>();
+        expectedMembers.add(collaborator1);
+        expectedMembers.add(collaborator2);
+        team.addMember(collaborator1);
+        team.addMember(collaborator2);
+        assertEquals(expectedMembers, team.getMembers());
+    }
+
+    @Test
+    public void testSetMembers() {
+        List<Collaborator> expectedMembers = new ArrayList<>();
+        expectedMembers.add(collaborator1);
+        expectedMembers.add(collaborator2);
+        team.setMembers(expectedMembers);
+        assertEquals(expectedMembers, team.getMembers());
     }
 }
 
